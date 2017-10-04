@@ -1,0 +1,37 @@
+
+<div *ngIf="auditProcessRecommendation">
+    <h2><span jhiTranslate="aresViApp.auditProcessRecommendation.detail.title">Audit Process Recommendation</span> {{auditProcessRecommendation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.auditProcessRecommendation.description">Description</span></dt>
+        <dd>
+            <span>{{auditProcessRecommendation.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditProcessRecommendation.recommendation">Recommendation</span></dt>
+        <dd>
+            <div *ngIf="auditProcessRecommendation.recommendationId">
+                <a [routerLink]="['/recommendation', auditProcessRecommendation.recommendationId]">{{auditProcessRecommendation.recommendationId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditProcessRecommendation.auditProcess">Audit Process</span></dt>
+        <dd>
+            <div *ngIf="auditProcessRecommendation.auditProcessId">
+                <a [routerLink]="['/audit-process', auditProcessRecommendation.auditProcessId]">{{auditProcessRecommendation.auditProcessId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'audit-process-recommendation/'+ auditProcessRecommendation.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

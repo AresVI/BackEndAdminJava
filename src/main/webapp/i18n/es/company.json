@@ -1,0 +1,22 @@
+{
+    "aresViApp": {
+        "company" : {
+            "home": {
+                "title": "Bodegas",
+                "createLabel": "Crear nueva Bodega",
+                "createOrEditLabel": "Crear o editar Bodega"
+            },
+            "created": "Una nueva Bodega ha sido creada con el identificador {{ param }}",
+            "updated": "Una Bodega ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Bodega ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la Bodega {{ id }}?"
+            },
+            "detail": {
+                "title": "Bodega"
+            },
+            "name": "Nombre",
+            "identifier": "CUIT"
+        }
+    }
+}

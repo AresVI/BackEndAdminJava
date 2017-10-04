@@ -1,0 +1,37 @@
+
+<div *ngIf="auditTaskRecommendation">
+    <h2><span jhiTranslate="aresViApp.auditTaskRecommendation.detail.title">Audit Task Recommendation</span> {{auditTaskRecommendation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.auditTaskRecommendation.description">Description</span></dt>
+        <dd>
+            <span>{{auditTaskRecommendation.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditTaskRecommendation.auditProcessRecom">Audit Process Recom</span></dt>
+        <dd>
+            <div *ngIf="auditTaskRecommendation.auditProcessRecomId">
+                <a [routerLink]="['/audit-process-recommendation', auditTaskRecommendation.auditProcessRecomId]">{{auditTaskRecommendation.auditProcessRecomId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditTaskRecommendation.auditTask">Audit Task</span></dt>
+        <dd>
+            <div *ngIf="auditTaskRecommendation.auditTaskId">
+                <a [routerLink]="['/audit-task', auditTaskRecommendation.auditTaskId]">{{auditTaskRecommendation.auditTaskId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'audit-task-recommendation/'+ auditTaskRecommendation.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

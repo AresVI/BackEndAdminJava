@@ -1,0 +1,23 @@
+{
+    "aresViApp": {
+        "categoryAttributeRecommendation" : {
+            "home": {
+                "title": "Category Attribute Recommendations",
+                "createLabel": "Crear nuevo Category Attribute Recommendation",
+                "createOrEditLabel": "Crear o editar Category Attribute Recommendation"
+            },
+            "created": "Un nuevo Category Attribute Recommendation ha sido creado con el identificador {{ param }}",
+            "updated": "Un Category Attribute Recommendation ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Category Attribute Recommendation ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Category Attribute Recommendation {{ id }}?"
+            },
+            "detail": {
+                "title": "Category Attribute Recommendation"
+            },
+            "description": "Description",
+            "auditTaskRecom": "Audit Task Recom",
+            "categoryAttribute": "Category Attribute"
+        }
+    }
+}

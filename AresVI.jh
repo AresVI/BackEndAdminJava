@@ -1,0 +1,125 @@
+entity Attribute {
+	name String required
+	required Boolean required
+}
+
+entity CategoryAttribute {
+	name String required
+}
+
+entity Container {
+	name String required
+}
+
+entity AuditTask {
+	name String required
+}
+
+entity AuditProcess {
+	name String required
+}
+
+entity Participant {
+	name String required
+}
+
+entity Weighting {
+	value Integer required
+}
+
+entity TraceabilityAudit {
+	name String required
+    creationDate Instant
+}
+
+entity Company {
+	name String required
+    identifier String required
+}
+
+entity Recommendation {
+	name String required
+    qualification Integer
+    creationDate Instant
+}
+
+entity AuditProcessRecommendation {
+	description TextBlob required
+}
+
+entity AuditTaskRecommendation {
+	description TextBlob required
+}
+
+entity CategoryAttrRecommendation {
+	description TextBlob required
+}
+
+entity AttributeRecommendation {
+	description TextBlob required
+}
+
+relationship OneToOne {
+	Attribute{weighting} to Weighting,
+    Container{participant} to Participant
+}
+
+relationship ManyToOne {
+    Attribute{categoryAttribute} to CategoryAttribute,
+    CategoryAttribute{auditTask} to AuditTask,
+    Container{AuditProcess} to AuditProcess,
+    AuditTask{container} to Container,
+    TraceabilityAudit{company} to Company,
+    Recommendation{traceabilityAudit} to TraceabilityAudit,
+    AuditProcessRecommendation{recommendation} to Recommendation,
+    AuditProcessRecommendation{auditProcess} to AuditProcess,
+    AuditTaskRecommendation{AuditProcessRecom} to AuditProcessRecommendation,
+    AuditTaskRecommendation{auditTask} to AuditTask,
+    CategoryAttrRecommendation{auditTaskRecom} to AuditTaskRecommendation,
+    CategoryAttrRecommendation{categoryAttribute} to CategoryAttribute,
+    AttributeRecommendation{categoryAttRecom} to CategoryAttrRecommendation,
+    AttributeRecommendation{attribute} to Attribute
+}
+
+relationship OneToMany{
+    TraceabilityAudit{AuditProcesses} to AuditProcess
+}
+
+// Set pagination options
+paginate Attribute with infinite-scroll
+paginate CategoryAttribute with pagination
+paginate Container with pagination
+paginate AuditTask with pagination
+paginate AuditProcess with pagination
+paginate Participant with pagination
+paginate Weighting with pagination
+paginate TraceabilityAudit with pagination
+paginate Company with pagination
+paginate Recommendation with infinite-scroll
+paginate AuditProcessRecommendation with infinite-scroll
+paginate AuditTaskRecommendation with infinite-scroll
+paginate CategoryAttrRecommendation with infinite-scroll
+paginate AttributeRecommendation with infinite-scroll
+
+dto * with mapstruct
+
+#arrowSize: 0.5
+#bendSize: 0.3
+#direction: down | right
+#gutter: 10
+#edgeMargin: 1
+#edges: rounded
+#fill: white; #ffffff
+#fillArrows: true
+#font: Calibri
+#fontSize: 12
+#leading: 1.25
+#lineWidth: 3
+#padding: 8
+#spacing: 100
+#stroke: #000000
+#title: AresVI
+#zoom: 2
+
+// Set service 
+service all with serviceImpl

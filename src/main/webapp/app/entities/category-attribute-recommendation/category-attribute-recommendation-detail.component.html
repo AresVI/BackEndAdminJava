@@ -1,0 +1,37 @@
+
+<div *ngIf="categoryAttributeRecommendation">
+    <h2><span jhiTranslate="aresViApp.categoryAttributeRecommendation.detail.title">Category Attribute Recommendation</span> {{categoryAttributeRecommendation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.categoryAttributeRecommendation.description">Description</span></dt>
+        <dd>
+            <span>{{categoryAttributeRecommendation.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.categoryAttributeRecommendation.auditTaskRecom">Audit Task Recom</span></dt>
+        <dd>
+            <div *ngIf="categoryAttributeRecommendation.auditTaskRecomId">
+                <a [routerLink]="['/audit-task-recommendation', categoryAttributeRecommendation.auditTaskRecomId]">{{categoryAttributeRecommendation.auditTaskRecomId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.categoryAttributeRecommendation.categoryAttribute">Category Attribute</span></dt>
+        <dd>
+            <div *ngIf="categoryAttributeRecommendation.categoryAttributeId">
+                <a [routerLink]="['/category-attribute', categoryAttributeRecommendation.categoryAttributeId]">{{categoryAttributeRecommendation.categoryAttributeId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'category-attribute-recommendation/'+ categoryAttributeRecommendation.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

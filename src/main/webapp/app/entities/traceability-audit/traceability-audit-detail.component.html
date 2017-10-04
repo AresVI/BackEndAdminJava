@@ -1,0 +1,35 @@
+
+<div *ngIf="traceabilityAudit">
+    <h2><span jhiTranslate="aresViApp.traceabilityAudit.detail.title">Traceability Audit</span> {{traceabilityAudit.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.traceabilityAudit.name">Name</span></dt>
+        <dd>
+            <span>{{traceabilityAudit.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.traceabilityAudit.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{traceabilityAudit.creationDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.traceabilityAudit.company">Company</span></dt>
+        <dd>
+            <div *ngIf="traceabilityAudit.companyId">
+                <a [routerLink]="['/company', traceabilityAudit.companyId]">{{traceabilityAudit.company.name}} ({{traceabilityAudit.company.identifier}})</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'traceability-audit/'+ traceabilityAudit.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

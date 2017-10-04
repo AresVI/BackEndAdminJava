@@ -1,0 +1,24 @@
+{
+    "aresViApp": {
+        "attribute" : {
+            "home": {
+                "title": "Listado de Atributos",
+                "createLabel": "Crear nuevo atributo",
+                "createOrEditLabel": "Crear o editar atributo"
+            },
+            "created": "Un nuevo atributo ha sido creado con el identificador {{ param }}",
+            "updated": "Un atributo ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un atributo ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar el atributo {{ id }}?"
+            },
+            "detail": {
+                "title": "Atributo"
+            },
+            "name": "Nombre",
+            "required": "Requerido",
+            "weighting": "Ponderación",
+            "categoryAttribute": "Categoría de Atributo"
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "aresViApp": {
+        "traceabilityAudit" : {
+            "home": {
+                "title": "Auditorías de Trazabilidad",
+                "createLabel": "Crear nueva Auditoría de Trazabilidad",
+                "createOrEditLabel": "Crear o editar una Auditoría de Trazabilidad"
+            },
+            "created": "Una nueva Auditoría de Trazabilidad ha sido creada con el identificador {{ param }}",
+            "updated": "Una Auditoría de Trazabilidad ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Auditoría de Trazabilidad ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la Auditoría de Trazabilidad {{ id }}?"
+            },
+            "detail": {
+                "title": "Auditoría de Trazabilidad"
+            },
+            "name": "Nombre",
+            "creationDate": "Fecha de Craación",
+            "auditProcesses": "Proceso",
+            "company": "Bodega"
+        }
+    }
+}

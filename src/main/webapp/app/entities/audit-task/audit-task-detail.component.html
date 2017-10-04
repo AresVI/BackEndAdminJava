@@ -1,0 +1,31 @@
+
+<div *ngIf="auditTask">
+    <h2><span jhiTranslate="aresViApp.auditTask.detail.title">Audit Task</span> {{auditTask.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.auditTask.name">Name</span></dt>
+        <dd>
+            <span>{{auditTask.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditTask.container">Container</span></dt>
+        <dd>
+            <div *ngIf="auditTask.containerId">
+                <a [routerLink]="['/container', auditTask.containerId]">{{auditTask.containerId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'audit-task/'+ auditTask.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

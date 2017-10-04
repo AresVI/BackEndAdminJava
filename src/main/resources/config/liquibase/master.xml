@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043612_added_entity_Attribute.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043613_added_entity_CategoryAttribute.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043614_added_entity_Container.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043615_added_entity_AuditTask.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043616_added_entity_AuditProcess.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043617_added_entity_Participant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043618_added_entity_Weighting.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043619_added_entity_TraceabilityAudit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043620_added_entity_Company.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043621_added_entity_Recommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043622_added_entity_AuditProcessRecommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043623_added_entity_AuditTaskRecommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043624_added_entity_CategoryAttributeRecommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043625_added_entity_AttributeRecommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926044554_added_entity_CategoryAttRecommendation.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20170926043612_added_entity_constraints_Attribute.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043613_added_entity_constraints_CategoryAttribute.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043614_added_entity_constraints_Container.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043615_added_entity_constraints_AuditTask.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043616_added_entity_constraints_AuditProcess.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043619_added_entity_constraints_TraceabilityAudit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043621_added_entity_constraints_Recommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043622_added_entity_constraints_AuditProcessRecommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043623_added_entity_constraints_AuditTaskRecommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043624_added_entity_constraints_CategoryAttributeRecommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926043625_added_entity_constraints_AttributeRecommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170926044554_added_entity_constraints_CategoryAttRecommendation.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

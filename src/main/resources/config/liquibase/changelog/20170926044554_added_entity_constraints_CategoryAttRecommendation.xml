@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity CategoryAttRecommendation.
+    -->
+    <changeSet id="20170926044554-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="audit_task_recom_id"
+                                 baseTableName="category_att_recommendation"
+                                 constraintName="fk_category_att_recommendation_audit_task_recom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="audit_task_recommendation"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_attribute_id"
+                                 baseTableName="category_att_recommendation"
+                                 constraintName="fk_category_att_recommendation_category_attribute_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_attribute"/>
+
+    </changeSet>
+</databaseChangeLog>

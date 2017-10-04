@@ -1,0 +1,22 @@
+{
+    "aresViApp": {
+        "categoryAttribute" : {
+            "home": {
+                "title": "Category Attributes",
+                "createLabel": "Crear nuevo Category Attribute",
+                "createOrEditLabel": "Crear o editar Category Attribute"
+            },
+            "created": "Un nuevo Category Attribute ha sido creado con el identificador {{ param }}",
+            "updated": "Un Category Attribute ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Category Attribute ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Category Attribute {{ id }}?"
+            },
+            "detail": {
+                "title": "Category Attribute"
+            },
+            "name": "Name",
+            "auditTask": "Audit Task"
+        }
+    }
+}

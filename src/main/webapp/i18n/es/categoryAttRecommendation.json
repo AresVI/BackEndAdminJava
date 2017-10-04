@@ -1,0 +1,23 @@
+{
+    "aresViApp": {
+        "categoryAttRecommendation" : {
+            "home": {
+                "title": "Category Att Recommendations",
+                "createLabel": "Crear nuevo Category Att Recommendation",
+                "createOrEditLabel": "Crear o editar Category Att Recommendation"
+            },
+            "created": "Un nuevo Category Att Recommendation ha sido creado con el identificador {{ param }}",
+            "updated": "Un Category Att Recommendation ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Category Att Recommendation ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Category Att Recommendation {{ id }}?"
+            },
+            "detail": {
+                "title": "Category Att Recommendation"
+            },
+            "description": "Description",
+            "auditTaskRecom": "Audit Task Recom",
+            "categoryAttribute": "Category Attribute"
+        }
+    }
+}

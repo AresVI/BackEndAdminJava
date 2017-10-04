@@ -1,0 +1,50 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAuditTaskRecommendationLabel" jhiTranslate="aresViApp.auditTaskRecommendation.home.createOrEditLabel">Create or edit a Audit Task Recommendation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!auditTaskRecommendation.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="auditTaskRecommendation.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditTaskRecommendation.description" for="field_description">Description</label>
+            <textarea class="form-control" name="description" id="field_description"
+                [(ngModel)]="auditTaskRecommendation.description" required ></textarea>
+            <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditTaskRecommendation.auditProcessRecom" for="field_auditProcessRecom">Audit Process Recom</label>
+            <select class="form-control" id="field_auditProcessRecom" name="auditProcessRecom" [(ngModel)]="auditTaskRecommendation.auditProcessRecomId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="auditProcessRecommendationOption.id" *ngFor="let auditProcessRecommendationOption of auditprocessrecommendations; trackBy: trackAuditProcessRecommendationById">{{auditProcessRecommendationOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditTaskRecommendation.auditTask" for="field_auditTask">Audit Task</label>
+            <select class="form-control" id="field_auditTask" name="auditTask" [(ngModel)]="auditTaskRecommendation.auditTaskId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="auditTaskOption.id" *ngFor="let auditTaskOption of audittasks; trackBy: trackAuditTaskById">{{auditTaskOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

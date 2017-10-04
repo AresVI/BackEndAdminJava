@@ -1,0 +1,23 @@
+{
+    "aresViApp": {
+        "auditProcessRecommendation" : {
+            "home": {
+                "title": "Audit Process Recommendations",
+                "createLabel": "Crear nuevo Audit Process Recommendation",
+                "createOrEditLabel": "Crear o editar Audit Process Recommendation"
+            },
+            "created": "Un nuevo Audit Process Recommendation ha sido creado con el identificador {{ param }}",
+            "updated": "Un Audit Process Recommendation ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Audit Process Recommendation ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Audit Process Recommendation {{ id }}?"
+            },
+            "detail": {
+                "title": "Audit Process Recommendation"
+            },
+            "description": "Description",
+            "recommendation": "Recommendation",
+            "auditProcess": "Audit Process"
+        }
+    }
+}

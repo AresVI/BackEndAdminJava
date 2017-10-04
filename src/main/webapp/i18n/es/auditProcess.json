@@ -1,0 +1,22 @@
+{
+    "aresViApp": {
+        "auditProcess" : {
+            "home": {
+                "title": "Audit Processes",
+                "createLabel": "Crear nuevo Audit Process",
+                "createOrEditLabel": "Crear o editar Audit Process"
+            },
+            "created": "Un nuevo Audit Process ha sido creado con el identificador {{ param }}",
+            "updated": "Un Audit Process ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Audit Process ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Audit Process {{ id }}?"
+            },
+            "detail": {
+                "title": "Audit Process"
+            },
+            "name": "Name",
+            "traceabilityAudit": "Traceability Audit"
+        }
+    }
+}

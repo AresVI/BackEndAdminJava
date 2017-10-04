@@ -1,0 +1,24 @@
+{
+    "aresViApp": {
+        "recommendation" : {
+            "home": {
+                "title": "Recommendations",
+                "createLabel": "Crear nuevo Recommendation",
+                "createOrEditLabel": "Crear o editar Recommendation"
+            },
+            "created": "Un nuevo Recommendation ha sido creado con el identificador {{ param }}",
+            "updated": "Un Recommendation ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Recommendation ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Recommendation {{ id }}?"
+            },
+            "detail": {
+                "title": "Recommendation"
+            },
+            "name": "Name",
+            "qualification": "Qualification",
+            "creationDate": "Creation Date",
+            "traceabilityAudit": "Traceability Audit"
+        }
+    }
+}

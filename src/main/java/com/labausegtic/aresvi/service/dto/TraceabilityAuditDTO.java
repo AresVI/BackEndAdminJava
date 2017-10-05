@@ -24,6 +24,8 @@ public class TraceabilityAuditDTO implements Serializable {
 
     private CompanyDTO company;
 
+    private String category;
+
     public Long getId() {
         return id;
     }
@@ -62,6 +64,14 @@ public class TraceabilityAuditDTO implements Serializable {
 
     public void setCompany(CompanyDTO company) {
         this.company = company;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override

@@ -33,5 +33,6 @@
     <include file="config/liquibase/changelog/20170926043624_added_entity_constraints_CategoryAttributeRecommendation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170926043625_added_entity_constraints_AttributeRecommendation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170926044554_added_entity_constraints_CategoryAttRecommendation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171005024821_changelog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

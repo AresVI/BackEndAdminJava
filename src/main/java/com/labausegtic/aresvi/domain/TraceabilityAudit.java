@@ -31,6 +31,9 @@ public class TraceabilityAudit implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "category")
+    private String category;
+
     @Column(name = "creation_date")
     private Instant creationDate;
 
@@ -61,6 +64,19 @@ public class TraceabilityAudit implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public TraceabilityAudit category(String category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Instant getCreationDate() {

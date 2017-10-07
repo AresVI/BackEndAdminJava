@@ -1,6 +1,6 @@
 {
     "aresViApp": {
-        "Contenedor" : {
+        "container" : {
             "home": {
                 "title": "Contenedores",
                 "createLabel": "Crear nuevo Contenedor",

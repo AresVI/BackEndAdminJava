@@ -2,21 +2,21 @@
     "aresViApp": {
         "auditTask" : {
             "home": {
-                "title": "Audit Tasks",
-                "createLabel": "Crear nuevo Audit Task",
-                "createOrEditLabel": "Crear o editar Audit Task"
+                "title": "Tareas de Auditoría",
+                "createLabel": "Crear nueva Tarea de Auditoría",
+                "createOrEditLabel": "Crear o editar Tarea de Auditoría"
             },
-            "created": "Un nuevo Audit Task ha sido creado con el identificador {{ param }}",
-            "updated": "Un Audit Task ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Audit Task ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Tarea de Auditoría ha sido creada con el identificador {{ param }}",
+            "updated": "Una Tarea de Auditoría ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Tarea de Auditoría ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Audit Task {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Tarea de Auditoría {{ id }}?"
             },
             "detail": {
-                "title": "Audit Task"
+                "title": "Tarea de Auditoría"
             },
-            "name": "Name",
-            "container": "Container"
+            "name": "Nombre",
+            "container": "Contenedor"
         }
     }
 }

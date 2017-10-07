@@ -2,7 +2,7 @@
     "aresViApp": {
         "categoryAttribute" : {
             "home": {
-                "title": "Categorías de Atributo",
+                "title": "Categoría de Atributos",
                 "createLabel": "Crear nueva Categoría de Atributo",
                 "createOrEditLabel": "Crear o editar Categoría de Atributo"
             },

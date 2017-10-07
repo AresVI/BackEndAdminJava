@@ -2,21 +2,21 @@
     "aresViApp": {
         "categoryAttribute" : {
             "home": {
-                "title": "Category Attributes",
-                "createLabel": "Crear nuevo Category Attribute",
-                "createOrEditLabel": "Crear o editar Category Attribute"
+                "title": "Categorías de Atributo",
+                "createLabel": "Crear nueva Categoría de Atributo",
+                "createOrEditLabel": "Crear o editar Categoría de Atributo"
             },
-            "created": "Un nuevo Category Attribute ha sido creado con el identificador {{ param }}",
-            "updated": "Un Category Attribute ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Category Attribute ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Categoría de Atributo ha sido creada con el identificador {{ param }}",
+            "updated": "Una Categoría de Atributo ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Categoría de Atributo ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Category Attribute {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Categoría de Atributo {{ id }}?"
             },
             "detail": {
-                "title": "Category Attribute"
+                "title": "Categoría de Atributo"
             },
-            "name": "Name",
-            "auditTask": "Audit Task"
+            "name": "Nombre",
+            "auditTask": "Tarea de Auditoría"
         }
     }
 }

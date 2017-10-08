@@ -2,20 +2,20 @@
     "aresViApp": {
         "participant" : {
             "home": {
-                "title": "Participants",
-                "createLabel": "Crear nuevo Participant",
-                "createOrEditLabel": "Crear o editar Participant"
+                "title": "Participantes",
+                "createLabel": "Crear nuevo Participante",
+                "createOrEditLabel": "Crear o editar Participante"
             },
-            "created": "Un nuevo Participant ha sido creado con el identificador {{ param }}",
-            "updated": "Un Participant ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Participant ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo Participante ha sido creado con el identificador {{ param }}",
+            "updated": "Un Participante ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Participante ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Participant {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Participante {{ id }}?"
             },
             "detail": {
-                "title": "Participant"
+                "title": "Participante"
             },
-            "name": "Name"
+            "name": "Nombre"
         }
     }
 }

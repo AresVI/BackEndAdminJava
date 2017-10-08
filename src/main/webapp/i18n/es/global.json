@@ -134,14 +134,14 @@
         }
     },
     "error": {
-        "internalServerError": "Internal server error",
+        "internalServerError": "Error de servidor interno",
         "server.not.reachable": "Servidor no accesible",
-        "url.not.found": "Not found",
+        "url.not.found": "No encontrado",
         "NotNull": "¡El campo {{fieldName}} no puede estar vacío!",
         "Size": "¡El campo {{fieldName}} no cumple con los requisitos de tamaño mínimo/máximo!",
-        "userexists": "Login name already used!",
-        "emailexists": "Email is already in use!",
-        "idexists": "A new {{entityName}} cannot already have an ID"
+        "userexists": "El nombre de logueo ya está en uso!",
+        "emailexists": "El email ya está en uso!",
+        "idexists": "Un nuevo {{entityName}} no puede tener ese ID"
     },
     "footer": "pie de página"
 }

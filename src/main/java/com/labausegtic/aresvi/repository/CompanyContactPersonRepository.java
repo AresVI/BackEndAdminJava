@@ -18,5 +18,5 @@ import java.util.List;
 @Repository
 public interface CompanyContactPersonRepository extends JpaRepository<CompanyContactPerson, Long> {
 
-    Page<CompanyContactPersonDTO> findCompanyContactPeopleByCompany_Id(Long company_id, Pageable pageable);
+    Page<CompanyContactPerson> findCompanyContactPeopleByCompany_Id(Long company_id, Pageable pageable);
 }

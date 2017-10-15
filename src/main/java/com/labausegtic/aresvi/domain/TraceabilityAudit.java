@@ -169,6 +169,7 @@ public class TraceabilityAudit implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", creationDate='" + getCreationDate() + "'" +
+            ", companyContactPerson='" + getCompanyContactPerson() + "'" +
             "}";
     }
 }

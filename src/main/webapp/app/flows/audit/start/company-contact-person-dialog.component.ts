@@ -36,6 +36,9 @@ export class CompanyContactPersonDialogComponent implements OnInit {
             this.company_id = params['company_id'];
         });
         this.isSaving = false;
+
+        console.error(this.company_id);
+
     }
 
     clear() {

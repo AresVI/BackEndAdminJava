@@ -22,6 +22,10 @@ public class CompanyContactPersonDTO implements Serializable {
 
     private String job_possition;
 
+    private Long companyId;
+
+    private CompanyDTO company;
+
     public String getFirst_name() {
         return first_name;
     }
@@ -60,6 +64,22 @@ public class CompanyContactPersonDTO implements Serializable {
 
     public void setJob_possition(String job_possition) {
         this.job_possition = job_possition;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public CompanyDTO getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyDTO company) {
+        this.company = company;
     }
 
     @Override

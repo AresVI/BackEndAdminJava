@@ -90,7 +90,7 @@ public class CompanyContactPersonServiceImpl implements CompanyContactPersonServ
     @Override
     public Page<CompanyContactPersonDTO> findCompanyContactPeopleByCompany_Id(Long company_id, Pageable pageable) {
 
-        return company_contact_personRepository.findCompanyContactPeopleByCompany_Id(company_id, pageable);
+        return company_contact_personRepository.findCompanyContactPeopleByCompany_Id(company_id, pageable).map(companyContactPersonMapper::toDto);
 
     }
 }

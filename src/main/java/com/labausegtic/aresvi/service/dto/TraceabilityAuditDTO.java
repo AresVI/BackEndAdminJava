@@ -26,9 +26,11 @@ public class TraceabilityAuditDTO implements Serializable {
 
     private CompanyDTO company;
 
-    private String category;
+    private CompanyContactPersonDTO companyContactPerson;
 
     private Long companyContactPersonId;
+
+    private String category;
 
     public Long getId() {
         return id;
@@ -78,6 +80,22 @@ public class TraceabilityAuditDTO implements Serializable {
         this.category = category;
     }
 
+    public CompanyContactPersonDTO getCompanyContactPerson() {
+        return companyContactPerson;
+    }
+
+    public void setCompanyContactPerson(CompanyContactPersonDTO companyContactPerson) {
+        this.companyContactPerson = companyContactPerson;
+    }
+
+    public Long getCompanyContactPersonId() {
+        return companyContactPersonId;
+    }
+
+    public void setCompanyContactPersonId(Long companyContactPersonId) {
+        this.companyContactPersonId = companyContactPersonId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -105,6 +123,7 @@ public class TraceabilityAuditDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", creationDate='" + getCreationDate() + "'" +
+            ", companyContactPersonId='" + getCompanyContactPersonId() + "'" +
             "}";
     }
 }

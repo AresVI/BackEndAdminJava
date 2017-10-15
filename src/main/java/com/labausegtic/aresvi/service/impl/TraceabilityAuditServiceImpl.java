@@ -41,6 +41,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
     public TraceabilityAuditDTO save(TraceabilityAuditDTO traceabilityAuditDTO) {
         log.debug("Request to save TraceabilityAudit : {}", traceabilityAuditDTO);
         TraceabilityAudit traceabilityAudit = traceabilityAuditMapper.toEntity(traceabilityAuditDTO);
+        log.debug(traceabilityAudit.toString());
         traceabilityAudit = traceabilityAuditRepository.save(traceabilityAudit);
         return traceabilityAuditMapper.toDto(traceabilityAudit);
     }

@@ -3,14 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
-import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { JhiEventManager } from 'ng-jhipster';
 
-import { CompanyContactPerson } from './company-contact-person.model';
 import { CompanyContactPersonPopupService } from './company-contact-person-popup.service';
-import { CompanyContactPersonService } from './company-contact-person.service';
-import { Company } from '../company';
 import {Subscription} from "rxjs/Subscription";
+import {CompanyContactPerson} from "../../../entities/company-contact-person/company-contact-person.model";
+import {CompanyContactPersonService} from "../../../entities/company-contact-person/company-contact-person.service";
 
 @Component({
     selector: 'jhi-company-contact-person-dialog',
@@ -21,7 +20,6 @@ export class CompanyContactPersonDialogComponent implements OnInit {
     company_contact_person: CompanyContactPerson;
     isSaving: boolean;
 
-    companies: Company[];
     company_id: number;
     private subscription: Subscription;
 

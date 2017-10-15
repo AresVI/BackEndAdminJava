@@ -92,10 +92,10 @@ public class CompanyResource {
      */
     @GetMapping("/companies")
     @Timed
-    public ResponseEntity<List<CompanyDTO>> getAllCompanies(@ApiParam Pageable pageable, @RequestParam("pagination") Boolean pagination) {
+    public ResponseEntity<List<CompanyDTO>> getAllCompanies(@ApiParam Pageable pageable, @Param("pagination") Boolean pagination) {
         log.debug("REST request to get a page of Companies");
 
-        pageable = pagination ? pageable : null;
+        pageable = pagination != null && pagination ? pageable : null;
 
         Page<CompanyDTO> page = companyService.findAll(pageable);
         System.out.println(pagination);

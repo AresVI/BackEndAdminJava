@@ -35,14 +35,6 @@ public class AuditProcessDTO implements Serializable {
         this.name = name;
     }
 
-    public Long getTraceabilityAuditId() {
-        return traceabilityAuditId;
-    }
-
-    public void setTraceabilityAuditId(Long traceabilityAuditId) {
-        this.traceabilityAuditId = traceabilityAuditId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

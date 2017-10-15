@@ -37,8 +37,11 @@ public class TraceabilityAudit implements Serializable {
     @Column(name = "creation_date")
     private Instant creationDate;
 
-    @OneToMany(mappedBy = "traceabilityAudit")
     @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "traceability_audit_audit_process",
+        joinColumns = @JoinColumn(name="traceability_audit_id", referencedColumnName="id"),
+        inverseJoinColumns = @JoinColumn(name="audit_process_id", referencedColumnName="id"))
     private Set<AuditProcess> auditProcesses = new HashSet<>();
 
     @ManyToOne
@@ -101,18 +104,6 @@ public class TraceabilityAudit implements Serializable {
 
     public TraceabilityAudit auditProcesses(Set<AuditProcess> auditProcesses) {
         this.auditProcesses = auditProcesses;
-        return this;
-    }
-
-    public TraceabilityAudit addAuditProcesses(AuditProcess auditProcess) {
-        this.auditProcesses.add(auditProcess);
-        auditProcess.setTraceabilityAudit(this);
-        return this;
-    }
-
-    public TraceabilityAudit removeAuditProcesses(AuditProcess auditProcess) {
-        this.auditProcesses.remove(auditProcess);
-        auditProcess.setTraceabilityAudit(null);
         return this;
     }
 

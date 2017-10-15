@@ -26,13 +26,15 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="traceability_audit_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/seeds/audit_process.csv"
+                  separator=";"
+                  tableName="audit_process">
+        </loadData>
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

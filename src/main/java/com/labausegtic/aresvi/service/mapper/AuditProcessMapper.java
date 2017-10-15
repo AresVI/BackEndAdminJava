@@ -8,14 +8,9 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity AuditProcess and its DTO AuditProcessDTO.
  */
-@Mapper(componentModel = "spring", uses = {TraceabilityAuditMapper.class, })
+@Mapper(componentModel = "spring", uses = {})
 public interface AuditProcessMapper extends EntityMapper <AuditProcessDTO, AuditProcess> {
 
-    @Mapping(source = "traceabilityAudit.id", target = "traceabilityAuditId")
-    AuditProcessDTO toDto(AuditProcess auditProcess); 
-
-    @Mapping(source = "traceabilityAuditId", target = "traceabilityAudit")
-    AuditProcess toEntity(AuditProcessDTO auditProcessDTO); 
     default AuditProcess fromId(Long id) {
         if (id == null) {
             return null;

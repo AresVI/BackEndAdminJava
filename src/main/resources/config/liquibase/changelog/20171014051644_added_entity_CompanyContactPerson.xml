@@ -50,7 +50,7 @@
         </createTable>
 
         <loadData encoding="UTF-8"
-                  file="config/liquibase/company_contact_people.csv"
+                  file="config/liquibase/seeds/company_contact_people.csv"
                   separator=";"
                   tableName="company_contact_person">
         </loadData>

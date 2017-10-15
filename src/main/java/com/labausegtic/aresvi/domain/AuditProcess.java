@@ -23,9 +23,6 @@ public class AuditProcess implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne
-    private TraceabilityAudit traceabilityAudit;
-
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -48,18 +45,6 @@ public class AuditProcess implements Serializable {
         this.name = name;
     }
 
-    public TraceabilityAudit getTraceabilityAudit() {
-        return traceabilityAudit;
-    }
-
-    public AuditProcess traceabilityAudit(TraceabilityAudit traceabilityAudit) {
-        this.traceabilityAudit = traceabilityAudit;
-        return this;
-    }
-
-    public void setTraceabilityAudit(TraceabilityAudit traceabilityAudit) {
-        this.traceabilityAudit = traceabilityAudit;
-    }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override

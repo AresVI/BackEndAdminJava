@@ -34,7 +34,7 @@
         </createTable>
 
         <loadData encoding="UTF-8"
-                  file="config/liquibase/companies.csv"
+                  file="config/liquibase/seeds/companies.csv"
                   separator=";"
                   tableName="company">
         </loadData>

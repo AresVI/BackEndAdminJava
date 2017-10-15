@@ -98,7 +98,7 @@ public class CompanyResource {
         pageable = pagination != null && pagination ? pageable : null;
 
         Page<CompanyDTO> page = companyService.findAll(pageable);
-        System.out.println(pagination);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -1,6 +1,7 @@
 package com.labausegtic.aresvi.repository;
 
 import com.labausegtic.aresvi.domain.CompanyContactPerson;
+import com.labausegtic.aresvi.service.dto.CompanyContactPersonDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -17,5 +18,5 @@ import java.util.List;
 @Repository
 public interface CompanyContactPersonRepository extends JpaRepository<CompanyContactPerson, Long> {
 
-    Page<CompanyContactPerson> findCompanyContactPeopleByCompany_Id(Long company_id, Pageable pageable);
+    Page<CompanyContactPersonDTO> findCompanyContactPeopleByCompany_Id(Long company_id, Pageable pageable);
 }

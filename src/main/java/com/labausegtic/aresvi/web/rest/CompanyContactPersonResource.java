@@ -3,6 +3,7 @@ package com.labausegtic.aresvi.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.labausegtic.aresvi.domain.CompanyContactPerson;
 import com.labausegtic.aresvi.service.CompanyContactPersonService;
+import com.labausegtic.aresvi.service.dto.CompanyContactPersonDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
@@ -49,12 +50,12 @@ public class CompanyContactPersonResource {
      */
     @PostMapping("company/{company_id}/company-contact-people")
     @Timed
-    public ResponseEntity<CompanyContactPerson> createCompanyContactPerson(@Valid @RequestBody CompanyContactPerson company_contact_person, @PathVariable("company_id") String company_id) throws URISyntaxException {
+    public ResponseEntity<CompanyContactPersonDTO> createCompanyContactPerson(@Valid @RequestBody CompanyContactPersonDTO company_contact_person, @PathVariable("company_id") String company_id) throws URISyntaxException {
         log.debug("REST request to save CompanyContactPerson : {}", company_contact_person);
         if (company_contact_person.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new company_contact_person cannot already have an ID")).body(null);
         }
-        CompanyContactPerson result = company_contact_personService.save(company_contact_person);
+        CompanyContactPersonDTO result = company_contact_personService.save(company_contact_person);
         return ResponseEntity.created(new URI("/api/company/" + company_id + "/company-contact-people/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -71,12 +72,12 @@ public class CompanyContactPersonResource {
      */
     @PutMapping("company/{company_id}/company-contact-people")
     @Timed
-    public ResponseEntity<CompanyContactPerson> updateCompanyContactPerson(@Valid @RequestBody CompanyContactPerson company_contact_person, @PathVariable("company_id") String company_id) throws URISyntaxException {
+    public ResponseEntity<CompanyContactPersonDTO> updateCompanyContactPerson(@Valid @RequestBody CompanyContactPersonDTO company_contact_person, @PathVariable("company_id") String company_id) throws URISyntaxException {
         log.debug("REST request to update CompanyContactPerson : {}", company_contact_person);
         if (company_contact_person.getId() == null) {
             return createCompanyContactPerson(company_contact_person, company_id);
         }
-        CompanyContactPerson result = company_contact_personService.save(company_contact_person);
+        CompanyContactPersonDTO result = company_contact_personService.save(company_contact_person);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, company_contact_person.getId().toString()))
             .body(result);
@@ -90,9 +91,9 @@ public class CompanyContactPersonResource {
      */
     @GetMapping("company/{company_id}/company-contact-people")
     @Timed
-    public ResponseEntity<List<CompanyContactPerson>> getAllCompany_contact_people(@ApiParam Pageable pageable, @PathVariable("company_id") Long company_id) {
+    public ResponseEntity<List<CompanyContactPersonDTO>> getAllCompany_contact_people(@ApiParam Pageable pageable, @PathVariable("company_id") Long company_id) {
         log.debug("REST request to get a page of Company_contact_people");
-        Page<CompanyContactPerson> page = company_contact_personService.findCompanyContactPeopleByCompany_IdOrderByIdLast_nameAsc(company_id, pageable);
+        Page<CompanyContactPersonDTO> page = company_contact_personService.findCompanyContactPeopleByCompany_Id(company_id, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/company/" + company_id + "company-contact-people");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -105,9 +106,9 @@ public class CompanyContactPersonResource {
      */
     @GetMapping("company/{company_id}/company-contact-people/{id}")
     @Timed
-    public ResponseEntity<CompanyContactPerson> getCompanyContactPerson(@PathVariable Long id, @PathVariable("company_id") Long company_id) {
+    public ResponseEntity<CompanyContactPersonDTO> getCompanyContactPerson(@PathVariable Long id, @PathVariable("company_id") Long company_id) {
         log.debug("REST request to get CompanyContactPerson : {}", id);
-        CompanyContactPerson company_contact_person = company_contact_personService.findOne(id);
+        CompanyContactPersonDTO company_contact_person = company_contact_personService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(company_contact_person));
     }
 

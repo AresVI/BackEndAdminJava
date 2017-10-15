@@ -12,11 +12,13 @@ import org.mapstruct.*;
 public interface TraceabilityAuditMapper extends EntityMapper <TraceabilityAuditDTO, TraceabilityAudit> {
 
     @Mapping(source = "company.id", target = "companyId")
-    TraceabilityAuditDTO toDto(TraceabilityAudit traceabilityAudit); 
-    @Mapping(target = "auditProcesses", ignore = true)
+    //@Mapping(source = "companyContactPerson.id", target = "companyContactPersonId")
+    TraceabilityAuditDTO toDto(TraceabilityAudit traceabilityAudit);
 
+    @Mapping(target = "auditProcesses", ignore = true)
     @Mapping(source = "companyId", target = "company")
-    TraceabilityAudit toEntity(TraceabilityAuditDTO traceabilityAuditDTO); 
+    //@Mapping(source = "companyContactPersonId", target = "companyContactPerson")
+    TraceabilityAudit toEntity(TraceabilityAuditDTO traceabilityAuditDTO);
     default TraceabilityAudit fromId(Long id) {
         if (id == null) {
             return null;

@@ -1,6 +1,7 @@
 package com.labausegtic.aresvi.service;
 
 import com.labausegtic.aresvi.domain.CompanyContactPerson;
+import com.labausegtic.aresvi.service.dto.CompanyContactPersonDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,7 +16,7 @@ public interface CompanyContactPersonService {
      * @param company_contact_person the entity to save
      * @return the persisted entity
      */
-    CompanyContactPerson save(CompanyContactPerson company_contact_person);
+    CompanyContactPersonDTO save(CompanyContactPersonDTO company_contact_person);
 
     /**
      *  Get all the company_contact_people.
@@ -25,7 +26,7 @@ public interface CompanyContactPersonService {
      * @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<CompanyContactPerson> findAll(Long company_id, Pageable pageable);
+    Page<CompanyContactPersonDTO> findAll(Long company_id, Pageable pageable);
 
     /**
      *  Get the "id" company_contact_person.
@@ -33,7 +34,7 @@ public interface CompanyContactPersonService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    CompanyContactPerson findOne(Long id);
+    CompanyContactPersonDTO findOne(Long id);
 
     /**
      *  Delete the "id" company_contact_person.
@@ -42,5 +43,5 @@ public interface CompanyContactPersonService {
      */
     void delete(Long id);
 
-    Page<CompanyContactPerson> findCompanyContactPeopleByCompany_IdOrderByIdLast_nameAsc(Long company_id, Pageable pageable);
+    Page<CompanyContactPersonDTO> findCompanyContactPeopleByCompany_Id(Long company_id, Pageable pageable);
 }

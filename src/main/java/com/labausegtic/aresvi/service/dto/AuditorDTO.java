@@ -16,8 +16,6 @@ public class AuditorDTO implements Serializable {
 
     private Boolean internal;
 
-    private UserDTO user;
-
     public Long getId() {
         return id;
     }
@@ -40,14 +38,6 @@ public class AuditorDTO implements Serializable {
 
     public void setInternal(Boolean internal) {
         this.internal = internal;
-    }
-
-    public UserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserDTO user) {
-        this.user = user;
     }
 
     @Override

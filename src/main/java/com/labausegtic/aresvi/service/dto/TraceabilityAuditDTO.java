@@ -1,6 +1,8 @@
 package com.labausegtic.aresvi.service.dto;
 
 
+import com.labausegtic.aresvi.domain.CompanyContactPerson;
+
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -25,6 +27,8 @@ public class TraceabilityAuditDTO implements Serializable {
     private CompanyDTO company;
 
     private String category;
+
+    private CompanyContactPerson companyContactPerson;
 
     public Long getId() {
         return id;
@@ -72,6 +76,14 @@ public class TraceabilityAuditDTO implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public CompanyContactPerson getCompanyContactPerson() {
+        return companyContactPerson;
+    }
+
+    public void setCompanyContactPerson(CompanyContactPerson companyContactPerson) {
+        this.companyContactPerson = companyContactPerson;
     }
 
     @Override

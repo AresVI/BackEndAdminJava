@@ -42,6 +42,7 @@ export class SettingsComponent implements OnInit {
                     this.languageService.changeLanguage(this.settingsAccount.langKey);
                 }
             });
+            window.location.reload();
         }, () => {
             this.success = null;
             this.error = 'ERROR';

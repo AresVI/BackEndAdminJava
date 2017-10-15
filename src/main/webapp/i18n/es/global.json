@@ -8,20 +8,22 @@
             "entities": {
                 "main": "Entidades",
                 "attribute": "Atributos",
-                "categoryAttribute": "Categoría de Atributos",
-                "container": "Contenedor",
-                "auditTask": "Tarea de Auditoría",
-                "auditProcess": "Proceso de Auditoría",
+                "categoryAttribute": "Categorías de Atributos",
+                "container": "Contenedores",
+                "auditTask": "Tareas de Auditoría",
+                "auditProcess": "Procesos de Auditoría",
                 "participant": "Participante",
-                "weighting": "Ponderacion",
-                "traceabilityAudit": "Auditoría de Trazabilidad",
-                "company": "Bodega",
+                "weighting": "Ponderaciones",
+                "traceabilityAudit": "Auditorías de Trazabilidad",
+                "company": "Bodegas",
                 "recommendation": "Recomendación",
                 "auditProcessRecommendation": "Audit Process Recommendation",
                 "auditTaskRecommendation": "Audit Task Recommendation",
                 "categoryAttributeRecommendation": "Category Attribute Recommendation",
                 "attributeRecommendation": "Attribute Recommendation",
                 "categoryAttRecommendation": "Category Att Recommendation",
+                "auditor": "Auditor",
+                "companyContactPerson": "Company Contact Person",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -32,6 +34,9 @@
                 "login": "Iniciar sesión",
                 "logout": "Cerrar la sesión",
                 "register": "Crear una cuenta"
+            },
+            "flow": {
+                "init_audit": "Iniciar Auditoría"
             },
             "admin": {
                 "main": "Administración",

@@ -14,7 +14,7 @@ export const attributeRecommendationRoute: Routes = [
         path: 'attribute-recommendation',
         component: AttributeRecommendationComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.attributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -22,7 +22,7 @@ export const attributeRecommendationRoute: Routes = [
         path: 'attribute-recommendation/:id',
         component: AttributeRecommendationDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.attributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -34,7 +34,7 @@ export const attributeRecommendationPopupRoute: Routes = [
         path: 'attribute-recommendation-new',
         component: AttributeRecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.attributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -44,7 +44,7 @@ export const attributeRecommendationPopupRoute: Routes = [
         path: 'attribute-recommendation/:id/edit',
         component: AttributeRecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.attributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -54,7 +54,7 @@ export const attributeRecommendationPopupRoute: Routes = [
         path: 'attribute-recommendation/:id/delete',
         component: AttributeRecommendationDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.attributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],

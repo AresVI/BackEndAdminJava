@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -90,9 +92,13 @@ public class CompanyResource {
      */
     @GetMapping("/companies")
     @Timed
-    public ResponseEntity<List<CompanyDTO>> getAllCompanies(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<CompanyDTO>> getAllCompanies(@ApiParam Pageable pageable, @RequestParam("pagination") Boolean pagination) {
         log.debug("REST request to get a page of Companies");
+
+        pageable = pagination ? pageable : null;
+
         Page<CompanyDTO> page = companyService.findAll(pageable);
+        System.out.println(pagination);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

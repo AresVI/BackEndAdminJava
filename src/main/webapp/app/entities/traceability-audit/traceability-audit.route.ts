@@ -33,7 +33,7 @@ export const traceabilityAuditRoute: Routes = [
             'pagingParams': TraceabilityAuditResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const traceabilityAuditRoute: Routes = [
         path: 'traceability-audit/:id',
         component: TraceabilityAuditDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -53,7 +53,7 @@ export const traceabilityAuditPopupRoute: Routes = [
         path: 'traceability-audit-new',
         component: TraceabilityAuditPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const traceabilityAuditPopupRoute: Routes = [
         path: 'traceability-audit/:id/edit',
         component: TraceabilityAuditPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -73,7 +73,7 @@ export const traceabilityAuditPopupRoute: Routes = [
         path: 'traceability-audit/:id/delete',
         component: TraceabilityAuditDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService],

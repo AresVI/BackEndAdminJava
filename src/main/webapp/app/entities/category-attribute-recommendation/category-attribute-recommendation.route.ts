@@ -16,7 +16,7 @@ export const categoryAttributeRecommendationRoute: Routes = [
         path: 'category-attribute-recommendation',
         component: CategoryAttributeRecommendationComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -24,7 +24,7 @@ export const categoryAttributeRecommendationRoute: Routes = [
         path: 'category-attribute-recommendation/:id',
         component: CategoryAttributeRecommendationDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -36,7 +36,7 @@ export const categoryAttributeRecommendationPopupRoute: Routes = [
         path: 'category-attribute-recommendation-new',
         component: CategoryAttributeRecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -46,7 +46,7 @@ export const categoryAttributeRecommendationPopupRoute: Routes = [
         path: 'category-attribute-recommendation/:id/edit',
         component: CategoryAttributeRecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -56,7 +56,7 @@ export const categoryAttributeRecommendationPopupRoute: Routes = [
         path: 'category-attribute-recommendation/:id/delete',
         component: CategoryAttributeRecommendationDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttributeRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -1,5 +1,6 @@
 import { BaseEntity } from './../../shared';
 import {Company} from "../company/company.model";
+import {CompanyContactPerson} from "../company-contact-person/company-contact-person.model";
 
 export class TraceabilityAudit implements BaseEntity {
     constructor(
@@ -8,7 +9,9 @@ export class TraceabilityAudit implements BaseEntity {
         public creationDate?: any,
         public auditProcesses?: BaseEntity[],
         public companyId?: number,
-        public company?: Company
+        public company?: Company,
+        public companyContactPersonId?: number,
+        public companyContactPerson?: CompanyContactPerson
     ) {
     }
 }

@@ -4,7 +4,9 @@ package com.labausegtic.aresvi.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Company.
@@ -30,6 +32,12 @@ public class Company implements Serializable {
     @NotNull
     @Column(name = "identifier", nullable = false)
     private String identifier;
+
+    @ManyToMany
+    @JoinTable(name = "auditor_companies",
+        inverseJoinColumns = @JoinColumn(name="auditors_id", referencedColumnName="id"),
+        joinColumns = @JoinColumn(name="companies_id", referencedColumnName="id"))
+    private Set<Auditor> internal_auditors = new HashSet<>();
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -60,6 +68,14 @@ public class Company implements Serializable {
     public Company identifier(String identifier) {
         this.identifier = identifier;
         return this;
+    }
+
+    public Set<Auditor> getInternal_auditors() {
+        return internal_auditors;
+    }
+
+    public void setInternal_auditors(Set<Auditor> internal_auditors) {
+        this.internal_auditors = internal_auditors;
     }
 
     public void setIdentifier(String identifier) {

@@ -18,7 +18,8 @@
             "name": "Nombre",
             "creationDate": "Fecha de Craación",
             "auditProcesses": "Proceso",
-            "company": "Bodega"
+            "company": "Bodega",
+            "company_contact_person": "Persona de Contacto"
         }
     }
 }

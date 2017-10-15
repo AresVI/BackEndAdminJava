@@ -14,7 +14,7 @@ export const categoryAttRecommendationRoute: Routes = [
         path: 'category-att-recommendation',
         component: CategoryAttRecommendationComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -22,7 +22,7 @@ export const categoryAttRecommendationRoute: Routes = [
         path: 'category-att-recommendation/:id',
         component: CategoryAttRecommendationDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -34,7 +34,7 @@ export const categoryAttRecommendationPopupRoute: Routes = [
         path: 'category-att-recommendation-new',
         component: CategoryAttRecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -44,7 +44,7 @@ export const categoryAttRecommendationPopupRoute: Routes = [
         path: 'category-att-recommendation/:id/edit',
         component: CategoryAttRecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -54,7 +54,7 @@ export const categoryAttRecommendationPopupRoute: Routes = [
         path: 'category-att-recommendation/:id/delete',
         component: CategoryAttRecommendationDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],

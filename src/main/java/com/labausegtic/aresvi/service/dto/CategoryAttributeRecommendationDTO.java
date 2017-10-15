@@ -21,6 +21,8 @@ public class CategoryAttributeRecommendationDTO implements Serializable {
 
     private Long auditTaskRecomId;
 
+    private Long companyId;
+
     private Long categoryAttributeId;
 
     public Long getId() {
@@ -53,6 +55,14 @@ public class CategoryAttributeRecommendationDTO implements Serializable {
 
     public void setCategoryAttributeId(Long categoryAttributeId) {
         this.categoryAttributeId = categoryAttributeId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     @Override

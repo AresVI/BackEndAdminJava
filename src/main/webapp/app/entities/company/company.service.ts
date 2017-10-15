@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { SERVER_API_URL } from '../../app.constants';
 
 import { Company } from './company.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {createRequestOptionAllElements} from "../../shared/model/request-util";
+import {SERVER_API_URL} from "../../app.constants";
 
 @Injectable()
 export class CompanyService {
@@ -35,6 +36,12 @@ export class CompanyService {
 
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
+        return this.http.get(this.resourceUrl, options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
+    queryAll(req?: any): Observable<ResponseWrapper> {
+        const options = createRequestOptionAllElements(req);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }

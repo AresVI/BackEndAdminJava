@@ -1,0 +1,11 @@
+{
+    "aresViApp": {
+        "flow-audit" : {
+            "start": {
+                "home": {
+                    "title": "Iniciar Proceso de Auditoría"
+                }
+            }
+        }
+    }
+}

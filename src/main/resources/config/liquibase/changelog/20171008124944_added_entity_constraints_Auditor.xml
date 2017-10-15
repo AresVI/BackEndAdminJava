@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Auditor.
+    -->
+    <changeSet id="20171008124944-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="auditor"
+                                 constraintName="fk_auditor_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="auditors_id"
+                                 baseTableName="auditor_companies"
+                                 constraintName="fk_auditor_companies_auditors_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="auditor"/>
+        <addForeignKeyConstraint baseColumnNames="companies_id"
+                                 baseTableName="auditor_companies"
+                                 constraintName="fk_auditor_companies_companies_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+        
+    </changeSet>
+</databaseChangeLog>

@@ -9,8 +9,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { CompanyContactPerson } from './company-contact-person.model';
 import { CompanyContactPersonPopupService } from './company-contact-person-popup.service';
 import { CompanyContactPersonService } from './company-contact-person.service';
-import { Company, CompanyService } from '../company';
-import { ResponseWrapper } from '../../shared';
+import { Company } from '../company';
 import {Subscription} from "rxjs/Subscription";
 
 @Component({

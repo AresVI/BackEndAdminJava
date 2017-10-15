@@ -16,8 +16,6 @@ export class CompanyContactPersonDeleteDialogComponent {
 
     company_contact_person: CompanyContactPerson;
 
-    company_id: number;
-
     constructor(
         private company_contact_personService: CompanyContactPersonService,
         public activeModal: NgbActiveModal,
@@ -30,13 +28,14 @@ export class CompanyContactPersonDeleteDialogComponent {
     }
 
     confirmDelete(id: number) {
-        this.company_contact_personService.delete(this.company_id, id).subscribe((response) => {
-            this.eventManager.broadcast({
-                name: 'company_contact_personListModification',
-                content: 'Deleted an company_contact_person'
+        this.company_contact_personService.delete(this.company_contact_person.company.id, id)
+            .subscribe((response) => {
+                this.eventManager.broadcast({
+                    name: 'company_contact_personListModification',
+                    content: 'Deleted an company_contact_person'
+                });
+                this.activeModal.dismiss(true);
             });
-            this.activeModal.dismiss(true);
-        });
     }
 }
 
@@ -56,7 +55,7 @@ export class CompanyContactPersonDeletePopupComponent implements OnInit, OnDestr
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             this.company_contact_personPopupService
-                .open(CompanyContactPersonDeleteDialogComponent as Component, params['id']);
+                .open(CompanyContactPersonDeleteDialogComponent as Component, params['company_id'], params['id']);
         });
     }
 

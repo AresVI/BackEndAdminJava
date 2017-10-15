@@ -3,24 +3,24 @@
         "company_contact_person" : {
             "home": {
                 "title": "Persona de Contacto",
-                "createLabel": "Crear nuevo contacto",
-                "createOrEditLabel": "Crear o editar Company Contact Person"
+                "createLabel": "Crear nueva Persona de Contacto",
+                "createOrEditLabel": "Crear o editar Persona de Contacto"
             },
-            "created": "Un nuevo Company Contact Person ha sido creado con el identificador {{ param }}",
-            "updated": "Un Company Contact Person ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Company Contact Person ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Persona de Contacto ha sido creada con el identificador {{ param }}",
+            "updated": "Una Persona de Contacto ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Persona de Contacto ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Company Contact Person {{ id }}?"
+                "question": "¿Seguro que quiere eliminar la Persona de Contacto {{ id }}?"
             },
             "detail": {
-                "title": "Company Contact Person"
+                "title": "Persona de Contacto"
             },
-            "first_name": "First Name",
-            "last_name": "Last Name",
+            "first_name": "Nombre",
+            "last_name": "Apellido",
             "email": "Email",
-            "telephone": "Telephone",
-            "job_possition": "Job Possition",
-            "company": "Company"
+            "telephone": "Teléfono",
+            "job_possition": "Puesto",
+            "company": "Bodega"
         }
     }
 }

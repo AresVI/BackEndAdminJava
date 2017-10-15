@@ -26,8 +26,8 @@ export class CompanyContactPersonDetailComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {
-            this.load(params['id']);
             this.company_id = params['company_id'];
+            this.load(params['id']);
         });
         this.registerChangeInCompany_contact_people();
     }

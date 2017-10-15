@@ -14,6 +14,8 @@ import {CompanyContactPerson} from '../../../entities/company-contact-person/com
 import {Observable} from 'rxjs/Observable';
 import {TraceabilityAuditService} from './traceability-audit.service';
 import {isUndefined} from 'util';
+import {AuditProcess} from '../../../entities/audit-process/audit-process.model';
+import {AuditProcessService} from '../../../entities/audit-process/audit-process.service';
 
 @Component({
     selector: 'jhi-flow-audit-start',
@@ -37,11 +39,13 @@ export class StartComponent implements OnInit {
     previousPage: any;
     reverse: any;
     filter_company: string;
+    auditProcesses: AuditProcess[];
 
     constructor(
         private company_contact_personService: CompanyContactPersonService,
         private traceabilityAuditService: TraceabilityAuditService,
         private companyService: CompanyService,
+        private auditProcessService: AuditProcessService,
         private alertService: JhiAlertService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
@@ -63,6 +67,7 @@ export class StartComponent implements OnInit {
         this.companyContactPeople = [];
         this.registerChangeInCompanies();
         this.registerChangeInCompanyContactPeople();
+        this.loadAllAuditProcess();
         this.isSaving = false;
     }
 
@@ -74,8 +79,8 @@ export class StartComponent implements OnInit {
     }
 
     loadAllCompanyContactPeople() {
-        if (!isUndefined(this.traceabilityAudit.companyId)) {
-            this.company_contact_personService.queryAll(this.traceabilityAudit.companyId,
+        if (!isUndefined(this.traceabilityAudit.company.id)) {
+            this.company_contact_personService.queryAll(this.traceabilityAudit.company.id,
                 {}).subscribe(
                 (res: ResponseWrapper) => this.onSuccessCompanyContactPeople(res.json),
                 (res: ResponseWrapper) => this.onErrorCompanyContactPeople(res.json)
@@ -83,6 +88,15 @@ export class StartComponent implements OnInit {
         } else {
             this.companyContactPeople = [];
         }
+    }
+
+    loadAllAuditProcess() {
+
+        this.auditProcessService.query({}).subscribe(
+            (res: ResponseWrapper) => this.onSuccessAuditProcess(res.json),
+            (res: ResponseWrapper) => this.onErrorAuditProcess(res.json)
+        );
+
     }
 
     changeCompanyId() {
@@ -106,7 +120,10 @@ export class StartComponent implements OnInit {
     }
 
     save() {
-        this.traceabilityAudit.name = '';
+
+        this.traceabilityAudit.name = 'Auditoría bodega: ' + this.traceabilityAudit.company.name;
+
+        this.traceabilityAudit.companyId = this.traceabilityAudit.company.id;
 
         this.subscribeToSaveResponse(this.traceabilityAuditService.create(this.traceabilityAudit));
     }
@@ -139,6 +156,13 @@ export class StartComponent implements OnInit {
         this.alertService.error(error.message, null, null);
     }
 
+    private onSuccessAuditProcess(data) {
+        this.auditProcesses = data;
+    }
+    private onErrorAuditProcess(error) {
+        this.alertService.error(error.message, null, null);
+    }
+
     registerChangeInCompanies() {
         this.eventSubscriberCompanies = this.eventManager.subscribe('companyListModification', (response) => this.loadAllCompanies());
         this.eventSubscriberCompanies = this.eventManager.subscribe('companyListModification', (response) => this.loadAllCompanyContactPeople());
@@ -150,4 +174,24 @@ export class StartComponent implements OnInit {
             (response) => this.loadAllCompanyContactPeople()
         );
     }
+
+    trackCompanyById(index: number, item: Company) {
+        return item.id;
+    }
+
+    trackAuditProcessById(index: number, item: AuditProcess) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
+    }
+
 }

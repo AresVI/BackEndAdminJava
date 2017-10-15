@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Rx';
 
 import { Company } from './company.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
-import {createRequestOptionAllElements} from "../../shared/model/request-util";
-import {SERVER_API_URL} from "../../app.constants";
+import {createRequestOptionAllElements} from '../../shared/model/request-util';
+import {SERVER_API_URL} from '../../app.constants';
 
 @Injectable()
 export class CompanyService {

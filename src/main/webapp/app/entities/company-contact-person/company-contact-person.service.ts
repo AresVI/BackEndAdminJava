@@ -5,16 +5,16 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { CompanyContactPerson } from './company-contact-person.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
-import {createRequestOptionAllElements} from "../../shared/model/request-util";
+import {createRequestOptionAllElements} from '../../shared/model/request-util';
 
 @Injectable()
 export class CompanyContactPersonService {
 
     constructor(private http: Http) { }
 
-    getResourceUrl( company_id: number ){
+    getResourceUrl( company_id: number ) {
 
-        return SERVER_API_URL + 'api/company/'+ company_id +'/company-contact-people';
+        return SERVER_API_URL + 'api/company/' + company_id + '/company-contact-people';
 
     }
 

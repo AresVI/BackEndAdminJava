@@ -7,7 +7,7 @@ import { JhiEventManager } from 'ng-jhipster';
 import { ProfileService } from '../profiles/profile.service';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
 
-import { VERSION, DEBUG_INFO_ENABLED } from '../../app.constants';
+import { VERSION } from '../../app.constants';
 
 @Component({
     selector: 'jhi-navbar',
@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
 
             this.principal.identity().then((account) => {
                 this.account = account;
-                this.account.displayName = account.firstName + " " + account.lastName;
+                this.account.displayName = account.firstName + ' ' + account.lastName;
                 this.account.name = account.login;
             });
 

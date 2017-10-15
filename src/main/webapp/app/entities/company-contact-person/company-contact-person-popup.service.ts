@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyContactPerson } from './company-contact-person.model';
 import { CompanyContactPersonService } from './company-contact-person.service';
-import {CompanyService} from "../company/company.service";
+import {CompanyService} from '../company/company.service';
 
 @Injectable()
 export class CompanyContactPersonPopupService {
@@ -39,7 +39,7 @@ export class CompanyContactPersonPopupService {
                     // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                     setTimeout(() => {
 
-                        var companyContactPerson: CompanyContactPerson = new CompanyContactPerson();
+                        const companyContactPerson: CompanyContactPerson = new CompanyContactPerson();
 
                         companyContactPerson.company = company;
 

@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {AresViFlowAuditStartModule} from "./audit/start/start.module";
+import {AresViFlowAuditStartModule} from './audit/start/start.module';
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 

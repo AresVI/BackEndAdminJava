@@ -1,6 +1,6 @@
 import { BaseEntity } from './../../shared';
-import {Company} from "../company/company.model";
-import {CompanyContactPerson} from "../company-contact-person/company-contact-person.model";
+import {Company} from '../company/company.model';
+import {CompanyContactPerson} from '../company-contact-person/company-contact-person.model';
 
 export class TraceabilityAudit implements BaseEntity {
     constructor(

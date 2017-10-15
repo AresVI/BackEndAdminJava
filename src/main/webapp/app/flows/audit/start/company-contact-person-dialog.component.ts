@@ -7,9 +7,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { CompanyContactPersonPopupService } from './company-contact-person-popup.service';
-import {Subscription} from "rxjs/Subscription";
-import {CompanyContactPerson} from "../../../entities/company-contact-person/company-contact-person.model";
-import {CompanyContactPersonService} from "../../../entities/company-contact-person/company-contact-person.service";
+import {Subscription} from 'rxjs/Subscription';
+import {CompanyContactPerson} from '../../../entities/company-contact-person/company-contact-person.model';
+import {CompanyContactPersonService} from '../../../entities/company-contact-person/company-contact-person.service';
 
 @Component({
     selector: 'jhi-company-contact-person-dialog',

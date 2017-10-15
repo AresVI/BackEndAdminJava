@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { CompanyContactPerson } from './company-contact-person.model';
 import { CompanyContactPersonService } from './company-contact-person.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
-import {CompanyService} from "../company/company.service";
-import {Company} from "../company/company.model";
+import {CompanyService} from '../company/company.service';
+import {Company} from '../company/company.model';
 
 @Component({
     selector: 'jhi-company-contact-person',
@@ -56,7 +55,7 @@ export class CompanyContactPersonComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.company_contact_personService.query(this.company_id,{
+        this.company_contact_personService.query(this.company_id, {
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()}).subscribe(

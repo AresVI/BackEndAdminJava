@@ -25,7 +25,7 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
-import {AresViFlowModule} from "./flows/flow.module";
+import {AresViFlowModule} from './flows/flow.module';
 
 @NgModule({
     imports: [

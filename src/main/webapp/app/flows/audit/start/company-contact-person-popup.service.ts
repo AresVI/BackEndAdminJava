@@ -1,9 +1,9 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import {CompanyContactPersonService} from "../../../entities/company-contact-person/company-contact-person.service";
-import {CompanyService} from "../../../entities/company/company.service";
-import {CompanyContactPerson} from "../../../entities/company-contact-person/company-contact-person.model";
+import {CompanyContactPersonService} from '../../../entities/company-contact-person/company-contact-person.service';
+import {CompanyService} from '../../../entities/company/company.service';
+import {CompanyContactPerson} from '../../../entities/company-contact-person/company-contact-person.model';
 
 @Injectable()
 export class CompanyContactPersonPopupService {

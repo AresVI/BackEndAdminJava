@@ -4,7 +4,7 @@ export const createRequestOption = (req?: any): BaseRequestOptions => {
     const options: BaseRequestOptions = new BaseRequestOptions();
     if (req) {
         const params: URLSearchParams = new URLSearchParams();
-        params.set('pagination', "true");
+        params.set('pagination', 'true');
         params.set('page', req.page);
         params.set('size', req.size);
         if (req.sort) {
@@ -21,7 +21,7 @@ export const createRequestOptionAllElements = (req?: any): BaseRequestOptions =>
     const options: BaseRequestOptions = new BaseRequestOptions();
     if (req) {
         const params: URLSearchParams = new URLSearchParams();
-        params.set('pagination', "false");
+        params.set('pagination', 'false');
         params.set('query', req.query);
 
         options.params = params;

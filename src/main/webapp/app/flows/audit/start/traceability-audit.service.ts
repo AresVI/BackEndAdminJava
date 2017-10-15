@@ -6,7 +6,7 @@ import { SERVER_API_URL } from '../../../app.constants';
 import { JhiDateUtils } from 'ng-jhipster';
 
 import { ResponseWrapper, createRequestOption } from '../../../shared';
-import {TraceabilityAudit} from "../../../entities/traceability-audit/traceability-audit.model";
+import {TraceabilityAudit} from '../../../entities/traceability-audit/traceability-audit.model';
 
 @Injectable()
 export class TraceabilityAuditService {

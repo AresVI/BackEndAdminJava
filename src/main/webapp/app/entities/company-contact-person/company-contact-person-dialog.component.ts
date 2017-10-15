@@ -3,14 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
-import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { CompanyContactPerson } from './company-contact-person.model';
 import { CompanyContactPersonPopupService } from './company-contact-person-popup.service';
 import { CompanyContactPersonService } from './company-contact-person.service';
 import { Company } from '../company';
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-company-contact-person-dialog',

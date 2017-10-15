@@ -1,27 +1,26 @@
 import {Component, OnInit} from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
-import {Subscription} from "rxjs/Subscription";
-import {Company} from "../../../entities/company/company.model";
-import {JhiAlertService, JhiEventManager} from "ng-jhipster";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Subscription} from 'rxjs/Subscription';
+import {Company} from '../../../entities/company/company.model';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
+import {ActivatedRoute} from '@angular/router';
 
 import { Principal, ResponseWrapper } from '../../../shared';
-import {TraceabilityAudit} from "../../../entities/traceability-audit/traceability-audit.model";
-import {Auditor} from "../../../entities/auditor/auditor.model";
-import {AuditorService} from "../../../entities/auditor/auditor.service";
-import {CompanyService} from "../../../entities/company/company.service";
-import {CompanyContactPersonService} from "../../../entities/company-contact-person/company-contact-person.service";
-import {CompanyContactPerson} from "../../../entities/company-contact-person/company-contact-person.model";
-import {Observable} from "rxjs/Observable";
-import {TraceabilityAuditService} from "./traceability-audit.service";
-import {isUndefined} from "util";
+import {TraceabilityAudit} from '../../../entities/traceability-audit/traceability-audit.model';
+import {CompanyService} from '../../../entities/company/company.service';
+import {CompanyContactPersonService} from '../../../entities/company-contact-person/company-contact-person.service';
+import {CompanyContactPerson} from '../../../entities/company-contact-person/company-contact-person.model';
+import {Observable} from 'rxjs/Observable';
+import {TraceabilityAuditService} from './traceability-audit.service';
+import {isUndefined} from 'util';
 
 @Component({
     selector: 'jhi-flow-audit-start',
     templateUrl: './start.component.html',
 })
-export class StartComponent implements OnInit{
+
+export class StartComponent implements OnInit {
     currentAccount: Account;
     modalRef: NgbModalRef;
 
@@ -59,7 +58,7 @@ export class StartComponent implements OnInit{
         });
         this.traceabilityAudit = new TraceabilityAudit();
         this.loadAllCompanies();
-        this.filter_company = "";
+        this.filter_company = '';
         this.companies = [];
         this.companyContactPeople = [];
         this.registerChangeInCompanies();
@@ -96,8 +95,6 @@ export class StartComponent implements OnInit{
 
     changeCompanyContactPeopleId() {
 
-
-
     }
 
     sort() {
@@ -109,7 +106,7 @@ export class StartComponent implements OnInit{
     }
 
     save() {
-        this.traceabilityAudit.name = "";
+        this.traceabilityAudit.name = '';
 
         this.subscribeToSaveResponse(this.traceabilityAuditService.create(this.traceabilityAudit));
     }

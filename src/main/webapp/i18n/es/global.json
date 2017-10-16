@@ -105,7 +105,13 @@
         "ribbon": {
             "dev":"Development"
         },
-        "item-count": "Monstrando {{first}} - {{second}} de {{total}} artículos."
+        "item-count": "Monstrando {{first}} - {{second}} de {{total}} artículos.",
+        "value": {
+            "boolean": {
+                "true": "Sí",
+                "false": "No"
+            }
+        }
     },
     "entity": {
         "action": {

@@ -5,6 +5,18 @@
                 "home": {
                     "title": "Iniciar Proceso de Auditoría"
                 }
+            },
+            "dashboard": {
+                "home": {
+                    "title": "Dashboard de Procesos de Auditoría"
+                }
+            },
+            "lists": {
+                "by_status":{
+                    "in_progress": "Listado de Auditorías en Progreso",
+                    "canceled": "Listado de Auditorías Canceladas",
+                    "finished": "Listado de Auditorías Finalizadas"
+                }
             }
         }
     }

@@ -1,10 +1,10 @@
+///<reference path='../../../../../../../node_modules/@angular/router/src/router.d.ts'/>
 import {Component, OnInit} from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import {Subscription} from 'rxjs/Subscription';
 import {Company} from '../../../entities/company/company.model';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
-import {ActivatedRoute} from '@angular/router';
 
 import { Principal, ResponseWrapper } from '../../../shared';
 import {TraceabilityAudit} from '../../../entities/traceability-audit/traceability-audit.model';
@@ -16,6 +16,7 @@ import {TraceabilityAuditService} from './traceability-audit.service';
 import {isUndefined} from 'util';
 import {AuditProcess} from '../../../entities/audit-process/audit-process.model';
 import {AuditProcessService} from '../../../entities/audit-process/audit-process.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-flow-audit-start',
@@ -50,6 +51,7 @@ export class StartComponent implements OnInit {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private eventManager: JhiEventManager,
+        private router: Router,
     ) {
         this.routeData = this.activatedRoute.data.subscribe((data) => {
 
@@ -121,7 +123,9 @@ export class StartComponent implements OnInit {
 
     save() {
 
-        this.traceabilityAudit.name = 'Auditoría bodega: ' + this.traceabilityAudit.company.name;
+        this.isSaving = true;
+
+        this.traceabilityAudit.name = 'Auditoría ' + this.traceabilityAudit.company.name;
 
         this.traceabilityAudit.companyId = this.traceabilityAudit.company.id;
 
@@ -135,11 +139,20 @@ export class StartComponent implements OnInit {
 
     private onSaveSuccess(result: TraceabilityAudit) {
         this.eventManager.broadcast({ name: 'traceabilityAuditListModification', content: 'OK'});
+        this.alertService.clear();
+        this.alertService.success(
+            'aresViApp.traceabilityAudit.created',
+            { param : this.traceabilityAudit.company.name },
+            null
+        );
+
         this.isSaving = false;
+         this.router.navigate(['/process/audit/dashboard']);
     }
 
     private onSaveError() {
         this.isSaving = false;
+        this.alertService.error('Ocurrió un error al guardar.', null, null);
     }
 
     private onSuccessCompanies(data) {

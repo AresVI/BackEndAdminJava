@@ -7,6 +7,7 @@ export class TraceabilityAudit implements BaseEntity {
     constructor(
         public id?: number,
         public name?: string,
+        public status?: string,
         public creationDate?: any,
         public auditProcesses?: AuditProcess[],
         public companyId?: number,

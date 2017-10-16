@@ -34,9 +34,14 @@ public class TraceabilityAudit implements Serializable {
     @Column(name = "category")
     private String category;
 
+    @NotNull
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "creation_date")
     private Instant creationDate;
 
+    @NotNull
     @JsonIgnore
     @ManyToMany
     @JoinTable(name = "traceability_audit_audit_process",
@@ -44,9 +49,11 @@ public class TraceabilityAudit implements Serializable {
         inverseJoinColumns = @JoinColumn(name="audit_process_id", referencedColumnName="id"))
     private Set<AuditProcess> auditProcesses = new HashSet<>();
 
+    @NotNull
     @ManyToOne
     private Company company;
 
+    @NotNull
     @ManyToOne
     private CompanyContactPerson companyContactPerson;
 
@@ -130,6 +137,14 @@ public class TraceabilityAudit implements Serializable {
 
     public void setCompanyContactPerson(CompanyContactPerson companyContactPerson) {
         this.companyContactPerson = companyContactPerson;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove

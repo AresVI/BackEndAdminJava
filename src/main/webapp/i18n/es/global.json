@@ -36,7 +36,8 @@
                 "register": "Crear una cuenta"
             },
             "flow": {
-                "init_audit": "Iniciar Auditoría"
+                "init_audit": "Iniciar Auditoría",
+                "dashboard_audit": "Dashboard Auditorías"
             },
             "admin": {
                 "main": "Administración",

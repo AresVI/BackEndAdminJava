@@ -6,7 +6,7 @@
                 "createLabel": "Crear nueva Auditoría de Trazabilidad",
                 "createOrEditLabel": "Crear o editar una Auditoría de Trazabilidad"
             },
-            "created": "Una nueva Auditoría de Trazabilidad ha sido creada con el identificador {{ param }}",
+            "created": "Una nueva Auditoría de Trazabilidad ha sido creada para la bodega \"{{ param }}\"",
             "updated": "Una Auditoría de Trazabilidad ha sido actualizada con el identificador {{ param }}",
             "deleted": "Una Auditoría de Trazabilidad ha sido eliminada con el identificador {{ param }}",
             "delete": {
@@ -15,7 +15,14 @@
             "detail": {
                 "title": "Auditoría de Trazabilidad"
             },
+            "status_values": {
+                "STATUS_STARTED": "Iniciada",
+                "IN_PROGRESS": "En Progreso",
+                "CANCELED": "Cancelada",
+                "FINISHED": "Finalizada"
+            },
             "name": "Nombre",
+            "status": "Estado",
             "creationDate": "Fecha de Craación",
             "auditProcesses": "Proceso",
             "company": "Bodega",

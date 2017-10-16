@@ -32,6 +32,8 @@ public class TraceabilityAuditDTO implements Serializable {
 
     private String category;
 
+    private String status;
+
     public Long getId() {
         return id;
     }
@@ -94,6 +96,14 @@ public class TraceabilityAuditDTO implements Serializable {
 
     public void setCompanyContactPersonId(Long companyContactPersonId) {
         this.companyContactPersonId = companyContactPersonId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

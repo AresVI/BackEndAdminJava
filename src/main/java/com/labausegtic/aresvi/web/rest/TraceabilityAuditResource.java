@@ -1,6 +1,7 @@
 package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.labausegtic.aresvi.domain.StatusTraceabilityAudit;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
@@ -57,6 +58,7 @@ public class TraceabilityAuditResource {
         }
 
         traceabilityAuditDTO.setCreationDate(Instant.now());
+        traceabilityAuditDTO.setStatus(StatusTraceabilityAudit.STARTED);
 
         TraceabilityAuditDTO result = traceabilityAuditService.save(traceabilityAuditDTO);
         return ResponseEntity.created(new URI("/api/traceability-audits/" + result.getId()))

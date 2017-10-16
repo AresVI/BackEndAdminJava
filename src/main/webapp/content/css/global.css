@@ -204,7 +204,7 @@ button{
 }
 
 
-.auto-hide {
+.auto-hide2 {
     animation: autoHideAnimation .5s ease-in 5s forwards;
 
     animation-fill-mode: forwards;
@@ -246,3 +246,6 @@ select option:nth-child(odd){
     }
 }
 
+.border-light {
+    border-color: #b9b9b9!important;
+}

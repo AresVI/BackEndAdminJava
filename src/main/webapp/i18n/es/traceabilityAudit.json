@@ -16,10 +16,11 @@
                 "title": "Auditoría de Trazabilidad"
             },
             "status_values": {
+                "STATUS_NOT_STARTED": "No Iniciada",
                 "STATUS_STARTED": "Iniciada",
-                "IN_PROGRESS": "En Progreso",
-                "CANCELED": "Cancelada",
-                "FINISHED": "Finalizada"
+                "STATUS_IN_PROGRESS": "En Progreso",
+                "STATUS_CANCELED": "Cancelada",
+                "STATUS_FINISHED": "Finalizada"
             },
             "name": "Nombre",
             "status": "Estado",

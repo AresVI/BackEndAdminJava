@@ -6,7 +6,7 @@ import {CompanyService} from '../../../entities/company/company.service';
 import {CompanyContactPerson} from '../../../entities/company-contact-person/company-contact-person.model';
 
 @Injectable()
-export class CompanyContactPersonPopupService {
+export class CompanyContactPersonAuditStartPopupService {
     private ngbModalRef: NgbModalRef;
     company_id: number;
 
@@ -31,7 +31,7 @@ export class CompanyContactPersonPopupService {
             }
             this.companyService.find(this.company_id).subscribe((company) => {
                 if (id) {
-                    this.company_contact_personService.find(this.company_id, id).subscribe((company_contact_person) => {
+                    this.company_contact_personService.find(company.id, id).subscribe((company_contact_person) => {
                         this.ngbModalRef = this.company_contact_personModalRef(component, company_contact_person);
                         resolve(this.ngbModalRef);
                     });
@@ -39,7 +39,7 @@ export class CompanyContactPersonPopupService {
                     // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                     setTimeout(() => {
 
-                        var companyContactPerson: CompanyContactPerson = new CompanyContactPerson();
+                        const companyContactPerson: CompanyContactPerson = new CompanyContactPerson();
 
                         companyContactPerson.company = company;
 

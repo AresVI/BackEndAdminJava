@@ -58,7 +58,7 @@ public class TraceabilityAuditResource {
         }
 
         traceabilityAuditDTO.setCreationDate(Instant.now());
-        traceabilityAuditDTO.setStatus(StatusTraceabilityAudit.STARTED);
+        traceabilityAuditDTO.setStatus(StatusTraceabilityAudit.NOT_STARTED);
 
         TraceabilityAuditDTO result = traceabilityAuditService.save(traceabilityAuditDTO);
         return ResponseEntity.created(new URI("/api/traceability-audits/" + result.getId()))
@@ -96,9 +96,17 @@ public class TraceabilityAuditResource {
      */
     @GetMapping("/traceability-audits")
     @Timed
-    public ResponseEntity<List<TraceabilityAuditDTO>> getAllTraceabilityAudits(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<TraceabilityAuditDTO>> getAllTraceabilityAudits(@ApiParam Pageable pageable, @ApiParam String status) {
         log.debug("REST request to get a page of TraceabilityAudits");
-        Page<TraceabilityAuditDTO> page = traceabilityAuditService.findAll(pageable);
+
+        Page<TraceabilityAuditDTO> page;
+
+        if (status != null ) {
+            page = traceabilityAuditService.findAllByStatus(pageable, status);
+        } else {
+            page = traceabilityAuditService.findAll(pageable);
+        }
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/traceability-audits");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

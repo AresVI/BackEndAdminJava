@@ -26,6 +26,8 @@ public interface TraceabilityAuditService {
      */
     Page<TraceabilityAuditDTO> findAll(Pageable pageable);
 
+    Page<TraceabilityAuditDTO> findAllByStatus(Pageable pageable, String status);
+
     /**
      *  Get the "id" traceabilityAudit.
      *

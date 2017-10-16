@@ -7,10 +7,14 @@ import {StartComponent} from './start.component';
 import {TraceabilityAuditService} from './traceability-audit.service';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {AuditorService} from '../../../entities/auditor/auditor.service';
 import {CompanyService} from '../../../entities/company/company.service';
-import {CompanyPopupService} from '../../../entities/company/company-popup.service';
-import {CompanyDialogAuditStartComponent, CompanyPopupComponent} from './company-dialog.component';
+import {CompanyContactPersonService} from '../../../entities/company-contact-person/company-contact-person.service';
+import {CompanyAuditStartPopupService} from './company-popup.service';
+import {
+    CompanyContactPersonAuditStartDialogComponent, CompanyContactPersonAuditStartPopupComponent
+} from './company-contact-person-dialog.component';
+import {CompanyContactPersonAuditStartPopupService} from './company-contact-person-popup.service';
+import {CompanyAuditStartPopupComponent, CompanyDialogAuditStartComponent} from './company-dialog.component';
 
 const ENTITY_STATES = [
     ...flowAuditStartRoute
@@ -25,17 +29,23 @@ const ENTITY_STATES = [
     declarations: [
         StartComponent,
         CompanyDialogAuditStartComponent,
-        CompanyPopupComponent
+        CompanyAuditStartPopupComponent,
+        CompanyContactPersonAuditStartPopupComponent,
+        CompanyContactPersonAuditStartDialogComponent
     ],
     entryComponents: [
+        StartComponent,
         CompanyDialogAuditStartComponent,
-        CompanyPopupComponent
+        CompanyAuditStartPopupComponent,
+        CompanyContactPersonAuditStartDialogComponent,
+        CompanyContactPersonAuditStartPopupComponent
     ],
     providers: [
         CompanyService,
-        CompanyPopupService,
-        AuditorService,
-        TraceabilityAuditService
+        CompanyContactPersonService,
+        TraceabilityAuditService,
+        CompanyAuditStartPopupService,
+        CompanyContactPersonAuditStartPopupService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

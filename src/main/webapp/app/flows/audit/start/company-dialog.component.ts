@@ -7,7 +7,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Company } from '../../../entities/company/company.model';
-import { CompanyPopupService } from './company-popup.service';
+import {CompanyAuditStartPopupService} from './company-popup.service';
 import { CompanyService } from '../../../entities/company/company.service';
 
 @Component({
@@ -70,22 +70,22 @@ export class CompanyDialogAuditStartComponent implements OnInit {
     selector: 'jhi-company-popup',
     template: ''
 })
-export class CompanyPopupComponent implements OnInit, OnDestroy {
+export class CompanyAuditStartPopupComponent implements OnInit, OnDestroy {
 
     routeSub: any;
 
     constructor(
         private route: ActivatedRoute,
-        private companyPopupService: CompanyPopupService
+        private companyAuditStartPopupService: CompanyAuditStartPopupService
     ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             if ( params['id'] ) {
-                this.companyPopupService
+                this.companyAuditStartPopupService
                     .open(CompanyDialogAuditStartComponent as Component, params['id']);
             } else {
-                this.companyPopupService
+                this.companyAuditStartPopupService
                     .open(CompanyDialogAuditStartComponent as Component);
             }
         });

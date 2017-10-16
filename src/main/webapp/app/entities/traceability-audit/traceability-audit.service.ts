@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { TraceabilityAudit } from './traceability-audit.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {createRequestOptionWithQuery} from '../../shared/model/request-util';
 
 @Injectable()
 export class TraceabilityAuditService {
@@ -41,8 +42,8 @@ export class TraceabilityAuditService {
         });
     }
 
-    query(req?: any): Observable<ResponseWrapper> {
-        const options = createRequestOption(req);
+    query(req?: any, query_object?: object): Observable<ResponseWrapper> {
+        const options = createRequestOptionWithQuery(req, query_object);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }

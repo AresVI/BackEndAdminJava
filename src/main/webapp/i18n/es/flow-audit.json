@@ -11,8 +11,29 @@
                     "title": "Dashboard de Procesos de Auditoría"
                 }
             },
+            "not_started": {
+                "home": {
+                    "title": "Listado de Procesos de Auditoría No Iniciados"
+                }
+            },
+            "in_progress": {
+                "home": {
+                    "title": "Listado de Procesos de Auditoría en Preogreso"
+                }
+            },
+            "finished": {
+                "home": {
+                    "title": "Listado de Procesos de Auditoría Finalizados"
+                }
+            },
+            "cancelled": {
+                "home": {
+                    "title": "Listado de Procesos de Auditoría Cancelados"
+                }
+            },
             "lists": {
                 "by_status":{
+                    "not_stated": "Listado de Auditorías No Iniciadas",
                     "in_progress": "Listado de Auditorías en Progreso",
                     "canceled": "Listado de Auditorías Canceladas",
                     "finished": "Listado de Auditorías Finalizadas"

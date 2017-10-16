@@ -35,7 +35,6 @@ export class CompanyContactPersonDialogComponent implements OnInit {
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {
-            console.error(params);
             this.company_id = params['company_id'];
         });
         this.isSaving = false;

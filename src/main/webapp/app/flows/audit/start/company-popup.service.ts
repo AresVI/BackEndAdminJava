@@ -5,7 +5,7 @@ import { Company } from '../../../entities/company/company.model';
 import { CompanyService } from '../../../entities/company/company.service';
 
 @Injectable()
-export class CompanyPopupService {
+export class CompanyAuditStartPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(

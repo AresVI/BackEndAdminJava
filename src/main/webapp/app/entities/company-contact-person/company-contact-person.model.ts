@@ -9,7 +9,8 @@ export class CompanyContactPerson implements BaseEntity {
         public email?: string,
         public telephone?: string,
         public job_possition?: string,
-        public company?: Company
+        public company?: Company,
+        public companyId?: number
     ) {
     }
 }

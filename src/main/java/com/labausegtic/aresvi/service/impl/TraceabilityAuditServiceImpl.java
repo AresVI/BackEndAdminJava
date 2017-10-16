@@ -60,6 +60,14 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
             .map(traceabilityAuditMapper::toDto);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<TraceabilityAuditDTO> findAllByStatus(Pageable pageable, String status) {
+        log.debug("Request to get all TraceabilityAudits");
+        return traceabilityAuditRepository.findAllByStatus(pageable, status)
+            .map(traceabilityAuditMapper::toDto);
+    }
+
     /**
      *  Get one traceabilityAudit by id.
      *

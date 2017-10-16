@@ -1,21 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiAlertService } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
 
-import { TraceabilityAudit } from './traceability-audit.model';
-import { TraceabilityAuditService } from './traceability-audit.service';
-import { Company, CompanyService } from '../company';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import {ActivatedRoute, Router} from '@angular/router';
+
+import { Principal } from '../../../shared';
+import {ITEMS_PER_PAGE} from '../../../shared/constants/pagination.constants';
+import {Subscription} from 'rxjs/Subscription';
+import {TraceabilityAudit} from '../../../entities/traceability-audit/traceability-audit.model';
+import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
+import {TraceabilityAuditService} from '../../../entities/traceability-audit/traceability-audit.service';
+import {ResponseWrapper} from '../../../shared/model/response-wrapper.model';
 
 @Component({
-    selector: 'jhi-traceability-audit',
-    templateUrl: './traceability-audit.component.html'
+    selector: 'jhi-flow-audit-dashboard',
+    templateUrl: './finished.component.html',
 })
-export class TraceabilityAuditComponent implements OnInit, OnDestroy {
 
-    currentAccount: any;
+export class FinishedComponent implements OnInit {
+    currentAccount: Account;
     traceabilityAudits: TraceabilityAudit[];
     error: any;
     success: any;
@@ -29,7 +30,6 @@ export class TraceabilityAuditComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    company: Company;
 
     constructor(
         private traceabilityAuditService: TraceabilityAuditService,
@@ -38,10 +38,7 @@ export class TraceabilityAuditComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private companyService: CompanyService,
         private eventManager: JhiEventManager,
-        private paginationUtil: JhiPaginationUtil,
-        private paginationConfig: PaginationConfig
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
@@ -52,11 +49,23 @@ export class TraceabilityAuditComponent implements OnInit, OnDestroy {
         });
     }
 
+    ngOnInit() {
+        this.loadAll();
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
+        });
+        this.registerChangeInTraceabilityAudits();
+    }
+
     loadAll() {
-        this.traceabilityAuditService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+        this.traceabilityAuditService.query(
+            {
+                page: this.page - 1,
+                size: this.itemsPerPage,
+                sort: this.sort()},
+            {
+                status: 'STATUS_FINISHED'
+            }).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -85,17 +94,6 @@ export class TraceabilityAuditComponent implements OnInit, OnDestroy {
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
         this.loadAll();
-    }
-    ngOnInit() {
-        this.loadAll();
-        this.principal.identity().then((account) => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInTraceabilityAudits();
-    }
-
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
     }
 
     trackId(index: number, item: TraceabilityAudit) {

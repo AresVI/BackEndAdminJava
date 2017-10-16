@@ -12,14 +12,13 @@ import org.mapstruct.*;
 public interface ContainerMapper extends EntityMapper <ContainerDTO, Container> {
 
     @Mapping(source = "participant.id", target = "participantId")
-
     @Mapping(source = "auditProcess.id", target = "auditProcessId")
-    ContainerDTO toDto(Container container); 
+    ContainerDTO toDto(Container container);
 
     @Mapping(source = "participantId", target = "participant")
-
     @Mapping(source = "auditProcessId", target = "auditProcess")
-    Container toEntity(ContainerDTO containerDTO); 
+    Container toEntity(ContainerDTO containerDTO);
+
     default Container fromId(Long id) {
         if (id == null) {
             return null;

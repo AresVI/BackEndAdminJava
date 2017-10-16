@@ -28,7 +28,7 @@
                 <td>{{auditTask.name}}</td>
                 <td>
                     <div *ngIf="auditTask.containerId">
-                        <a [routerLink]="['../container', auditTask.containerId  ]" >{{auditTask.containerId}}</a>
+                        <a [routerLink]="['../container', auditTask.containerId  ]" >{{auditTask.container.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -1,6 +1,8 @@
 package com.labausegtic.aresvi.service.dto;
 
 
+import com.labausegtic.aresvi.domain.AuditProcess;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -20,6 +22,8 @@ public class ContainerDTO implements Serializable {
     private Long participantId;
 
     private Long auditProcessId;
+
+    private AuditProcessDTO auditProcess;
 
     public Long getId() {
         return id;
@@ -51,6 +55,14 @@ public class ContainerDTO implements Serializable {
 
     public void setAuditProcessId(Long auditProcessId) {
         this.auditProcessId = auditProcessId;
+    }
+
+    public AuditProcessDTO getAuditProcess() {
+        return auditProcess;
+    }
+
+    public void setAuditProcess(AuditProcessDTO auditProcess) {
+        this.auditProcess = auditProcess;
     }
 
     @Override

@@ -19,6 +19,8 @@ public class AuditTaskDTO implements Serializable {
 
     private Long containerId;
 
+    private ContainerDTO container;
+
     public Long getId() {
         return id;
     }
@@ -41,6 +43,14 @@ public class AuditTaskDTO implements Serializable {
 
     public void setContainerId(Long containerId) {
         this.containerId = containerId;
+    }
+
+    public ContainerDTO getContainer() {
+        return container;
+    }
+
+    public void setContainer(ContainerDTO container) {
+        this.container = container;
     }
 
     @Override

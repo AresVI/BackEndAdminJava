@@ -31,7 +31,7 @@
                 <td><span jhiTranslate="global.value.boolean.{{attribute.required}}">{{attribute.required}}</span></td>
                 <td>
                     <div *ngIf="attribute.weightingId">
-                        <a [routerLink]="['../weighting', attribute.weightingId  ]" >{{attribute.weightingId}}</a>
+                        <a [routerLink]="['../weighting', attribute.weightingId  ]" >Nivel {{attribute.weighting.value}}</a>
                     </div>
                 </td>
                 <td>

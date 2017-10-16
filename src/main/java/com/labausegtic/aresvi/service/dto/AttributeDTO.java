@@ -1,6 +1,8 @@
 package com.labausegtic.aresvi.service.dto;
 
 
+import com.labausegtic.aresvi.domain.Weighting;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -21,6 +23,8 @@ public class AttributeDTO implements Serializable {
     private Boolean required;
 
     private Long weightingId;
+
+    private WeightingDTO weighting;
 
     private Long categoryAttributeId;
 
@@ -56,6 +60,14 @@ public class AttributeDTO implements Serializable {
 
     public void setWeightingId(Long weightingId) {
         this.weightingId = weightingId;
+    }
+
+    public WeightingDTO getWeighting() {
+        return weighting;
+    }
+
+    public void setWeighting(WeightingDTO weighting) {
+        this.weighting = weighting;
     }
 
     public Long getCategoryAttributeId() {

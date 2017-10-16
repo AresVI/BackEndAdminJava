@@ -24,6 +24,8 @@ public class AttributeDTO implements Serializable {
 
     private Long categoryAttributeId;
 
+    private CategoryAttributeDTO categoryAttribute;
+
     public Long getId() {
         return id;
     }
@@ -62,6 +64,18 @@ public class AttributeDTO implements Serializable {
 
     public void setCategoryAttributeId(Long categoryAttributeId) {
         this.categoryAttributeId = categoryAttributeId;
+    }
+
+    public Boolean getRequired() {
+        return required;
+    }
+
+    public CategoryAttributeDTO getCategoryAttribute() {
+        return categoryAttribute;
+    }
+
+    public void setCategoryAttribute(CategoryAttributeDTO categoryAttribute) {
+        this.categoryAttribute = categoryAttribute;
     }
 
     @Override

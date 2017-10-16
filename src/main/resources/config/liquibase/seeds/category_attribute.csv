@@ -1,0 +1,11 @@
+id;name;audit_task_id
+1;Identificación del predio;1
+2;Uso de Agroquimicos;1
+3;Calidad microbiológica del agua utilizada en la aplicación de agroquímicos;1
+4;Uso de Agroquímicos;2
+5;Calidad microbiológica del agua utilizada en la aplicación de agroquímicos;2
+6;Calidad microbiológica del agua utilizada para el riego;3
+7;Identificación del predio;4
+8;Determinación de la madurez;5
+9;Identificación de los lotes de cosecha;6
+10;Traslado de materia prima;7

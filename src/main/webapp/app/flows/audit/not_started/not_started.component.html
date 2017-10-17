@@ -5,8 +5,6 @@
     </h2>
 </div>
 <hr/>
-
-<jhi-alert></jhi-alert>
 <div class="row">
 </div>
 <br/>
@@ -40,10 +38,8 @@
                         <span class="fa fa-eye"></span>
                         <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                     </a>
-                </div>
-                <div class="btn-group flex-btn-group-container">
                     <button type="submit"
-                            [routerLink]="['/', { outlets: { popup: ['cancelation-traceability-audit-new'] } }]"
+                            [routerLink]="['/', { outlets: { popup: ['traceability-audit', traceabilityAudit.id, 'cancellation-new'] } }]"
                             class="btn btn-danger btn-sm">
                         <span class="fa fa-ban"></span>
                         <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.cancel">Cancel</span>

@@ -50,7 +50,7 @@ export const cancelationTraceabilityAuditRoute: Routes = [
 
 export const cancelationTraceabilityAuditPopupRoute: Routes = [
     {
-        path: 'cancelation-traceability-audit-new',
+        path: 'traceability-audit/:traceability_audit/cancellation-new',
         component: CancelationTraceabilityAuditPopupComponent,
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMINISTRATOR'],

@@ -1,7 +1,10 @@
 package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.labausegtic.aresvi.domain.StatusTraceabilityAudit;
 import com.labausegtic.aresvi.service.CancelationTraceabilityAuditService;
+import com.labausegtic.aresvi.service.TraceabilityAuditService;
+import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.CancelationTraceabilityAuditDTO;
@@ -36,8 +39,12 @@ public class CancelationTraceabilityAuditResource {
 
     private final CancelationTraceabilityAuditService cancelationTraceabilityAuditService;
 
-    public CancelationTraceabilityAuditResource(CancelationTraceabilityAuditService cancelationTraceabilityAuditService) {
+    private final TraceabilityAuditService traceabilityAuditService;
+
+    public CancelationTraceabilityAuditResource(CancelationTraceabilityAuditService cancelationTraceabilityAuditService,
+                                                TraceabilityAuditService traceabilityAuditService) {
         this.cancelationTraceabilityAuditService = cancelationTraceabilityAuditService;
+        this.traceabilityAuditService = traceabilityAuditService;
     }
 
     /**
@@ -54,7 +61,15 @@ public class CancelationTraceabilityAuditResource {
         if (cancelationTraceabilityAuditDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new cancelationTraceabilityAudit cannot already have an ID")).body(null);
         }
+
         CancelationTraceabilityAuditDTO result = cancelationTraceabilityAuditService.save(cancelationTraceabilityAuditDTO);
+
+        TraceabilityAuditDTO auditService = traceabilityAuditService.findOne(cancelationTraceabilityAuditDTO.getTraceabilityAuditId());
+
+        auditService.setStatus(StatusTraceabilityAudit.CANCELED);
+
+        traceabilityAuditService.save(auditService);
+
         return ResponseEntity.created(new URI("/api/cancelation-traceability-audits/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

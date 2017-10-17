@@ -249,3 +249,8 @@ select option:nth-child(odd){
 .border-light {
     border-color: #b9b9b9!important;
 }
+
+textarea{
+    resize: none;
+    height: 250px;
+}

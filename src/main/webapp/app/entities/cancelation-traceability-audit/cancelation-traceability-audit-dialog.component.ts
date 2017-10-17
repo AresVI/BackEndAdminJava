@@ -77,6 +77,7 @@ export class CancelationTraceabilityAuditDialogComponent implements OnInit {
 
     private onSaveSuccess(result: CancelationTraceabilityAudit) {
         this.eventManager.broadcast({ name: 'cancelationTraceabilityAuditListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'traceabilityAuditListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -113,12 +114,13 @@ export class CancelationTraceabilityAuditPopupComponent implements OnInit, OnDes
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
+
             if ( params['id'] ) {
                 this.cancelationTraceabilityAuditPopupService
-                    .open(CancelationTraceabilityAuditDialogComponent as Component, params['id']);
+                    .open(CancelationTraceabilityAuditDialogComponent as Component, params['traceability_audit'], params['id']);
             } else {
                 this.cancelationTraceabilityAuditPopupService
-                    .open(CancelationTraceabilityAuditDialogComponent as Component);
+                    .open(CancelationTraceabilityAuditDialogComponent as Component, params['traceability_audit']);
             }
         });
     }

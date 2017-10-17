@@ -17,7 +17,7 @@ export class CancelationTraceabilityAuditPopupService {
         this.ngbModalRef = null;
     }
 
-    open(component: Component, id?: number | any): Promise<NgbModalRef> {
+    open(component: Component, traceability_audit_id?: number, id?: number | any): Promise<NgbModalRef> {
         return new Promise<NgbModalRef>((resolve, reject) => {
             const isOpen = this.ngbModalRef !== null;
             if (isOpen) {
@@ -31,8 +31,13 @@ export class CancelationTraceabilityAuditPopupService {
                 });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
+
+                const cancelationTraceabilityAudit = new CancelationTraceabilityAudit();
+
+                cancelationTraceabilityAudit.traceabilityAuditId = traceability_audit_id;
+
                 setTimeout(() => {
-                    this.ngbModalRef = this.cancelationTraceabilityAuditModalRef(component, new CancelationTraceabilityAudit());
+                    this.ngbModalRef = this.cancelationTraceabilityAuditModalRef(component, cancelationTraceabilityAudit);
                     resolve(this.ngbModalRef);
                 }, 0);
             }

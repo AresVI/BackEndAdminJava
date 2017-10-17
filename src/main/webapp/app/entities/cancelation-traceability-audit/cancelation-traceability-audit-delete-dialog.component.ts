@@ -54,7 +54,7 @@ export class CancelationTraceabilityAuditDeletePopupComponent implements OnInit,
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             this.cancelationTraceabilityAuditPopupService
-                .open(CancelationTraceabilityAuditDeleteDialogComponent as Component, params['id']);
+                .open(CancelationTraceabilityAuditDeleteDialogComponent as Component, 0, params['id']);
         });
     }
 

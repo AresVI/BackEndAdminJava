@@ -1,0 +1,23 @@
+{
+    "aresViApp": {
+        "cancelationTraceabilityAudit" : {
+            "home": {
+                "title": "Cancelation Traceability Audits",
+                "createLabel": "Crear nuevo Cancelation Traceability Audit",
+                "createOrEditLabel": "Crear o editar Cancelation Traceability Audit"
+            },
+            "created": "Un nuevo Cancelation Traceability Audit ha sido creado con el identificador {{ param }}",
+            "updated": "Un Cancelation Traceability Audit ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Cancelation Traceability Audit ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Cancelation Traceability Audit {{ id }}?"
+            },
+            "detail": {
+                "title": "Cancelation Traceability Audit"
+            },
+            "justification": "Justification",
+            "traceabilityAudit": "Traceability Audit",
+            "user": "User"
+        }
+    }
+}

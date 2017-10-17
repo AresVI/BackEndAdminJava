@@ -24,6 +24,7 @@
                 "categoryAttRecommendation": "Category Att Recommendation",
                 "auditor": "Auditor",
                 "companyContactPerson": "Company Contact Person",
+                "cancelationTraceabilityAudit": "Cancelation Traceability Audit",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

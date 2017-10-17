@@ -60,6 +60,11 @@
             </column>
         </createTable>
 
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/seeds/traceability_audit.csv"
+                  separator=";"
+                  tableName="traceability_audit"/>
+
         <addPrimaryKey columnNames="traceability_audit_id, audit_process_id" tableName="traceability_audit_audit_process"/>
 
     </changeSet>

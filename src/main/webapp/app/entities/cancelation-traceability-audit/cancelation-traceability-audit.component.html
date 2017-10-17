@@ -1,0 +1,74 @@
+<div>
+    <h2>
+        <span jhiTranslate="aresViApp.cancelationTraceabilityAudit.home.title">Cancelation Traceability Audits</span>
+        <button class="btn btn-primary float-right jh-create-entity create-cancelation-traceability-audit" [routerLink]="['/', { outlets: { popup: ['cancelation-traceability-audit-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="aresViApp.cancelationTraceabilityAudit.home.createLabel">
+            Create new Cancelation Traceability Audit
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="cancelationTraceabilityAudits">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="justification"><span jhiTranslate="aresViApp.cancelationTraceabilityAudit.justification">Justification</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="traceabilityAuditName"><span jhiTranslate="aresViApp.cancelationTraceabilityAudit.traceabilityAudit">Traceability Audit</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="userLogin"><span jhiTranslate="aresViApp.cancelationTraceabilityAudit.user">User</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let cancelationTraceabilityAudit of cancelationTraceabilityAudits ;trackBy: trackId">
+                <td><a [routerLink]="['../cancelation-traceability-audit', cancelationTraceabilityAudit.id ]">{{cancelationTraceabilityAudit.id}}</a></td>
+                <td>{{cancelationTraceabilityAudit.justification}}</td>
+                <td>
+                    <div *ngIf="cancelationTraceabilityAudit.traceabilityAuditId">
+                        <a [routerLink]="['../traceability-audit', cancelationTraceabilityAudit.traceabilityAuditId  ]" >{{cancelationTraceabilityAudit.traceabilityAuditName}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{cancelationTraceabilityAudit.userLogin}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../cancelation-traceability-audit', cancelationTraceabilityAudit.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'cancelation-traceability-audit/'+ cancelationTraceabilityAudit.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'cancelation-traceability-audit/'+ cancelationTraceabilityAudit.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="cancelationTraceabilityAudits && cancelationTraceabilityAudits.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>

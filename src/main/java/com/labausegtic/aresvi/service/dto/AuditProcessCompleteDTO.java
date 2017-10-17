@@ -1,21 +1,18 @@
 package com.labausegtic.aresvi.service.dto;
 
-
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
-/**
- * A DTO for the AuditProcess entity.
- */
-public class AuditProcessDTO implements Serializable {
+public class AuditProcessCompleteDTO  implements Serializable {
 
     private Long id;
 
     @NotNull
     private String name;
+
+    private Set<ContainerCompleteDTO> containerDTOSet;
 
     public Long getId() {
         return id;
@@ -31,6 +28,14 @@ public class AuditProcessDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<ContainerCompleteDTO> getContainerDTOSet() {
+        return containerDTOSet;
+    }
+
+    public void setContainerDTOSet(Set<ContainerCompleteDTO> containerDTOSet) {
+        this.containerDTOSet = containerDTOSet;
     }
 
     @Override

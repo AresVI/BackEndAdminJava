@@ -42,8 +42,9 @@
         <loadData encoding="UTF-8"
                   file="config/liquibase/seeds/attribute.csv"
                   separator=";"
-                  tableName="attribute"/>
-
+                  tableName="attribute">
+                <column name="required" type="BOOLEAN" />
+        </loadData>
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

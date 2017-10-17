@@ -2,6 +2,10 @@ package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.labausegtic.aresvi.service.AuditProcessService;
+import com.labausegtic.aresvi.service.ContainerService;
+import com.labausegtic.aresvi.service.dto.AuditProcessCompleteDTO;
+import com.labausegtic.aresvi.service.dto.ContainerCompleteDTO;
+import com.labausegtic.aresvi.service.dto.ContainerDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.AuditProcessDTO;
@@ -22,6 +26,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing AuditProcess.
@@ -35,9 +40,11 @@ public class AuditProcessResource {
     private static final String ENTITY_NAME = "auditProcess";
 
     private final AuditProcessService auditProcessService;
+    private final ContainerService containerService;
 
-    public AuditProcessResource(AuditProcessService auditProcessService) {
+    public AuditProcessResource(AuditProcessService auditProcessService, ContainerService containerService) {
         this.auditProcessService = auditProcessService;
+        this.containerService = containerService;
     }
 
     /**
@@ -109,6 +116,25 @@ public class AuditProcessResource {
         log.debug("REST request to get AuditProcess : {}", id);
         AuditProcessDTO auditProcessDTO = auditProcessService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditProcessDTO));
+    }
+
+    @GetMapping("/audit-processes/{id}/complete")
+    @Timed
+    public ResponseEntity<AuditProcessCompleteDTO> getAuditProcessComplete(@PathVariable Long id) {
+        log.debug("REST request to get AuditProcess : {}", id);
+        AuditProcessDTO auditProcessDTO = auditProcessService.findOne(id);
+
+        Set<ContainerCompleteDTO> content = containerService.findAllByAuditProcess_Id(auditProcessDTO.getId());
+
+        AuditProcessCompleteDTO auditProcessCompleteDTO = new AuditProcessCompleteDTO();
+
+        auditProcessCompleteDTO.setId(auditProcessDTO.getId());
+
+        auditProcessCompleteDTO.setName(auditProcessDTO.getName());
+
+        auditProcessCompleteDTO.setContainerDTOSet(content);
+
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditProcessCompleteDTO));
     }
 
     /**

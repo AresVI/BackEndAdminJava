@@ -3,7 +3,9 @@ package com.labausegtic.aresvi.service.impl;
 import com.labausegtic.aresvi.service.AttributeService;
 import com.labausegtic.aresvi.domain.Attribute;
 import com.labausegtic.aresvi.repository.AttributeRepository;
+import com.labausegtic.aresvi.service.dto.AttributeCompleteDTO;
 import com.labausegtic.aresvi.service.dto.AttributeDTO;
+import com.labausegtic.aresvi.service.mapper.AttributeCompleteMapper;
 import com.labausegtic.aresvi.service.mapper.AttributeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -25,10 +30,13 @@ public class AttributeServiceImpl implements AttributeService{
     private final AttributeRepository attributeRepository;
 
     private final AttributeMapper attributeMapper;
+    private final AttributeCompleteMapper attributeCompleteMapper;
 
-    public AttributeServiceImpl(AttributeRepository attributeRepository, AttributeMapper attributeMapper) {
+    public AttributeServiceImpl(AttributeRepository attributeRepository, AttributeMapper attributeMapper,
+                                AttributeCompleteMapper attributeCompleteMapper) {
         this.attributeRepository = attributeRepository;
         this.attributeMapper = attributeMapper;
+        this.attributeCompleteMapper = attributeCompleteMapper;
     }
 
     /**
@@ -57,6 +65,19 @@ public class AttributeServiceImpl implements AttributeService{
         log.debug("Request to get all Attributes");
         return attributeRepository.findAll(pageable)
             .map(attributeMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Set<AttributeCompleteDTO> findAllByCategoryAttribute_Id(Long categoryAttributeId){
+
+        Set<AttributeCompleteDTO> result = new HashSet<>();
+
+        attributeRepository.findAllByCategoryAttribute_Id(categoryAttributeId).forEach(
+            item -> result.add(attributeCompleteMapper.toDto(item))
+        );
+
+        return result;
     }
 
     /**

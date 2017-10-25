@@ -4,7 +4,6 @@ package com.labausegtic.aresvi.service.dto;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
@@ -23,6 +22,10 @@ public class RecommendationDTO implements Serializable {
     private Instant creationDate;
 
     private Long traceabilityAuditId;
+
+    private Set<AuditProcessRecommendationDTO> auditProcessRecommendationSet;
+
+    private Long auditorId;
 
     public Long getId() {
         return id;
@@ -62,6 +65,22 @@ public class RecommendationDTO implements Serializable {
 
     public void setTraceabilityAuditId(Long traceabilityAuditId) {
         this.traceabilityAuditId = traceabilityAuditId;
+    }
+
+    public Set<AuditProcessRecommendationDTO> getAuditProcessRecommendationSet() {
+        return auditProcessRecommendationSet;
+    }
+
+    public void setAuditProcessRecommendationSet(Set<AuditProcessRecommendationDTO> auditProcessRecommendationSet) {
+        this.auditProcessRecommendationSet = auditProcessRecommendationSet;
+    }
+
+    public Long getAuditorId() {
+        return auditorId;
+    }
+
+    public void setAuditorId(Long auditorId) {
+        this.auditorId = auditorId;
     }
 
     @Override

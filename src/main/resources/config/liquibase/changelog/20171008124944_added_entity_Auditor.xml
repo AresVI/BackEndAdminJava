@@ -35,12 +35,12 @@
             <column name="companies_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="auditors_id" type="bigint">
+            <column name="auditor_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="auditors_id, companies_id" tableName="auditor_companies"/>
+        <addPrimaryKey columnNames="auditor_id, companies_id" tableName="auditor_companies"/>
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

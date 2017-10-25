@@ -26,7 +26,7 @@
                     "title": "Listado de Procesos de Auditoría Finalizados"
                 }
             },
-            "cancelled": {
+            "canceled": {
                 "home": {
                     "title": "Listado de Procesos de Auditoría Cancelados"
                 }

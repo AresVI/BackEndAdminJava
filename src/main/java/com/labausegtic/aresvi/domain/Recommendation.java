@@ -33,6 +33,9 @@ public class Recommendation implements Serializable {
     @ManyToOne
     private TraceabilityAudit traceabilityAudit;
 
+    @ManyToOne
+    private Auditor auditor;
+
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -93,6 +96,15 @@ public class Recommendation implements Serializable {
     public void setTraceabilityAudit(TraceabilityAudit traceabilityAudit) {
         this.traceabilityAudit = traceabilityAudit;
     }
+
+    public Auditor getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(Auditor auditor) {
+        this.auditor = auditor;
+    }
+
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override

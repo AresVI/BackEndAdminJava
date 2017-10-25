@@ -1,8 +1,10 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.domain.AttributeRecommendation;
 import com.labausegtic.aresvi.service.AttributeRecommendationService;
 import com.labausegtic.aresvi.domain.AttributeRecommendation;
 import com.labausegtic.aresvi.repository.AttributeRecommendationRepository;
+import com.labausegtic.aresvi.service.dto.AttributeRecommendationDTO;
 import com.labausegtic.aresvi.service.dto.AttributeRecommendationDTO;
 import com.labausegtic.aresvi.service.mapper.AttributeRecommendationMapper;
 import org.slf4j.Logger;
@@ -11,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -71,6 +76,25 @@ public class AttributeRecommendationServiceImpl implements AttributeRecommendati
         log.debug("Request to get AttributeRecommendation : {}", id);
         AttributeRecommendation attributeRecommendation = attributeRecommendationRepository.findOne(id);
         return attributeRecommendationMapper.toDto(attributeRecommendation);
+    }
+
+    @Override
+    public Set<AttributeRecommendationDTO> findAllByCategoryAttrRecom_Id(Long categoryAttrRecom_id) {
+
+        Set<AttributeRecommendationDTO> result = new HashSet<>();
+
+        Set<AttributeRecommendation> attributeRecommendations;
+
+        attributeRecommendations = attributeRecommendationRepository.findAllByCategoryAttrRecom_Id(categoryAttrRecom_id);
+
+        for (AttributeRecommendation ar : attributeRecommendations) {
+
+            result.add(attributeRecommendationMapper.toDto(ar));
+
+        }
+
+        return result;
+
     }
 
     /**

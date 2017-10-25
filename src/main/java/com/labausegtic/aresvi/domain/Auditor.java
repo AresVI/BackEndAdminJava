@@ -29,10 +29,7 @@ public class Auditor implements Serializable {
     @JoinColumn(unique = true)
     private User user;
 
-    @ManyToMany
-    @JoinTable(name = "auditor_companies",
-               joinColumns = @JoinColumn(name="auditors_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="companies_id", referencedColumnName="id"))
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Company> companies = new HashSet<>();
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
@@ -79,18 +76,6 @@ public class Auditor implements Serializable {
         return this;
     }
 
-    public Auditor addCompanies(Company company) {
-        this.companies.add(company);
-        company.getInternal_auditors().add(this);
-        return this;
-    }
-
-    public Auditor removeCompanies(Company company) {
-        this.companies.remove(company);
-        company.getInternal_auditors().remove(this);
-        return this;
-    }
-
     public void setCompanies(Set<Company> companies) {
         this.companies = companies;
     }
@@ -121,6 +106,8 @@ public class Auditor implements Serializable {
         return "Auditor{" +
             "id=" + getId() +
             ", internal='" + isInternal() + "'" +
+            ", companies='" + getCompanies().toString() + "'" +
+            ", user='" + getUser().getLogin() + "'" +
             "}";
     }
 }

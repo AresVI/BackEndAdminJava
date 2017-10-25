@@ -7,16 +7,16 @@
         Added the constraints for entity Auditor.
     -->
     <changeSet id="20171008124944-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="auditor"
                                  constraintName="fk_auditor_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="auditors_id"
+        <addForeignKeyConstraint baseColumnNames="auditor_id"
                                  baseTableName="auditor_companies"
-                                 constraintName="fk_auditor_companies_auditors_id"
+                                 constraintName="fk_auditor_company_auditor_id"
                                  referencedColumnNames="id"
                                  referencedTableName="auditor"/>
         <addForeignKeyConstraint baseColumnNames="companies_id"
@@ -24,6 +24,6 @@
                                  constraintName="fk_auditor_companies_companies_id"
                                  referencedColumnNames="id"
                                  referencedTableName="company"/>
-        
+
     </changeSet>
 </databaseChangeLog>

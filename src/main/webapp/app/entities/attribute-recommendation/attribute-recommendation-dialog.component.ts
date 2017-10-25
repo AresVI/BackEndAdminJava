@@ -9,7 +9,7 @@ import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { AttributeRecommendation } from './attribute-recommendation.model';
 import { AttributeRecommendationPopupService } from './attribute-recommendation-popup.service';
 import { AttributeRecommendationService } from './attribute-recommendation.service';
-import { CategoryAttRecommendation, CategoryAttRecommendationService } from '../category-att-recommendation';
+import { CategoryAttrRecommendation, CategoryAttrRecommendationService } from '../category-attr-recommendation';
 import { Attribute, AttributeService } from '../attribute';
 import { ResponseWrapper } from '../../shared';
 
@@ -22,7 +22,7 @@ export class AttributeRecommendationDialogComponent implements OnInit {
     attributeRecommendation: AttributeRecommendation;
     isSaving: boolean;
 
-    categoryattrecommendations: CategoryAttRecommendation[];
+    categoryAttrRecommendations: CategoryAttrRecommendation[];
 
     attributes: Attribute[];
 
@@ -31,7 +31,7 @@ export class AttributeRecommendationDialogComponent implements OnInit {
         private dataUtils: JhiDataUtils,
         private alertService: JhiAlertService,
         private attributeRecommendationService: AttributeRecommendationService,
-        private categoryAttRecommendationService: CategoryAttRecommendationService,
+        private categoryAttrRecommendationService: CategoryAttrRecommendationService,
         private attributeService: AttributeService,
         private eventManager: JhiEventManager
     ) {
@@ -39,8 +39,8 @@ export class AttributeRecommendationDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.categoryAttRecommendationService.query()
-            .subscribe((res: ResponseWrapper) => { this.categoryattrecommendations = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.categoryAttrRecommendationService.query()
+            .subscribe((res: ResponseWrapper) => { this.categoryAttrRecommendations = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.attributeService.query()
             .subscribe((res: ResponseWrapper) => { this.attributes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
@@ -91,7 +91,7 @@ export class AttributeRecommendationDialogComponent implements OnInit {
         this.alertService.error(error.message, null, null);
     }
 
-    trackCategoryAttRecommendationById(index: number, item: CategoryAttRecommendation) {
+    trackCategoryAttrRecommendationById(index: number, item: CategoryAttrRecommendation) {
         return item.id;
     }
 

@@ -1,6 +1,6 @@
 {
     "aresViApp": {
-        "categoryAttRecommendation" : {
+        "categoryAttrRecommendation" : {
             "home": {
                 "title": "Recomendaciones de Categoría de Atributo",
                 "createLabel": "Crear nueva Recomendación de Categoría de Atributo",

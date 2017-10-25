@@ -1,13 +1,15 @@
 
 <div *ngIf="traceabilityAudit">
-    <h2><span jhiTranslate="aresViApp.traceabilityAudit.detail.title">Traceability Audit</span> {{traceabilityAudit.id}}</h2>
-    <hr>
+    <h2>{{traceabilityAudit.name}}
+        <span class="badge badge-success" ng-if="traceabilityAudit != null">
+            <span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span>
+            {{traceabilityAudit.category}}
+        </span>
+    </h2>
+    <hr/>
     <jhi-alert-error></jhi-alert-error>
+
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.traceabilityAudit.name">Name</span></dt>
-        <dd>
-            <span>{{traceabilityAudit.name}}</span>
-        </dd>
         <dt><span jhiTranslate="aresViApp.traceabilityAudit.creationDate">Creation Date</span></dt>
         <dd>
             <span>{{traceabilityAudit.creationDate | date:'medium'}}</span>
@@ -18,7 +20,28 @@
                 <a [routerLink]="['/company', traceabilityAudit.companyId]">{{traceabilityAudit.company.name}} ({{traceabilityAudit.company.identifier}})</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="aresViApp.traceabilityAudit.status">Status</span></dt>
+        <dd>
+            <span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span></dt>
+        <dd>
+            <span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span> {{traceabilityAudit.category}}
+        </dd>
     </dl>
+
+    <hr/>
+
+    <div class="card" *ngFor="let recommendation of traceabilityAudit.recommendationSet">
+        <h4 class="card-header">{{ recommendation.qualification }}</h4>
+        <div class="card-body">
+            <h4 class="card-title">Special title treatment</h4>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+    <hr/>
 
     <button type="submit"
             (click)="previousState()"
@@ -26,10 +49,4 @@
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'traceability-audit/'+ traceabilityAudit.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
 </div>

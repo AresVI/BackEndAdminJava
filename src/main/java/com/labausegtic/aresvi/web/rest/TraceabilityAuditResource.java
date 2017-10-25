@@ -2,6 +2,7 @@ package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.labausegtic.aresvi.domain.StatusTraceabilityAudit;
+import com.labausegtic.aresvi.service.RecommendationService;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
@@ -38,8 +39,11 @@ public class TraceabilityAuditResource {
 
     private final TraceabilityAuditService traceabilityAuditService;
 
-    public TraceabilityAuditResource(TraceabilityAuditService traceabilityAuditService) {
+    private final RecommendationService recommendationService;
+
+    public TraceabilityAuditResource(TraceabilityAuditService traceabilityAuditService, RecommendationService recommendationService) {
         this.traceabilityAuditService = traceabilityAuditService;
+        this.recommendationService = recommendationService;
     }
 
     /**
@@ -122,6 +126,11 @@ public class TraceabilityAuditResource {
     public ResponseEntity<TraceabilityAuditDTO> getTraceabilityAudit(@PathVariable Long id) {
         log.debug("REST request to get TraceabilityAudit : {}", id);
         TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.findOne(id);
+
+        traceabilityAuditDTO.setRecommendationDTOSet(
+            recommendationService.findAllByTraceabilityAudit_Id(traceabilityAuditDTO.getId())
+        );
+
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(traceabilityAuditDTO));
     }
 

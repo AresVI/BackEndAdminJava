@@ -7,12 +7,18 @@
         Added the constraints for entity Recommendation.
     -->
     <changeSet id="20170926043621-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="traceability_audit_id"
                                  baseTableName="recommendation"
                                  constraintName="fk_recommendation_traceability_audit_id"
                                  referencedColumnNames="id"
                                  referencedTableName="traceability_audit"/>
+
+        <addForeignKeyConstraint baseColumnNames="auditor_id"
+                                 baseTableName="recommendation"
+                                 constraintName="fk_recommendation_auditor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="auditor"/>
 
     </changeSet>
 </databaseChangeLog>

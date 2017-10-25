@@ -1,0 +1,35 @@
+
+<div *ngIf="cancellationTraceabilityAudit">
+    <h2><span jhiTranslate="aresViApp.cancellationTraceabilityAudit.detail.title">Cancellation Traceability Audit</span> {{cancellationTraceabilityAudit.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.cancellationTraceabilityAudit.justification">Justification</span></dt>
+        <dd>
+            <span>{{cancellationTraceabilityAudit.justification}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.cancellationTraceabilityAudit.traceabilityAudit">Traceability Audit</span></dt>
+        <dd>
+            <div *ngIf="cancellationTraceabilityAudit.traceabilityAuditId">
+                <a [routerLink]="['/traceability-audit', cancellationTraceabilityAudit.traceabilityAuditId]">{{cancellationTraceabilityAudit.traceabilityAuditName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.cancellationTraceabilityAudit.user">User</span></dt>
+        <dd>
+            {{cancellationTraceabilityAudit.userLogin}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'cancellation-traceability-audit/'+ cancellationTraceabilityAudit.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

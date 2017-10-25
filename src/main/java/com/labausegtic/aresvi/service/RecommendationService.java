@@ -4,6 +4,8 @@ import com.labausegtic.aresvi.service.dto.RecommendationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Set;
+
 /**
  * Service Interface for managing Recommendation.
  */
@@ -24,6 +26,8 @@ public interface RecommendationService {
      *  @return the list of entities
      */
     Page<RecommendationDTO> findAll(Pageable pageable);
+
+    Set<RecommendationDTO> findAllByTraceabilityAudit_Id(Long traceabilityAudit_Id);
 
     /**
      *  Get the "id" recommendation.

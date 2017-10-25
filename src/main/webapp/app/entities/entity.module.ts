@@ -12,12 +12,11 @@ import { AresViCompanyModule } from './company/company.module';
 import { AresViRecommendationModule } from './recommendation/recommendation.module';
 import { AresViAuditProcessRecommendationModule } from './audit-process-recommendation/audit-process-recommendation.module';
 import { AresViAuditTaskRecommendationModule } from './audit-task-recommendation/audit-task-recommendation.module';
-import { AresViCategoryAttributeRecommendationModule } from './category-attribute-recommendation/category-attribute-recommendation.module';
 import { AresViAttributeRecommendationModule } from './attribute-recommendation/attribute-recommendation.module';
-import { AresViCategoryAttRecommendationModule } from './category-att-recommendation/category-att-recommendation.module';
+import { AresViCategoryAttrRecommendationModule } from './category-attr-recommendation/category-attr-recommendation.module';
 import { AresViAuditorModule } from './auditor/auditor.module';
 import { AresViCompanyContactPersonModule } from './company-contact-person/company-contact-person.module';
-import { AresViCancelationTraceabilityAuditModule } from './cancelation-traceability-audit/cancelation-traceability-audit.module';
+import { AresViCancellationTraceabilityAuditModule } from './cancellation-traceability-audit/cancellation-traceability-audit.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -34,12 +33,11 @@ import { AresViCancelationTraceabilityAuditModule } from './cancelation-traceabi
         AresViRecommendationModule,
         AresViAuditProcessRecommendationModule,
         AresViAuditTaskRecommendationModule,
-        AresViCategoryAttributeRecommendationModule,
         AresViAttributeRecommendationModule,
-        AresViCategoryAttRecommendationModule,
+        AresViCategoryAttrRecommendationModule,
         AresViAuditorModule,
         AresViCompanyContactPersonModule,
-        AresViCancelationTraceabilityAuditModule,
+        AresViCancellationTraceabilityAuditModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

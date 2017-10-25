@@ -27,6 +27,7 @@
             "creationDate": "Fecha de Craación",
             "auditProcesses": "Proceso",
             "company": "Bodega",
+            "category": "Categoría",
             "company_contact_person": "Persona de Contacto",
             "audit_processes": "Procesos a Auditar",
             "action": {

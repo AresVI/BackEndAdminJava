@@ -21,10 +21,10 @@
                 "auditTaskRecommendation": "Audit Task Recommendation",
                 "categoryAttributeRecommendation": "Category Attribute Recommendation",
                 "attributeRecommendation": "Attribute Recommendation",
-                "categoryAttRecommendation": "Category Att Recommendation",
+                "categoryAttrRecommendation": "Category Att Recommendation",
                 "auditor": "Auditor",
                 "companyContactPerson": "Company Contact Person",
-                "cancelationTraceabilityAudit": "Cancelation Traceability Audit",
+                "cancellationTraceabilityAudit": "Cancellation Traceability Audit",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

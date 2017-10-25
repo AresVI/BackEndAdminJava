@@ -34,6 +34,8 @@ public class TraceabilityAuditDTO implements Serializable {
 
     private String status;
 
+    private Set<RecommendationDTO> recommendationSet;
+
     public Long getId() {
         return id;
     }
@@ -104,6 +106,14 @@ public class TraceabilityAuditDTO implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Set<RecommendationDTO> getRecommendationSet() {
+        return recommendationSet;
+    }
+
+    public void setRecommendationDTOSet(Set<RecommendationDTO> recommendationSet) {
+        this.recommendationSet = recommendationSet;
     }
 
     @Override

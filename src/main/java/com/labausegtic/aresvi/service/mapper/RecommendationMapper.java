@@ -8,14 +8,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Recommendation and its DTO RecommendationDTO.
  */
-@Mapper(componentModel = "spring", uses = {TraceabilityAuditMapper.class, })
+@Mapper(componentModel = "spring", uses = {TraceabilityAuditMapper.class})
 public interface RecommendationMapper extends EntityMapper <RecommendationDTO, Recommendation> {
 
     @Mapping(source = "traceabilityAudit.id", target = "traceabilityAuditId")
-    RecommendationDTO toDto(Recommendation recommendation); 
+    RecommendationDTO toDto(Recommendation recommendation);
 
     @Mapping(source = "traceabilityAuditId", target = "traceabilityAudit")
-    Recommendation toEntity(RecommendationDTO recommendationDTO); 
+    Recommendation toEntity(RecommendationDTO recommendationDTO);
     default Recommendation fromId(Long id) {
         if (id == null) {
             return null;

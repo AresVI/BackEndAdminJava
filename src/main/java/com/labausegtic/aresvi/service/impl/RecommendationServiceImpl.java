@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.service.AuditProcessRecommendationService;
 import com.labausegtic.aresvi.service.RecommendationService;
 import com.labausegtic.aresvi.domain.Recommendation;
 import com.labausegtic.aresvi.repository.RecommendationRepository;
@@ -11,6 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -26,9 +30,13 @@ public class RecommendationServiceImpl implements RecommendationService{
 
     private final RecommendationMapper recommendationMapper;
 
-    public RecommendationServiceImpl(RecommendationRepository recommendationRepository, RecommendationMapper recommendationMapper) {
+    private final AuditProcessRecommendationService auditProcessRecommendationService;
+
+    public RecommendationServiceImpl(RecommendationRepository recommendationRepository, RecommendationMapper recommendationMapper,
+                                     AuditProcessRecommendationService auditProcessRecommendationService) {
         this.recommendationRepository = recommendationRepository;
         this.recommendationMapper = recommendationMapper;
+        this.auditProcessRecommendationService = auditProcessRecommendationService;
     }
 
     /**
@@ -57,6 +65,31 @@ public class RecommendationServiceImpl implements RecommendationService{
         log.debug("Request to get all Recommendations");
         return recommendationRepository.findAll(pageable)
             .map(recommendationMapper::toDto);
+    }
+
+    @Override
+    public Set<RecommendationDTO> findAllByTraceabilityAudit_Id(Long traceabilityAudit_Id) {
+
+        Set<RecommendationDTO> result = new HashSet<>();
+
+        Set<Recommendation> recommendations = recommendationRepository.findAllByTraceabilityAudit_Id(traceabilityAudit_Id);
+
+        for (Recommendation ta:recommendations){
+
+            RecommendationDTO recommendationDTO = recommendationMapper.toDto(ta);
+
+            recommendationDTO.setAuditProcessRecommendationSet(
+                auditProcessRecommendationService.findAllByRecommendation_Id(
+                    recommendationDTO.getId()
+                )
+            );
+
+            result.add(recommendationDTO);
+
+        }
+
+        return result;
+
     }
 
     /**

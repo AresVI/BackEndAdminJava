@@ -3,6 +3,7 @@ package com.labausegtic.aresvi.service.impl;
 import com.labausegtic.aresvi.service.AuditProcessRecommendationService;
 import com.labausegtic.aresvi.domain.AuditProcessRecommendation;
 import com.labausegtic.aresvi.repository.AuditProcessRecommendationRepository;
+import com.labausegtic.aresvi.service.CategoryAttrRecommendationService;
 import com.labausegtic.aresvi.service.dto.AuditProcessRecommendationDTO;
 import com.labausegtic.aresvi.service.mapper.AuditProcessRecommendationMapper;
 import org.slf4j.Logger;
@@ -11,6 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -26,9 +30,12 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
 
     private final AuditProcessRecommendationMapper auditProcessRecommendationMapper;
 
-    public AuditProcessRecommendationServiceImpl(AuditProcessRecommendationRepository auditProcessRecommendationRepository, AuditProcessRecommendationMapper auditProcessRecommendationMapper) {
+    private final CategoryAttrRecommendationService categoryAttrRecommendationService;
+
+    public AuditProcessRecommendationServiceImpl(AuditProcessRecommendationRepository auditProcessRecommendationRepository, AuditProcessRecommendationMapper auditProcessRecommendationMapper, CategoryAttrRecommendationService categoryAttrRecommendationService) {
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
         this.auditProcessRecommendationMapper = auditProcessRecommendationMapper;
+        this.categoryAttrRecommendationService = categoryAttrRecommendationService;
     }
 
     /**
@@ -57,6 +64,33 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
         log.debug("Request to get all AuditProcessRecommendations");
         return auditProcessRecommendationRepository.findAll(pageable)
             .map(auditProcessRecommendationMapper::toDto);
+    }
+
+    @Override
+    public Set<AuditProcessRecommendationDTO> findAllByRecommendation_Id(Long recommendation_id) {
+
+        Set<AuditProcessRecommendationDTO> result = new HashSet<>();
+
+        Set<AuditProcessRecommendation> auditProcessRecommendations;
+
+        auditProcessRecommendations = auditProcessRecommendationRepository.findAllByRecommendation_Id(recommendation_id);
+
+        for (AuditProcessRecommendation apr : auditProcessRecommendations){
+
+            AuditProcessRecommendationDTO auditProcessRecommendationDTO = auditProcessRecommendationMapper.toDto(apr);
+
+            auditProcessRecommendationDTO.setCategoryAttrRecommendationDTOSet(
+                categoryAttrRecommendationService.findAllByAuditTaskRecom_Id(
+                    auditProcessRecommendationDTO.getId()
+                )
+            );
+
+            result.add(auditProcessRecommendationDTO);
+
+        }
+
+        return result;
+
     }
 
     /**

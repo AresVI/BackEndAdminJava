@@ -38,7 +38,7 @@ public class AuditorServiceImpl implements AuditorService{
 
         if (auditor.isInternal() && auditor.getCompanies().size() < 1) {
 
-            throw new Exception();
+          //  throw new Exception();
 
         }
 

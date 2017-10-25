@@ -33,7 +33,7 @@ export const traceabilityAuditRoute: Routes = [
             'pagingParams': TraceabilityAuditResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const traceabilityAuditRoute: Routes = [
         path: 'traceability-audit/:id',
         component: TraceabilityAuditDetailComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService]

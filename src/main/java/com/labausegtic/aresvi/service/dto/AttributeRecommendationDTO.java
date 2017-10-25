@@ -23,6 +23,8 @@ public class AttributeRecommendationDTO implements Serializable {
 
     private Long attributeId;
 
+    private AttributeLiteDTO attribute;
+
     public Long getId() {
         return id;
     }
@@ -53,6 +55,14 @@ public class AttributeRecommendationDTO implements Serializable {
 
     public void setAttributeId(Long attributeId) {
         this.attributeId = attributeId;
+    }
+
+    public AttributeLiteDTO getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(AttributeLiteDTO attribute) {
+        this.attribute = attribute;
     }
 
     @Override

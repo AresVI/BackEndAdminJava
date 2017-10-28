@@ -15,6 +15,9 @@
             "detail": {
                 "title": "Recomendación"
             },
+            "action": {
+                "qualify": "Caliificar"
+            },
             "name": "Mombre",
             "qualification": "Calificación",
             "creationDate": "Día de Creación",

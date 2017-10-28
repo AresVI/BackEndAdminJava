@@ -27,7 +27,7 @@
             },
             "name": "Nombre",
             "status": "Estado",
-            "creationDate": "Fecha de Craación",
+            "creationDate": "Fecha de Creación",
             "auditProcesses": "Proceso",
             "company": "Bodega",
             "category": "Categoría",
@@ -35,7 +35,8 @@
             "audit_processes": "Procesos a Auditar",
             "action": {
                 "cancel": "Cancelar Proceso",
-                "start": "Iniciar Proceso"
+                "start": "Iniciar Proceso",
+                "audit": "Realizar Auditoría"
             }
         }
     }

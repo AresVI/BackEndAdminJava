@@ -17,7 +17,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="internal"><span jhiTranslate="aresViApp.auditor.internal">Internal</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="internal"><span jhiTranslate="aresViApp.auditor.cain">Cain</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="user.login"><span jhiTranslate="aresViApp.auditor.user">User</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -25,9 +25,9 @@
             <tbody>
             <tr *ngFor="let auditor of auditors ;trackBy: trackId">
                 <td><a [routerLink]="['../auditor', auditor.id ]">{{auditor.id}}</a></td>
-                <td>{{auditor.internal}}</td>
+                <td>{{auditor.internal ? "Interno" : "Externo"}}</td>
                 <td>
-                    {{auditor.user?.login}}
+                    <a [routerLink]="['../user-management', auditor.user?.login ]"> {{auditor.user?.login}} </a>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

@@ -1,31 +1,35 @@
 
 <div *ngIf="recommendation">
-    <h2><span jhiTranslate="aresViApp.recommendation.detail.title">Recommendation</span> {{recommendation.id}}</h2>
+    <h2>{{recommendation.name}}</h2>
     <hr>
+
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.recommendation.name">Name</span></dt>
-        <dd>
-            <span>{{recommendation.name}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.recommendation.qualification">Qualification</span></dt>
-        <dd>
-            <span>{{recommendation.qualification}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.recommendation.creationDate">Creation Date</span></dt>
-        <dd>
-            <span>{{recommendation.creationDate | date:'medium'}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.recommendation.traceabilityAudit">Traceability Audit</span></dt>
-        <dd>
-            <div *ngIf="recommendation.traceabilityAuditId">
-                <a [routerLink]="['/traceability-audit', recommendation.traceabilityAuditId]">{{recommendation.traceabilityAuditId}}</a>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3>
+                <span jhiTranslate="aresViApp.recommendation.qualification">Qualification</span>:
+                <small>{{recommendation.qualification ? recommendation.qualification : "-- Sin Calificación --" }}</small>
+            </h3>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4>Procesos: </h4>
+
+            <div class="list-group">
+                <a *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet"
+                   [routerLink]="['/audit-process-recommendation', auditProcessRecom.id ]"
+                   class="list-group-item list-group-item-action">
+                    {{auditProcessRecom.auditProcess.name}}
+                </a>
             </div>
-        </dd>
-    </dl>
+        </div>
+    </div>
 
     <button type="submit"
-            (click)="previousState()"
+            [routerLink]="['/traceability-audit', recommendation.traceabilityAuditId ]"
             class="btn btn-info">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
@@ -34,6 +38,6 @@
             [routerLink]="['/', { outlets: { popup: 'recommendation/'+ recommendation.id + '/edit'} }]"
             replaceUrl="true"
             class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="aresViApp.recommendation.action.qualify"> Qualify</span>
     </button>
 </div>

@@ -103,7 +103,16 @@ public class RecommendationServiceImpl implements RecommendationService{
     public RecommendationDTO findOne(Long id) {
         log.debug("Request to get Recommendation : {}", id);
         Recommendation recommendation = recommendationRepository.findOne(id);
-        return recommendationMapper.toDto(recommendation);
+
+        RecommendationDTO recommendationDTO = recommendationMapper.toDto(recommendation);
+
+        recommendationDTO.setAuditProcessRecommendationSet(
+            auditProcessRecommendationService.findAllByRecommendation_Id(
+                recommendationDTO.getId()
+            )
+        );
+
+        return recommendationDTO;
     }
 
     /**

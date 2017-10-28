@@ -16,6 +16,7 @@
                 "title": "Auditor"
             },
             "internal": "Interno",
+            "cain": "Tipo de Auditor",
             "user": "Usuario",
             "companies": "Empresas"
         }

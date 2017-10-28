@@ -42,6 +42,14 @@
 
         <addPrimaryKey columnNames="auditor_id, companies_id" tableName="auditor_companies"/>
 
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/seeds/auditor.csv"
+                  separator=";"
+                  tableName="auditor">
+            <column name="internal" type="BOOLEAN" />
+        </loadData>
+
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

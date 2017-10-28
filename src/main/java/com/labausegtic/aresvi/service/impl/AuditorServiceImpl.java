@@ -36,13 +36,10 @@ public class AuditorServiceImpl implements AuditorService{
     public Auditor save(Auditor auditor) throws Exception {
         log.debug("Request to save Auditor : {}", auditor);
 
-        if (auditor.isInternal() && auditor.getCompanies().size() < 1) {
-
-          //  throw new Exception();
-
-        }
+        auditor.setInternal(auditor.getCompanies().size() > 0);
 
         return auditorRepository.save(auditor);
+
     }
 
     /**

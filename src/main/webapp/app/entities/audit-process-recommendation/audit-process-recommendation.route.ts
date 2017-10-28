@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes, CanActivate } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from '../../shared';
-import { JhiPaginationUtil } from 'ng-jhipster';
 
 import { AuditProcessRecommendationComponent } from './audit-process-recommendation.component';
 import { AuditProcessRecommendationDetailComponent } from './audit-process-recommendation-detail.component';

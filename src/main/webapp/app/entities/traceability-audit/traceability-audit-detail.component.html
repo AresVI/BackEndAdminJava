@@ -1,7 +1,7 @@
 
 <div *ngIf="traceabilityAudit">
     <h2>{{traceabilityAudit.name}}
-        <span class="badge badge-success" ng-if="traceabilityAudit != null">
+        <span class="badge badge-success" [hidden]="!traceabilityAudit.category">
             <span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span>
             {{traceabilityAudit.category}}
         </span>
@@ -32,7 +32,16 @@
 
     <hr/>
 
-    <div class="card" *ngFor="let recommendation of traceabilityAudit.recommendationSet">
+    <div class="card" [hidden]="traceabilityAudit.category">
+        <div class="card-body">
+            <a class="btn btn-success btn-block btn-lg" [routerLink]="['/recommendation', traceabilityAudit.recommendationSet[0].id]">
+                <span class="fa fa-file-text-o"></span>
+                <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.audit">Audit</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="card" *ngFor="let recommendation of traceabilityAudit.recommendationSet" [hidden]="!traceabilityAudit.category">
 
         <h3 class="card-header">{{ recommendation.name }}</h3>
 
@@ -71,7 +80,7 @@
     <hr/>
 
     <button type="submit"
-            (click)="previousState()"
+            [routerLink]="['/process/audit/dashboard']"
             class="btn btn-info">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>

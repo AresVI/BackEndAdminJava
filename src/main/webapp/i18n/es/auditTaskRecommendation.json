@@ -13,7 +13,7 @@
                 "question": "¿Seguro que quiere eliminar Recomendación de la Tarea de Auditoría {{ id }}?"
             },
             "detail": {
-                "title": "Recomendación de la Tarea de Auditoría"
+                "title": "Auditoría de la Actividad - {{name}}"
             },
             "description": "Descripción",
             "auditProcessRecom": "Recomendación del Proceso de Auditoría",

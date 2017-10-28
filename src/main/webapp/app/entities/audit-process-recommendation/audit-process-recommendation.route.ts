@@ -20,7 +20,7 @@ export const auditProcessRecommendationRoute: Routes = [
         path: 'audit-process-recommendation/:id',
         component: AuditProcessRecommendationDetailComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR'],
             pageTitle: 'aresViApp.auditProcessRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -42,7 +42,7 @@ export const auditProcessRecommendationPopupRoute: Routes = [
         path: 'audit-process-recommendation/:id/edit',
         component: AuditProcessRecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR'],
             pageTitle: 'aresViApp.auditProcessRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -1,9 +1,7 @@
 package com.labausegtic.aresvi.service.impl;
 
 import com.labausegtic.aresvi.domain.*;
-import com.labausegtic.aresvi.repository.AuditProcessRecommendationRepository;
-import com.labausegtic.aresvi.repository.RecommendationRepository;
-import com.labausegtic.aresvi.repository.TraceabilityAuditRepository;
+import com.labausegtic.aresvi.repository.*;
 import com.labausegtic.aresvi.security.SecurityUtils;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
@@ -34,15 +32,42 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final AuditProcessRecommendationRepository auditProcessRecommendationRepository;
 
+    private final ContainerRepository containerRepository;
+
+    private final AuditTaskRepository auditTaskRepository;
+
+    private final AuditTaskRecommendationRepository auditTaskRecommendationRepository;
+
+    private final CategoryAttributeRepository categoryAttributeRepository;
+
+    private final CategoryAttrRecommendationRepository categoryAttrRecommendationRepository;
+
+    private final AttributeRepository attributeRepository;
+
+    private final AttributeRecommendationRepository attributeRecommendationRepository;
 
     private final TraceabilityAuditMapper traceabilityAuditMapper;
 
     public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository,
                                         RecommendationRepository recommendationRepository,
-                                        AuditProcessRecommendationRepository auditProcessRecommendationRepository, TraceabilityAuditMapper traceabilityAuditMapper) {
+                                        AuditProcessRecommendationRepository auditProcessRecommendationRepository,
+                                        ContainerRepository containerRepository, AuditTaskRepository auditTaskRepository,
+                                        AuditTaskRecommendationRepository auditTaskRecommendationRepository,
+                                        CategoryAttributeRepository categoryAttributeRepository,
+                                        CategoryAttrRecommendationRepository categoryAttrRecommendationRepository,
+                                        AttributeRepository attributeRepository,
+                                        AttributeRecommendationRepository attributeRecommendationRepository,
+                                        TraceabilityAuditMapper traceabilityAuditMapper) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
         this.recommendationRepository = recommendationRepository;
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
+        this.containerRepository = containerRepository;
+        this.auditTaskRepository = auditTaskRepository;
+        this.auditTaskRecommendationRepository = auditTaskRecommendationRepository;
+        this.categoryAttributeRepository = categoryAttributeRepository;
+        this.categoryAttrRecommendationRepository = categoryAttrRecommendationRepository;
+        this.attributeRepository = attributeRepository;
+        this.attributeRecommendationRepository = attributeRecommendationRepository;
         this.traceabilityAuditMapper = traceabilityAuditMapper;
     }
 
@@ -147,6 +172,60 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
             auditProcessRecommendation.setRecommendation(recommendation);
 
             auditProcessRecommendationRepository.save(auditProcessRecommendation);
+
+            Set<Container> containers = containerRepository.findAllByAuditProcess_Id(ap.getId());
+
+            for (Container c : containers){
+
+                Set<AuditTask> auditTasks = auditTaskRepository.findAllByContainer_Id(c.getId());
+
+                for (AuditTask at : auditTasks) {
+
+                    AuditTaskRecommendation auditTaskRecommendation = new AuditTaskRecommendation();
+
+                    auditTaskRecommendation.setAuditProcessRecom(auditProcessRecommendation);
+
+                    auditTaskRecommendation.setAuditTask(at);
+
+                    auditTaskRecommendation.setDescription("");
+
+                    auditTaskRecommendationRepository.save(auditTaskRecommendation);
+
+                    Set<CategoryAttribute> categoryAttributes = categoryAttributeRepository.findAllByAuditTask_Id(at.getId());
+
+                    for ( CategoryAttribute ca : categoryAttributes ) {
+
+                        CategoryAttrRecommendation categoryAttrRecommendation = new CategoryAttrRecommendation();
+
+                        categoryAttrRecommendation.setAuditTaskRecom(auditTaskRecommendation);
+
+                        categoryAttrRecommendation.setCategoryAttribute(ca);
+
+                        categoryAttrRecommendation.setDescription("");
+
+                        categoryAttrRecommendationRepository.save(categoryAttrRecommendation);
+
+                        Set<Attribute> attributes = attributeRepository.findAllByCategoryAttribute_Id(ca.getId());
+
+                        for (Attribute a : attributes) {
+
+                            AttributeRecommendation attributeRecommendation = new AttributeRecommendation();
+
+                            attributeRecommendation.setCategoryAttRecom(categoryAttrRecommendation);
+
+                            attributeRecommendation.setAttribute(a);
+
+                            attributeRecommendation.setDescription("");
+
+                            attributeRecommendationRepository.save(attributeRecommendation);
+
+                        }
+
+                    }
+
+                }
+
+            }
 
         }
 

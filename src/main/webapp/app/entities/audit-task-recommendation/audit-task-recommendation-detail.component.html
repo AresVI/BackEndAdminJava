@@ -1,6 +1,11 @@
 
 <div *ngIf="auditTaskRecommendation">
-    <h2><span jhiTranslate="aresViApp.auditTaskRecommendation.detail.title">Audit Task Recommendation</span> {{auditTaskRecommendation.id}}</h2>
+    <h2>
+         <span jhiTranslate="aresViApp.auditTaskRecommendation.detail.title"
+               translateValues="{name: '{{auditTaskRecommendation.auditTask.name}}'}">
+            Audit Task Recommendation
+        </span>
+    </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">

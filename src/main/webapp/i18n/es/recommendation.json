@@ -4,7 +4,8 @@
             "home": {
                 "title": "Recomendaciones",
                 "createLabel": "Crear nueva Recomendación",
-                "createOrEditLabel": "Crear o editar Recomendación"
+                "createOrEditLabel": "Crear o editar Recomendación",
+                "qualifyLabel": "Calificar Recomendación"
             },
             "created": "Una nueva Recomendación ha sido creada con el identificador {{ param }}",
             "updated": "Una Recomendación ha sido actualizada con el identificador {{ param }}",

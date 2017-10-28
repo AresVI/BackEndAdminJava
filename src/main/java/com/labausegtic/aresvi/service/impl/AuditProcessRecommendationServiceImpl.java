@@ -106,7 +106,11 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
     public AuditProcessRecommendationDTO findOne(Long id) {
         log.debug("Request to get AuditProcessRecommendation : {}", id);
         AuditProcessRecommendation auditProcessRecommendation = auditProcessRecommendationRepository.findOne(id);
-        return auditProcessRecommendationMapper.toDto(auditProcessRecommendation);
+        AuditProcessRecommendationDTO auditProcessRecommendationDTO = auditProcessRecommendationMapper.toDto(auditProcessRecommendation);
+        auditProcessRecommendationDTO.setAuditTaskRecommendationSet(
+            auditTaskRecommendationServiceService.findAllByAuditProcessRecom_Id(auditProcessRecommendationDTO.getId())
+        );
+        return auditProcessRecommendationDTO;
     }
 
     /**

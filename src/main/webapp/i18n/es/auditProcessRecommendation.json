@@ -4,7 +4,8 @@
             "home": {
                 "title": "Recomendaciones del Proceso de Auditoría",
                 "createLabel": "Crear nueva Recomendación del Proceso de Auditoría",
-                "createOrEditLabel": "Crear o editar Recomendación del Proceso de Auditoría"
+                "createOrEditLabel": "Crear o editar Recomendación del Proceso de Auditoría",
+                "describeLabel": "Describir Proceso de Auditoría"
             },
             "created": "Una nueva Recomendación del Proceso de Auditoría ha sido creada con el identificador {{ param }}",
             "updated": "Una Recomendación del Proceso de Auditoría ha sido actualizada con el identificador {{ param }}",
@@ -13,7 +14,10 @@
                 "question": "¿Seguro que quiere eliminar Recomendación del Proceso de Auditoría {{ id }}?"
             },
             "detail": {
-                "title": "Recomendación del Proceso de Auditoría"
+                "title": "Auditoría del Proceso - {{name}}"
+            },
+            "action": {
+                "describe": "Describir Proceso"
             },
             "description": "Descripción",
             "recommendation": "Recomendación",

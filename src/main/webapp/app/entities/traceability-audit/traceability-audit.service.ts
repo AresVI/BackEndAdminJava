@@ -48,6 +48,10 @@ export class TraceabilityAuditService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    start(id: number): Observable<Response> {
+        return this.http.post(`${this.resourceUrl}/${id}/start`, {});
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

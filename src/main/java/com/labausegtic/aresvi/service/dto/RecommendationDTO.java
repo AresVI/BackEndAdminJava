@@ -27,6 +27,8 @@ public class RecommendationDTO implements Serializable {
 
     private Long auditorId;
 
+    private AuditorDTO auditor;
+
     public Long getId() {
         return id;
     }
@@ -81,6 +83,14 @@ public class RecommendationDTO implements Serializable {
 
     public void setAuditorId(Long auditorId) {
         this.auditorId = auditorId;
+    }
+
+    public AuditorDTO getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(AuditorDTO auditor) {
+        this.auditor = auditor;
     }
 
     @Override

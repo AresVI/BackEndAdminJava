@@ -21,7 +21,7 @@ public class AuditProcessRecommendation implements Serializable {
 
     @NotNull
     @Lob
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     @ManyToOne

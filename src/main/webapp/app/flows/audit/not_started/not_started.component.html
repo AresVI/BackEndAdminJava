@@ -33,11 +33,13 @@
             </td>
             <td class="text-right">
                 <div class="btn-group flex-btn-group-container">
-                    <a [routerLink]="['/traceability-audit', traceabilityAudit.id ]"
-                            class="btn btn-info btn-sm">
-                        <span class="fa fa-eye"></span>
-                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                    </a>
+                    <button type="submit"
+                            [routerLink]="['/', { outlets: { popup: 'traceability-audit/'+ traceabilityAudit.id + '/start'} }]"
+                            replaceUrl="true"
+                            class="btn btn-success btn-sm">
+                        <span class="fa fa-hourglass-start"></span>
+                        <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.start">Start</span>
+                    </button>
                     <button type="submit"
                             [routerLink]="['/', { outlets: { popup: ['traceability-audit', traceabilityAudit.id, 'cancellation-new'] } }]"
                             class="btn btn-danger btn-sm">

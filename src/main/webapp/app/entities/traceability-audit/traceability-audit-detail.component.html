@@ -33,12 +33,39 @@
     <hr/>
 
     <div class="card" *ngFor="let recommendation of traceabilityAudit.recommendationSet">
-        <h4 class="card-header">{{ recommendation.qualification }}</h4>
+
+        <h3 class="card-header">{{ recommendation.name }}</h3>
+
         <div class="card-body">
-            <h4 class="card-title">Special title treatment</h4>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet">
+
+                    <h4 class="mb-1 w-100">
+                        <span jhiTranslate="aresViApp.auditProcess.detail.title">Process</span>:
+                        {{auditProcessRecom.auditProcess.name}}
+                    </h4>
+
+                    <div class="m-2 w-100" *ngFor="let auditTaskRecom of auditProcessRecom.auditTaskRecommendationSet">
+                        <h5>  {{auditTaskRecom.auditTask.name}} </h5>
+                        <ul>
+                            <li *ngFor="let categoryAttrRecom of auditTaskRecom.categoryAttrRecommendationSet">
+                                <p><strong>{{categoryAttrRecom.categoryAttribute.name}}</strong></p>
+                                <ul>
+                                    <li *ngFor="let attributeRecom of categoryAttrRecom.attributeRecommendationSet"  [ngSwitch]="attributeRecom.implemented">
+                                        <p class="text-success" *ngSwitchCase="true">{{attributeRecom.attribute.name}}</p>
+                                        <p class="text-danger" *ngSwitchCase="false">{{attributeRecom.attribute.name}}</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+            </ul>
+
         </div>
+
     </div>
 
     <hr/>

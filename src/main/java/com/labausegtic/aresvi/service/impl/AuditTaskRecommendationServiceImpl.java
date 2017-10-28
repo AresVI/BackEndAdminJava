@@ -3,6 +3,7 @@ package com.labausegtic.aresvi.service.impl;
 import com.labausegtic.aresvi.service.AuditTaskRecommendationService;
 import com.labausegtic.aresvi.domain.AuditTaskRecommendation;
 import com.labausegtic.aresvi.repository.AuditTaskRecommendationRepository;
+import com.labausegtic.aresvi.service.CategoryAttrRecommendationService;
 import com.labausegtic.aresvi.service.dto.AuditTaskRecommendationDTO;
 import com.labausegtic.aresvi.service.mapper.AuditTaskRecommendationMapper;
 import org.slf4j.Logger;
@@ -11,6 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -26,9 +30,14 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
 
     private final AuditTaskRecommendationMapper auditTaskRecommendationMapper;
 
-    public AuditTaskRecommendationServiceImpl(AuditTaskRecommendationRepository auditTaskRecommendationRepository, AuditTaskRecommendationMapper auditTaskRecommendationMapper) {
+    private final CategoryAttrRecommendationService categoryAttrRecommendationService;
+
+    public AuditTaskRecommendationServiceImpl(AuditTaskRecommendationRepository auditTaskRecommendationRepository,
+                                              AuditTaskRecommendationMapper auditTaskRecommendationMapper,
+                                              CategoryAttrRecommendationService categoryAttrRecommendationService) {
         this.auditTaskRecommendationRepository = auditTaskRecommendationRepository;
         this.auditTaskRecommendationMapper = auditTaskRecommendationMapper;
+        this.categoryAttrRecommendationService = categoryAttrRecommendationService;
     }
 
     /**
@@ -57,6 +66,29 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
         log.debug("Request to get all AuditTaskRecommendations");
         return auditTaskRecommendationRepository.findAll(pageable)
             .map(auditTaskRecommendationMapper::toDto);
+    }
+
+    @Override
+    public Set<AuditTaskRecommendationDTO> findAllByAuditProcessRecom_Id(Long auditProcessRecom_id) {
+        Set<AuditTaskRecommendationDTO> result = new HashSet<>();
+
+        Set<AuditTaskRecommendation> AuditTaskRecommendations;
+
+        AuditTaskRecommendations = auditTaskRecommendationRepository.findAllByAuditProcessRecom_Id(auditProcessRecom_id);
+
+        for (AuditTaskRecommendation atr : AuditTaskRecommendations){
+
+            AuditTaskRecommendationDTO auditTaskRecommendationDTO = auditTaskRecommendationMapper.toDto(atr);
+
+            auditTaskRecommendationDTO.setCategoryAttrRecommendationSet(
+                categoryAttrRecommendationService.findAllByAuditTaskRecom_Id(auditTaskRecommendationDTO.getId())
+            );
+
+            result.add(auditTaskRecommendationDTO);
+
+        }
+
+        return result;
     }
 
     /**

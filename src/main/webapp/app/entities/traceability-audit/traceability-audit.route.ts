@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes, CanActivate } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from '../../shared';
 import { JhiPaginationUtil } from 'ng-jhipster';
@@ -8,6 +8,7 @@ import { TraceabilityAuditComponent } from './traceability-audit.component';
 import { TraceabilityAuditDetailComponent } from './traceability-audit-detail.component';
 import { TraceabilityAuditPopupComponent } from './traceability-audit-dialog.component';
 import { TraceabilityAuditDeletePopupComponent } from './traceability-audit-delete-dialog.component';
+import {TraceabilityAuditStartAuditPopupComponent} from '../../flows/audit/not_started/traceability-audit-start-audit-dialog.component';
 
 @Injectable()
 export class TraceabilityAuditResolvePagingParams implements Resolve<any> {
@@ -41,7 +42,7 @@ export const traceabilityAuditRoute: Routes = [
         path: 'traceability-audit/:id',
         component: TraceabilityAuditDetailComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,6 +75,16 @@ export const traceabilityAuditPopupRoute: Routes = [
         component: TraceabilityAuditDeletePopupComponent,
         data: {
             authorities: ['ROLE_ADMINISTRATOR'],
+            pageTitle: 'aresViApp.traceabilityAudit.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'traceability-audit/:id/start',
+        component: TraceabilityAuditStartAuditPopupComponent,
+        data: {
+            authorities: ['ROLE_AUDITOR'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -2,22 +2,22 @@
     "aresViApp": {
         "auditor" : {
             "home": {
-                "title": "Auditors",
-                "createLabel": "Crear nuevo Auditor",
-                "createOrEditLabel": "Crear o editar Auditor"
+                "title": "Auditores",
+                "createLabel": "Crear un nuevo Auditor",
+                "createOrEditLabel": "Crear o editar un Auditor"
             },
             "created": "Un nuevo Auditor ha sido creado con el identificador {{ param }}",
             "updated": "Un Auditor ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Auditor ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Auditor {{ id }}?"
+                "question": "¿Seguro que quiere eliminar el Auditor {{ id }}?"
             },
             "detail": {
                 "title": "Auditor"
             },
-            "internal": "Internal",
-            "user": "User",
-            "companies": "Companies"
+            "internal": "Interno",
+            "user": "Usuario",
+            "companies": "Empresas"
         }
     }
 }

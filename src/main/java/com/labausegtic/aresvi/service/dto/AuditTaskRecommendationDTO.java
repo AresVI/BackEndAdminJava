@@ -3,7 +3,6 @@ package com.labausegtic.aresvi.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 import javax.persistence.Lob;
@@ -22,6 +21,10 @@ public class AuditTaskRecommendationDTO implements Serializable {
     private Long auditProcessRecomId;
 
     private Long auditTaskId;
+
+    private AuditTaskDTO auditTask;
+
+    private Set<CategoryAttrRecommendationDTO> CategoryAttrRecommendationSet;
 
     public Long getId() {
         return id;
@@ -53,6 +56,22 @@ public class AuditTaskRecommendationDTO implements Serializable {
 
     public void setAuditTaskId(Long auditTaskId) {
         this.auditTaskId = auditTaskId;
+    }
+
+    public AuditTaskDTO getAuditTask() {
+        return auditTask;
+    }
+
+    public void setAuditTask(AuditTaskDTO auditTask) {
+        this.auditTask = auditTask;
+    }
+
+    public Set<CategoryAttrRecommendationDTO> getCategoryAttrRecommendationSet() {
+        return CategoryAttrRecommendationSet;
+    }
+
+    public void setCategoryAttrRecommendationSet(Set<CategoryAttrRecommendationDTO> categoryAttrRecommendationSet) {
+        CategoryAttrRecommendationSet = categoryAttrRecommendationSet;
     }
 
     @Override

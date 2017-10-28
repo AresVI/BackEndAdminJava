@@ -1,14 +1,11 @@
 package com.labausegtic.aresvi.service.dto;
 
 
-import com.labausegtic.aresvi.domain.CompanyContactPerson;
-
-import java.time.Instant;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the TraceabilityAudit entity.
@@ -35,6 +32,8 @@ public class TraceabilityAuditDTO implements Serializable {
     private String status;
 
     private Set<RecommendationDTO> recommendationSet;
+
+    private Set<AuditProcessDTO> auditProcesses;
 
     public Long getId() {
         return id;
@@ -114,6 +113,18 @@ public class TraceabilityAuditDTO implements Serializable {
 
     public void setRecommendationDTOSet(Set<RecommendationDTO> recommendationSet) {
         this.recommendationSet = recommendationSet;
+    }
+
+    public void setRecommendationSet(Set<RecommendationDTO> recommendationSet) {
+        this.recommendationSet = recommendationSet;
+    }
+
+    public Set<AuditProcessDTO> getAuditProcesses() {
+        return auditProcesses;
+    }
+
+    public void setAuditProcesses(Set<AuditProcessDTO> auditProcesses) {
+        this.auditProcesses = auditProcesses;
     }
 
     @Override

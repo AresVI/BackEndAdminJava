@@ -3,7 +3,8 @@ package com.labausegtic.aresvi.service.impl;
 import com.labausegtic.aresvi.service.AuditProcessRecommendationService;
 import com.labausegtic.aresvi.domain.AuditProcessRecommendation;
 import com.labausegtic.aresvi.repository.AuditProcessRecommendationRepository;
-import com.labausegtic.aresvi.service.CategoryAttrRecommendationService;
+import com.labausegtic.aresvi.service.AuditTaskRecommendationService;
+import com.labausegtic.aresvi.service.AuditTaskService;
 import com.labausegtic.aresvi.service.dto.AuditProcessRecommendationDTO;
 import com.labausegtic.aresvi.service.mapper.AuditProcessRecommendationMapper;
 import org.slf4j.Logger;
@@ -30,12 +31,14 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
 
     private final AuditProcessRecommendationMapper auditProcessRecommendationMapper;
 
-    private final CategoryAttrRecommendationService categoryAttrRecommendationService;
+    private final AuditTaskRecommendationService auditTaskRecommendationServiceService;
 
-    public AuditProcessRecommendationServiceImpl(AuditProcessRecommendationRepository auditProcessRecommendationRepository, AuditProcessRecommendationMapper auditProcessRecommendationMapper, CategoryAttrRecommendationService categoryAttrRecommendationService) {
+    public AuditProcessRecommendationServiceImpl(AuditProcessRecommendationRepository auditProcessRecommendationRepository,
+                                                 AuditProcessRecommendationMapper auditProcessRecommendationMapper,
+                                                 AuditTaskRecommendationService auditTaskRecommendationServiceService) {
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
         this.auditProcessRecommendationMapper = auditProcessRecommendationMapper;
-        this.categoryAttrRecommendationService = categoryAttrRecommendationService;
+        this.auditTaskRecommendationServiceService = auditTaskRecommendationServiceService;
     }
 
     /**
@@ -79,10 +82,9 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
 
             AuditProcessRecommendationDTO auditProcessRecommendationDTO = auditProcessRecommendationMapper.toDto(apr);
 
-            auditProcessRecommendationDTO.setCategoryAttrRecommendationDTOSet(
-                categoryAttrRecommendationService.findAllByAuditTaskRecom_Id(
-                    auditProcessRecommendationDTO.getId()
-                )
+
+            auditProcessRecommendationDTO.setAuditTaskRecommendationSet(
+                auditTaskRecommendationServiceService.findAllByAuditProcessRecom_Id(auditProcessRecommendationDTO.getId())
             );
 
             result.add(auditProcessRecommendationDTO);

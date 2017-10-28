@@ -1,8 +1,11 @@
 package com.labausegtic.aresvi.service.impl;
 
-import com.labausegtic.aresvi.service.TraceabilityAuditService;
-import com.labausegtic.aresvi.domain.TraceabilityAudit;
+import com.labausegtic.aresvi.domain.*;
+import com.labausegtic.aresvi.repository.AuditProcessRecommendationRepository;
+import com.labausegtic.aresvi.repository.RecommendationRepository;
 import com.labausegtic.aresvi.repository.TraceabilityAuditRepository;
+import com.labausegtic.aresvi.security.SecurityUtils;
+import com.labausegtic.aresvi.service.TraceabilityAuditService;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
 import com.labausegtic.aresvi.service.mapper.TraceabilityAuditMapper;
 import org.slf4j.Logger;
@@ -11,6 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
+import java.util.Set;
 
 
 /**
@@ -24,10 +30,19 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final TraceabilityAuditRepository traceabilityAuditRepository;
 
+    private final RecommendationRepository recommendationRepository;
+
+    private final AuditProcessRecommendationRepository auditProcessRecommendationRepository;
+
+
     private final TraceabilityAuditMapper traceabilityAuditMapper;
 
-    public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository, TraceabilityAuditMapper traceabilityAuditMapper) {
+    public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository,
+                                        RecommendationRepository recommendationRepository,
+                                        AuditProcessRecommendationRepository auditProcessRecommendationRepository, TraceabilityAuditMapper traceabilityAuditMapper) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
+        this.recommendationRepository = recommendationRepository;
+        this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
         this.traceabilityAuditMapper = traceabilityAuditMapper;
     }
 
@@ -98,5 +113,46 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
     public void delete(Long id) {
         log.debug("Request to delete TraceabilityAudit : {}", id);
         traceabilityAuditRepository.delete(id);
+    }
+
+    @Override
+    public void startTraceabilityAudit(Long id) {
+
+        TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
+
+        Recommendation recommendation = new Recommendation();
+
+        recommendation.setTraceabilityAudit(traceabilityAudit);
+
+        recommendation.setCreationDate(Instant.now());
+
+        recommendation.setName("Recomendación para la " + traceabilityAudit.getName());
+
+        System.out.println(SecurityUtils.getCurrentUserLogin());
+
+        recommendation.setAuditor(null);
+
+        recommendation = recommendationRepository.save(recommendation);
+
+        Set<AuditProcess> auditProcessSet = traceabilityAudit.getAuditProcesses();
+
+        for (AuditProcess ap : auditProcessSet) {
+
+            AuditProcessRecommendation auditProcessRecommendation = new AuditProcessRecommendation();
+
+            auditProcessRecommendation.setAuditProcess(ap);
+
+            auditProcessRecommendation.setDescription("");
+
+            auditProcessRecommendation.setRecommendation(recommendation);
+
+            auditProcessRecommendationRepository.save(auditProcessRecommendation);
+
+        }
+
+        traceabilityAudit.setStatus(StatusTraceabilityAudit.IN_PROGRESS);
+
+        traceabilityAuditRepository.save(traceabilityAudit);
+
     }
 }

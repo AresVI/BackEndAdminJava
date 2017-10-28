@@ -23,7 +23,7 @@
                 "attributeRecommendation": "Attribute Recommendation",
                 "categoryAttrRecommendation": "Category Att Recommendation",
                 "auditor": "Auditor",
-                "companyContactPerson": "Company Contact Person",
+                "companyContactPerson": "Persona de Contacto de la Empresa",
                 "cancellationTraceabilityAudit": "Cancellation Traceability Audit",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
@@ -132,6 +132,9 @@
         },
         "delete": {
             "title": "Confirmar operación de borrado"
+        },
+        "start": {
+            "title": "Confirmar operación de iniciación"
         },
         "validation": {
             "required": "Este campo es obligatorio.",

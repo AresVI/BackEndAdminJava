@@ -25,6 +25,8 @@ public class AttributeRecommendationDTO implements Serializable {
 
     private AttributeLiteDTO attribute;
 
+    private boolean implemented;
+
     public Long getId() {
         return id;
     }
@@ -63,6 +65,14 @@ public class AttributeRecommendationDTO implements Serializable {
 
     public void setAttribute(AttributeLiteDTO attribute) {
         this.attribute = attribute;
+    }
+
+    public boolean isImplemented() {
+        return implemented;
+    }
+
+    public void setImplemented(boolean implemented) {
+        this.implemented = implemented;
     }
 
     @Override

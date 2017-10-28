@@ -1,6 +1,8 @@
 package com.labausegtic.aresvi.service.dto;
 
 
+import com.labausegtic.aresvi.domain.User;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,6 +17,10 @@ public class AuditorDTO implements Serializable {
     private String name;
 
     private Boolean internal;
+
+    private Long userId;
+
+    private User user;
 
     public Long getId() {
         return id;
@@ -38,6 +44,22 @@ public class AuditorDTO implements Serializable {
 
     public void setInternal(Boolean internal) {
         this.internal = internal;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

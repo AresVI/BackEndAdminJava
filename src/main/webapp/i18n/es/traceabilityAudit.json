@@ -12,6 +12,9 @@
             "delete": {
                 "question": "¿Seguro que quiere eliminar la Auditoría de Trazabilidad {{ id }}?"
             },
+            "start": {
+                "question": "¿Seguro que desa iniciar la {{ name }}?"
+            },
             "detail": {
                 "title": "Auditoría de Trazabilidad"
             },
@@ -31,7 +34,8 @@
             "company_contact_person": "Persona de Contacto",
             "audit_processes": "Procesos a Auditar",
             "action": {
-                "cancel": "Cancelar Proceso"
+                "cancel": "Cancelar Proceso",
+                "start": "Iniciar Proceso"
             }
         }
     }

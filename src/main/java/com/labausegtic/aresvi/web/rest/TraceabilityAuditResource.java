@@ -1,9 +1,14 @@
 package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.labausegtic.aresvi.domain.AuditProcessRecommendation;
 import com.labausegtic.aresvi.domain.StatusTraceabilityAudit;
+import com.labausegtic.aresvi.service.AuditProcessRecommendationService;
 import com.labausegtic.aresvi.service.RecommendationService;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
+import com.labausegtic.aresvi.service.dto.AuditProcessDTO;
+import com.labausegtic.aresvi.service.dto.AuditProcessRecommendationDTO;
+import com.labausegtic.aresvi.service.dto.RecommendationDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
@@ -25,6 +30,7 @@ import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing TraceabilityAudit.
@@ -68,6 +74,16 @@ public class TraceabilityAuditResource {
         return ResponseEntity.created(new URI("/api/traceability-audits/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/traceability-audits/{id}/start")
+    @Timed
+    public ResponseEntity<Void> startTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+
+        traceabilityAuditService.startTraceabilityAudit(id);
+
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+
     }
 
     /**

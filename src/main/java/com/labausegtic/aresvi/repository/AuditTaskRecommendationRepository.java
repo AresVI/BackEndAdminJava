@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.Set;
+
 
 /**
  * Spring Data JPA repository for the AuditTaskRecommendation entity.
@@ -12,5 +14,7 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface AuditTaskRecommendationRepository extends JpaRepository<AuditTaskRecommendation, Long> {
+
+    Set<AuditTaskRecommendation> findAllByAuditProcessRecom_Id(Long auditProcess_Id);
 
 }

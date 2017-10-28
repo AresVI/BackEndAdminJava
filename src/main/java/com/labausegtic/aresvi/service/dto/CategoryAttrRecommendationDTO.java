@@ -22,7 +22,9 @@ public class CategoryAttrRecommendationDTO implements Serializable {
 
     private Long categoryAttributeId;
 
-    private Set<AttributeRecommendationDTO> attributeRecommendationDTOSet;
+    private CategoryAttributeDTO categoryAttribute;
+
+    private Set<AttributeRecommendationDTO> attributeRecommendationSet;
 
     public Long getId() {
         return id;
@@ -56,12 +58,20 @@ public class CategoryAttrRecommendationDTO implements Serializable {
         this.categoryAttributeId = categoryAttributeId;
     }
 
-    public Set<AttributeRecommendationDTO> getAttributeRecommendationDTOSet() {
-        return attributeRecommendationDTOSet;
+    public Set<AttributeRecommendationDTO> getAttributeRecommendationSet() {
+        return attributeRecommendationSet;
     }
 
-    public void setAttributeRecommendationDTOSet(Set<AttributeRecommendationDTO> attributeRecommendationDTOSet) {
-        this.attributeRecommendationDTOSet = attributeRecommendationDTOSet;
+    public void setAttributeRecommendationSet(Set<AttributeRecommendationDTO> attributeRecommendationSet) {
+        this.attributeRecommendationSet = attributeRecommendationSet;
+    }
+
+    public CategoryAttributeDTO getCategoryAttribute() {
+        return categoryAttribute;
+    }
+
+    public void setCategoryAttribute(CategoryAttributeDTO categoryAttribute) {
+        this.categoryAttribute = categoryAttribute;
     }
 
     @Override

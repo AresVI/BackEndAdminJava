@@ -7,6 +7,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {NotStartedComponent} from './not_started.component';
 import {flowAuditNotStartedRoute, TraceabilityAuditResolvePagingParams} from './not_started.route';
 import {TraceabilityAuditService} from '../../../entities/traceability-audit/traceability-audit.service';
+import {
+    TraceabilityAuditStartAuditDialogComponent,
+    TraceabilityAuditStartAuditPopupComponent
+} from './traceability-audit-start-audit-dialog.component';
 
 const ENTITY_STATES = [
     ...flowAuditNotStartedRoute
@@ -19,13 +23,17 @@ const ENTITY_STATES = [
         RouterModule.forRoot(ENTITY_STATES , { useHash: true })
     ],
     declarations: [
-        NotStartedComponent
+        NotStartedComponent,
+        TraceabilityAuditStartAuditDialogComponent,
+        TraceabilityAuditStartAuditPopupComponent
     ],
     entryComponents: [
+        TraceabilityAuditStartAuditDialogComponent,
+        TraceabilityAuditStartAuditPopupComponent
     ],
     providers: [
         TraceabilityAuditService,
-        TraceabilityAuditResolvePagingParams
+        TraceabilityAuditResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

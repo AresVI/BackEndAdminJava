@@ -1,4 +1,5 @@
 import { BaseEntity } from './../../shared';
+import {Attribute} from '../attribute/attribute.model';
 
 export class AttributeRecommendation implements BaseEntity {
     constructor(
@@ -7,6 +8,7 @@ export class AttributeRecommendation implements BaseEntity {
         public implemented?: boolean,
         public categoryAttRecomId?: number,
         public attributeId?: number,
+        public attribute?: Attribute,
     ) {
     }
 }

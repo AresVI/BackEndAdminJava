@@ -23,7 +23,9 @@ public class AuditProcessRecommendationDTO implements Serializable {
 
     private Long auditProcessId;
 
-    private Set<CategoryAttrRecommendationDTO> CategoryAttrRecommendationDTOSet;
+    private AuditProcessDTO auditProcess;
+
+    private Set<AuditTaskRecommendationDTO> auditTaskRecommendationSet;
 
     public Long getId() {
         return id;
@@ -57,12 +59,20 @@ public class AuditProcessRecommendationDTO implements Serializable {
         this.auditProcessId = auditProcessId;
     }
 
-    public Set<CategoryAttrRecommendationDTO> getCategoryAttrRecommendationDTOSet() {
-        return CategoryAttrRecommendationDTOSet;
+    public AuditProcessDTO getAuditProcess() {
+        return auditProcess;
     }
 
-    public void setCategoryAttrRecommendationDTOSet(Set<CategoryAttrRecommendationDTO> CategoryAttrRecommendationDTOSet) {
-        this.CategoryAttrRecommendationDTOSet = CategoryAttrRecommendationDTOSet;
+    public void setAuditProcess(AuditProcessDTO auditProcess) {
+        this.auditProcess = auditProcess;
+    }
+
+    public Set<AuditTaskRecommendationDTO> getAuditTaskRecommendationSet() {
+        return auditTaskRecommendationSet;
+    }
+
+    public void setAuditTaskRecommendationSet(Set<AuditTaskRecommendationDTO> auditTaskRecommendationSet) {
+        this.auditTaskRecommendationSet = auditTaskRecommendationSet;
     }
 
     @Override

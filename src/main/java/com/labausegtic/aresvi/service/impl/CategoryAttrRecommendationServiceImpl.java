@@ -81,7 +81,7 @@ public class CategoryAttrRecommendationServiceImpl implements CategoryAttrRecomm
 
             CategoryAttrRecommendationDTO categoryAttrRecommendationDTO = categoryAttrRecommendationMapper.toDto(car);
 
-            categoryAttrRecommendationDTO.setAttributeRecommendationDTOSet(
+            categoryAttrRecommendationDTO.setAttributeRecommendationSet(
                 attributeRecommendationService.findAllByCategoryAttrRecom_Id(car.getId())
             );
 

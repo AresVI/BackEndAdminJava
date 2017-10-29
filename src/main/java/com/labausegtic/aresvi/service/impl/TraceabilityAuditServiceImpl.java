@@ -254,15 +254,13 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
 
-        //traceabilityAudit.setStatus(StatusTraceabilityAudit.FINISHED);
+        traceabilityAudit.setStatus(StatusTraceabilityAudit.FINISHED);
 
         Set<AttributeRecommendation> attributeRecommendationSet;
 
         attributeRecommendationSet = attributeRecommendationRepository.findAllForTraceabilityAuditId(traceabilityAudit.getId());
 
-
-
-        int countNotRequired = 0, totalNotRequired = 0,
+        double countNotRequired = 0, totalNotRequired = 0,
             countLevel1 = 0, totalLevel1 = 0,
             countLevel2 = 0, totalLevel2 = 0,
             countLevel3 = 0, totalLevel3 = 0,
@@ -324,9 +322,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         InferenceParameterDTO inferenceParameterDTO = new InferenceParameterDTO();
 
         inferenceParameterDTO.setLevelComputerization(1);
-
         inferenceParameterDTO.setPercentageNotRequired(
-            countNotRequired/totalNotRequired
+            (countNotRequired/totalNotRequired)
         );
 
         inferenceParameterDTO.setPercentageLevel1(

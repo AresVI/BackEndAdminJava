@@ -69,4 +69,17 @@ public class InferenceParameterDTO implements Serializable{
     public void setLevelComputerization(int levelComputerization) {
         this.levelComputerization = levelComputerization;
     }
+
+    @Override
+    public String toString() {
+        return "InferenceParameterDTO{" +
+            "percentageNotRequired=" + percentageNotRequired +
+            ", percentageLevel1=" + percentageLevel1 +
+            ", percentageLevel2=" + percentageLevel2 +
+            ", percentageLevel3=" + percentageLevel3 +
+            ", percentageLevel4=" + percentageLevel4 +
+            ", percentageLevel5=" + percentageLevel5 +
+            ", levelComputerization=" + levelComputerization +
+            '}';
+    }
 }

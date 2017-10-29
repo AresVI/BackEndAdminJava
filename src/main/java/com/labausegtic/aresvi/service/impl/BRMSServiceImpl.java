@@ -1,11 +1,15 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.labausegtic.aresvi.service.BRMSService;
 import com.labausegtic.aresvi.service.dto.InferenceParameterDTO;
 import com.labausegtic.aresvi.service.dto.ResultInferenceDTO;
 import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,23 +27,29 @@ public class BRMSServiceImpl implements BRMSService {
         ResultInferenceDTO resultInferenceDTO = new ResultInferenceDTO();
 
         try {
-            HttpResponse<String> response = Unirest.post("http://0.0.0.0:7000/api/inference")
+            HttpResponse<JsonNode> response = Unirest.post("http://0.0.0.0:7000/api/inference")
                 .header("content-type", "application/json")
                 .header("cache-control", "no-cache")
-                .header("postman-token", "e27ab633-b5ac-30d0-853d-9841a19abc19")
-                .body("{\n   \"percentageNotRequired\": 0.8,\n   \"percentageLevel1\": 0.8,\n   \"percentageLevel2\": 0.8,\n   \"percentageLevel3\": 0.9,\n   \"percentageLevel4\": 0.8,\n   \"percentageLevel5\": 0.8,\n   \"pevelComputerization\": 3\n}")
-                .asString();
+                .body(writeValue(inferenceParameterDTO))
+                .asJson();
 
+            resultInferenceDTO.setCategory(response.getBody().getObject().getString("category"));
 
-
-            resultInferenceDTO.setCategory("J");
-
-        } catch (UnirestException e) {
+        } catch (UnirestException | JSONException e) {
             e.printStackTrace();
-            resultInferenceDTO.setCategory("J");
+            resultInferenceDTO.setCategory("");
         }
 
         return resultInferenceDTO;
+    }
+
+    private String writeValue(Object value) {
+        try {
+            ObjectMapper jacksonObjectMapper = new ObjectMapper();
+            return jacksonObjectMapper.writeValueAsString(value);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

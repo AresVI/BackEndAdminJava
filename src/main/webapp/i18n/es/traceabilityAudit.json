@@ -9,6 +9,8 @@
             "created": "Una nueva Auditoría de Trazabilidad ha sido creada para la bodega \"{{ param }}\"",
             "updated": "Una Auditoría de Trazabilidad ha sido actualizada con el identificador {{ param }}",
             "deleted": "Una Auditoría de Trazabilidad ha sido eliminada con el identificador {{ param }}",
+            "started": "La {{ param }} ha sido iniciada con éxito",
+            "finished": "La {{ param }} ha sido finalizada con éxito",
             "delete": {
                 "question": "¿Seguro que quiere eliminar la Auditoría de Trazabilidad {{ id }}?"
             },

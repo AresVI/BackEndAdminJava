@@ -80,9 +80,9 @@ public class TraceabilityAuditResource {
     @Timed
     public ResponseEntity<Void> startTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
 
-        traceabilityAuditService.startTraceabilityAudit(id);
+        TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.startTraceabilityAudit(id);
 
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowStartAlert(ENTITY_NAME, traceabilityAuditDTO.getName())).build();
 
     }
 
@@ -90,9 +90,9 @@ public class TraceabilityAuditResource {
     @Timed
     public ResponseEntity<Void> finishTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
 
-        traceabilityAuditService.finishTraceabilityAudit(id);
+        TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.finishTraceabilityAudit(id);
 
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowFinishAlert(ENTITY_NAME, traceabilityAuditDTO.getName())).build();
 
     }
 

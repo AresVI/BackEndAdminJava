@@ -141,7 +141,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
     }
 
     @Override
-    public void startTraceabilityAudit(Long id) {
+    public TraceabilityAuditDTO startTraceabilityAudit(Long id) {
 
         TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
 
@@ -239,15 +239,20 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         traceabilityAuditRepository.save(traceabilityAudit);
 
+        return traceabilityAuditMapper.toDto(traceabilityAudit);
+
     }
 
     @Override
-    public void finishTraceabilityAudit(Long id) {
+    public TraceabilityAuditDTO finishTraceabilityAudit(Long id) {
 
         TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
 
         traceabilityAudit.setStatus(StatusTraceabilityAudit.FINISHED);
 
         traceabilityAuditRepository.save(traceabilityAudit);
+
+        return traceabilityAuditMapper.toDto(traceabilityAudit);
+
     }
 }

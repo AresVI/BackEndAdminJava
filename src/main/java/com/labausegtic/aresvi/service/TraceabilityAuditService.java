@@ -45,7 +45,7 @@ public interface TraceabilityAuditService {
      */
     void delete(Long id);
 
-    void startTraceabilityAudit(Long id);
+    TraceabilityAuditDTO startTraceabilityAudit(Long id);
 
-    void finishTraceabilityAudit(Long id);
+    TraceabilityAuditDTO finishTraceabilityAudit(Long id);
 }

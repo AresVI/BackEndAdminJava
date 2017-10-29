@@ -20,7 +20,10 @@
                 <div class="card mb-3" *ngFor="let attrCatRecom of auditTaskRecommendation.categoryAttrRecommendationSet">
                     <div class="card-header">
                         {{attrCatRecom.categoryAttribute.name}}
-                        <button type="button" class="btn btn-outline-dark btn-sm"><i class="fa fa-file-text-o"></i></button>
+                        <button type="button" class="btn btn-outline-dark btn-sm"
+                                (click)="openModalCategoryAttr(contentCatAttrR, attrCatRecom)">
+                            <i class="fa fa-file-text-o"></i>
+                        </button>
                     </div>
                     <div class="card-body">
 
@@ -34,7 +37,10 @@
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">{{attrRecomm.attribute.name}}</span>
                                     </label>
-                                    <button type="button" class="btn btn-outline-dark btn-sm"><i class="fa fa-file-text-o"></i></button>
+                                    <button type="button" class="btn btn-outline-dark btn-sm"
+                                            (click)="openModalAttribute(contentAttrR, attrRecomm)">
+                                        <i class="fa fa-file-text-o"></i>
+                                    </button>
                                 </div>
                             </li>
                         </ul>
@@ -66,3 +72,45 @@
     </form>
 
 </div>
+
+<ng-template #contentAttrR let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <textarea class="form-control" name="recommendation_attribute" id="field_recommendation_attribute"
+                  [(ngModel)]="recommendationAttribute"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="d('Close click')">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="c('Close click')">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #contentCatAttrR let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <textarea class="form-control" name="recommendation_attribute" id="field_recommendation_attribute"
+                  [(ngModel)]="recommendationCategoryAttr"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="d('Close click')">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="c('Close click')">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</ng-template>

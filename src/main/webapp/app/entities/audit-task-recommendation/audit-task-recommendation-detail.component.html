@@ -20,6 +20,7 @@
                 <div class="card mb-3" *ngFor="let attrCatRecom of auditTaskRecommendation.categoryAttrRecommendationSet">
                     <div class="card-header">
                         {{attrCatRecom.categoryAttribute.name}}
+                        <button type="button" class="btn btn-outline-dark btn-sm"><i class="fa fa-file-text-o"></i></button>
                     </div>
                     <div class="card-body">
 
@@ -33,6 +34,7 @@
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">{{attrRecomm.attribute.name}}</span>
                                     </label>
+                                    <button type="button" class="btn btn-outline-dark btn-sm"><i class="fa fa-file-text-o"></i></button>
                                 </div>
                             </li>
                         </ul>

@@ -49,12 +49,14 @@
             </div>
         </div>
 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="previousState()">
-                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
+        <div>
             <button type="submit" [disabled]="auditForm.form.invalid || isSaving" class="btn btn-primary">
                 <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+            <button
+                type="button" class="btn btn-secondary"
+                [routerLink]="['/audit-process-recommendation', auditTaskRecommendation.auditProcessRecomId]">
+                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
         </div>
 

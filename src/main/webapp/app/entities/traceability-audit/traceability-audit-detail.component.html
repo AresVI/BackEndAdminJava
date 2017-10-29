@@ -25,8 +25,12 @@
             <span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span>
         </dd>
         <dt><span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span></dt>
-        <dd>
+        <dd *ngIf="traceabilityAudit.category">
             <span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span> {{traceabilityAudit.category}}
+
+        </dd>
+        <dd *ngIf="!traceabilityAudit.category">
+            -- Sin categoría --
         </dd>
     </dl>
 

@@ -51,6 +51,11 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
     public AuditProcessRecommendationDTO save(AuditProcessRecommendationDTO auditProcessRecommendationDTO) {
         log.debug("Request to save AuditProcessRecommendation : {}", auditProcessRecommendationDTO);
         AuditProcessRecommendation auditProcessRecommendation = auditProcessRecommendationMapper.toEntity(auditProcessRecommendationDTO);
+
+        if (auditProcessRecommendation.getId() != null) {
+            auditProcessRecommendation.setReviewed(true);
+        }
+
         auditProcessRecommendation = auditProcessRecommendationRepository.save(auditProcessRecommendation);
         return auditProcessRecommendationMapper.toDto(auditProcessRecommendation);
     }

@@ -57,15 +57,20 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
     public AuditTaskRecommendationDTO save(AuditTaskRecommendationDTO auditTaskRecommendationDTO) {
         log.debug("Request to save AuditTaskRecommendation : {}", auditTaskRecommendationDTO);
         AuditTaskRecommendation auditTaskRecommendation = auditTaskRecommendationMapper.toEntity(auditTaskRecommendationDTO);
-        auditTaskRecommendation.setReviewed(true);
-        auditTaskRecommendation = auditTaskRecommendationRepository.save(auditTaskRecommendation);
 
-        for (CategoryAttrRecommendationDTO categoryAttrRecommendationDTO :auditTaskRecommendationDTO.getCategoryAttrRecommendationSet()){
+        if (auditTaskRecommendation.getId() != null) {
 
-            categoryAttrRecommendationService.save(categoryAttrRecommendationDTO);
+            auditTaskRecommendation.setReviewed(true);
+            auditTaskRecommendation = auditTaskRecommendationRepository.save(auditTaskRecommendation);
 
-            for (AttributeRecommendationDTO attributeRecommendationDTO : categoryAttrRecommendationDTO.getAttributeRecommendationSet()){
-                attributeRecommendationService.save(attributeRecommendationDTO);
+            for (CategoryAttrRecommendationDTO categoryAttrRecommendationDTO : auditTaskRecommendationDTO.getCategoryAttrRecommendationSet()) {
+
+                categoryAttrRecommendationService.save(categoryAttrRecommendationDTO);
+
+                for (AttributeRecommendationDTO attributeRecommendationDTO : categoryAttrRecommendationDTO.getAttributeRecommendationSet()) {
+                    attributeRecommendationService.save(attributeRecommendationDTO);
+                }
+
             }
 
         }

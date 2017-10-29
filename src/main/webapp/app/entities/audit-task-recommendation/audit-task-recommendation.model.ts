@@ -8,6 +8,7 @@ export class AuditTaskRecommendation implements BaseEntity {
         public description?: any,
         public auditProcessRecomId?: number,
         public auditTaskId?: number,
+        public reviewed?: boolean,
         public auditTask?: AuditTask,
         public categoryAttrRecommendationSet?: CategoryAttrRecommendation[],
     ) {

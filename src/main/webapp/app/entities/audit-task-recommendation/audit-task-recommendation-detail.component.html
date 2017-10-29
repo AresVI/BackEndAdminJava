@@ -8,35 +8,56 @@
     </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.auditTaskRecommendation.description">Description</span></dt>
-        <dd>
-            <span>{{auditTaskRecommendation.description}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.auditTaskRecommendation.auditProcessRecom">Audit Process Recom</span></dt>
-        <dd>
-            <div *ngIf="auditTaskRecommendation.auditProcessRecomId">
-                <a [routerLink]="['/audit-process-recommendation', auditTaskRecommendation.auditProcessRecomId]">{{auditTaskRecommendation.auditProcessRecomId}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.auditTaskRecommendation.auditTask">Audit Task</span></dt>
-        <dd>
-            <div *ngIf="auditTaskRecommendation.auditTaskId">
-                <a [routerLink]="['/audit-task', auditTaskRecommendation.auditTaskId]">{{auditTaskRecommendation.auditTaskId}}</a>
-            </div>
-        </dd>
-    </dl>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+    <form name="auditForm" (ngSubmit)="save()" novalidate #auditForm="ngForm">
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'audit-task-recommendation/'+ auditTaskRecommendation.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
+        <div class="card mb-3">
+
+            <div class="card-body">
+
+                <h4>Atributos: </h4>
+
+                <div class="card mb-3" *ngFor="let attrCatRecom of auditTaskRecommendation.categoryAttrRecommendationSet">
+                    <div class="card-header">
+                        {{attrCatRecom.categoryAttribute.name}}
+                    </div>
+                    <div class="card-body">
+
+                        <ul class="list-group" *ngFor="let attrRecomm of attrCatRecom.attributeRecommendationSet">
+                            <li class="list-group-item">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input"
+                                               name="field_attribute_{{attrRecomm.id}}" id="field_attribute_{{attrRecomm.id}}"
+                                               [(ngModel)]="attrRecomm.implemented"  />
+                                        {{attrRecomm.attribute.name}}
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4>Recomendación: </h4>
+                <textarea class="form-control" name="description" id="field_description"
+                          [(ngModel)]="auditTaskRecommendation.description"></textarea>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="previousState()">
+                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="submit" [disabled]="auditForm.form.invalid || isSaving" class="btn btn-primary">
+                <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+        </div>
+
+    </form>
+
 </div>

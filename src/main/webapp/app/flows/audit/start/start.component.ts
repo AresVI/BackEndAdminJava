@@ -149,7 +149,7 @@ export class StartComponent implements OnInit {
         );
 
         this.isSaving = false;
-         this.router.navigate(['/process/audit/dashboard']);
+        this.router.navigate(['/process/audit/dashboard']);
     }
 
     private onSaveError() {

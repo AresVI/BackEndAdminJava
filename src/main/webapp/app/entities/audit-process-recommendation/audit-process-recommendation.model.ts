@@ -6,6 +6,7 @@ export class AuditProcessRecommendation implements BaseEntity {
     constructor(
         public id?: number,
         public description?: any,
+        public reviewed?: boolean,
         public recommendationId?: number,
         public auditProcessId?: number,
         public auditProcess?: AuditProcess,

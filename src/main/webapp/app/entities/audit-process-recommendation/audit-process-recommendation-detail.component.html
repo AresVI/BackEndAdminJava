@@ -9,15 +9,6 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
 
-    <div class="card mb-3">
-        <div class="card-body">
-            <h4>Descripción: </h4>
-            <p>
-                {{auditProcessRecommendation.description}}
-            </p>
-        </div>
-    </div>
-
 
     <div class="card mb-3">
         <div class="card-body">
@@ -27,11 +18,20 @@
             <div class="list-group">
                 <a *ngFor="let auditTaskRecom of auditProcessRecommendation.auditTaskRecommendationSet"
                    [routerLink]="['/audit-task-recommendation', auditTaskRecom.id ]"
-                   class="list-group-item list-group-item-action">
+                   class="list-group-item list-group-item-action {{auditTaskRecom.reviewed ? 'list-group-item-success' : ''}} ">
                     {{auditTaskRecom.auditTask.name}}
                 </a>
             </div>
 
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4>Descripción: </h4>
+            <p>
+                {{auditProcessRecommendation.description}}
+            </p>
         </div>
     </div>
 

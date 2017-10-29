@@ -19,10 +19,12 @@ public class AuditTaskRecommendation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Lob
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "reviewed")
+    private boolean reviewed;
 
     @ManyToOne
     private AuditProcessRecommendation auditProcessRecom;
@@ -72,6 +74,14 @@ public class AuditTaskRecommendation implements Serializable {
     public AuditTaskRecommendation auditTask(AuditTask auditTask) {
         this.auditTask = auditTask;
         return this;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
     }
 
     public void setAuditTask(AuditTask auditTask) {

@@ -19,10 +19,12 @@ public class AuditProcessRecommendation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Lob
     @Column(name = "description")
     private String description;
+
+    @Column(name = "reviewed")
+    private boolean reviewed;
 
     @ManyToOne
     private Recommendation recommendation;
@@ -77,6 +79,15 @@ public class AuditProcessRecommendation implements Serializable {
     public void setAuditProcess(AuditProcess auditProcess) {
         this.auditProcess = auditProcess;
     }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override

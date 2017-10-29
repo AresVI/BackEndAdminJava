@@ -43,27 +43,41 @@
 
     <div class="card" *ngFor="let recommendation of traceabilityAudit.recommendationSet" [hidden]="!traceabilityAudit.category">
 
-        <h3 class="card-header">{{ recommendation.name }}</h3>
+        <h3 class="card-header">
+            {{ recommendation.name }}
+            <button type="button" class="btn btn-outline-dark"><i class="fa fa-file-text-o"></i> Ver Recomendación</button>
+        </h3>
 
         <div class="card-body">
 
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet">
+                <li class="list-group-item p-0" *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet">
 
-                    <h4 class="mb-1 w-100">
+                    <h4 class="border mb-1 p-3 w-100">
                         <span jhiTranslate="aresViApp.auditProcess.detail.title">Process</span>:
                         {{auditProcessRecom.auditProcess.name}}
+                        <button type="button" class="btn btn-outline-dark"><i class="fa fa-file-text-o"></i> Ver Recomendación</button>
                     </h4>
 
-                    <div class="m-2 w-100" *ngFor="let auditTaskRecom of auditProcessRecom.auditTaskRecommendationSet">
-                        <h5>  {{auditTaskRecom.auditTask.name}} </h5>
+                    <div class="w-100" *ngFor="let auditTaskRecom of auditProcessRecom.auditTaskRecommendationSet">
+                        <h5 class="mb-4 mt-4 px-4">
+                            {{auditTaskRecom.auditTask.name}}
+                            <button type="button" class="btn btn-outline-dark btn-sm"><i class="fa fa-file-text-o"></i></button>
+                        </h5>
                         <ul>
                             <li *ngFor="let categoryAttrRecom of auditTaskRecom.categoryAttrRecommendationSet">
-                                <p><strong>{{categoryAttrRecom.categoryAttribute.name}}</strong></p>
+                                <p class="m-2">
+                                    <strong>
+                                        {{categoryAttrRecom.categoryAttribute.name}}
+                                        <button type="button" class="btn btn-outline-dark btn-sm"><i class="fa fa-file-text-o"></i></button>
+                                    </strong>
+                                </p>
                                 <ul>
-                                    <li *ngFor="let attributeRecom of categoryAttrRecom.attributeRecommendationSet"  [ngSwitch]="attributeRecom.implemented">
-                                        <p class="text-success" *ngSwitchCase="true">{{attributeRecom.attribute.name}}</p>
-                                        <p class="text-danger" *ngSwitchCase="false">{{attributeRecom.attribute.name}}</p>
+                                    <li *ngFor="let attributeRecom of categoryAttrRecom.attributeRecommendationSet">
+                                        <p class="{{attributeRecom.implemented ? 'text-success': 'text-danger' }}">
+                                            {{attributeRecom.attribute.name}}
+                                            <button type="button" class="btn btn-outline-dark btn-sm"><i class="fa fa-file-text-o"></i></button>
+                                        </p>
                                     </li>
                                 </ul>
                             </li>

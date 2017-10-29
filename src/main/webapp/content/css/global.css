@@ -6,6 +6,10 @@ body, h1, h2, h3, h4 {
     font-weight: 300;
 }
 
+h5{
+    font-size: 22px;
+}
+
 body {
     background: #e4e5e6;
 }

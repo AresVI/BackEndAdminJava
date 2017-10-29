@@ -169,6 +169,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
             auditProcessRecommendation.setDescription("");
 
+            auditProcessRecommendation.setReviewed(false);
+
             auditProcessRecommendation.setRecommendation(recommendation);
 
             auditProcessRecommendationRepository.save(auditProcessRecommendation);
@@ -188,6 +190,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                     auditTaskRecommendation.setAuditTask(at);
 
                     auditTaskRecommendation.setDescription("");
+
+                    auditTaskRecommendation.setReviewed(false);
 
                     auditTaskRecommendationRepository.save(auditTaskRecommendation);
 

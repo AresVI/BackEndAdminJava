@@ -24,13 +24,10 @@
         <dd>
             <span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span>
         </dd>
-        <dt><span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span></dt>
+        <dt *ngIf="traceabilityAudit.category"><span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span></dt>
         <dd *ngIf="traceabilityAudit.category">
             <span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span> {{traceabilityAudit.category}}
 
-        </dd>
-        <dd *ngIf="!traceabilityAudit.category">
-            -- Sin categoría --
         </dd>
     </dl>
 
@@ -40,7 +37,7 @@
         <div class="card-body">
             <a class="btn btn-success btn-block btn-lg" [routerLink]="['/recommendation', traceabilityAudit.recommendationSet[0].id]">
                 <span class="fa fa-file-text-o"></span>
-                <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.audit">Audit</span>
+                {{actionText}}
             </a>
         </div>
     </div>

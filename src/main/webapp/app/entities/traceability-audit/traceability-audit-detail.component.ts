@@ -5,6 +5,8 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { TraceabilityAudit } from './traceability-audit.model';
 import { TraceabilityAuditService } from './traceability-audit.service';
+import {Recommendation} from '../recommendation/recommendation.model';
+import {AuditProcessRecommendation} from '../audit-process-recommendation/audit-process-recommendation.model';
 
 @Component({
     selector: 'jhi-traceability-audit-detail',
@@ -15,6 +17,7 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
     traceabilityAudit: TraceabilityAudit;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
+    actionText: string;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -28,13 +31,50 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
             this.load(params['id']);
         });
         this.registerChangeInTraceabilityAudits();
+        this.actionText = 'Realizar Auditoría';
     }
 
     load(id) {
         this.traceabilityAuditService.find(id).subscribe((traceabilityAudit) => {
             this.traceabilityAudit = traceabilityAudit;
+            this.getActionText();
         });
     }
+
+    getActionText() {
+
+        let countProcessReviewed = 0;
+
+        if (this.traceabilityAudit.recommendationSet) {
+
+            for (let rIndex = 0; rIndex < this.traceabilityAudit.recommendationSet.length; rIndex++) {
+
+                const r: Recommendation = this.traceabilityAudit.recommendationSet[rIndex];
+
+                for (let aprIndex = 0; aprIndex < r.auditProcessRecommendationSet.length; aprIndex++) {
+
+                    if (r.auditProcessRecommendationSet[aprIndex].reviewed) {
+                        countProcessReviewed += 1;
+                    }
+
+                }
+
+            }
+
+        }
+
+        if (countProcessReviewed > 0) {
+
+            if (this.traceabilityAudit.recommendationSet.length === countProcessReviewed) {
+                this.actionText = 'Revisar Auditoría';
+            } else {
+                this.actionText = 'Continuar Auditoría';
+            }
+
+        }
+
+    }
+
     previousState() {
         window.history.back();
     }

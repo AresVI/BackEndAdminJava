@@ -8,7 +8,7 @@
 <div class="row">
 </div>
 <br/>
-<div class="table-responsive" *ngIf="traceabilityAudits">
+<div class="table-responsive" *ngIf="traceabilityAudits.length > 0">
     <table class="table table-striped">
         <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
@@ -52,6 +52,16 @@
         </tbody>
     </table>
 </div>
+
+
+<div class="card border-secondary mb-4" *ngIf="traceabilityAudits.length < 1">
+    <div class="card-body mt-2">
+        <h4 class="card-title text-secondary text-center">
+            No se encontraron Auditorías de Trazabilidad no iniciadas.
+        </h4>
+    </div>
+</div>
+
 <div *ngIf="traceabilityAudits && traceabilityAudits.length">
     <div class="row justify-content-center">
         <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
@@ -61,6 +71,6 @@
     </div>
 </div>
 
-<a class="btn btn-info" routerLink="/process/audit/dashboard">
+<a class="btn btn-secondary" routerLink="/process/audit/dashboard">
     <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
 </a>

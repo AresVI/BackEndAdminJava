@@ -260,7 +260,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         attributeRecommendationSet = attributeRecommendationRepository.findAllForTraceabilityAuditId(traceabilityAudit.getId());
 
-        /*
+
 
         int countNotRequired = 0, totalNotRequired = 0,
             countLevel1 = 0, totalLevel1 = 0,
@@ -354,8 +354,6 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         traceabilityAudit.setCategory(category.getCategory());
 
         traceabilityAuditRepository.save(traceabilityAudit);
-
-        */
 
         return traceabilityAuditMapper.toDto(traceabilityAudit);
 

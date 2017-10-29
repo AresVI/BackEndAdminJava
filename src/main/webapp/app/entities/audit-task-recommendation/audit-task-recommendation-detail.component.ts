@@ -2,14 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { AuditTaskRecommendation } from './audit-task-recommendation.model';
 import { AuditTaskRecommendationService } from './audit-task-recommendation.service';
 import {Observable} from 'rxjs/Observable';
 import {AttributeRecommendation} from '../attribute-recommendation/attribute-recommendation.model';
-import {CategoryAttribute} from '../category-attribute/category-attribute.model';
-import {CategoryAttributeResolvePagingParams} from '../category-attribute/category-attribute.route';
 import {CategoryAttrRecommendation} from '../category-attr-recommendation/category-attr-recommendation.model';
 
 @Component({

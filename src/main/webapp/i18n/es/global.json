@@ -124,7 +124,8 @@
             "edit": "Editar",
             "open": "Open",
             "save": "Guardar",
-            "view": "Ver"
+            "view": "Ver",
+            "close": "Cerrar"
         },
         "detail": {
             "field": "Campo",

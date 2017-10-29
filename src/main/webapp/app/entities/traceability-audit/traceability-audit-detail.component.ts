@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager } from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { TraceabilityAudit } from './traceability-audit.model';
 import { TraceabilityAuditService } from './traceability-audit.service';
 import {Recommendation} from '../recommendation/recommendation.model';
-import {AuditProcessRecommendation} from '../audit-process-recommendation/audit-process-recommendation.model';
 
 @Component({
     selector: 'jhi-traceability-audit-detail',
@@ -19,11 +19,13 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
     private eventSubscriber: Subscription;
     actionText: string;
     allRecommendationReviewed: boolean;
+    description: string;
 
     constructor(
         private eventManager: JhiEventManager,
         private traceabilityAuditService: TraceabilityAuditService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private modalService: NgbModal,
     ) {
     }
 
@@ -34,6 +36,7 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
         });
         this.registerChangeInTraceabilityAudits();
         this.actionText = 'Realizar Auditoría';
+        this.description = '';
     }
 
     load(id) {
@@ -108,5 +111,16 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
             'traceabilityAuditListModification',
             (response) => this.load(this.traceabilityAudit.id)
         );
+    }
+
+    openModalDescription(content, description: string) {
+
+        this.description = description;
+
+        this.modalService.open(content).result.then(() => {
+            this.description = '';
+            }, (reason) => {
+            this.description = '';
+        });
     }
 }

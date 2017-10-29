@@ -1,6 +1,8 @@
 package com.labausegtic.aresvi.service.dto;
 
 
+import org.joda.time.DateTime;
+
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -18,6 +20,8 @@ public class RecommendationDTO implements Serializable {
     private String name;
 
     private Integer qualification;
+
+    private Integer levelComputerization;
 
     private Instant creationDate;
 
@@ -91,6 +95,14 @@ public class RecommendationDTO implements Serializable {
 
     public void setAuditor(AuditorDTO auditor) {
         this.auditor = auditor;
+    }
+
+    public Integer getLevelComputerization() {
+        return levelComputerization;
+    }
+
+    public void setLevelComputerization(Integer levelComputerization) {
+        this.levelComputerization = levelComputerization;
     }
 
     @Override

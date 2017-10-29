@@ -22,7 +22,8 @@
             "name": "Mombre",
             "qualification": "Calificación",
             "creationDate": "Día de Creación",
-            "traceabilityAudit": "Auditoría de Trazabilidad"
+            "traceabilityAudit": "Auditoría de Trazabilidad",
+            "levelComputerization": "Nivel de Informatización"
         }
     }
 }

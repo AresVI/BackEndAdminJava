@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.domain;
 
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -27,7 +28,11 @@ public class Recommendation implements Serializable {
     @Column(name = "qualification")
     private Integer qualification;
 
-    @Column(name = "creation_date")
+    @Column(name = "level_computerization")
+    private Integer levelComputerization;
+
+    @CreatedDate
+    @Column(name = "creation_date", updatable = false)
     private Instant creationDate;
 
     @ManyToOne
@@ -103,6 +108,14 @@ public class Recommendation implements Serializable {
 
     public void setAuditor(Auditor auditor) {
         this.auditor = auditor;
+    }
+
+    public Integer getLevelComputerization() {
+        return levelComputerization;
+    }
+
+    public void setLevelComputerization(Integer levelComputerization) {
+        this.levelComputerization = levelComputerization;
     }
 
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove

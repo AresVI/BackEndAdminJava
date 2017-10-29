@@ -7,6 +7,7 @@ export class Recommendation implements BaseEntity {
         public id?: number,
         public name?: string,
         public qualification?: number,
+        public levelComputerization?: number,
         public creationDate?: any,
         public auditorId?: number,
         public auditor?: Auditor,

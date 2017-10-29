@@ -5,41 +5,64 @@
 
     <jhi-alert-error></jhi-alert-error>
 
-    <div class="card mb-3">
-        <div class="card-body">
-            <h3>
-                <span jhiTranslate="aresViApp.recommendation.qualification">Qualification</span>:
-                <small>{{recommendation.qualification ? recommendation.qualification : "-- Sin Calificación --" }}</small>
-            </h3>
-        </div>
-    </div>
+    <form name="auditForm" (ngSubmit)="save()" novalidate #auditForm="ngForm">
 
-    <div class="card mb-3">
-        <div class="card-body">
-
-            <h4>Procesos: </h4>
-
-            <div class="list-group">
-                <a *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet"
-                   [routerLink]="['/audit-process-recommendation', auditProcessRecom.id ]"
-                   class="list-group-item list-group-item-action {{auditProcessRecom.reviewed ? 'list-group-item-success' : ''}}">
-                    {{auditProcessRecom.auditProcess.name}}
-                </a>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4>
+                    <span jhiTranslate="aresViApp.recommendation.levelComputerization">Level Computerization</span>
+                </h4>
+                <select class="form-control" name="level_computerization" [(ngModel)]="recommendation.levelComputerization">>
+                    <option value="null">
+                        -- Seleccione un Nivel de Infomatización --
+                    </option>
+                    <option value="1">
+                        Sistema de trazabilidad automatizado e integrado al resto de los sistemas de la bodega
+                    </option>
+                    <option value="2">
+                        Sistema de trazabilidad automatizado no integrado al resto de los sistemas de la bodega con persistencia de datos igual o mayor a 3 años
+                    </option>
+                    <option value="3">
+                        Sistema de trazabilidad automatizado no integrado al resto de los sistemas de la bodega con persistencia de menor a 3 años
+                    </option>
+                    <option value="4">
+                        Sistema semi-automatizado (excel u otros) que lleve la trazabilidad de la bodega
+                    </option>
+                    <option value="5">
+                        Se registra la trazabilidad en forma manual, o registros esporádicos o no se registra
+                    </option>
+                </select>
             </div>
-
         </div>
-    </div>
 
-    <button type="submit"
-            [routerLink]="['/traceability-audit', recommendation.traceabilityAuditId ]"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+        <div class="card mb-3">
+            <div class="card-body">
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'recommendation/'+ recommendation.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="aresViApp.recommendation.action.qualify"> Qualify</span>
-    </button>
+                <h4>Procesos: </h4>
+
+                <div class="list-group">
+                    <a *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet"
+                       [routerLink]="['/audit-process-recommendation', auditProcessRecom.id ]"
+                       class="list-group-item list-group-item-action {{auditProcessRecom.reviewed ? 'list-group-item-success' : ''}}">
+                        {{auditProcessRecom.auditProcess.name}}
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div>
+            <button type="submit" [disabled]="auditForm.form.invalid || isSaving || !recommendation.levelComputerization || !allProcessReviewed" class="btn btn-primary">
+                <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+            <button type="button"
+                    [routerLink]="['/traceability-audit', recommendation.traceabilityAuditId ]"
+                    class="btn btn-secondary">
+                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+
+    </form>
+
 </div>

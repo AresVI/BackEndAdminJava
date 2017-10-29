@@ -10,7 +10,7 @@ id;name;required;weighting_id;category_attribute_id
 9;Localidad;true;2;1
 10;Código postal;true;2;1
 11;Geolocalización;false;NULL;1
-12;Teléfofalse, fax y correo electrónico;false;NULL;1
+12;Teléfono, fax y correo electrónico;false;NULL;1
 13;Razón social o falsembre del propietario;false;NULL;1
 14;Fecha de inicio de actividades;false;NULL;1
 15;CUIT del propietario;false;NULL;1

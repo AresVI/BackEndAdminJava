@@ -45,18 +45,14 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
 
         let countProcessReviewed = 0;
 
-        if (this.traceabilityAudit.recommendationSet) {
+        for (let rIndex = 0; rIndex < this.traceabilityAudit.recommendationSet.length; rIndex++) {
 
-            for (let rIndex = 0; rIndex < this.traceabilityAudit.recommendationSet.length; rIndex++) {
+            const r: Recommendation = this.traceabilityAudit.recommendationSet[rIndex];
 
-                const r: Recommendation = this.traceabilityAudit.recommendationSet[rIndex];
+            for (let aprIndex = 0; aprIndex < r.auditProcessRecommendationSet.length; aprIndex++) {
 
-                for (let aprIndex = 0; aprIndex < r.auditProcessRecommendationSet.length; aprIndex++) {
-
-                    if (r.auditProcessRecommendationSet[aprIndex].reviewed) {
-                        countProcessReviewed += 1;
-                    }
-
+                if (r.auditProcessRecommendationSet[aprIndex].reviewed) {
+                    countProcessReviewed += 1;
                 }
 
             }

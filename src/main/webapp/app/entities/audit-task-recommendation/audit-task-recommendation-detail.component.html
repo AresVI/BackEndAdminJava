@@ -26,11 +26,12 @@
                         <ul class="list-group" *ngFor="let attrRecomm of attrCatRecom.attributeRecommendationSet">
                             <li class="list-group-item">
                                 <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input"
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input"
                                                name="field_attribute_{{attrRecomm.id}}" id="field_attribute_{{attrRecomm.id}}"
                                                [(ngModel)]="attrRecomm.implemented"  />
-                                        {{attrRecomm.attribute.name}}
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">{{attrRecomm.attribute.name}}</span>
                                     </label>
                                 </div>
                             </li>

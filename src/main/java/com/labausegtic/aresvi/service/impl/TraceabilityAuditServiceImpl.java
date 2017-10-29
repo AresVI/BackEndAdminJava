@@ -1,6 +1,9 @@
 package com.labausegtic.aresvi.service.impl;
 
 import com.labausegtic.aresvi.domain.*;
+import com.labausegtic.aresvi.service.BRMSService;
+import com.labausegtic.aresvi.service.dto.InferenceParameterDTO;
+import com.labausegtic.aresvi.service.dto.ResultInferenceDTO;
 import com.labausegtic.aresvi.repository.*;
 import com.labausegtic.aresvi.security.SecurityUtils;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
@@ -46,6 +49,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final AttributeRecommendationRepository attributeRecommendationRepository;
 
+    private final BRMSService brmsService;
+
     private final TraceabilityAuditMapper traceabilityAuditMapper;
 
     public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository,
@@ -57,7 +62,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                                         CategoryAttrRecommendationRepository categoryAttrRecommendationRepository,
                                         AttributeRepository attributeRepository,
                                         AttributeRecommendationRepository attributeRecommendationRepository,
-                                        TraceabilityAuditMapper traceabilityAuditMapper) {
+                                        BRMSService brmsService, TraceabilityAuditMapper traceabilityAuditMapper) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
         this.recommendationRepository = recommendationRepository;
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
@@ -68,6 +73,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         this.categoryAttrRecommendationRepository = categoryAttrRecommendationRepository;
         this.attributeRepository = attributeRepository;
         this.attributeRecommendationRepository = attributeRecommendationRepository;
+        this.brmsService = brmsService;
         this.traceabilityAuditMapper = traceabilityAuditMapper;
     }
 
@@ -248,9 +254,108 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
 
-        traceabilityAudit.setStatus(StatusTraceabilityAudit.FINISHED);
+        //traceabilityAudit.setStatus(StatusTraceabilityAudit.FINISHED);
+
+        Set<AttributeRecommendation> attributeRecommendationSet;
+
+        attributeRecommendationSet = attributeRecommendationRepository.findAllForTraceabilityAuditId(traceabilityAudit.getId());
+
+        /*
+
+        int countNotRequired = 0, totalNotRequired = 0,
+            countLevel1 = 0, totalLevel1 = 0,
+            countLevel2 = 0, totalLevel2 = 0,
+            countLevel3 = 0, totalLevel3 = 0,
+            countLevel4 = 0, totalLevel4 = 0,
+            countLevel5 = 0, totalLevel5 = 0;
+
+        for (AttributeRecommendation ar : attributeRecommendationSet) {
+
+            Attribute a = ar.getAttribute();
+
+            if (a.isRequired()) {
+
+                Weighting w = a.getWeighting();
+
+                switch (w.getValue()){
+                    case 1:
+                        if (ar.isImplemented()) {
+                            countLevel1 += 1;
+                        }
+                        totalLevel1 += 1;
+                    break;
+                    case 2:
+                        if (ar.isImplemented()) {
+                            countLevel2 += 1;
+                        }
+                        totalLevel2 += 1;
+                    break;
+                    case 3:
+                        if (ar.isImplemented()) {
+                            countLevel3 += 1;
+                        }
+                        totalLevel3 += 1;
+                    break;
+                    case 4:
+                        if (ar.isImplemented()) {
+                            countLevel4 += 1;
+                        }
+                        totalLevel4 += 1;
+                    break;
+                    case 5:
+                        if (ar.isImplemented()) {
+                            countLevel5 += 1;
+                        }
+                        totalLevel5 += 1;
+                    break;
+                }
+
+            } else {
+
+                if (ar.isImplemented()) {
+                    countNotRequired += 1;
+                }
+                totalNotRequired += 1;
+
+            }
+
+        }
+
+        InferenceParameterDTO inferenceParameterDTO = new InferenceParameterDTO();
+
+        inferenceParameterDTO.setLevelComputerization(1);
+
+        inferenceParameterDTO.setPercentageNotRequired(
+            countNotRequired/totalNotRequired
+        );
+
+        inferenceParameterDTO.setPercentageLevel1(
+            countLevel1/totalLevel1
+        );
+
+        inferenceParameterDTO.setPercentageLevel2(
+            countLevel2/totalLevel2
+        );
+
+        inferenceParameterDTO.setPercentageLevel3(
+            countLevel3/totalLevel3
+        );
+
+        inferenceParameterDTO.setPercentageLevel4(
+            countLevel4/totalLevel4
+        );
+
+        inferenceParameterDTO.setPercentageLevel5(
+            countLevel5/totalLevel5
+        );
+
+        ResultInferenceDTO category = brmsService.getCategory(inferenceParameterDTO);
+
+        traceabilityAudit.setCategory(category.getCategory());
 
         traceabilityAuditRepository.save(traceabilityAudit);
+
+        */
 
         return traceabilityAuditMapper.toDto(traceabilityAudit);
 

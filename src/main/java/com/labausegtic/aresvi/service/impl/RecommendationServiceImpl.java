@@ -50,6 +50,7 @@ public class RecommendationServiceImpl implements RecommendationService{
         log.debug("Request to save Recommendation : {}", recommendationDTO);
         Recommendation recommendation = recommendationMapper.toEntity(recommendationDTO);
         recommendation = recommendationRepository.save(recommendation);
+        recommendation.setReviewed(true);
         return recommendationMapper.toDto(recommendation);
     }
 

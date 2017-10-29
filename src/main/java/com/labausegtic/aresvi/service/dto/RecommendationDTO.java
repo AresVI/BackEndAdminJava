@@ -21,6 +21,8 @@ public class RecommendationDTO implements Serializable {
 
     private Integer qualification;
 
+    private boolean reviewed;
+
     private Integer levelComputerization;
 
     private Instant creationDate;
@@ -103,6 +105,14 @@ public class RecommendationDTO implements Serializable {
 
     public void setLevelComputerization(Integer levelComputerization) {
         this.levelComputerization = levelComputerization;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
     }
 
     @Override

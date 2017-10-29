@@ -28,6 +28,9 @@ public class Recommendation implements Serializable {
     @Column(name = "qualification")
     private Integer qualification;
 
+    @Column(name = "reviewed")
+    private boolean reviewed;
+
     @Column(name = "level_computerization")
     private Integer levelComputerization;
 
@@ -116,6 +119,14 @@ public class Recommendation implements Serializable {
 
     public void setLevelComputerization(Integer levelComputerization) {
         this.levelComputerization = levelComputerization;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
     }
 
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove

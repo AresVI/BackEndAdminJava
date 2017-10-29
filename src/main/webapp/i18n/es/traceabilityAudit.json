@@ -15,6 +15,9 @@
             "start": {
                 "question": "¿Seguro que desa iniciar la {{ name }}?"
             },
+            "finish": {
+                "question": "¿Seguro que desa finalizar la {{ name }}?"
+            },
             "detail": {
                 "title": "Auditoría de Trazabilidad"
             },
@@ -36,6 +39,7 @@
             "action": {
                 "cancel": "Cancelar Proceso",
                 "start": "Iniciar Proceso",
+                "finish": "Finalizar Proceso",
                 "audit": "Realizar Auditoría"
             }
         }

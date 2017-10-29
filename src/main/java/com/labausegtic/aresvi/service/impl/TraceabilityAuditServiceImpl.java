@@ -157,6 +157,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         recommendation.setAuditor(null);
 
+        recommendation.setReviewed(false);
+
         recommendation = recommendationRepository.save(recommendation);
 
         Set<AuditProcess> auditProcessSet = traceabilityAudit.getAuditProcesses();
@@ -237,5 +239,15 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         traceabilityAuditRepository.save(traceabilityAudit);
 
+    }
+
+    @Override
+    public void finishTraceabilityAudit(Long id) {
+
+        TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
+
+        traceabilityAudit.setStatus(StatusTraceabilityAudit.FINISHED);
+
+        traceabilityAuditRepository.save(traceabilityAudit);
     }
 }

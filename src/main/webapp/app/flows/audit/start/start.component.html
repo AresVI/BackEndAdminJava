@@ -84,10 +84,13 @@
     </div>
 
     <div>
-        <button type="submit" [disabled]="startForm.form.invalid || isSaving || traceabilityAudit.companyContactPersonId < 1" class="btn btn-success btn-block">
+        <button type="submit" [disabled]="startForm.form.invalid || isSaving || traceabilityAudit.companyContactPersonId < 1" class="btn btn-success">
             <span class="fa fa-save"></span>&nbsp;
             <span jhiTranslate="entity.action.save">Save</span>
         </button>
+        <a class="btn btn-secondary" routerLink="/process/audit/dashboard">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </a>
     </div>
 
 </form>

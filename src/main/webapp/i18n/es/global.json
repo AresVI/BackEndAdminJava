@@ -136,6 +136,9 @@
         "start": {
             "title": "Confirmar operación de iniciación"
         },
+        "finish": {
+            "title": "Confirmar operación de finalización"
+        },
         "validation": {
             "required": "Este campo es obligatorio.",
             "minlength": "Este campo requiere al menos {{min}} caracteres.",

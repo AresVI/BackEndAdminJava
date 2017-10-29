@@ -36,7 +36,7 @@
         </div>
 
         <div>
-            <button type="submit" [disabled]="auditForm.form.invalid || isSaving" class="btn btn-primary">
+            <button type="submit" [disabled]="auditForm.form.invalid || isSaving || !allAuditTaskReviewed" class="btn btn-primary">
                 <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
             </button>
             <button

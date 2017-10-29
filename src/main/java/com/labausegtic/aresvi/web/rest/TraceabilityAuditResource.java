@@ -86,6 +86,16 @@ public class TraceabilityAuditResource {
 
     }
 
+    @PostMapping("/traceability-audits/{id}/finish")
+    @Timed
+    public ResponseEntity<Void> finishTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+
+        traceabilityAuditService.finishTraceabilityAudit(id);
+
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+
+    }
+
     /**
      * PUT  /traceability-audits : Updates an existing traceabilityAudit.
      *

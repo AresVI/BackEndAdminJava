@@ -94,12 +94,30 @@
 
     <hr/>
 
+    <nav class="navbar fixed-bottom navbar-light bg-secondary" [hidden]="traceabilityAudit.status != 'STATUS_FINISHED'">
+        <button type="submit"
+                [routerLink]="['/process/audit/status/finished']"
+                class="btn btn-secondary">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+    </nav>
 
+    <div [hidden]="traceabilityAudit.status == 'STATUS_FINISHED'">
 
-    <button type="submit"
-            [routerLink]="['/process/audit/dashboard']"
-            class="btn btn-secondary">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+        <button type="submit"
+                [routerLink]="['/', { outlets: { popup: 'traceability-audit/'+ traceabilityAudit.id + '/finish'} }]"
+                replaceUrl="true"
+                class="btn btn-primary">
+            <span class="fa fa-send"></span>
+            <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.finish">Finish</span>
+        </button>
+
+        <button type="submit"
+                [routerLink]="['/process/audit/status/in_progress']"
+                class="btn btn-secondary">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+
+    </div>
 
 </div>

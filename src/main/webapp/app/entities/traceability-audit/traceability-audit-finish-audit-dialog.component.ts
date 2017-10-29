@@ -3,17 +3,18 @@ import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
-import {TraceabilityAudit} from '../../../entities/traceability-audit/traceability-audit.model';
-import {TraceabilityAuditService} from '../../../entities/traceability-audit/traceability-audit.service';
-import {TraceabilityAuditPopupService} from '../../../entities/traceability-audit/traceability-audit-popup.service';
+import {TraceabilityAuditService} from './traceability-audit.service';
+import {TraceabilityAudit} from './traceability-audit.model';
+import {TraceabilityAuditPopupService} from './traceability-audit-popup.service';
 
 @Component({
-    selector: 'jhi-traceability-audit-start-dialog',
-    templateUrl: './traceability-audit-start-audit-dialog.component.html'
+    selector: 'jhi-traceability-audit-finish-dialog',
+    templateUrl: './traceability-audit-finish-audit-dialog.component.html'
 })
-export class TraceabilityAuditStartAuditDialogComponent {
+export class TraceabilityAuditFinishAuditDialogComponent {
 
     traceabilityAudit: TraceabilityAudit;
+    operationInProgress = false;
 
     constructor(
         private traceabilityAuditService: TraceabilityAuditService,
@@ -26,13 +27,15 @@ export class TraceabilityAuditStartAuditDialogComponent {
         this.activeModal.dismiss('cancel');
     }
 
-    confirmStart(id: number) {
-        this.traceabilityAuditService.start(id).subscribe((response) => {
+    confirmFinish(id: number) {
+        this.operationInProgress = true;
+        this.traceabilityAuditService.finish(id).subscribe((response) => {
             this.eventManager.broadcast({
                 name: 'traceabilityAuditListModification',
-                content: 'Started an traceabilityAudit'
+                content: 'Finished an traceabilityAudit'
             });
             this.activeModal.dismiss(true);
+            this.operationInProgress = false;
         });
     }
 }
@@ -41,7 +44,7 @@ export class TraceabilityAuditStartAuditDialogComponent {
     selector: 'jhi-traceability-audit-delete-popup',
     template: ''
 })
-export class TraceabilityAuditStartAuditPopupComponent implements OnInit, OnDestroy {
+export class TraceabilityAuditFinishAuditPopupComponent implements OnInit, OnDestroy {
 
     routeSub: any;
 
@@ -53,7 +56,7 @@ export class TraceabilityAuditStartAuditPopupComponent implements OnInit, OnDest
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             this.traceabilityAuditPopupService
-                .open(TraceabilityAuditStartAuditDialogComponent as Component, params['id']);
+                .open(TraceabilityAuditFinishAuditDialogComponent as Component, params['id']);
         });
     }
 

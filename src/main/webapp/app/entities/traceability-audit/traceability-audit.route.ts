@@ -9,6 +9,7 @@ import { TraceabilityAuditDetailComponent } from './traceability-audit-detail.co
 import { TraceabilityAuditPopupComponent } from './traceability-audit-dialog.component';
 import { TraceabilityAuditDeletePopupComponent } from './traceability-audit-delete-dialog.component';
 import {TraceabilityAuditStartAuditPopupComponent} from '../../flows/audit/not_started/traceability-audit-start-audit-dialog.component';
+import {TraceabilityAuditFinishAuditPopupComponent} from './traceability-audit-finish-audit-dialog.component';
 
 @Injectable()
 export class TraceabilityAuditResolvePagingParams implements Resolve<any> {
@@ -83,6 +84,16 @@ export const traceabilityAuditPopupRoute: Routes = [
     {
         path: 'traceability-audit/:id/start',
         component: TraceabilityAuditStartAuditPopupComponent,
+        data: {
+            authorities: ['ROLE_AUDITOR'],
+            pageTitle: 'aresViApp.traceabilityAudit.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'traceability-audit/:id/finish',
+        component: TraceabilityAuditFinishAuditPopupComponent,
         data: {
             authorities: ['ROLE_AUDITOR'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'

@@ -104,7 +104,7 @@
 
     <div [hidden]="traceabilityAudit.status == 'STATUS_FINISHED'">
 
-        <button type="submit"
+        <button type="submit" [disabled]="!allRecommendationReviewed"
                 [routerLink]="['/', { outlets: { popup: 'traceability-audit/'+ traceabilityAudit.id + '/finish'} }]"
                 replaceUrl="true"
                 class="btn btn-primary">

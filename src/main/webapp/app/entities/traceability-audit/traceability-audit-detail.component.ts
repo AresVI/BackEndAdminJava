@@ -18,6 +18,7 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private eventSubscriber: Subscription;
     actionText: string;
+    allRecommendationReviewed: boolean;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -27,6 +28,7 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.allRecommendationReviewed = false;
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
         });
@@ -37,8 +39,29 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.traceabilityAuditService.find(id).subscribe((traceabilityAudit) => {
             this.traceabilityAudit = traceabilityAudit;
+            this.checkRecommendationsReview();
             this.getActionText();
         });
+    }
+
+    checkRecommendationsReview() {
+
+        let countRecommendationsReviewed = 0;
+
+        for (let rIndex = 0; rIndex < this.traceabilityAudit.recommendationSet.length; rIndex++) {
+
+            const apr: Recommendation = this.traceabilityAudit.recommendationSet[rIndex];
+
+            if (apr.reviewed) {
+                countRecommendationsReviewed += 1;
+            }
+
+        }
+
+        if ( this.traceabilityAudit.recommendationSet.length === countRecommendationsReviewed ) {
+            this.allRecommendationReviewed = true;
+        }
+
     }
 
     getActionText() {

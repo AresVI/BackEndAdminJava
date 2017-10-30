@@ -11,11 +11,11 @@ id;name;required;weighting_id;category_attribute_id
 10;Código postal;true;2;1
 11;Geolocalización;false;NULL;1
 12;Teléfono, fax y correo electrónico;false;NULL;1
-13;Razón social o falsembre del propietario;false;NULL;1
+13;Razón social o nombre del propietario;false;NULL;1
 14;Fecha de inicio de actividades;false;NULL;1
 15;CUIT del propietario;false;NULL;1
 16;Identificación del fabricante del producto;true;3;2
-17;falsembre del ingrediente activo;true;2;2
+17;Nombre del ingrediente activo;true;2;2
 18;Dotrues aplicada;true;2;2
 19;Identificación de los cuarteles a los cuales se aplicó;true;2;2
 20;Identificación de la persona que recomendó la aplicación;true;3;2
@@ -31,9 +31,9 @@ id;name;required;weighting_id;category_attribute_id
 30;Resultado del análitrues de agua;false;NULL;3
 31;Fecha del análitrues;false;NULL;3
 32;Identificación de la fuente del agua empleada;false;NULL;3
-33;Identificación del laboratorio exterfalse;false;NULL;3
+33;Identificación del laboratorio externo;false;NULL;3
 34;Identificación del fabricante del producto;true;3;4
-35;falsembre del ingrediente activo;true;1;4
+35;Nombre del ingrediente activo;true;1;4
 36;Dotrues aplicada;true;1;4
 37;Identificación de los cuarteles a los cuales se aplicó;true;2;4
 38;Identificación de la persona que recomendó la aplicación;true;3;4
@@ -54,26 +54,26 @@ id;name;required;weighting_id;category_attribute_id
 53;Identificación de la fuente del agua empleada;true;2;6
 54;Resultado del análitrues de agua;true;3;6
 55;Fecha del análitrues;true;3;6
-56;Identificación del laboratorio exterfalse;true;5;6
+56;Identificación del laboratorio no;true;5;6
 57;Método de riego;true;4;6
 58;Identificación del predio en que está ubicada la viña;true;2;7
 59;Código de inscripción de la viña (según reglamentación de la autoridad competente);true;1;7
 60;Localización, incluyendo provincia, zona y departamento;true;1;7
-61;Identificación de cepas que integran el viñedo, cuarteles y superficie que ocupa cada ufalse;true;1;7
+61;Identificación de cepas que integran el viñedo, cuarteles y superficie que ocupa cada no;true;1;7
 62;Tipo de conducción;true;2;7
 63;Año de plantación;true;1;7
 64;Dirección (calle y número);true;3;7
 65;Localidad;true;3;7
 66;Código postal;true;3;7
-67;Teléfofalse, fax y correo electrónico;true;3;7
-68;Razón social o falsembre del propietario;true;3;7
+67;no, fax y correo electrónico;true;3;7
+68;Razón social o nombre del propietario;true;3;7
 69;Fecha de inicio de actividades;true;3;7
 70;CUIT del propietario;true;3;7
 71;Datos de determinación de madurez vitícola;true;4;8
 72;Datos de determinación de madurez fefalselógica;true;4;8
 73;Datos de determinación de madurez industrial;true;3;8
 74;Datos de determinación de madurez efalselógica;true;1;8
-75;Defalseminación de la finca;true;2;9
+75;Denominación de la finca;true;2;9
 76;Razón social;true;2;9
 77;CUIT del propietario;true;3;9
 78;Fecha de inicio de actividades;true;3;9
@@ -82,7 +82,7 @@ id;name;required;weighting_id;category_attribute_id
 81;Número de viñedo;true;1;9
 82;Número o código del cuartel de la finca;true;2;9
 83;Fecha de cosecha;true;1;9
-84;Tipo de cosecha utilizada (manual diurna, manual falsecturfalse, mecanizado);false;NULL;9
+84;Tipo de cosecha utilizada (manual diurna, manual nocturno, mecanizado);false;NULL;9
 85;Peso en kg de cada lote (peso neto y tara del camión);true;3;9
 86;Tipo de envase caja, bin o granel;true;2;9
 87;Datos del transporte: patente, datos del conductor;true;3;9

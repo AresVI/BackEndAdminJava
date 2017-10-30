@@ -22,7 +22,7 @@ export const recommendationRoute: Routes = [
         path: 'recommendation/:id',
         component: RecommendationDetailComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.recommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -44,7 +44,7 @@ export const recommendationPopupRoute: Routes = [
         path: 'recommendation/:id/edit',
         component: RecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.recommendation.home.title'
         },
         canActivate: [UserRouteAccessService],

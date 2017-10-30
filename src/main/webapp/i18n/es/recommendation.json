@@ -23,7 +23,8 @@
             "qualification": "Calificación",
             "creationDate": "Día de Creación",
             "traceabilityAudit": "Auditoría de Trazabilidad",
-            "levelComputerization": "Nivel de Informatización"
+            "levelComputerization": "Nivel de Informatización",
+            "auditor": "Auditor"
         }
     }
 }

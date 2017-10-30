@@ -2,6 +2,7 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@ang
 import {NotStartedComponent} from './not_started.component';
 import {JhiPaginationUtil} from 'ng-jhipster';
 import {Injectable} from '@angular/core';
+import {UserRouteAccessService} from '../../../shared/auth/user-route-access-service';
 
 @Injectable()
 export class TraceabilityAuditResolvePagingParams implements Resolve<any> {
@@ -27,8 +28,9 @@ export const flowAuditNotStartedRoute: Routes = [
             'pagingParams': TraceabilityAuditResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.flow-audit.not_started.home.title'
-        }
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];

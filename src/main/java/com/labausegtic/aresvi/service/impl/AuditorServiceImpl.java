@@ -1,14 +1,20 @@
 package com.labausegtic.aresvi.service.impl;
 
 import com.labausegtic.aresvi.domain.Auditor;
+import com.labausegtic.aresvi.domain.Authority;
 import com.labausegtic.aresvi.repository.AuditorRepository;
+import com.labausegtic.aresvi.repository.AuthorityRepository;
+import com.labausegtic.aresvi.security.AuthoritiesConstants;
 import com.labausegtic.aresvi.service.AuditorService;
+import com.labausegtic.aresvi.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 
 /**
@@ -22,8 +28,15 @@ public class AuditorServiceImpl implements AuditorService{
 
     private final AuditorRepository auditorRepository;
 
-    public AuditorServiceImpl(AuditorRepository auditorRepository) {
+    private final AuthorityRepository authorityRepository;
+
+    private final UserService userService;
+
+    public AuditorServiceImpl(AuditorRepository auditorRepository, AuthorityRepository authorityRepository,
+                              UserService userService) {
         this.auditorRepository = auditorRepository;
+        this.authorityRepository = authorityRepository;
+        this.userService = userService;
     }
 
     /**
@@ -37,6 +50,20 @@ public class AuditorServiceImpl implements AuditorService{
         log.debug("Request to save Auditor : {}", auditor);
 
         auditor.setInternal(auditor.getCompanies().size() > 0);
+
+        Set<Authority> authorities = auditor.getUser().getAuthorities();
+
+        Authority authority;
+
+        if (auditor.getCompanies().size() > 0) {
+            authority = authorityRepository.findOne(AuthoritiesConstants.AUDITOR_INTERNAL);
+        } else {
+            authority = authorityRepository.findOne(AuthoritiesConstants.AUDITOR_EXTERNAL);
+        }
+
+        authorities.add(authority);
+
+        //userService.getUserWithAuthoritiesByLogin()
 
         return auditorRepository.save(auditor);
 

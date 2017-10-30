@@ -7,7 +7,7 @@ export const settingsRoute: Route = {
     path: 'settings',
     component: SettingsComponent,
     data: {
-        authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR'],
+        authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
         pageTitle: 'global.menu.account.settings'
     },
     canActivate: [UserRouteAccessService]

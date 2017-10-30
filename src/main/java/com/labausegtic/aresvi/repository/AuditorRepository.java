@@ -20,4 +20,6 @@ public interface AuditorRepository extends JpaRepository<Auditor, Long> {
     @Query("select auditor from Auditor auditor left join fetch auditor.companies where auditor.id =:id")
     Auditor findOneWithEagerRelationships(@Param("id") Long id);
 
+    Auditor findAuditorByUser_Id(long user_id);
+
 }

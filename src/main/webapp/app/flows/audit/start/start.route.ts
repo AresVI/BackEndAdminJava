@@ -10,7 +10,8 @@ export const flowAuditStartRoute: Routes = [
         data: {
             authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.flow-audit.start.home.title'
-        }
+        },
+        canActivate: [UserRouteAccessService]
     },
     {
         path: 'process/audit/start/company/:company_id/company-contact-person-new',

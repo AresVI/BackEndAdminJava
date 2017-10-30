@@ -2,6 +2,7 @@ package com.labausegtic.aresvi.service.impl;
 
 import com.labausegtic.aresvi.domain.*;
 import com.labausegtic.aresvi.service.BRMSService;
+import com.labausegtic.aresvi.service.UserService;
 import com.labausegtic.aresvi.service.dto.InferenceParameterDTO;
 import com.labausegtic.aresvi.service.dto.ResultInferenceDTO;
 import com.labausegtic.aresvi.repository.*;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -53,6 +55,10 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final TraceabilityAuditMapper traceabilityAuditMapper;
 
+    private final UserService userService;
+
+    private final AuditorRepository auditorRepository;
+
     public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository,
                                         RecommendationRepository recommendationRepository,
                                         AuditProcessRecommendationRepository auditProcessRecommendationRepository,
@@ -62,7 +68,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                                         CategoryAttrRecommendationRepository categoryAttrRecommendationRepository,
                                         AttributeRepository attributeRepository,
                                         AttributeRecommendationRepository attributeRecommendationRepository,
-                                        BRMSService brmsService, TraceabilityAuditMapper traceabilityAuditMapper) {
+                                        BRMSService brmsService, TraceabilityAuditMapper traceabilityAuditMapper,
+                                        UserService userService, AuditorRepository auditorRepository) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
         this.recommendationRepository = recommendationRepository;
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
@@ -75,6 +82,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         this.attributeRecommendationRepository = attributeRecommendationRepository;
         this.brmsService = brmsService;
         this.traceabilityAuditMapper = traceabilityAuditMapper;
+        this.userService = userService;
+        this.auditorRepository = auditorRepository;
     }
 
     /**
@@ -159,9 +168,9 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         recommendation.setName("Recomendación para la " + traceabilityAudit.getName());
 
-        System.out.println(SecurityUtils.getCurrentUserLogin());
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin());
 
-        recommendation.setAuditor(null);
+        recommendation.setAuditor(auditorRepository.findAuditorByUser_Id(user.get().getId()));
 
         recommendation.setReviewed(false);
 

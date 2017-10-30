@@ -1,8 +1,11 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.domain.User;
+import com.labausegtic.aresvi.security.SecurityUtils;
 import com.labausegtic.aresvi.service.CancelationTraceabilityAuditService;
 import com.labausegtic.aresvi.domain.CancelationTraceabilityAudit;
 import com.labausegtic.aresvi.repository.CancelationTraceabilityAuditRepository;
+import com.labausegtic.aresvi.service.UserService;
 import com.labausegtic.aresvi.service.dto.CancelationTraceabilityAuditDTO;
 import com.labausegtic.aresvi.service.mapper.CancelationTraceabilityAuditMapper;
 import org.slf4j.Logger;
@@ -11,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 /**
@@ -26,9 +31,14 @@ public class CancelationTraceabilityAuditServiceImpl implements CancelationTrace
 
     private final CancelationTraceabilityAuditMapper cancelationTraceabilityAuditMapper;
 
-    public CancelationTraceabilityAuditServiceImpl(CancelationTraceabilityAuditRepository cancelationTraceabilityAuditRepository, CancelationTraceabilityAuditMapper cancelationTraceabilityAuditMapper) {
+    private final UserService userService;
+
+    public CancelationTraceabilityAuditServiceImpl(CancelationTraceabilityAuditRepository cancelationTraceabilityAuditRepository,
+                                                   CancelationTraceabilityAuditMapper cancelationTraceabilityAuditMapper,
+                                                   UserService userService) {
         this.cancelationTraceabilityAuditRepository = cancelationTraceabilityAuditRepository;
         this.cancelationTraceabilityAuditMapper = cancelationTraceabilityAuditMapper;
+        this.userService = userService;
     }
 
     /**
@@ -41,6 +51,11 @@ public class CancelationTraceabilityAuditServiceImpl implements CancelationTrace
     public CancelationTraceabilityAuditDTO save(CancelationTraceabilityAuditDTO cancelationTraceabilityAuditDTO) {
         log.debug("Request to save CancelationTraceabilityAudit : {}", cancelationTraceabilityAuditDTO);
         CancelationTraceabilityAudit cancelationTraceabilityAudit = cancelationTraceabilityAuditMapper.toEntity(cancelationTraceabilityAuditDTO);
+
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin());
+
+        cancelationTraceabilityAudit.setUser(user.get());
+
         cancelationTraceabilityAudit = cancelationTraceabilityAuditRepository.save(cancelationTraceabilityAudit);
         return cancelationTraceabilityAuditMapper.toDto(cancelationTraceabilityAudit);
     }

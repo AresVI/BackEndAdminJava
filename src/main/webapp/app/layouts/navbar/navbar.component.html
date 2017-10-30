@@ -34,6 +34,12 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" routerLink="weighting" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.weighting">Weighting</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" routerLink="attribute" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.attribute">Attribute</span>
@@ -46,15 +52,21 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="container" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.container">Container</span>
-                        </a>
-                    </li>
-                    <li>
                         <a class="dropdown-item" routerLink="audit-task" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.auditTask">Audit Task</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="participant" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.participant">Participant</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="container" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.container">Container</span>
                         </a>
                     </li>
                     <li>
@@ -67,61 +79,6 @@
                         <a class="dropdown-item" routerLink="auditor" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.auditor">Auditor</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="participant" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.participant">Participant</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="weighting" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.weighting">Weighting</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="traceability-audit" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.traceabilityAudit">Traceability Audit</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item" routerLink="recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.recommendation">Recommendation</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="audit-process-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.auditProcessRecommendation">Audit Process Recommendation</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="audit-task-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.auditTaskRecommendation">Audit Task Recommendation</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="category-attribute-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.categoryAttributeRecommendation">Category Attribute Recommendation</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="attribute-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.attributeRecommendation">Attribute Recommendation</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="category-attr-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.categoryAttrRecommendation">Category Att Recommendation</span>
                         </a>
                     </li>
                     <li>

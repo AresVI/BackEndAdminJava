@@ -6,7 +6,8 @@ package com.labausegtic.aresvi.security;
 public final class AuthoritiesConstants {
 
 
-    public static final String AUDITOR = "ROLE_AUDITOR";
+    public static final String AUDITOR_EXTERNAL = "ROLE_AUDITOR_EXTERNAL";
+    public static final String AUDITOR_INTERNAL = "ROLE_AUDITOR_INTERNAL";
     public static final String ADMINISTRATOR = "ROLE_ADMINISTRATOR";
     public static final String ADMINISTRATIVE = "ROLE_ADMINISTRATIVE";
     public static final String NO_ROLE = "ROLE_NO_ROLE";

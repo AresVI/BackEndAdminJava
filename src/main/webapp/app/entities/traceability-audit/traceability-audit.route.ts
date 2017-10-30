@@ -43,7 +43,7 @@ export const traceabilityAuditRoute: Routes = [
         path: 'traceability-audit/:id',
         component: TraceabilityAuditDetailComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -85,7 +85,7 @@ export const traceabilityAuditPopupRoute: Routes = [
         path: 'traceability-audit/:id/start',
         component: TraceabilityAuditStartAuditPopupComponent,
         data: {
-            authorities: ['ROLE_AUDITOR'],
+            authorities: ['ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -95,7 +95,7 @@ export const traceabilityAuditPopupRoute: Routes = [
         path: 'traceability-audit/:id/finish',
         component: TraceabilityAuditFinishAuditPopupComponent,
         data: {
-            authorities: ['ROLE_AUDITOR'],
+            authorities: ['ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -2,11 +2,14 @@ package com.labausegtic.aresvi.service.impl;
 
 import com.labausegtic.aresvi.domain.Auditor;
 import com.labausegtic.aresvi.domain.Authority;
+import com.labausegtic.aresvi.domain.User;
 import com.labausegtic.aresvi.repository.AuditorRepository;
 import com.labausegtic.aresvi.repository.AuthorityRepository;
+import com.labausegtic.aresvi.repository.UserRepository;
 import com.labausegtic.aresvi.security.AuthoritiesConstants;
 import com.labausegtic.aresvi.service.AuditorService;
 import com.labausegtic.aresvi.service.UserService;
+import com.labausegtic.aresvi.service.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,6 +17,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -32,11 +37,14 @@ public class AuditorServiceImpl implements AuditorService{
 
     private final UserService userService;
 
+    private final UserRepository userRepository;
+
     public AuditorServiceImpl(AuditorRepository auditorRepository, AuthorityRepository authorityRepository,
-                              UserService userService) {
+                              UserService userService, UserRepository userRepository) {
         this.auditorRepository = auditorRepository;
         this.authorityRepository = authorityRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -51,7 +59,7 @@ public class AuditorServiceImpl implements AuditorService{
 
         auditor.setInternal(auditor.getCompanies().size() > 0);
 
-        Set<Authority> authorities = auditor.getUser().getAuthorities();
+        auditor = auditorRepository.save(auditor);
 
         Authority authority;
 
@@ -61,11 +69,17 @@ public class AuditorServiceImpl implements AuditorService{
             authority = authorityRepository.findOne(AuthoritiesConstants.AUDITOR_EXTERNAL);
         }
 
-        authorities.add(authority);
+        Set<Authority> authoritiesSet = new HashSet<>();
 
-        //userService.getUserWithAuthoritiesByLogin()
+        authoritiesSet.add(authority);
 
-        return auditorRepository.save(auditor);
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(auditor.getUser().getLogin());
+
+        user.get().setAuthorities(authoritiesSet);
+
+        userRepository.save(user.get());
+
+        return auditor;
 
     }
 
@@ -103,6 +117,19 @@ public class AuditorServiceImpl implements AuditorService{
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Auditor : {}", id);
+
+        Authority authority = authorityRepository.findOne(AuthoritiesConstants.NO_ROLE);
+
+        Set<Authority> authoritiesSet = new HashSet<>();
+
+        authoritiesSet.add(authority);
+
+        User user = auditorRepository.findOne(id).getUser();
+
+        user.setAuthorities(authoritiesSet);
+
+        userRepository.save(user);
+
         auditorRepository.delete(id);
     }
 }

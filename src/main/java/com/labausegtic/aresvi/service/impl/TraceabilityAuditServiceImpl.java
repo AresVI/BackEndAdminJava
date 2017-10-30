@@ -330,7 +330,12 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         InferenceParameterDTO inferenceParameterDTO = new InferenceParameterDTO();
 
-        inferenceParameterDTO.setLevelComputerization(1);
+        Set<Recommendation> recommendationSet = recommendationRepository.findAllByTraceabilityAudit_Id(traceabilityAudit.getId());
+
+        Integer levelComputerization = ((Recommendation[]) recommendationSet.toArray())[0].getLevelComputerization();
+
+        inferenceParameterDTO.setLevelComputerization(levelComputerization);
+
         inferenceParameterDTO.setPercentageNotRequired(
             (countNotRequired/totalNotRequired)
         );

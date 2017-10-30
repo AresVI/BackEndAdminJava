@@ -8,6 +8,7 @@ import { ProfileService } from '../profiles/profile.service';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
 
 import { VERSION } from '../../app.constants';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-navbar',
@@ -22,9 +23,11 @@ export class NavbarComponent implements OnInit {
     isNavbarCollapsed: boolean;
     languages: any[];
     swaggerEnabled: boolean;
+    eventSubscriber: Subscription;
     modalRef: NgbModalRef;
     version: string;
     account: Account;
+    fullName: string;
 
     constructor(
         private loginService: LoginService,
@@ -41,6 +44,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.fullName = '';
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
         });
@@ -50,18 +54,21 @@ export class NavbarComponent implements OnInit {
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
 
-        this.loadAccout();
+        this.loadAccount();
+
+        this.registerChangeLogin();
 
     }
 
-    loadAccout() {
+    loadAccount() {
 
-        if (this.isAuthenticated() && !this.account) {
+        if (!this.account) {
 
             this.principal.identity().then((account) => {
                 this.account = account;
-                this.account.displayName = account.firstName + ' ' + account.lastName;
+                this.account.displayName = account.lastName + ', ' + account.firstName;
                 this.account.name = account.login;
+                this.fullName = account.lastName + ', ' + account.firstName;
             });
 
         }
@@ -86,6 +93,8 @@ export class NavbarComponent implements OnInit {
     logout() {
         this.collapseNavbar();
         this.loginService.logout();
+        this.fullName = '';
+        this.account = null;
         this.router.navigate(['']);
     }
 
@@ -97,14 +106,8 @@ export class NavbarComponent implements OnInit {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }
 
-    getUserFullName() {
-        this.loadAccout();
-        return this.account ? this.account.displayName : null;
-    }
-
-    getUserName() {
-        this.loadAccout();
-        return this.account ? this.account.name : null;
+    registerChangeLogin() {
+        this.eventSubscriber = this.eventManager.subscribe('loginSuccess', (response) => this.loadAccount());
     }
 
 }

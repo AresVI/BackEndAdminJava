@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JhiLanguageService } from 'ng-jhipster';
+import {JhiEventManager, JhiLanguageService} from 'ng-jhipster';
 
 import { Principal } from '../auth/principal.service';
 import { AuthServerProvider } from '../auth/auth-jwt.service';
@@ -10,7 +10,8 @@ export class LoginService {
     constructor(
         private languageService: JhiLanguageService,
         private principal: Principal,
-        private authServerProvider: AuthServerProvider
+        private authServerProvider: AuthServerProvider,
+        private eventManager: JhiEventManager
     ) {}
 
     login(credentials, callback?) {
@@ -23,6 +24,7 @@ export class LoginService {
                     // the language selected by the user during his registration
                     if (account !== null) {
                         this.languageService.changeLanguage(account.langKey);
+                        this.eventManager.broadcast({ name: 'loginSuccess', content: 'OK'});
                     }
                     resolve(data);
                 });
@@ -42,5 +44,6 @@ export class LoginService {
     logout() {
         this.authServerProvider.logout().subscribe();
         this.principal.authenticate(null);
+        this.eventManager.broadcast({ name: 'logoutSuccess', content: 'OK'});
     }
 }

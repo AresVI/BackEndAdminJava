@@ -1,35 +1,39 @@
 
 <div *ngIf="cancellationTraceabilityAudit">
-    <h2><span jhiTranslate="aresViApp.cancellationTraceabilityAudit.detail.title">Cancellation Traceability Audit</span> {{cancellationTraceabilityAudit.id}}</h2>
+    <h2>
+        <span jhiTranslate="aresViApp.cancellationTraceabilityAudit.detail.title"
+              translateValues="{name: '{{cancellationTraceabilityAudit.traceabilityAuditName}}'}">
+            Cancellation Traceability Audit
+        </span>
+    </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.cancellationTraceabilityAudit.justification">Justification</span></dt>
-        <dd>
-            <span>{{cancellationTraceabilityAudit.justification}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.cancellationTraceabilityAudit.traceabilityAudit">Traceability Audit</span></dt>
-        <dd>
-            <div *ngIf="cancellationTraceabilityAudit.traceabilityAuditId">
-                <a [routerLink]="['/traceability-audit', cancellationTraceabilityAudit.traceabilityAuditId]">{{cancellationTraceabilityAudit.traceabilityAuditName}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.cancellationTraceabilityAudit.user">User</span></dt>
-        <dd>
-            {{cancellationTraceabilityAudit.userLogin}}
-        </dd>
-    </dl>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <span jhiTranslate="aresViApp.cancellationTraceabilityAudit.user">User</span>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                {{cancellationTraceabilityAudit.user.lastName}}, {{cancellationTraceabilityAudit.user.firstName}}
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <span jhiTranslate="aresViApp.cancellationTraceabilityAudit.justification">Justification</span>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-justify">
+                {{cancellationTraceabilityAudit.justification}}
+            </p>
+        </div>
+    </div>
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info">
+            class="btn btn-secondary">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'cancellation-traceability-audit/'+ cancellationTraceabilityAudit.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

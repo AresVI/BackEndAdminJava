@@ -41,7 +41,7 @@ export const cancellationTraceabilityAuditRoute: Routes = [
         path: 'cancellation-traceability-audit/:id',
         component: CancellationTraceabilityAuditDetailComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.cancellationTraceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService]

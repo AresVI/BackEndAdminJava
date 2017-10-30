@@ -1,10 +1,11 @@
 package com.labausegtic.aresvi.service.dto;
 
 
+import com.labausegtic.aresvi.domain.TraceabilityAudit;
+import com.labausegtic.aresvi.domain.User;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -22,7 +23,11 @@ public class CancelationTraceabilityAuditDTO implements Serializable {
 
     private String traceabilityAuditName;
 
+    private TraceabilityAudit traceabilityAudit;
+
     private Long userId;
+
+    private User user;
 
     private String userLogin;
 
@@ -72,6 +77,22 @@ public class CancelationTraceabilityAuditDTO implements Serializable {
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public TraceabilityAudit getTraceabilityAudit() {
+        return traceabilityAudit;
+    }
+
+    public void setTraceabilityAudit(TraceabilityAudit traceabilityAudit) {
+        this.traceabilityAudit = traceabilityAudit;
     }
 
     @Override

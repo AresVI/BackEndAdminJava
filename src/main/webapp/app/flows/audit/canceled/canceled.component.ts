@@ -6,9 +6,12 @@ import { Principal } from '../../../shared';
 import {ITEMS_PER_PAGE} from '../../../shared/constants/pagination.constants';
 import {Subscription} from 'rxjs/Subscription';
 import {TraceabilityAudit} from '../../../entities/traceability-audit/traceability-audit.model';
-import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
+import {JhiAlertService, JhiEventManager, JhiPaginationUtil, JhiParseLinks} from 'ng-jhipster';
 import {TraceabilityAuditService} from '../../../entities/traceability-audit/traceability-audit.service';
 import {ResponseWrapper} from '../../../shared/model/response-wrapper.model';
+import {CancellationTraceabilityAudit} from '../../../entities/cancellation-traceability-audit/cancellation-traceability-audit.model';
+import {CancellationTraceabilityAuditService} from '../../../entities/cancellation-traceability-audit/cancellation-traceability-audit.service';
+import {PaginationConfig} from '../../../blocks/config/uib-pagination.config';
 
 @Component({
     selector: 'jhi-flow-audit-dashboard',
@@ -16,8 +19,8 @@ import {ResponseWrapper} from '../../../shared/model/response-wrapper.model';
 })
 
 export class CanceledComponent implements OnInit {
-    currentAccount: Account;
-    traceabilityAudits: TraceabilityAudit[];
+    currentAccount: any;
+    cancellationTraceabilityAudits: CancellationTraceabilityAudit[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -32,13 +35,15 @@ export class CanceledComponent implements OnInit {
     reverse: any;
 
     constructor(
-        private traceabilityAuditService: TraceabilityAuditService,
+        private cancellationTraceabilityAuditService: CancellationTraceabilityAuditService,
         private parseLinks: JhiParseLinks,
         private alertService: JhiAlertService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
+        private paginationUtil: JhiPaginationUtil,
+        private paginationConfig: PaginationConfig
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
@@ -49,23 +54,11 @@ export class CanceledComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
-        this.loadAll();
-        this.principal.identity().then((account) => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInTraceabilityAudits();
-    }
-
     loadAll() {
-        this.traceabilityAuditService.query(
-            {
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()},
-            {
-                status: 'STATUS_CANCELED'
-            }).subscribe(
+        this.cancellationTraceabilityAuditService.query({
+            page: this.page - 1,
+            size: this.itemsPerPage,
+            sort: this.sort()}).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -77,7 +70,7 @@ export class CanceledComponent implements OnInit {
         }
     }
     transition() {
-        this.router.navigate(['/traceability-audit'], {queryParams:
+        this.router.navigate(['/cancellation-traceability-audit'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -89,18 +82,26 @@ export class CanceledComponent implements OnInit {
 
     clear() {
         this.page = 0;
-        this.router.navigate(['/traceability-audit', {
+        this.router.navigate(['/cancellation-traceability-audit', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
         this.loadAll();
     }
+    ngOnInit() {
+        this.loadAll();
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
+        });
+        this.registerChangeInCancellationTraceabilityAudits();
+    }
 
-    trackId(index: number, item: TraceabilityAudit) {
+    trackId(index: number, item: CancellationTraceabilityAudit) {
         return item.id;
     }
-    registerChangeInTraceabilityAudits() {
-        this.eventSubscriber = this.eventManager.subscribe('traceabilityAuditListModification', (response) => this.loadAll());
+
+    registerChangeInCancellationTraceabilityAudits() {
+        this.eventSubscriber = this.eventManager.subscribe('cancellationTraceabilityAuditListModification', (response) => this.loadAll());
     }
 
     sort() {
@@ -116,8 +117,9 @@ export class CanceledComponent implements OnInit {
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        this.traceabilityAudits = data;
+        this.cancellationTraceabilityAudits = data;
     }
+
     private onError(error) {
         this.alertService.error(error.message, null, null);
     }

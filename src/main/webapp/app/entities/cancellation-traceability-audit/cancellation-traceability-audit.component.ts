@@ -14,7 +14,7 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 })
 export class CancellationTraceabilityAuditComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     cancellationTraceabilityAudits: CancellationTraceabilityAudit[];
     error: any;
     success: any;

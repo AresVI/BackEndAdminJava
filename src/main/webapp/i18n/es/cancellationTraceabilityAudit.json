@@ -13,7 +13,7 @@
                 "question": "¿Seguro que quiere eliminar Cancellation Traceability Audit {{ id }}?"
             },
             "detail": {
-                "title": "Cancellation Traceability Audit"
+                "title": "Cancelación de la {{name}}"
             },
             "justification": "Justificación",
             "traceabilityAudit": "Auditoría de Trazabilidad",

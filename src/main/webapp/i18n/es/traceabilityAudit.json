@@ -39,6 +39,7 @@
             "company_contact_person": "Persona de Contacto",
             "audit_processes": "Procesos a Auditar",
             "action": {
+                "view": "Ver Proceso",
                 "cancel": "Cancelar Proceso",
                 "start": "Iniciar Proceso",
                 "finish": "Finalizar Proceso",

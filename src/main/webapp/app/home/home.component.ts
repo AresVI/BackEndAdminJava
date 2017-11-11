@@ -4,6 +4,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal } from '../shared';
 import {Router} from '@angular/router';
+import {isUndefined} from 'util';
 
 @Component({
     selector: 'jhi-home',
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.account = account;
-            if (this.account.authorities.indexOf('ROLE_ADMINISTRATIVE') > -1) {
+            if (account && this.account.authorities.indexOf('ROLE_ADMINISTRATIVE') > -1) {
                 this.router.navigate(['/process/audit/dashboard']);
             }
         });
@@ -39,6 +40,9 @@ export class HomeComponent implements OnInit {
         this.eventManager.subscribe('authenticationSuccess', (message) => {
             this.principal.identity().then((account) => {
                 this.account = account;
+                if (account && this.account.authorities.indexOf('ROLE_ADMINISTRATIVE') > -1) {
+                    this.router.navigate(['/process/audit/dashboard']);
+                }
             });
         });
     }

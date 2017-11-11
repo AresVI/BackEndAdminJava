@@ -12,7 +12,7 @@
     <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="aresViApp.traceabilityAudit.creationDate">Creation Date</span></dt>
         <dd>
-            <span>{{traceabilityAudit.creationDate | date:'medium'}}</span>
+            <span>{{traceabilityAudit.creationDate | date: 'dd/MM/yyyy HH:mm'}}</span>
         </dd>
         <dt><span jhiTranslate="aresViApp.traceabilityAudit.company">Company</span></dt>
         <dd>
@@ -43,11 +43,13 @@
         </dd>
     </dl>
 
-    <hr/>
+    <hr *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL']" [hidden]="traceabilityAudit.recommendationSet[0].auditor.user.id != account.id"/>
 
-    <div class="card" [hidden]="traceabilityAudit.status == 'STATUS_FINISHED'">
+    <div class="card" *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL']"
+         [hidden]="traceabilityAudit.status == 'STATUS_FINISHED' || traceabilityAudit.recommendationSet[0].auditor.user.id != account.id ">
         <div class="card-body">
-            <a class="btn btn-success btn-block btn-lg" [routerLink]="['/recommendation', traceabilityAudit.recommendationSet[0].id]">
+            <a class="btn btn-success btn-block btn-lg"
+               [routerLink]="['/recommendation', traceabilityAudit.recommendationSet[0].id]">
                 <span class="fa fa-file-text-o"></span>
                 {{actionText}}
             </a>
@@ -122,8 +124,9 @@
     <hr/>
 
     <nav class="navbar fixed-bottom navbar-light bg-secondary" [hidden]="traceabilityAudit.status != 'STATUS_FINISHED'">
-        <button type="submit"
+        <button type="button"
                 [routerLink]="['/process/audit/status/finished']"
+                *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL']"
                 class="btn btn-secondary">
             <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
         </button>
@@ -131,15 +134,16 @@
 
     <div [hidden]="traceabilityAudit.status == 'STATUS_FINISHED'">
 
-        <button type="submit" [disabled]="!allRecommendationReviewed"
+        <button type="button" [disabled]="!allRecommendationReviewed"
                 [routerLink]="['/', { outlets: { popup: 'traceability-audit/'+ traceabilityAudit.id + '/finish'} }]"
-                replaceUrl="true"
-                class="btn btn-primary">
+                replaceUrl="true" class="btn btn-primary"
+                [hidden]="traceabilityAudit.recommendationSet[0].auditor.user.id != account.id"
+                *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL']">
             <span class="fa fa-send"></span>
             <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.finish">Finish</span>
         </button>
 
-        <button type="submit"
+        <button type="button"
                 [routerLink]="['/process/audit/status/in_progress']"
                 class="btn btn-secondary">
             <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>

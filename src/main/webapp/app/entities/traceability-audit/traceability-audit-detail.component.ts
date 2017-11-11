@@ -7,6 +7,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { TraceabilityAudit } from './traceability-audit.model';
 import { TraceabilityAuditService } from './traceability-audit.service';
 import {Recommendation} from '../recommendation/recommendation.model';
+import {ProfileService} from '../../layouts/profiles/profile.service';
+import {Principal} from '../../shared/auth/principal.service';
 
 @Component({
     selector: 'jhi-traceability-audit-detail',
@@ -20,17 +22,20 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
     actionText: string;
     allRecommendationReviewed: boolean;
     description: string;
+    account: Account;
 
     constructor(
         private eventManager: JhiEventManager,
         private traceabilityAuditService: TraceabilityAuditService,
         private route: ActivatedRoute,
+        private principal: Principal,
         private modalService: NgbModal,
     ) {
     }
 
     ngOnInit() {
         this.allRecommendationReviewed = false;
+        this.loadAccount();
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
         });
@@ -45,6 +50,14 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
             this.checkRecommendationsReview();
             this.getActionText();
         });
+    }
+
+    loadAccount() {
+        if (!this.account) {
+            this.principal.identity().then((account) => {
+                this.account = account;
+            });
+        }
     }
 
     checkRecommendationsReview() {

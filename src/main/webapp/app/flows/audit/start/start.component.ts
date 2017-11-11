@@ -103,8 +103,6 @@ export class StartComponent implements OnInit {
 
     changeCompanyId() {
 
-        this.traceabilityAudit.companyId = this.traceabilityAudit.company.id;
-
         this.loadAllCompanyContactPeople();
 
         this.traceabilityAudit.companyContactPersonId = 0;

@@ -38,7 +38,7 @@
             },
             "flow": {
                 "init_audit": "Iniciar Auditoría",
-                "dashboard_audit": "Dashboard Auditorías"
+                "dashboard_audit": "Panel Auditorías"
             },
             "search": {
                 "traceability_audit": "Buscar Auditorías"

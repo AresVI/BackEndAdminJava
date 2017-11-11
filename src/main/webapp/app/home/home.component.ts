@@ -3,6 +3,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal } from '../shared';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'jhi-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
     constructor(
         private principal: Principal,
         private loginModalService: LoginModalService,
+        private router: Router,
         private eventManager: JhiEventManager
     ) {
     }
@@ -26,6 +28,9 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.account = account;
+            if (this.account.authorities.indexOf('ROLE_ADMINISTRATIVE') > -1) {
+                this.router.navigate(['/process/audit/dashboard']);
+            }
         });
         this.registerAuthenticationSuccess();
     }

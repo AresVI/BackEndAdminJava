@@ -66,9 +66,11 @@ export class NavbarComponent implements OnInit {
 
             this.principal.identity().then((account) => {
                 this.account = account;
-                this.account.displayName = account.lastName + ', ' + account.firstName;
-                this.account.name = account.login;
-                this.fullName = account.lastName + ', ' + account.firstName;
+                if (account) {
+                    this.account.displayName = account.lastName + ', ' + account.firstName;
+                    this.account.name = account.login;
+                    this.fullName = account.lastName + ', ' + account.firstName;
+                }
             });
 
         }

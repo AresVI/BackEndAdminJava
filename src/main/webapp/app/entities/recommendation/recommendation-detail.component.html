@@ -43,7 +43,8 @@
                 <div class="list-group">
                     <a *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet"
                        [routerLink]="['/audit-process-recommendation', auditProcessRecom.id ]"
-                       class="list-group-item list-group-item-action {{auditProcessRecom.reviewed ? 'list-group-item-success' : ''}}">
+                       class="list-group-item list-group-item-action {{auditProcessRecom.reviewed ? 'list-group-item-success' : 'list-group-item-info'}}">
+                        <i class="fa fa-check-square-o" aria-hidden="true" [hidden]="!auditProcessRecom.reviewed"></i>
                         {{auditProcessRecom.auditProcess.name}}
                     </a>
                 </div>

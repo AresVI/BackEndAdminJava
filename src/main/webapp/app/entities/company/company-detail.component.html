@@ -1,37 +1,113 @@
 
 <div *ngIf="company">
-    <h2><span jhiTranslate="aresViApp.company.detail.title">Company</span> {{company.id}}</h2>
+    <h2>
+        {{company.name}} ({{company.identifier}})
+    </h2>
     <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.company.name">Name</span></dt>
-        <dd>
-            <span>{{company.name}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.company.identifier">Identifier</span></dt>
-        <dd>
-            <span>{{company.identifier}}</span>
-        </dd>
-    </dl>
+    <div class="container-fluid mb-3">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Personas de Contacto</h4>
+                        <a class="btn btn-info btn-block btn-lg"
+                           [routerLink]="['/company', company.id, 'company-contact-person' ]">
+                            <span class="fa fa-users"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="aresViApp.company.action.viewCompanyContactPerson">View</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Comparar Últimas Dos Auditorías</h4>
+                        <a class="btn btn-info btn-block btn-lg"
+                           [routerLink]="['/company', company.id, 'company-contact-person' ]">
+                            <span class="fa fa-file-text-o"></span>
+                            Comparar Auditorías
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 mb-3">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Auditorías Finalizadas</h4>
+
+                <div class="table-responsive" *ngIf="traceabilityAudits && traceabilityAudits.length > 0">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="companyId"><span jhiTranslate="aresViApp.traceabilityAudit.company">Company</span> <span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="name"><span jhiTranslate="aresViApp.traceabilityAudit.status">Status</span> <span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="creationDate"><span jhiTranslate="aresViApp.traceabilityAudit.creationDate">Creation Date</span> <span class="fa fa-sort"></span></th>
+                            <th><span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let traceabilityAudit of traceabilityAudits ;trackBy: trackId">
+                            <td><a [routerLink]="['../traceability-audit', traceabilityAudit.id ]">{{traceabilityAudit.id}}</a></td>
+                            <td>{{traceabilityAudit.company.name}} ({{traceabilityAudit.company.identifier}})</td>
+                            <td><span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span></td>
+                            <td>{{traceabilityAudit.creationDate | date:'medium'}}</td>
+                            <td>
+                                {{traceabilityAudit.category.length > 0 ? "Categoría " + traceabilityAudit.category : "-- Sin categoría --" }}
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group flex-btn-group-container">
+                                    <button type="submit"
+                                            [routerLink]="['/traceability-audit', traceabilityAudit.id ]"
+                                            class="btn btn-info btn-sm">
+                                        <span class="fa fa-eye"></span>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div *ngIf="traceabilityAudits && traceabilityAudits.length">
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                    <div class="row justify-content-center">
+                        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                    </div>
+                </div>
+
+                <div class="card border-secondary mb-4" *ngIf="traceabilityAudits && traceabilityAudits.length < 1">
+                    <div class="card-body mt-2">
+                        <h4 class="card-title text-secondary text-center">
+                            No se encontraron Auditorías de Trazabilidad finalizadas.
+                        </h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <button type="button"
             [routerLink]="['/company']"
-            class="btn btn-info">
+            class="btn btn-secondary">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
     <button type="button"
             [routerLink]="['/', { outlets: { popup: 'company/'+ company.id + '/edit'} }]"
             replaceUrl="true"
+            *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE', 'ROLE_ADMINISTRATOR']"
             class="btn btn-primary">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
-
-    <button type="submit"
-            [routerLink]="['./company-contact-person' ]"
-            class="btn btn-primary">
-        <span class="fa fa-users"></span>
-        <span class="d-none d-md-inline" jhiTranslate="aresViApp.company.action.viewCompanyContactPerson">View</span>
     </button>
 
 </div>

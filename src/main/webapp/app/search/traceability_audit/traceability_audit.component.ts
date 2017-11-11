@@ -111,7 +111,7 @@ export class SearchTraceabilityAuditComponent implements OnInit {
     }
 
     transition() {
-        this.router.navigate(['/traceability-audit'], {queryParams:
+        this.router.navigate(['/search/traceability_audit'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -123,7 +123,7 @@ export class SearchTraceabilityAuditComponent implements OnInit {
 
     clear() {
         this.page = 0;
-        this.router.navigate(['/traceability-audit', {
+        this.router.navigate(['/search/traceability_audit', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);

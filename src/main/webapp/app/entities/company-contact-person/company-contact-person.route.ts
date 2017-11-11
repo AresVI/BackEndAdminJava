@@ -35,7 +35,7 @@ export const company_contact_personRoute: Routes = [
             'pagingParams': CompanyContactPersonResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.company_contact_person.home.title'
         },
         canActivate: [UserRouteAccessService]

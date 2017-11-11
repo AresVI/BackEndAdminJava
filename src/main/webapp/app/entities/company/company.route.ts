@@ -8,7 +8,7 @@ import { CompanyComponent } from './company.component';
 import { CompanyDetailComponent } from './company-detail.component';
 import { CompanyPopupComponent } from './company-dialog.component';
 import { CompanyDeletePopupComponent } from './company-delete-dialog.component';
-import {CompanyContactPersonResolvePagingParams} from '../company-contact-person/company-contact-person.route';
+import {SearchTraceabilityResolvePagingParams} from '../../search/traceability_audit/traceability_audit.route';
 
 @Injectable()
 export class CompanyResolvePagingParams implements Resolve<any> {
@@ -42,7 +42,7 @@ export const companyRoute: Routes = [
         path: 'company/:id',
         component: CompanyDetailComponent,
         resolve: {
-            'pagingParamsCompanyContactPerson': CompanyContactPersonResolvePagingParams
+            'pagingParams': SearchTraceabilityResolvePagingParams
         },
         data: {
             authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],

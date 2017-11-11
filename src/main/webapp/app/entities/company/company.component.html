@@ -1,7 +1,9 @@
 <div>
     <h2>
         <span jhiTranslate="aresViApp.company.home.title">Companies</span>
-        <button class="btn btn-primary float-right jh-create-entity create-company" [routerLink]="['/', { outlets: { popup: ['company-new'] } }]">
+        <button class="btn btn-primary float-right jh-create-entity create-company"
+                *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE', 'ROLE_ADMINISTRATOR']"
+                [routerLink]="['/', { outlets: { popup: ['company-new'] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="aresViApp.company.home.createLabel">
             Create new Company

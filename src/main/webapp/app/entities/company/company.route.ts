@@ -8,6 +8,7 @@ import { CompanyComponent } from './company.component';
 import { CompanyDetailComponent } from './company-detail.component';
 import { CompanyPopupComponent } from './company-dialog.component';
 import { CompanyDeletePopupComponent } from './company-delete-dialog.component';
+import {CompanyContactPersonResolvePagingParams} from '../company-contact-person/company-contact-person.route';
 
 @Injectable()
 export class CompanyResolvePagingParams implements Resolve<any> {
@@ -33,15 +34,18 @@ export const companyRoute: Routes = [
             'pagingParams': CompanyResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.company.home.title'
         },
         canActivate: [UserRouteAccessService]
     }, {
         path: 'company/:id',
         component: CompanyDetailComponent,
+        resolve: {
+            'pagingParamsCompanyContactPerson': CompanyContactPersonResolvePagingParams
+        },
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.company.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -53,7 +57,7 @@ export const companyPopupRoute: Routes = [
         path: 'company-new',
         component: CompanyPopupComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.company.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -63,7 +67,7 @@ export const companyPopupRoute: Routes = [
         path: 'company/:id/edit',
         component: CompanyPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.company.home.title'
         },
         canActivate: [UserRouteAccessService],

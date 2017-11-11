@@ -63,14 +63,16 @@ export class CompanyContactPersonComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
+
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
         }
     }
+
     transition() {
-        this.router.navigate(['/company-contact-person'], {queryParams:
+        this.router.navigate(['/company', this.company_id, 'company-contact-person'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,

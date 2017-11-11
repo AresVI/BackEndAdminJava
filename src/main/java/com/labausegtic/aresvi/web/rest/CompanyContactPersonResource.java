@@ -94,7 +94,7 @@ public class CompanyContactPersonResource {
     public ResponseEntity<List<CompanyContactPersonDTO>> getAllCompany_contact_people(@ApiParam Pageable pageable, @PathVariable("company_id") Long company_id) {
         log.debug("REST request to get a page of Company_contact_people");
         Page<CompanyContactPersonDTO> page = company_contact_personService.findCompanyContactPeopleByCompany_Id(company_id, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/company/" + company_id + "company-contact-people");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/company/" + company_id + "/company-contact-people");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

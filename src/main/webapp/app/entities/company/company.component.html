@@ -29,22 +29,24 @@
                 <td>{{company.identifier}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
+                        <button type="button"
                                 [routerLink]="['../company', company.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button type="button"
                                 [routerLink]="['/', { outlets: { popup: 'company/'+ company.id + '/edit'} }]"
                                 replaceUrl="true"
+                                *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE', 'ROLE_ADMINISTRATOR']"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button type="button"
                                 [routerLink]="['/', { outlets: { popup: 'company/'+ company.id + '/delete'} }]"
                                 replaceUrl="true"
+                                *jhiHasAnyAuthority="['ROLE_ADMINISTRATOR']"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-trash"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>

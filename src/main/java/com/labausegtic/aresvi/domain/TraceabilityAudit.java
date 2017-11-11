@@ -14,10 +14,6 @@ import java.util.Objects;
  * A TraceabilityAudit.
  */
 @Entity
-@NamedNativeQuery(name = "traceability_audit.findLastByCompanyId",
-    query="SELECT * FROM traceability_audit t where t.company_id = :company_id order by t.creation_date DESC Limit 1;",
-    resultClass = TraceabilityAudit.class
-)
 @Table(name = "traceability_audit")
 public class TraceabilityAudit implements Serializable {
 

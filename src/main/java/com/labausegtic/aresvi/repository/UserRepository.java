@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.repository;
 
+import com.labausegtic.aresvi.domain.Authority;
 import com.labausegtic.aresvi.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,4 +34,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByLogin(String login);
 
     Page<User> findAllByLoginNot(Pageable pageable, String login);
+
+    Page<User> findAllByAuthoritiesEquals(Pageable pageable, Authority authority);
+
 }

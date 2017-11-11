@@ -1,11 +1,11 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
-import {NotStartedComponent} from './not_started.component';
+import {SearchTraceabilityAuditComponent} from './traceability_audit.component';
 import {JhiPaginationUtil} from 'ng-jhipster';
 import {Injectable} from '@angular/core';
-import {UserRouteAccessService} from '../../../shared/auth/user-route-access-service';
+import {UserRouteAccessService} from '../../shared/auth/user-route-access-service';
 
 @Injectable()
-export class TraceabilityAuditResolvePagingParams implements Resolve<any> {
+export class SearchTraceabilityResolvePagingParams implements Resolve<any> {
 
     constructor(private paginationUtil: JhiPaginationUtil) {}
 
@@ -20,16 +20,16 @@ export class TraceabilityAuditResolvePagingParams implements Resolve<any> {
     }
 }
 
-export const flowAuditNotStartedRoute: Routes = [
+export const searchTraceabilityAuditRoute: Routes = [
     {
-        path: 'process/audit/status/not_started',
-        component: NotStartedComponent,
+        path: 'search/traceability_audit',
+        component: SearchTraceabilityAuditComponent,
         resolve: {
-            'pagingParams': TraceabilityAuditResolvePagingParams
+            'pagingParams': SearchTraceabilityResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
-            pageTitle: 'aresViApp.flow-audit.not_started.home.title'
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL', 'ROLE_AUDITOR_INTERNAL'],
+            pageTitle: 'aresViApp.flow-audit.finished.home.title'
         },
         canActivate: [UserRouteAccessService]
     }

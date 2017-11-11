@@ -28,6 +28,8 @@ public interface TraceabilityAuditService {
 
     Page<TraceabilityAuditDTO> findAllByStatus(Pageable pageable, String status);
 
+    Page<TraceabilityAuditDTO> findAllFinishedByCategoryAndCompany(Pageable pageable, String category, Long company_id);
+
     /**
      *  Get the "id" traceabilityAudit.
      *
@@ -36,7 +38,7 @@ public interface TraceabilityAuditService {
      */
     TraceabilityAuditDTO findOne(Long id);
 
-    TraceabilityAuditDTO findLastByCompanyId(Long company_id);
+    TraceabilityAuditDTO findAllLastByCompanyId(Long company_id);
 
     /**
      *  Delete the "id" traceabilityAudit.

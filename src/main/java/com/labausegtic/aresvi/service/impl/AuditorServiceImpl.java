@@ -96,6 +96,13 @@ public class AuditorServiceImpl implements AuditorService{
         return auditorRepository.findAll(pageable);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Auditor> findAllExternal(Pageable pageable) {
+        log.debug("Request to get all Auditors");
+        return auditorRepository.findAllByInternalFalse(pageable);
+    }
+
     /**
      *  Get one auditor by id.
      *

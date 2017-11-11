@@ -27,6 +27,7 @@ public class BRMSServiceImpl implements BRMSService {
         ResultInferenceDTO resultInferenceDTO = new ResultInferenceDTO();
 
         try {
+            //HttpResponse<JsonNode> response = Unirest.post("http://165.227.89.229:7000/api/inference")
             HttpResponse<JsonNode> response = Unirest.post("http://0.0.0.0:7000/api/inference")
                 .header("content-type", "application/json")
                 .header("cache-control", "no-cache")

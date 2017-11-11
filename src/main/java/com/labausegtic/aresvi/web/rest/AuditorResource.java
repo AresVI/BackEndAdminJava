@@ -102,6 +102,15 @@ public class AuditorResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/auditors/external")
+    @Timed
+    public ResponseEntity<List<Auditor>> getAllExternalAuditors() {
+        log.debug("REST request to get a page of Auditors");
+        Page<Auditor> page = auditorService.findAllExternal(null);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/auditors");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     /**
      * GET  /auditors/:id : get the "id" auditor.
      *

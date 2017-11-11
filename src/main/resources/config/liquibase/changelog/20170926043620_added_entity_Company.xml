@@ -23,11 +23,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false" unique="true"/>
             </column>
 
             <column name="identifier" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false" unique="true"/>
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

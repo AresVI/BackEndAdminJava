@@ -40,6 +40,9 @@
                 "init_audit": "Iniciar Auditoría",
                 "dashboard_audit": "Dashboard Auditorías"
             },
+            "search": {
+                "traceability_audit": "Buscar Auditorías"
+            },
             "admin": {
                 "main": "Administración",
                 "userManagement": "Gestión de usuarios",

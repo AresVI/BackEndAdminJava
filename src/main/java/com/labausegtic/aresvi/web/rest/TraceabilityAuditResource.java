@@ -141,6 +141,21 @@ public class TraceabilityAuditResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/traceability-audits/finished")
+    @Timed
+    public ResponseEntity<List<TraceabilityAuditDTO>> getAllFinishedTraceabilityAudits(
+            @ApiParam Pageable pageable, @ApiParam String category, @ApiParam Long company_id
+        ) {
+        log.debug("REST request to get a page of TraceabilityAudits");
+
+        Page<TraceabilityAuditDTO> page;
+
+        page = traceabilityAuditService.findAllFinishedByCategoryAndCompany(pageable, category, company_id) ;
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/traceability-audits/finished");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     /**
      * GET  /traceability-audits/:id : get the "id" traceabilityAudit.
      *

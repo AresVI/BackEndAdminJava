@@ -48,6 +48,12 @@ export class TraceabilityAuditService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    queryFinished(req?: any, query_object?: object): Observable<ResponseWrapper> {
+        const options = createRequestOptionWithQuery(req, query_object);
+        return this.http.get(`${this.resourceUrl}/finished`, options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     start(id: number): Observable<Response> {
         return this.http.post(`${this.resourceUrl}/${id}/start`, {});
     }

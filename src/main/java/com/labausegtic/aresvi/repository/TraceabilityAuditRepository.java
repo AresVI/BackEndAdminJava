@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.Set;
+
 
 /**
  * Spring Data JPA repository for the TraceabilityAudit entity.
@@ -15,8 +17,17 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface TraceabilityAuditRepository extends JpaRepository<TraceabilityAudit, Long> {
 
-    TraceabilityAudit findLastByCompanyId(long company_id);
+    Set<TraceabilityAudit> findByCompanyIdOrderByCreationDateDesc(long company_id);
 
     Page<TraceabilityAudit> findAllByStatus(Pageable pageable, String status);
+
+    Page<TraceabilityAudit> findAllByCompanyId(Pageable pageable, Long company_id);
+    Page<TraceabilityAudit> findAllByCategory(Pageable pageable, String category);
+
+    Page<TraceabilityAudit> findAllByCompanyIdAndStatus(Pageable pageable, Long company_id, String status);
+    Page<TraceabilityAudit> findAllByCategoryAndStatus(Pageable pageable, String category, String status);
+
+    Page<TraceabilityAudit> findAllByCompanyIdAndCategory(Pageable pageable, Long company_id, String category);
+    Page<TraceabilityAudit> findAllByCompanyIdAndCategoryAndStatus(Pageable pageable, Long company_id, String category, String status);
 
 }

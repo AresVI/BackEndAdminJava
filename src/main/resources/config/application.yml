@@ -42,7 +42,7 @@ spring:
         basename: i18n/messages
     mvc:
         favicon:
-            enabled: false
+            enabled: true
     thymeleaf:
         mode: XHTML
 
@@ -84,7 +84,7 @@ jhipster:
         default-include-pattern: /api/.*
         title: AresVI API
         description: AresVI API documentation
-        version: 0.0.1
+        version: 1.3.1
         terms-of-service-url:
         contact-name:
         contact-url:

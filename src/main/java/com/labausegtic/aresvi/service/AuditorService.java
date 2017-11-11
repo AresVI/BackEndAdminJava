@@ -4,6 +4,8 @@ import com.labausegtic.aresvi.domain.Auditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Set;
+
 /**
  * Service Interface for managing Auditor.
  */
@@ -24,6 +26,7 @@ public interface AuditorService {
      *  @return the list of entities
      */
     Page<Auditor> findAll(Pageable pageable);
+    Page<Auditor> findAllExternal(Pageable pageable);
 
     /**
      *  Get the "id" auditor.

@@ -38,7 +38,7 @@ export class AuditorDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.userService.query()
+        this.userService.queryNoRole()
             .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.companyService.query()
             .subscribe((res: ResponseWrapper) => { this.companies = res.json; }, (res: ResponseWrapper) => this.onError(res.json));

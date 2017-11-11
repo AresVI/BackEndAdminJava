@@ -155,6 +155,14 @@ public class UserResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/users/no_role")
+    @Timed
+    public ResponseEntity<List<UserDTO>> getAllUsersNoRole(@ApiParam Pageable pageable) {
+        final Page<UserDTO> page = userService.findAllByAuthoritiesContains(null);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     /**
      * @return a string list of the all of the roles
      */

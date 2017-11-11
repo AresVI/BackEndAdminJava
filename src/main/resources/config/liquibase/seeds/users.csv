@@ -5,4 +5,4 @@ id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;c
 4;administrativo;$2a$10$GJmSLid2t9dHWB4dG5LG9eNi7VTMqxm9fD4Bss4XX9tSSFjGQAgxe;Eugenio;Bustos;administrativo@aresvi.com;;true;es;system;system
 5;auditor1;$2a$10$n4DKUWRVSfh9h71.cBw8WuAtAQpqqiUReNchkViFGmP0HSOMj3LPy;Nicolás;Avellaneda;auditor1@aresvi.com;;true;es;system;system
 6;auditor2;$2a$10$RFxHNQ0e6EaNLg02J7xKbupaPIywA5mHX0iijx.EW3gueMClDdrAy;Julio;Aguirre;auditor2@aresvi.com;;true;es;system;system
-7;auditor_interno1;$2a$10$RFxHNQ0e6EaNLg02J7xKbupaPIywA5mHX0iijx.EW3gueMClDdrAy;Álvarez;Thomas;auditor_internal1@aresvi.com;;true;es;system;system
+7;auditor_interno1;$2a$10$C3kZVweYk9kQEY1PB6to5esm425UjCfQ/fEye/Pn2MZMkDciiKBxG;Álvarez;Thomas;auditor_internal1@aresvi.com;;true;es;system;system

@@ -123,6 +123,32 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
             .map(traceabilityAuditMapper::toDto);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<TraceabilityAuditDTO> findAllFinishedByCategoryAndCompany(Pageable pageable, String category,Long company_id) {
+        log.debug("Request to get all TraceabilityAudits");
+
+        String status = "STATUS_FINISHED";
+
+        if (category == null && company_id == 0L) {
+            return traceabilityAuditRepository.findAllByStatus(pageable, status)
+                .map(traceabilityAuditMapper::toDto);
+        }
+
+        if (company_id == 0L) {
+            return traceabilityAuditRepository.findAllByCategoryAndStatus(pageable, category, status)
+                .map(traceabilityAuditMapper::toDto);
+        }
+
+        if (category == null) {
+            return traceabilityAuditRepository.findAllByCompanyIdAndStatus(pageable, company_id, status)
+                .map(traceabilityAuditMapper::toDto);
+        }
+
+        return traceabilityAuditRepository.findAllByCompanyIdAndCategoryAndStatus(pageable, company_id, category, status)
+            .map(traceabilityAuditMapper::toDto);
+    }
+
     /**
      *  Get one traceabilityAudit by id.
      *
@@ -139,9 +165,16 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     @Override
     @Transactional(readOnly = true)
-    public TraceabilityAuditDTO findLastByCompanyId(Long company_id) {
-        TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findLastByCompanyId(company_id);
-        return traceabilityAuditMapper.toDto(traceabilityAudit);
+    public TraceabilityAuditDTO findAllLastByCompanyId(Long company_id) {
+
+        Set<TraceabilityAudit> traceabilityAuditSet = traceabilityAuditRepository.findByCompanyIdOrderByCreationDateDesc(company_id);
+
+        if (traceabilityAuditSet.size() > 0) {
+            return traceabilityAuditMapper.toDto((TraceabilityAudit)(traceabilityAuditSet.toArray()[0]));
+        } else {
+            return null;
+        }
+
     }
 
     /**
@@ -332,7 +365,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         Set<Recommendation> recommendationSet = recommendationRepository.findAllByTraceabilityAudit_Id(traceabilityAudit.getId());
 
-        Integer levelComputerization = ((Recommendation[]) recommendationSet.toArray())[0].getLevelComputerization();
+        Integer levelComputerization = ((Recommendation) recommendationSet.toArray()[0]).getLevelComputerization();
 
         inferenceParameterDTO.setLevelComputerization(levelComputerization);
 

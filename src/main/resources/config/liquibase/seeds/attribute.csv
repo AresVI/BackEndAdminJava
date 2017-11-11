@@ -16,7 +16,7 @@ id;name;required;weighting_id;category_attribute_id
 15;CUIT del propietario;false;NULL;1
 16;Identificación del fabricante del producto;true;3;2
 17;Nombre del ingrediente activo;true;2;2
-18;Dotrues aplicada;true;2;2
+18;Dosis aplicada;true;2;2
 19;Identificación de los cuarteles a los cuales se aplicó;true;2;2
 20;Identificación de la persona que recomendó la aplicación;true;3;2
 21;Fecha de aplicación;true;2;2
@@ -28,13 +28,13 @@ id;name;required;weighting_id;category_attribute_id
 27;Tiempo de reingreso de los trabajadores al lote;false;NULL;2
 28;Registro de maquinaria;true;4;2
 29;Motivo de la Aplicación (preventiva o curativa);true;3;2
-30;Resultado del análitrues de agua;false;NULL;3
-31;Fecha del análitrues;false;NULL;3
+30;Resultado del análisis de agua;false;NULL;3
+31;Fecha del análisis;false;NULL;3
 32;Identificación de la fuente del agua empleada;false;NULL;3
 33;Identificación del laboratorio externo;false;NULL;3
 34;Identificación del fabricante del producto;true;3;4
 35;Nombre del ingrediente activo;true;1;4
-36;Dotrues aplicada;true;1;4
+36;Dosis aplicada;true;1;4
 37;Identificación de los cuarteles a los cuales se aplicó;true;2;4
 38;Identificación de la persona que recomendó la aplicación;true;3;4
 39;Antigüedad de la planta de vid;true;3;4
@@ -48,12 +48,12 @@ id;name;required;weighting_id;category_attribute_id
 47;Registro de maquinaria;true;4;4
 48;Motivo de la Aplicación (preventiva o curativa);true;2;4
 49;Identificación de la fuente del agua empleada;true;1;5
-50;Resultado del análitrues de agua;true;2;5
-51;Fecha del análitrues;true;2;5
+50;Resultado del análisis de agua;true;2;5
+51;Fecha del análisis;true;2;5
 52;Identificación del laboratorio exterfalse;true;4;5
 53;Identificación de la fuente del agua empleada;true;2;6
 54;Resultado del análitrues de agua;true;3;6
-55;Fecha del análitrues;true;3;6
+55;Fecha del análisis;true;3;6
 56;Identificación del laboratorio no;true;5;6
 57;Método de riego;true;4;6
 58;Identificación del predio en que está ubicada la viña;true;2;7

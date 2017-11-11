@@ -20,6 +20,14 @@
                 <a [routerLink]="['/company', traceabilityAudit.companyId]">{{traceabilityAudit.company.name}} ({{traceabilityAudit.company.identifier}})</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="aresViApp.traceabilityAudit.company_contact_person">Company Contact Person</span></dt>
+        <dd>
+            <div *ngIf="traceabilityAudit.companyContactPersonId">
+                <a [routerLink]="['/', { outlets: { popup: 'company/' + traceabilityAudit.companyId + '/company-contact-person/' + traceabilityAudit.companyContactPersonId}}]">
+                    {{traceabilityAudit.companyContactPerson.last_name}}, {{traceabilityAudit.companyContactPerson.first_name}}
+                </a>
+            </div>
+        </dd>
         <dt><span jhiTranslate="aresViApp.traceabilityAudit.status">Status</span></dt>
         <dd>
             <span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span>

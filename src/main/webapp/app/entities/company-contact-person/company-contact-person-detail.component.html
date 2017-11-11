@@ -1,48 +1,40 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        <span jhiTranslate="aresViApp.company_contact_person.detail.title">Company Contact Person</span>
+    </h4>
 
-<div *ngIf="company_contact_person">
-    <h2><span jhiTranslate="aresViApp.company_contact_person.detail.title">Company Contact Person</span> {{company_contact_person.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.company_contact_person.first_name">First Name</span></dt>
-        <dd>
-            <span>{{company_contact_person.first_name}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.company_contact_person.last_name">Last Name</span></dt>
-        <dd>
-            <span>{{company_contact_person.last_name}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.company_contact_person.email">Email</span></dt>
-        <dd>
-            <span>{{company_contact_person.email}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.company_contact_person.telephone">Telephone</span></dt>
-        <dd>
-            <span>{{company_contact_person.telephone}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.company_contact_person.job_possition">Job Possition</span></dt>
-        <dd>
-            <span>{{company_contact_person.job_possition}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.company_contact_person.company">Company</span></dt>
-        <dd>
-            <div *ngIf="company_contact_person.company">
-                <a [routerLink]="['/company', company_contact_person.company?.id]">{{company_contact_person.company?.name}}</a>
-            </div>
-        </dd>
-    </dl>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="close()">&times;</button>
+</div>
+<div class="modal-body">
+    <div *ngIf="company_contact_person">
+        <dl class="row-md jh-entity-details">
+            <dt><span jhiTranslate="aresViApp.company_contact_person.first_name">First Name</span></dt>
+            <dd>
+                <span>{{company_contact_person.first_name}}</span>
+            </dd>
+            <dt><span jhiTranslate="aresViApp.company_contact_person.last_name">Last Name</span></dt>
+            <dd>
+                <span>{{company_contact_person.last_name}}</span>
+            </dd>
+            <dt><span jhiTranslate="aresViApp.company_contact_person.email">Email</span></dt>
+            <dd>
+                <span>{{company_contact_person.email}}</span>
+            </dd>
+            <dt><span jhiTranslate="aresViApp.company_contact_person.telephone">Telephone</span></dt>
+            <dd>
+                <span>{{company_contact_person.telephone}}</span>
+            </dd>
+            <dt><span jhiTranslate="aresViApp.company_contact_person.job_possition">Job Possition</span></dt>
+            <dd>
+                <span>{{company_contact_person.job_possition}}</span>
+            </dd>
+        </dl>
+    </div>
 
-    <button type="button"
-            [routerLink]="[ '../' ]"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'company/' + company_id + '/company-contact-person/'+ company_contact_person.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
-
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">
+            <span class="fa fa-close"></span>&nbsp;<span jhiTranslate="entity.action.close">close</span>
+        </button>
+    </div>
 </div>

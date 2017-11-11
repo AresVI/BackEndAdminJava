@@ -5,7 +5,9 @@ import { UserRouteAccessService } from '../../shared';
 import { JhiPaginationUtil } from 'ng-jhipster';
 
 import { CompanyContactPersonComponent } from './company-contact-person.component';
-import { CompanyContactPersonDetailComponent } from './company-contact-person-detail.component';
+import {
+    CompanyContactPersonDetailComponent, CompanyContactPersonDetailPopupComponent
+} from './company-contact-person-detail.component';
 import { CompanyContactPersonPopupComponent } from './company-contact-person-dialog.component';
 import { CompanyContactPersonDeletePopupComponent } from './company-contact-person-delete-dialog.component';
 
@@ -39,12 +41,13 @@ export const company_contact_personRoute: Routes = [
         canActivate: [UserRouteAccessService]
     }, {
         path: 'company/:company_id/company-contact-person/:id',
-        component: CompanyContactPersonDetailComponent,
+        component: CompanyContactPersonDetailPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.company_contact_person.home.title'
         },
-        canActivate: [UserRouteAccessService]
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
     }
 ];
 

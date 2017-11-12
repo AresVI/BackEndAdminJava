@@ -38,7 +38,6 @@ public class TraceabilityAudit implements Serializable {
     private Instant creationDate;
 
     @NotNull
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "traceability_audit_audit_process",
         joinColumns = @JoinColumn(name="traceability_audit_id", referencedColumnName="id"),

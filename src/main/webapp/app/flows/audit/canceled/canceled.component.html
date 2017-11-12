@@ -34,7 +34,7 @@
             <td>{{cancellationTraceabilityAudit.traceabilityAudit.creationDate | date: 'dd/MM/yyyy HH:mm'}}</td>
             <td>
                 <div *ngIf="cancellationTraceabilityAudit.traceabilityAudit.company">
-                    <a [routerLink]="['../company', cancellationTraceabilityAudit.traceabilityAudit.company.id  ]" >
+                    <a [routerLink]="['/company', cancellationTraceabilityAudit.traceabilityAudit.company.id  ]" >
                         {{cancellationTraceabilityAudit.traceabilityAudit.company.name}} ({{cancellationTraceabilityAudit.traceabilityAudit.company.identifier}})
                     </a>
                 </div>

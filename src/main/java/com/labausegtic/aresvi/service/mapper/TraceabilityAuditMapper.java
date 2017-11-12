@@ -11,7 +11,8 @@ import java.util.Set;
 /**
  * Mapper for the entity TraceabilityAudit and its DTO TraceabilityAuditDTO.
  */
-@Mapper(componentModel = "spring", uses = {CompanyMapper.class, CompanyContactPersonMapper.class, AuditProcessMapper.class})
+@Mapper(componentModel = "spring", uses = {CompanyMapper.class, CompanyContactPersonMapper.class,
+                                            AuditProcessMapper.class})
 public interface TraceabilityAuditMapper extends EntityMapper <TraceabilityAuditDTO, TraceabilityAudit> {
 
     @Mapping(source = "company.id", target = "companyId")

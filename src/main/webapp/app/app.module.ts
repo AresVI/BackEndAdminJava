@@ -26,7 +26,7 @@ import {
     ErrorComponent
 } from './layouts';
 import {AresViFlowModule} from './flows/flow.module';
-import {AresViSearchModule} from './search/search.module';
+import {AresViReportModule} from './reports/report.module';
 
 @NgModule({
     imports: [
@@ -39,7 +39,7 @@ import {AresViSearchModule} from './search/search.module';
         AresViAccountModule,
         AresViEntityModule,
         AresViFlowModule,
-        AresViSearchModule,
+        AresViReportModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

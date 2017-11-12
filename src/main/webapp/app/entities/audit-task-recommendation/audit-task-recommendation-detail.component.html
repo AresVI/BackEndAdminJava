@@ -19,29 +19,38 @@
 
                 <div class="card mb-3" *ngFor="let attrCatRecom of auditTaskRecommendation.categoryAttrRecommendationSet">
                     <div class="card-header">
-                        {{attrCatRecom.categoryAttribute.name}}
-                        <button type="button" class="btn {{attrCatRecom.description.length > 0 ? 'btn-success' : 'btn-outline-dark' }} btn-sm"
+
+                        <button type="button" class="btn {{attrCatRecom.description.length > 0 ? 'btn-success' : 'btn-outline-dark' }} btn-sm mr-2"
                                 (click)="openModalCategoryAttr(contentCatAttrR, attrCatRecom)">
                             <i class="fa fa-file-text-o"></i>
                         </button>
+
+                        {{attrCatRecom.categoryAttribute.name}}
+
                     </div>
                     <div class="card-body">
 
                         <ul class="list-group" *ngFor="let attrRecomm of attrCatRecom.attributeRecommendationSet">
                             <li class="list-group-item">
-                                <div class="form-check">
-                                    <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input"
-                                               name="field_attribute_{{attrRecomm.id}}" id="field_attribute_{{attrRecomm.id}}"
-                                               [(ngModel)]="attrRecomm.implemented"  />
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">{{attrRecomm.attribute.name}}</span>
-                                    </label>
-                                    <button type="button"
-                                            class="btn {{attrRecomm.description.length > 0 ? 'btn-success' : 'btn-outline-dark' }} btn-sm"
-                                            (click)="openModalAttribute(contentAttrR, attrRecomm)">
-                                        <i class="fa fa-file-text-o"></i>
-                                    </button>
+                                <div class="row">
+                                    <div class="col-auto pr-1">
+                                        <button type="button"
+                                                class="btn {{attrRecomm.description.length > 0 ? 'btn-success' : 'btn-outline-dark' }} btn-sm"
+                                                (click)="openModalAttribute(contentAttrR, attrRecomm)">
+                                            <i class="fa fa-file-text-o"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                       name="field_attribute_{{attrRecomm.id}}" id="field_attribute_{{attrRecomm.id}}"
+                                                       [(ngModel)]="attrRecomm.implemented"  />
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description">{{attrRecomm.attribute.name}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                         </ul>

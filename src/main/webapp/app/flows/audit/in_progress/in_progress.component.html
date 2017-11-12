@@ -28,7 +28,7 @@
             <td>{{traceabilityAudit.creationDate | date:'dd/MM/yyyy HH:mm'}}</td>
             <td>
                 <div *ngIf="traceabilityAudit.companyId">
-                    <a [routerLink]="['../company', traceabilityAudit.companyId  ]" >{{traceabilityAudit.company.name}} ({{traceabilityAudit.company.identifier}})</a>
+                    <a [routerLink]="['/company', traceabilityAudit.companyId  ]" >{{traceabilityAudit.company.name}} ({{traceabilityAudit.company.identifier}})</a>
                 </div>
             </td>
             <td class="text-right">
@@ -49,6 +49,7 @@
                     </button>
                     <button type="button"
                             [routerLink]="['/', { outlets: { popup: ['traceability-audit', traceabilityAudit.id, 'cancellation-new'] } }]"
+                            *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE']"
                             class="btn btn-danger btn-sm">
                         <span class="fa fa-ban"></span>
                         <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.cancel">Cancel</span>

@@ -30,4 +30,6 @@ public interface TraceabilityAuditRepository extends JpaRepository<TraceabilityA
     Page<TraceabilityAudit> findAllByCompanyIdAndCategory(Pageable pageable, Long company_id, String category);
     Page<TraceabilityAudit> findAllByCompanyIdAndCategoryAndStatus(Pageable pageable, Long company_id, String category, String status);
 
+    Set<TraceabilityAudit> findFirst2ByCompanyIdAndStatusOrderByCreationDateDesc(Long company_id, String status);
+
 }

@@ -2,6 +2,8 @@ package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.labausegtic.aresvi.service.CompanyService;
+import com.labausegtic.aresvi.service.TraceabilityAuditService;
+import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.CompanyDTO;
@@ -11,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,9 +22,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing Company.
@@ -38,8 +39,11 @@ public class CompanyResource {
 
     private final CompanyService companyService;
 
-    public CompanyResource(CompanyService companyService) {
+    private final TraceabilityAuditService traceabilityAuditService;
+
+    public CompanyResource(CompanyService companyService, TraceabilityAuditService traceabilityAuditService) {
         this.companyService = companyService;
+        this.traceabilityAuditService = traceabilityAuditService;
     }
 
     /**
@@ -100,6 +104,7 @@ public class CompanyResource {
         Page<CompanyDTO> page = companyService.findAll(pageable);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies");
+
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
@@ -115,6 +120,18 @@ public class CompanyResource {
         log.debug("REST request to get Company : {}", id);
         CompanyDTO companyDTO = companyService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(companyDTO));
+    }
+
+    @GetMapping("/companies/{id}/last_two_results")
+    @Timed
+    public ResponseEntity<Set<TraceabilityAuditDTO>> getLastTwoTraceabilityAudit(@PathVariable Long id) {
+        log.debug("REST request to get Company : {}", id);
+
+        Set<TraceabilityAuditDTO> result;
+
+        result= traceabilityAuditService.findLastTwoTraceabilityAuditsFinished(id);
+
+        return  new ResponseEntity<>(result, null, HttpStatus.OK);
     }
 
     /**

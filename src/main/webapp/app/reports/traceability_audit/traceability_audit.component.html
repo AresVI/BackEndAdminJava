@@ -61,7 +61,7 @@
             <td><a [routerLink]="['../traceability-audit', traceabilityAudit.id ]">{{traceabilityAudit.id}}</a></td>
             <td>{{traceabilityAudit.company.name}} ({{traceabilityAudit.company.identifier}})</td>
             <td><span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span></td>
-            <td>{{traceabilityAudit.creationDate | date:'medium'}}</td>
+            <td>{{traceabilityAudit.creationDate | date:'dd/MM/yyyy HH:mm'}}</td>
             <td>
                 {{traceabilityAudit.category.length > 0 ? "Categoría " + traceabilityAudit.category : "-- Sin categoría --" }}
             </td>

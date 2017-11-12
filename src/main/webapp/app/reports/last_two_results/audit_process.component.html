@@ -1,0 +1,35 @@
+<div *ngIf="company">
+    <h2>
+        Comparar Auditorías
+    </h2>
+    <hr>
+
+    <table class="table table-responsive" *ngIf="traceabilityAudits && reviewDone">
+        <tbody>
+        <tr>
+            <td class="text-center align-middle">Auditoría: {{traceabilityAudits[1].creationDate  | date:'dd/MM/yyyy'}}</td>
+            <td><h3 class="text-center m-0">Procesos</h3></td>
+            <td class="text-center align-middle">Auditoría: {{traceabilityAudits[0].creationDate  | date:'dd/MM/yyyy'}}</td>
+        </tr>
+        <tr *ngFor="let auditProcess of auditProcesses; let idx = index">
+            <td class="text-center align-middle"> {{comparativeAuditProcessNew[idx]? 'Si' : 'No'}}</td>
+            <td class="text-center"
+                [ngSwitch]="comparativeAuditProcessOld[idx] === comparativeAuditProcessNew[idx] &&  comparativeAuditProcessNew[idx]">
+                <h5 class="m-0 text-secondary" *ngSwitchCase="false">
+                    {{auditProcess.name}}
+                </h5>
+                <button type="button" *ngSwitchCase="true" [routerLink]="['/company', company.id ]" class="btn btn-success">
+                    <h5 class="m-0"><span class="fa fa-search"></span> {{auditProcess.name}}</h5>
+                </button>
+            </td>
+            <td class="text-center align-middle"> {{comparativeAuditProcessOld[idx]? 'Si' : 'No'}} </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <button type="button" [routerLink]="['/company', company.id ]" class="btn btn-secondary">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+</div>

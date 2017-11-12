@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -323,31 +324,31 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                             countLevel1 += 1;
                         }
                         totalLevel1 += 1;
-                    break;
+                        break;
                     case 2:
                         if (ar.isImplemented()) {
                             countLevel2 += 1;
                         }
                         totalLevel2 += 1;
-                    break;
+                        break;
                     case 3:
                         if (ar.isImplemented()) {
                             countLevel3 += 1;
                         }
                         totalLevel3 += 1;
-                    break;
+                        break;
                     case 4:
                         if (ar.isImplemented()) {
                             countLevel4 += 1;
                         }
                         totalLevel4 += 1;
-                    break;
+                        break;
                     case 5:
                         if (ar.isImplemented()) {
                             countLevel5 += 1;
                         }
                         totalLevel5 += 1;
-                    break;
+                        break;
                 }
 
             } else {
@@ -401,5 +402,23 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         return traceabilityAuditMapper.toDto(traceabilityAudit);
 
+    }
+
+    @Override
+    public Set<TraceabilityAuditDTO> findLastTwoTraceabilityAuditsFinished(Long company_id) {
+
+        Set<TraceabilityAudit> query;
+
+        query = traceabilityAuditRepository.findFirst2ByCompanyIdAndStatusOrderByCreationDateDesc(
+            company_id, StatusTraceabilityAudit.FINISHED
+        );
+
+        Set<TraceabilityAuditDTO> result = new HashSet<>();
+
+        query.forEach(item -> {
+            result.add(traceabilityAuditMapper.toDto(item));
+        });
+
+        return result;
     }
 }

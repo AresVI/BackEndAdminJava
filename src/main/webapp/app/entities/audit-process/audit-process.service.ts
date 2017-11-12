@@ -5,6 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { AuditProcess } from './audit-process.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {createRequestOptionAllElements} from '../../shared/model/request-util';
 
 @Injectable()
 export class AuditProcessService {
@@ -35,6 +36,12 @@ export class AuditProcessService {
 
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
+        return this.http.get(this.resourceUrl, options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
+    queryAll(req?: any): Observable<ResponseWrapper> {
+        const options = createRequestOptionAllElements(req);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }

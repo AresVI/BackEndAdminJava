@@ -8,7 +8,7 @@ import { CompanyComponent } from './company.component';
 import { CompanyDetailComponent } from './company-detail.component';
 import { CompanyPopupComponent } from './company-dialog.component';
 import { CompanyDeletePopupComponent } from './company-delete-dialog.component';
-import {SearchTraceabilityResolvePagingParams} from '../../search/traceability_audit/traceability_audit.route';
+import {SearchTraceabilityResolvePagingParams} from '../../reports/traceability_audit/traceability_audit.route';
 
 @Injectable()
 export class CompanyResolvePagingParams implements Resolve<any> {

@@ -77,7 +77,7 @@ export class NotStartedComponent implements OnInit {
         }
     }
     transition() {
-        this.router.navigate(['/traceability-audit'], {queryParams:
+        this.router.navigate(['/process/audit/status/not_started'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -89,7 +89,7 @@ export class NotStartedComponent implements OnInit {
 
     clear() {
         this.page = 0;
-        this.router.navigate(['/traceability-audit', {
+        this.router.navigate(['/process/audit/status/not_started', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);

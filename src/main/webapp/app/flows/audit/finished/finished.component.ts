@@ -77,7 +77,7 @@ export class FinishedComponent implements OnInit {
         }
     }
     transition() {
-        this.router.navigate(['/traceability-audit'], {queryParams:
+        this.router.navigate(['/process/audit/status/finished'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -89,7 +89,7 @@ export class FinishedComponent implements OnInit {
 
     clear() {
         this.page = 0;
-        this.router.navigate(['/traceability-audit', {
+        this.router.navigate(['/process/audit/status/finished', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);

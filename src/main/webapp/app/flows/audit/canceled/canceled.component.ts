@@ -70,7 +70,7 @@ export class CanceledComponent implements OnInit {
         }
     }
     transition() {
-        this.router.navigate(['/cancellation-traceability-audit'], {queryParams:
+        this.router.navigate(['/process/audit/status/canceled'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -82,7 +82,7 @@ export class CanceledComponent implements OnInit {
 
     clear() {
         this.page = 0;
-        this.router.navigate(['/cancellation-traceability-audit', {
+        this.router.navigate(['/process/audit/status/canceled', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);

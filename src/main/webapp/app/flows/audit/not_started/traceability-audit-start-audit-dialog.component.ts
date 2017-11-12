@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
@@ -18,7 +18,8 @@ export class TraceabilityAuditStartAuditDialogComponent {
     constructor(
         private traceabilityAuditService: TraceabilityAuditService,
         public activeModal: NgbActiveModal,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private router: Router,
     ) {
     }
 
@@ -32,7 +33,11 @@ export class TraceabilityAuditStartAuditDialogComponent {
                 name: 'traceabilityAuditListModification',
                 content: 'Started an traceabilityAudit'
             });
-            this.activeModal.dismiss(true);
+
+            this.router.navigate(['/traceability-audit', id]).then(() => {
+                this.activeModal.dismiss(true);
+            });
+
         });
     }
 }

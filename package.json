@@ -107,7 +107,6 @@
     "webpack:prod": "yarn run cleanup && yarn run webpack:prod:main && yarn run clean-www",
     "webpack:test": "yarn run test",
     "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js",
-    "postinstall": "node node_modules/phantomjs-prebuilt/install.js"
+    "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
   }
 }

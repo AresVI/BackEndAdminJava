@@ -92,6 +92,9 @@ Custom alerts for notification
 ========================================================================== */
 .alerts .alert{
     text-overflow: ellipsis;
+    position: fixed;
+    right: 20px !important ;
+    top: 20px !important ;
 }
 .alert pre{
     background: none;
@@ -131,6 +134,43 @@ Custom alerts for notification
     .alerts .toast {
         width: 50%;
     }
+}
+
+#toast-container {
+    position: fixed;
+    z-index: 999999;
+}
+
+.toast-top-right {
+    top: 12px;
+    right: 12px;
+}
+
+#toast-container .toast {
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 6px;
+    padding: 15px 15px 15px 50px;
+    width: 300px;
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    box-shadow: 0 0 12px #000000;
+    opacity: 1;
+    cursor: pointer;
+}
+
+#toast-container .toast p{
+    margin: 0;
+}
+
+#toast-container .toast.toast-success {
+    background-image: url("../images/icon-success.png") !important;
+}
+
+.toast-success {
+    background-color: #51A351;
 }
 
 /* ==========================================================================

@@ -1,10 +1,11 @@
 package com.labausegtic.aresvi.domain;
 
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -37,7 +38,7 @@ public class TraceabilityAudit implements Serializable {
     private Instant creationDate;
 
     @Column(name = "finished_date")
-    private LocalDate finishedDate;
+    private Instant finishedDate;
 
     @NotNull
     @ManyToMany
@@ -144,11 +145,11 @@ public class TraceabilityAudit implements Serializable {
         this.status = status;
     }
 
-    public LocalDate getFinishedDate() {
+    public Instant getFinishedDate() {
         return finishedDate;
     }
 
-    public void setFinishedDate(LocalDate finishedDate) {
+    public void setFinishedDate(Instant finishedDate) {
         this.finishedDate = finishedDate;
     }
 

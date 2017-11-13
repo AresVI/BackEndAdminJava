@@ -33,6 +33,7 @@
             "name": "Nombre",
             "status": "Estado",
             "creationDate": "Fecha de Creación",
+            "finishedDate": "Fecha de Finalización",
             "auditProcesses": "Proceso",
             "company": "Bodega",
             "category": "Categoría",

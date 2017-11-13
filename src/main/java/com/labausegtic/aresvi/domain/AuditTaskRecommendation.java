@@ -1,10 +1,11 @@
 package com.labausegtic.aresvi.domain;
 
 
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -21,7 +22,7 @@ public class AuditTaskRecommendation implements Serializable {
     private Long id;
 
     @Column(name = "revised_date")
-    private LocalDate revisedDate;
+    private Instant revisedDate;
 
     @Lob
     @Column(name = "description")
@@ -92,11 +93,11 @@ public class AuditTaskRecommendation implements Serializable {
         this.auditTask = auditTask;
     }
 
-    public LocalDate getRevisedDate() {
+    public Instant getRevisedDate() {
         return revisedDate;
     }
 
-    public void setRevisedDate(LocalDate revisedDate) {
+    public void setRevisedDate(Instant revisedDate) {
         this.revisedDate = revisedDate;
     }
 

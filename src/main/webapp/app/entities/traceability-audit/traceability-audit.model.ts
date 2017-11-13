@@ -11,6 +11,7 @@ export class TraceabilityAudit implements BaseEntity {
         public status?: string,
         public category?: string,
         public creationDate?: any,
+        public finishedDate?: any,
         public auditProcesses?: AuditProcess[],
         public companyId?: number,
         public company?: Company,

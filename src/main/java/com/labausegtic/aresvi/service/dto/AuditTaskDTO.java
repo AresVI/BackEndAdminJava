@@ -22,8 +22,6 @@ public class AuditTaskDTO implements Serializable {
 
     private ContainerDTO container;
 
-    private LocalDate revisedDate;
-
     public Long getId() {
         return id;
     }
@@ -54,14 +52,6 @@ public class AuditTaskDTO implements Serializable {
 
     public void setContainer(ContainerDTO container) {
         this.container = container;
-    }
-
-    public LocalDate getRevisedDate() {
-        return revisedDate;
-    }
-
-    public void setRevisedDate(LocalDate revisedDate) {
-        this.revisedDate = revisedDate;
     }
 
     @Override

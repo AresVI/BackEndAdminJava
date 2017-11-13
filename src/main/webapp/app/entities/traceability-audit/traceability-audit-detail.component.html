@@ -10,9 +10,9 @@
     <jhi-alert-error></jhi-alert-error>
 
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.traceabilityAudit.creationDate">Creation Date</span></dt>
+        <dt><span jhiTranslate="aresViApp.traceabilityAudit.finishedDate">Finished Date</span></dt>
         <dd>
-            <span>{{traceabilityAudit.creationDate | date: 'dd/MM/yyyy HH:mm'}}</span>
+            <span>{{traceabilityAudit.finishedDate | date: 'dd/MM/yyyy HH:mm'}}</span>
         </dd>
         <dt><span jhiTranslate="aresViApp.traceabilityAudit.company">Company</span></dt>
         <dd>
@@ -80,6 +80,7 @@
                     <div class="w-100" *ngFor="let auditTaskRecom of auditProcessRecom.auditTaskRecommendationSet">
                         <h5 class="mb-4 mt-4 px-4">
                             {{auditTaskRecom.auditTask.name}}
+                            <small class="text-secondary">({{auditTaskRecom.revisedDate | date: 'dd/MM/yyyy HH:mm'}})</small>
                             <button type="button" class="btn btn-outline-dark btn-sm"
                                     [hidden]="auditTaskRecom.description.length < 1"
                                     (click)="openModalDescription(modal_description, auditTaskRecom.description)">

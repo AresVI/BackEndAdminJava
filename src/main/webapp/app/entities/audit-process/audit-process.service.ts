@@ -34,6 +34,12 @@ export class AuditProcessService {
         });
     }
 
+    findComplete(id: number): Observable<AuditProcess> {
+        return this.http.get(`${this.resourceUrl}/${id}/complete`).map((res: Response) => {
+            return res.json();
+        });
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)

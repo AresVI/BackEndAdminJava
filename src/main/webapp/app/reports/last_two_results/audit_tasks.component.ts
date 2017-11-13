@@ -10,16 +10,18 @@ import {CompanyService} from '../../entities/company/company.service';
 import {AuditProcess} from '../../entities/audit-process/audit-process.model';
 import {AuditProcessService} from '../../entities/audit-process/audit-process.service';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
+import {TraceabilityAuditService} from '../../entities/traceability-audit/traceability-audit.service';
+import {ComparativeTaskRecommendation} from './comparative.model';
 
 @Component({
-    selector: 'jhi-company-detail',
-    templateUrl: './audit_process.component.html'
+    selector: 'jhi-report-compare-audit-tasks-detail',
+    templateUrl: './audit_tasks.component.html'
 })
-export class AuditProcessComponent implements OnInit, OnDestroy {
+export class AuditTasksComponent implements OnInit {
 
     currentAccount: Account;
     company: Company;
-    auditProcesses: AuditProcess[];
+    auditProcess: AuditProcess;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
@@ -27,12 +29,12 @@ export class AuditProcessComponent implements OnInit, OnDestroy {
 
     traceabilityAudits: TraceabilityAudit[];
 
-    comparativeAuditProcessOld: boolean[];
-    comparativeAuditProcessNew: boolean[];
+    comparative: ComparativeTaskRecommendation[];
 
     constructor(
         private companyService: CompanyService,
         private auditProcessService: AuditProcessService,
+        private traceabilityAuditService: TraceabilityAuditService,
         private principal: Principal,
         private eventManager: JhiEventManager,
         private route: ActivatedRoute,
@@ -42,30 +44,27 @@ export class AuditProcessComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
         this.reviewDone = false;
-        this.comparativeAuditProcessNew = [];
-        this.comparativeAuditProcessOld = [];
+
+        this.comparative = [];
+
+        this.traceabilityAudits = [];
 
         this.subscription = this.route.params.subscribe((params) => {
-            this.load(params['id']);
+            this.load(params['id'], params['process_id']);
         });
-        this.registerChangeInCompanies();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
     }
 
-    load(id) {
-        this.getLastTwoTraceabilityAuditsResults(id);
+    load(id, audit_process_id) {
         this.companyService.find(id).subscribe((company) => {
             this.company = company;
+            this.auditProcessService.findComplete(audit_process_id).subscribe((auditProcess) => {
+                this.auditProcess = auditProcess;
+                this.getLastTwoTraceabilityAuditsResults(id);
+            });
         });
-    }
-
-    loadAllAuditProcess() {
-        this.auditProcessService.queryAll({}).subscribe(
-            (res: ResponseWrapper) => this.onSuccessAuditProcess(res.json),
-            (res: ResponseWrapper) => this.onErrorAuditProcess(res.json)
-        );
     }
 
     getLastTwoTraceabilityAuditsResults(company_id: number) {
@@ -79,62 +78,39 @@ export class AuditProcessComponent implements OnInit, OnDestroy {
         window.history.back();
     }
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.eventManager.destroy(this.eventSubscriber);
-    }
-
-    registerChangeInCompanies() {
-        this.eventSubscriber = this.eventManager.subscribe(
-            'companyListModification',
-            (response) => this.load(this.company.id)
-        );
-    }
-
     trackId(index: number, item: TraceabilityAudit) {
         return item.id;
     }
 
-    containsAuditProcess(traceabilityAudit: TraceabilityAudit, auditProcess: AuditProcess) {
+    private onSuccessLastTwoTraceabilityAudits(data: TraceabilityAudit[]) {
 
-        let result = false;
+        this.traceabilityAuditService.find(data[0].id).subscribe((traceabilityAuditOld) => {
+            this.traceabilityAudits.push(traceabilityAuditOld);
 
-        traceabilityAudit.auditProcesses.forEach((item) => {
-            if (item.id === auditProcess.id) {
-                result = true;
-            }
+            this.traceabilityAuditService.find(data[1].id).subscribe((traceabilityAuditNew) => {
+                this.traceabilityAudits.push(traceabilityAuditNew);
+                this.compareTraceabilityAudits();
+            });
         });
-
-        return result;
-
-    }
-
-    reviewTraceabilityAudits() {
-
-        this.auditProcesses.forEach((auditProcess) => {
-                this.comparativeAuditProcessNew.push(this.containsAuditProcess(this.traceabilityAudits[1], auditProcess));
-                this.comparativeAuditProcessOld.push(this.containsAuditProcess(this.traceabilityAudits[0], auditProcess));
-        });
-
-        this.reviewDone = true;
-
-    }
-
-    private onSuccessAuditProcess(data) {
-        this.auditProcesses = data;
-        this.reviewTraceabilityAudits();
-    }
-
-    private onErrorAuditProcess(error) {
-        this.alertService.error(error.message, null, null);
-    }
-
-    private onSuccessLastTwoTraceabilityAudits(data) {
-        this.traceabilityAudits = data;
-        this.loadAllAuditProcess();
     }
 
     private onErrorLastTwoTraceabilityAudits(error) {
+        this.alertService.error(error.message, null, null);
+    }
+
+    private compareTraceabilityAudits() {
+        this.companyService.getComparativeLastTwoTraceabilityAuditsResults(this.company.id, this.auditProcess.id).subscribe(
+            (res: ResponseWrapper) => this.onSuccessCompareTraceabilityAudits(res.json),
+            (res: ResponseWrapper) => this.onErrorCompareTraceabilityAudits(res.json)
+        );
+    }
+
+    private onSuccessCompareTraceabilityAudits(data: ComparativeTaskRecommendation[]) {
+        this.comparative = data;
+        this.reviewDone = true;
+    }
+
+    private onErrorCompareTraceabilityAudits(error) {
         this.alertService.error(error.message, null, null);
     }
 

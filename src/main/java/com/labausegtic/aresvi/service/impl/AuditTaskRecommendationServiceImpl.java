@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,6 +62,7 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
         if (auditTaskRecommendation.getId() != null) {
 
             auditTaskRecommendation.setReviewed(true);
+            auditTaskRecommendation.setRevisedDate(LocalDate.now());
             auditTaskRecommendation = auditTaskRecommendationRepository.save(auditTaskRecommendation);
 
             for (CategoryAttrRecommendationDTO categoryAttrRecommendationDTO : auditTaskRecommendationDTO.getCategoryAttrRecommendationSet()) {

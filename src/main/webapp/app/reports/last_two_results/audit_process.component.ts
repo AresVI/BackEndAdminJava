@@ -12,7 +12,7 @@ import {AuditProcessService} from '../../entities/audit-process/audit-process.se
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 
 @Component({
-    selector: 'jhi-company-detail',
+    selector: 'jhi-report-compare-audit-process-detail',
     templateUrl: './audit_process.component.html'
 })
 export class AuditProcessComponent implements OnInit, OnDestroy {
@@ -130,8 +130,10 @@ export class AuditProcessComponent implements OnInit, OnDestroy {
     }
 
     private onSuccessLastTwoTraceabilityAudits(data) {
-        this.traceabilityAudits = data;
-        this.loadAllAuditProcess();
+        if (data.length > 1) {
+            this.traceabilityAudits = data;
+            this.loadAllAuditProcess();
+        }
     }
 
     private onErrorLastTwoTraceabilityAudits(error) {

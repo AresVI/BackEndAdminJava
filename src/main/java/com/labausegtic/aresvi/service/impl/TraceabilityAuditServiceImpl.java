@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -298,6 +299,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
 
         traceabilityAudit.setStatus(StatusTraceabilityAudit.FINISHED);
+
+        traceabilityAudit.setFinishedDate(LocalDate.now());
 
         Set<AttributeRecommendation> attributeRecommendationSet;
 

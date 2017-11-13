@@ -3,6 +3,7 @@ package com.labausegtic.aresvi.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -20,6 +21,8 @@ public class AuditTaskDTO implements Serializable {
     private Long containerId;
 
     private ContainerDTO container;
+
+    private LocalDate revisedDate;
 
     public Long getId() {
         return id;
@@ -51,6 +54,14 @@ public class AuditTaskDTO implements Serializable {
 
     public void setContainer(ContainerDTO container) {
         this.container = container;
+    }
+
+    public LocalDate getRevisedDate() {
+        return revisedDate;
+    }
+
+    public void setRevisedDate(LocalDate revisedDate) {
+        this.revisedDate = revisedDate;
     }
 
     @Override

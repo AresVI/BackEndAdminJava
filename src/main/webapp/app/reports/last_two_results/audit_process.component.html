@@ -1,6 +1,6 @@
 <div *ngIf="company">
     <h2>
-        Comparar Auditorías
+        Comparar Auditorías - {{company.name}}
     </h2>
     <hr>
 
@@ -18,7 +18,8 @@
                 <h5 class="m-0 text-secondary" *ngSwitchCase="false">
                     {{auditProcess.name}}
                 </h5>
-                <button type="button" *ngSwitchCase="true" [routerLink]="['/company', company.id ]" class="btn btn-success">
+                <button type="button" [routerLink]="['/company', company.id, 'compare_results', auditProcess.id]"
+                        class="btn btn-success" *ngSwitchCase="true" >
                     <h5 class="m-0"><span class="fa fa-search"></span> {{auditProcess.name}}</h5>
                 </button>
             </td>

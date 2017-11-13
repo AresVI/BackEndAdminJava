@@ -4,6 +4,7 @@ package com.labausegtic.aresvi.service.dto;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,6 +35,8 @@ public class TraceabilityAuditDTO implements Serializable {
     private Set<RecommendationDTO> recommendationSet;
 
     private Set<AuditProcessDTO> auditProcesses;
+
+    private LocalDate finishedDate;
 
     public Long getId() {
         return id;
@@ -125,6 +128,14 @@ public class TraceabilityAuditDTO implements Serializable {
 
     public void setAuditProcesses(Set<AuditProcessDTO> auditProcesses) {
         this.auditProcesses = auditProcesses;
+    }
+
+    public LocalDate getFinishedDate() {
+        return finishedDate;
+    }
+
+    public void setFinishedDate(LocalDate finishedDate) {
+        this.finishedDate = finishedDate;
     }
 
     @Override

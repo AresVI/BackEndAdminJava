@@ -7,6 +7,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {AuditProcessComponent} from './audit_process.component';
 import {CompanyService} from '../../entities/company/company.service';
 import {reportLastTwoResultsRoute} from './last_two_results.route';
+import {AuditProcessService} from '../../entities/audit-process/audit-process.service';
+import {AuditTasksComponent} from './audit_tasks.component';
 
 const ENTITY_STATES = [
     ...reportLastTwoResultsRoute
@@ -19,13 +21,16 @@ const ENTITY_STATES = [
         RouterModule.forRoot(ENTITY_STATES , { useHash: true })
     ],
     declarations: [
-        AuditProcessComponent
+        AuditProcessComponent,
+        AuditTasksComponent
     ],
     entryComponents: [
-        AuditProcessComponent
+        AuditProcessComponent,
+        AuditTasksComponent
     ],
     providers: [
-        CompanyService
+        CompanyService,
+        AuditProcessService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,11 +1,10 @@
 package com.labausegtic.aresvi.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -36,6 +35,9 @@ public class TraceabilityAudit implements Serializable {
 
     @Column(name = "creation_date")
     private Instant creationDate;
+
+    @Column(name = "finished_date")
+    private LocalDate finishedDate;
 
     @NotNull
     @ManyToMany
@@ -140,6 +142,14 @@ public class TraceabilityAudit implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDate getFinishedDate() {
+        return finishedDate;
+    }
+
+    public void setFinishedDate(LocalDate finishedDate) {
+        this.finishedDate = finishedDate;
     }
 
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove

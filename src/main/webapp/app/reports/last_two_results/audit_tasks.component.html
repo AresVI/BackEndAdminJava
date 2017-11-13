@@ -1,35 +1,38 @@
-<div *ngIf="company">
+<div *ngIf="company && auditProcess">
     <h2>
-        Comparar Auditorías
+        Comparar Auditorías - {{company.name}} - Proceso {{auditProcess.name}}
     </h2>
     <hr>
 
-    <table class="table table-responsive" *ngIf="traceabilityAudits && reviewDone">
-        <tbody>
-        <tr>
-            <td class="text-center align-middle">Auditoría: {{traceabilityAudits[1].creationDate  | date:'dd/MM/yyyy'}}</td>
-            <td><h3 class="text-center m-0">Procesos</h3></td>
-            <td class="text-center align-middle">Auditoría: {{traceabilityAudits[0].creationDate  | date:'dd/MM/yyyy'}}</td>
-        </tr>
-        <tr *ngFor="let auditProcess of auditProcesses; let idx = index">
-            <td class="text-center align-middle"> {{comparativeAuditProcessNew[idx]? 'Si' : 'No'}}</td>
-            <td class="text-center"
-                [ngSwitch]="comparativeAuditProcessOld[idx] === comparativeAuditProcessNew[idx] &&  comparativeAuditProcessNew[idx]">
-                <h5 class="m-0 text-secondary" *ngSwitchCase="false">
-                    {{auditProcess.name}}
-                </h5>
-                <button type="button" *ngSwitchCase="true" [routerLink]="['/company', company.id ]" class="btn btn-success">
-                    <h5 class="m-0"><span class="fa fa-search"></span> {{auditProcess.name}}</h5>
-                </button>
-            </td>
-            <td class="text-center align-middle"> {{comparativeAuditProcessOld[idx]? 'Si' : 'No'}} </td>
-        </tr>
-        </tbody>
-    </table>
+    <div *ngIf="reviewDone">
 
-
-    <button type="button" [routerLink]="['/company', company.id ]" class="btn btn-secondary">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
-
+        <table class="table table-responsive" *ngFor="let comparativeTaskRecommendation of comparative">
+            <tbody>
+            <tr>
+                <td colspan="4">
+                    <h3>{{comparativeTaskRecommendation.auditTask.name}}</h3>
+                </td>
+            </tr>
+            </tbody>
+            <tbody  *ngFor="let comparativeCatAttrRecommendation of comparativeTaskRecommendation.comparativeCatAttrRecommendationList">
+            <tr>
+                <td colspan="4">
+                    <h4>{{comparativeCatAttrRecommendation.categoryAttribute.name}}</h4>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="text-center align-middle">Auditoría: {{traceabilityAudits[1].creationDate  | date:'dd/MM/yyyy'}}</td>
+                <td></td>
+                <td class="text-center align-middle">Auditoría: {{traceabilityAudits[0].creationDate  | date:'dd/MM/yyyy'}}</td>
+            </tr>
+            <tr  *ngFor="let comparativeAttributeRecommendation of comparativeCatAttrRecommendation.comparativeAttributeRecommendationList">
+                <td>{{comparativeAttributeRecommendation.attribute.name}}</td>
+                <td></td>
+                <td>{{comparativeAttributeRecommendation.difference}}</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

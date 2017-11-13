@@ -45,6 +45,11 @@ export class CompanyService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    getComparativeLastTwoTraceabilityAuditsResults(id: number, process_id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/${id}/last_two_results/comparative/${process_id}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     queryAll(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOptionAllElements(req);
         return this.http.get(this.resourceUrl, options)

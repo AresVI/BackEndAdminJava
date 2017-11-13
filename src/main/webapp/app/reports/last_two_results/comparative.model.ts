@@ -1,14 +1,28 @@
 import { BaseEntity } from './../../shared';
-import {Container} from '../container/container.model';
-import {CategoryAttribute} from '../category-attribute/category-attribute.model';
+import {AuditTask} from "../../entities/audit-task/audit-task.model";
+import {CategoryAttribute} from "../../entities/category-attribute/category-attribute.model";
+import {Attribute} from "../../entities/attribute/attribute.model";
 
-export class AuditTask implements BaseEntity {
+export class ComparativeAttributeRecommendation {
     constructor(
-        public id?: number,
-        public name?: string,
-        public containerId?: number,
-        public container?: Container,
-        public categoryAttributeSet?: CategoryAttribute[]
+        public attribute?: Attribute,
+        public difference?: number
+    ) {
+    }
+}
+
+export class ComparativeCatAttrRecommendation {
+    constructor(
+        public categoryAttribute?: CategoryAttribute,
+        public comparativeAttributeRecommendationList?: ComparativeAttributeRecommendation[]
+    ) {
+    }
+}
+
+export class ComparativeTaskRecommendation {
+    constructor(
+        public auditTask?: AuditTask,
+        public comparativeCatAttrRecommendationList?: ComparativeCatAttrRecommendation[]
     ) {
     }
 }

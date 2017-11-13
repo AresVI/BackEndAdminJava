@@ -22,11 +22,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Comparar Últimas Dos Auditorías</h4>
-                        <a class="btn btn-info btn-block btn-lg"
-                           [routerLink]="['/company', company.id, 'compare_results' ]" disabled="disabled">
+                        <button class="btn btn-info btn-block btn-lg" type="button"
+                           [disabled]="!traceabilityAudits || traceabilityAudits.length < 2"
+                           [routerLink]="['/company', company.id, 'compare_results' ]">
                             <span class="fa fa-file-text-o"></span>
                             Comparar Auditorías
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

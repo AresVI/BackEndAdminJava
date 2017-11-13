@@ -560,6 +560,9 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                         aR_Old.isImplemented() == aR_New.isImplemented() ? 0 : (aR_New.isImplemented() ? 1 : -1 )
                     );
 
+                    comparativeAttributeRecommendationDTO.setImplementedOld(aR_Old.isImplemented());
+                    comparativeAttributeRecommendationDTO.setImplementedNew(aR_New.isImplemented());
+
                     comparativeAttributeRecommendationList.add(comparativeAttributeRecommendationDTO);
 
                 }

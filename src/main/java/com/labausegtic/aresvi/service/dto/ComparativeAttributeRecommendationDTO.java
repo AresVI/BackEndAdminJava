@@ -14,6 +14,10 @@ public class ComparativeAttributeRecommendationDTO implements Serializable {
 
     private int difference;
 
+    private boolean implementedNew;
+
+    private boolean implementedOld;
+
     public Attribute getAttribute() {
         return attribute;
     }
@@ -28,5 +32,21 @@ public class ComparativeAttributeRecommendationDTO implements Serializable {
 
     public void setDifference(int difference) {
         this.difference = difference;
+    }
+
+    public boolean isImplementedNew() {
+        return implementedNew;
+    }
+
+    public void setImplementedNew(boolean implementedNew) {
+        this.implementedNew = implementedNew;
+    }
+
+    public boolean isImplementedOld() {
+        return implementedOld;
+    }
+
+    public void setImplementedOld(boolean implementedOld) {
+        this.implementedOld = implementedOld;
     }
 }

@@ -1,4 +1,3 @@
-import { BaseEntity } from './../../shared';
 import {AuditTask} from "../../entities/audit-task/audit-task.model";
 import {CategoryAttribute} from "../../entities/category-attribute/category-attribute.model";
 import {Attribute} from "../../entities/attribute/attribute.model";
@@ -6,7 +5,9 @@ import {Attribute} from "../../entities/attribute/attribute.model";
 export class ComparativeAttributeRecommendation {
     constructor(
         public attribute?: Attribute,
-        public difference?: number
+        public difference?: number,
+        public implementedNew?: boolean,
+        public implementedOld?: boolean
     ) {
     }
 }

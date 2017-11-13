@@ -20,7 +20,7 @@ public class ContainerCompleteDTO implements Serializable {
 
     private Long auditProcessId;
 
-    private Set<AuditTaskCompleteDTO> auditTaskDTOSet;
+    private Set<AuditTaskCompleteDTO> auditTaskSet;
 
     public Long getId() {
         return id;
@@ -54,12 +54,12 @@ public class ContainerCompleteDTO implements Serializable {
         this.auditProcessId = auditProcessId;
     }
 
-    public Set<AuditTaskCompleteDTO> getAuditTaskDTOSet() {
-        return auditTaskDTOSet;
+    public Set<AuditTaskCompleteDTO> getAuditTaskSet() {
+        return auditTaskSet;
     }
 
-    public void setAuditTaskDTOSet(Set<AuditTaskCompleteDTO> auditTaskDTOSet) {
-        this.auditTaskDTOSet = auditTaskDTOSet;
+    public void setAuditTaskSet(Set<AuditTaskCompleteDTO> auditTaskSet) {
+        this.auditTaskSet = auditTaskSet;
     }
 
     @Override

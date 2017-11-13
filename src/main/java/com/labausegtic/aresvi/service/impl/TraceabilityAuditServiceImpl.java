@@ -3,12 +3,11 @@ package com.labausegtic.aresvi.service.impl;
 import com.labausegtic.aresvi.domain.*;
 import com.labausegtic.aresvi.service.BRMSService;
 import com.labausegtic.aresvi.service.UserService;
-import com.labausegtic.aresvi.service.dto.InferenceParameterDTO;
-import com.labausegtic.aresvi.service.dto.ResultInferenceDTO;
+import com.labausegtic.aresvi.service.dto.*;
 import com.labausegtic.aresvi.repository.*;
 import com.labausegtic.aresvi.security.SecurityUtils;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
-import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
+import com.labausegtic.aresvi.service.mapper.AuditTaskMapper;
 import com.labausegtic.aresvi.service.mapper.TraceabilityAuditMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -60,6 +57,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final AuditorRepository auditorRepository;
 
+    private final AuditTaskMapper auditTaskMapper;
+
     public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository,
                                         RecommendationRepository recommendationRepository,
                                         AuditProcessRecommendationRepository auditProcessRecommendationRepository,
@@ -70,7 +69,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                                         AttributeRepository attributeRepository,
                                         AttributeRecommendationRepository attributeRecommendationRepository,
                                         BRMSService brmsService, TraceabilityAuditMapper traceabilityAuditMapper,
-                                        UserService userService, AuditorRepository auditorRepository) {
+                                        UserService userService, AuditorRepository auditorRepository, AuditTaskMapper auditTaskMapper) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
         this.recommendationRepository = recommendationRepository;
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
@@ -85,6 +84,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         this.traceabilityAuditMapper = traceabilityAuditMapper;
         this.userService = userService;
         this.auditorRepository = auditorRepository;
+        this.auditTaskMapper = auditTaskMapper;
     }
 
     /**
@@ -421,4 +421,150 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         return result;
     }
+
+    @Override
+    public List<ComparativeTaskRecommendationDTO> compareLastTwoTraceabilityAuditsFinished(Long company_id, Long process_id) {
+
+        Set<TraceabilityAudit> query;
+
+        TraceabilityAudit[] traceabilityAuditList = new TraceabilityAudit[2];
+
+        query = traceabilityAuditRepository.findFirst2ByCompanyIdAndStatusOrderByCreationDateDesc(
+            company_id, StatusTraceabilityAudit.FINISHED
+        );
+
+        Set<Container> containerSet = containerRepository.findAllByAuditProcess_Id(process_id);
+
+        List<AuditTask> auditTaskList = auditTaskRepository.findAllByContainerIn(containerSet);
+
+        traceabilityAuditList = query.toArray(traceabilityAuditList);
+
+        List<AuditTaskRecommendation> auditTaskRecommendationListOld = getAuditTaskRecommendationFromTraceabilityAuditAndProcessId(
+            traceabilityAuditList[0], process_id, auditTaskList
+        );
+
+        List<AuditTaskRecommendation> auditTaskRecommendationListNew = getAuditTaskRecommendationFromTraceabilityAuditAndProcessId(
+            traceabilityAuditList[1], process_id, auditTaskList
+        );
+
+
+
+        return compareTwoAuditTaskRecommendationLists(auditTaskRecommendationListOld, auditTaskRecommendationListNew);
+    }
+
+    private List<AuditTaskRecommendation> getAuditTaskRecommendationFromTraceabilityAuditAndProcessId(TraceabilityAudit t,
+                                                                                                      Long process_id,
+                                                                                                      List<AuditTask> auditTaskList){
+
+        Recommendation recommendation;
+
+        recommendation = (Recommendation) recommendationRepository.findAllByTraceabilityAudit_Id(t.getId()).toArray()[0];
+
+        AuditProcessRecommendation apRecommendationOld;
+
+        apRecommendationOld = auditProcessRecommendationRepository.findByRecommendation_IdAndAuditProcessId(recommendation.getId(), process_id);
+
+        List<AuditTaskRecommendation> auditTaskRecommendationList;
+
+        auditTaskRecommendationList = auditTaskRecommendationRepository.findAllByAuditProcessRecom_IdAndAuditTaskIsIn(
+            apRecommendationOld.getId(), auditTaskList
+        );
+
+        return auditTaskRecommendationList;
+
+    }
+
+    private List<ComparativeTaskRecommendationDTO> compareTwoAuditTaskRecommendationLists(
+                List<AuditTaskRecommendation> auditTaskRecommendationListOld,
+                List<AuditTaskRecommendation> auditTaskRecommendationListNew
+            ){
+
+        List<ComparativeTaskRecommendationDTO> comparativeTaskRecommendationDTOList = new ArrayList<>();
+
+        for (AuditTaskRecommendation atR_Old: auditTaskRecommendationListOld) {
+            for (AuditTaskRecommendation atR_New: auditTaskRecommendationListNew) {
+                if (atR_Old.getAuditTask().getId() == atR_New.getAuditTask().getId()) {
+
+                    ComparativeTaskRecommendationDTO comparativeTaskRecommendationDTO = new ComparativeTaskRecommendationDTO();
+
+                    comparativeTaskRecommendationDTO.setAuditTask(atR_New.getAuditTask());
+
+                    comparativeTaskRecommendationDTO.setComparativeCatAttrRecommendationList(
+                        compareTwoCatAttrRecommendationLists(
+                            categoryAttrRecommendationRepository.findAllByAuditTaskRecom_Id(atR_Old.getId()),
+                            categoryAttrRecommendationRepository.findAllByAuditTaskRecom_Id(atR_New.getId())
+                        )
+                    );
+
+                    comparativeTaskRecommendationDTOList.add(comparativeTaskRecommendationDTO);
+                }
+            }
+        }
+
+        return  comparativeTaskRecommendationDTOList;
+    }
+
+    private List<ComparativeCatAttrRecommendationDTO> compareTwoCatAttrRecommendationLists(
+                List<CategoryAttrRecommendation> categoryAttrRecommendationListOld,
+                List<CategoryAttrRecommendation> categoryAttrRecommendationListNew
+            ) {
+
+        List<ComparativeCatAttrRecommendationDTO> comparativeCatAttrRecommendationList = new ArrayList<>();
+
+        for (CategoryAttrRecommendation caR_Old: categoryAttrRecommendationListOld) {
+            for (CategoryAttrRecommendation caR_New: categoryAttrRecommendationListNew) {
+                if (caR_Old.getCategoryAttribute().getId() == caR_New.getCategoryAttribute().getId()) {
+
+                    ComparativeCatAttrRecommendationDTO comparativeCatAttrRecommendationDTO;
+
+                    comparativeCatAttrRecommendationDTO = new ComparativeCatAttrRecommendationDTO();
+
+                    comparativeCatAttrRecommendationDTO.setCategoryAttribute(caR_New.getCategoryAttribute());
+
+                    comparativeCatAttrRecommendationDTO.setComparativeAttributeRecommendationList(
+                        compareTwoAttributeRecommendationLists(
+                            attributeRecommendationRepository.findAllByCategoryAttrRecom_Id(caR_Old.getId()),
+                            attributeRecommendationRepository.findAllByCategoryAttrRecom_Id(caR_New.getId())
+                        )
+                    );
+
+                    comparativeCatAttrRecommendationList.add(comparativeCatAttrRecommendationDTO);
+                }
+            }
+        }
+
+        return comparativeCatAttrRecommendationList;
+    }
+
+    private List<ComparativeAttributeRecommendationDTO> compareTwoAttributeRecommendationLists(
+                List<AttributeRecommendation> attributeRecommendationListOld,
+                List<AttributeRecommendation> attributeRecommendationListNew
+            ) {
+
+        List<ComparativeAttributeRecommendationDTO> comparativeAttributeRecommendationList = new ArrayList<>();
+
+        for (AttributeRecommendation aR_Old: attributeRecommendationListOld) {
+            for (AttributeRecommendation aR_New: attributeRecommendationListNew) {
+                if (aR_Old.getAttribute().getId() == aR_New.getAttribute().getId()) {
+
+                    ComparativeAttributeRecommendationDTO comparativeAttributeRecommendationDTO;
+
+                    comparativeAttributeRecommendationDTO = new ComparativeAttributeRecommendationDTO();
+
+                    comparativeAttributeRecommendationDTO.setAttribute(aR_New.getAttribute());
+
+                    comparativeAttributeRecommendationDTO.setDifference(
+                        aR_Old.isImplemented() == aR_New.isImplemented() ? 0 : (aR_New.isImplemented() ? 1 : -1 )
+                    );
+
+                    comparativeAttributeRecommendationList.add(comparativeAttributeRecommendationDTO);
+
+                }
+            }
+        }
+
+        return  comparativeAttributeRecommendationList;
+
+    }
+
 }

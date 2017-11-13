@@ -81,7 +81,7 @@ public class AuditTaskServiceImpl implements AuditTaskService{
 
             AuditTaskCompleteDTO auditTaskCompleteDTO = auditTaskCompleteMapper.toDto(at);
 
-            auditTaskCompleteDTO.setCategoryAttributeDTOSet(
+            auditTaskCompleteDTO.setCategoryAttributeSet(
                 categoryAttributeService.findAllByAuditTaskId(auditTaskCompleteDTO.getId())
             );
 

@@ -12,7 +12,7 @@ public class AuditProcessCompleteDTO  implements Serializable {
     @NotNull
     private String name;
 
-    private Set<ContainerCompleteDTO> containerDTOSet;
+    private Set<ContainerCompleteDTO> containerSet;
 
     public Long getId() {
         return id;
@@ -30,28 +30,12 @@ public class AuditProcessCompleteDTO  implements Serializable {
         this.name = name;
     }
 
-    public Set<ContainerCompleteDTO> getContainerDTOSet() {
-        return containerDTOSet;
+    public Set<ContainerCompleteDTO> getContainerSet() {
+        return containerSet;
     }
 
-    public void setContainerDTOSet(Set<ContainerCompleteDTO> containerDTOSet) {
-        this.containerDTOSet = containerDTOSet;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        AuditProcessDTO auditProcessDTO = (AuditProcessDTO) o;
-        if(auditProcessDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), auditProcessDTO.getId());
+    public void setContainerSet(Set<ContainerCompleteDTO> containerSet) {
+        this.containerSet = containerSet;
     }
 
     @Override
@@ -61,7 +45,7 @@ public class AuditProcessCompleteDTO  implements Serializable {
 
     @Override
     public String toString() {
-        return "AuditProcessDTO{" +
+        return "AuditProcess{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
             "}";

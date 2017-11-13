@@ -84,7 +84,7 @@ public class ContainerServiceImpl implements ContainerService{
 
             ContainerCompleteDTO containerCompleteDTO = containerCompleteMapper.toDto(c);
 
-            containerCompleteDTO.setAuditTaskDTOSet(auditTaskService.findAllByContainer_Id(c.getId()));
+            containerCompleteDTO.setAuditTaskSet(auditTaskService.findAllByContainer_Id(c.getId()));
 
             result.add(containerCompleteDTO);
         }

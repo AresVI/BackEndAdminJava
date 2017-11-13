@@ -18,7 +18,7 @@ public class AuditTaskCompleteDTO implements Serializable {
 
     private Long containerId;
 
-    private Set<CategoryAttributeCompleteDTO> categoryAttributeDTOSet;
+    private Set<CategoryAttributeCompleteDTO> categoryAttributeSet;
 
     public Long getId() {
         return id;
@@ -44,12 +44,12 @@ public class AuditTaskCompleteDTO implements Serializable {
         this.containerId = containerId;
     }
 
-    public Set<CategoryAttributeCompleteDTO> getCategoryAttributeDTOSet() {
-        return categoryAttributeDTOSet;
+    public Set<CategoryAttributeCompleteDTO> getCategoryAttributeSet() {
+        return categoryAttributeSet;
     }
 
-    public void setCategoryAttributeDTOSet(Set<CategoryAttributeCompleteDTO> categoryAttributeDTOSet) {
-        this.categoryAttributeDTOSet = categoryAttributeDTOSet;
+    public void setCategoryAttributeSet(Set<CategoryAttributeCompleteDTO> categoryAttributeSet) {
+        this.categoryAttributeSet = categoryAttributeSet;
     }
 
     @Override

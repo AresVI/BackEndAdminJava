@@ -81,7 +81,7 @@ public class CategoryAttributeServiceImpl implements CategoryAttributeService{
 
             CategoryAttributeCompleteDTO categoryAttributeCompleteDTO = categoryAttributeCompleteMapper.toDto(ca);
 
-            categoryAttributeCompleteDTO.setAttributeCompleteDTOSet(
+            categoryAttributeCompleteDTO.setAttributeSet(
                 attributeService.findAllByCategoryAttribute_Id(categoryAttributeCompleteDTO.getId())
             );
 

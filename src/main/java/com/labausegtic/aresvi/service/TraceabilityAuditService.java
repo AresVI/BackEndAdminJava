@@ -1,10 +1,11 @@
 package com.labausegtic.aresvi.service;
 
-import com.labausegtic.aresvi.domain.TraceabilityAudit;
+import com.labausegtic.aresvi.service.dto.ComparativeTaskRecommendationDTO;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -54,4 +55,6 @@ public interface TraceabilityAuditService {
     TraceabilityAuditDTO finishTraceabilityAudit(Long id);
 
     Set<TraceabilityAuditDTO> findLastTwoTraceabilityAuditsFinished(Long id);
+
+    List<ComparativeTaskRecommendationDTO> compareLastTwoTraceabilityAuditsFinished(Long id, Long process_id);
 }

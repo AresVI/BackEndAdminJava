@@ -132,7 +132,7 @@ public class AuditProcessResource {
 
         auditProcessCompleteDTO.setName(auditProcessDTO.getName());
 
-        auditProcessCompleteDTO.setContainerDTOSet(content);
+        auditProcessCompleteDTO.setContainerSet(content);
 
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditProcessCompleteDTO));
     }

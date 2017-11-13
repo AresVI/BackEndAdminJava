@@ -3,6 +3,7 @@ package com.labausegtic.aresvi.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.labausegtic.aresvi.service.CompanyService;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
+import com.labausegtic.aresvi.service.dto.ComparativeTaskRecommendationDTO;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
@@ -132,6 +133,18 @@ public class CompanyResource {
         result= traceabilityAuditService.findLastTwoTraceabilityAuditsFinished(id);
 
         return  new ResponseEntity<>(result, null, HttpStatus.OK);
+    }
+
+    @GetMapping("/companies/{id}/last_two_results/comparative/{process_id}")
+    @Timed
+    public ResponseEntity<List<ComparativeTaskRecommendationDTO>> getLastTwoTraceabilityAudit(@PathVariable Long id, @PathVariable Long process_id) {
+        log.debug("REST request to get Company : {}", id);
+
+        List<ComparativeTaskRecommendationDTO> comparativeProcessRecommendationDTO;
+
+        comparativeProcessRecommendationDTO = traceabilityAuditService.compareLastTwoTraceabilityAuditsFinished(id, process_id);
+
+        return  new ResponseEntity<>(comparativeProcessRecommendationDTO, null, HttpStatus.OK);
     }
 
     /**

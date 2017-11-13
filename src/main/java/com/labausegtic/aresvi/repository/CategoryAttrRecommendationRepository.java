@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -15,6 +15,6 @@ import java.util.Set;
 @Repository
 public interface CategoryAttrRecommendationRepository extends JpaRepository<CategoryAttrRecommendation, Long> {
 
-    Set<CategoryAttrRecommendation> findAllByAuditTaskRecom_Id(Long auditTaskRecom_id);
+    List<CategoryAttrRecommendation> findAllByAuditTaskRecom_Id(Long auditTaskRecom_id);
 
 }

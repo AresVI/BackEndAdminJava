@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -16,7 +17,7 @@ import java.util.Set;
 @Repository
 public interface AttributeRecommendationRepository extends JpaRepository<AttributeRecommendation, Long> {
 
-    Set<AttributeRecommendation> findAllByCategoryAttrRecom_Id(Long categoryAttrRecom_id);
+    List<AttributeRecommendation> findAllByCategoryAttrRecom_Id(Long categoryAttrRecom_id);
 
     @Query( name = "findAllForTraceabilityAuditId",
         value =

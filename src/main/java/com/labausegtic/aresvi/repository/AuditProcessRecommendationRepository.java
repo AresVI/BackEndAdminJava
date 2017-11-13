@@ -17,4 +17,5 @@ public interface AuditProcessRecommendationRepository extends JpaRepository<Audi
 
     Set<AuditProcessRecommendation> findAllByRecommendation_Id(Long recommendation_id);
 
+    AuditProcessRecommendation findByRecommendation_IdAndAuditProcessId(Long recommendation_id, Long process_id);
 }

@@ -168,7 +168,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
     @Transactional(readOnly = true)
     public TraceabilityAuditDTO findAllLastByCompanyId(Long company_id) {
 
-        Set<TraceabilityAudit> traceabilityAuditSet = traceabilityAuditRepository.findByCompanyIdOrderByCreationDateDesc(company_id);
+        Set<TraceabilityAudit> traceabilityAuditSet = traceabilityAuditRepository.findByCompanyIdOrderByFinishedDateDesc(company_id);
 
         if (traceabilityAuditSet.size() > 0) {
             return traceabilityAuditMapper.toDto((TraceabilityAudit)(traceabilityAuditSet.toArray()[0]));
@@ -411,7 +411,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         Set<TraceabilityAudit> query;
 
-        query = traceabilityAuditRepository.findFirst2ByCompanyIdAndStatusOrderByCreationDateDesc(
+        query = traceabilityAuditRepository.findFirst2ByCompanyIdAndStatusOrderByFinishedDateDesc(
             company_id, StatusTraceabilityAudit.FINISHED
         );
 
@@ -431,7 +431,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         TraceabilityAudit[] traceabilityAuditList = new TraceabilityAudit[2];
 
-        query = traceabilityAuditRepository.findFirst2ByCompanyIdAndStatusOrderByCreationDateDesc(
+        query = traceabilityAuditRepository.findFirst2ByCompanyIdAndStatusOrderByFinishedDateDesc(
             company_id, StatusTraceabilityAudit.FINISHED
         );
 

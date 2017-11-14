@@ -86,10 +86,11 @@ public class UserService {
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.NO_ROLE);
         Set<Authority> authorities = new HashSet<>();
-        String encryptedPassword = passwordEncoder.encode(password);
+        //String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(login);
         // new user gets initially a generated password
-        newUser.setPassword(encryptedPassword);
+        //newUser.setPassword(encryptedPassword);
+        newUser.setPassword(passwordEncoder.encode(password));
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
         newUser.setEmail(email);
@@ -125,8 +126,8 @@ public class UserService {
             );
             user.setAuthorities(authorities);
         }
-        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
-        user.setPassword(encryptedPassword);
+        //String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
+        //user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);

@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.service;
 
+import com.labausegtic.aresvi.domain.Company;
 import com.labausegtic.aresvi.service.dto.ComparativeTaskRecommendationDTO;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,7 @@ public interface TraceabilityAuditService {
 
     Page<TraceabilityAuditDTO> findAllByStatus(Pageable pageable, String status);
 
-    Page<TraceabilityAuditDTO> findAllFinishedByCategoryAndCompany(Pageable pageable, String category, Long company_id);
+    Page<TraceabilityAuditDTO> findAllFinishedByCategoryAndCompany(Pageable pageable, String category, Long company_id, Set<Company> companySet);
 
     /**
      *  Get the "id" traceabilityAudit.

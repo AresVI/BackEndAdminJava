@@ -1,10 +1,20 @@
 package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.labausegtic.aresvi.domain.Auditor;
+import com.labausegtic.aresvi.domain.Authority;
+import com.labausegtic.aresvi.domain.Company;
+import com.labausegtic.aresvi.domain.User;
+import com.labausegtic.aresvi.repository.AuditorRepository;
+import com.labausegtic.aresvi.repository.CompanyRepository;
+import com.labausegtic.aresvi.security.AuthoritiesConstants;
+import com.labausegtic.aresvi.security.SecurityUtils;
 import com.labausegtic.aresvi.service.CompanyService;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
+import com.labausegtic.aresvi.service.UserService;
 import com.labausegtic.aresvi.service.dto.ComparativeTaskRecommendationDTO;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
+import com.labausegtic.aresvi.service.mapper.CompanyMapper;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.CompanyDTO;
@@ -23,9 +33,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * REST controller for managing Company.
@@ -40,11 +48,23 @@ public class CompanyResource {
 
     private final CompanyService companyService;
 
+    private final CompanyRepository companyRepository;
+
     private final TraceabilityAuditService traceabilityAuditService;
 
-    public CompanyResource(CompanyService companyService, TraceabilityAuditService traceabilityAuditService) {
+    private final UserService userService;
+
+    private final AuditorRepository auditorRepository;
+
+    private final CompanyMapper companyMapper;
+
+    public CompanyResource(CompanyService companyService, CompanyRepository companyRepository, TraceabilityAuditService traceabilityAuditService, UserService userService, AuditorRepository auditorRepository, CompanyMapper companyMapper) {
         this.companyService = companyService;
+        this.companyRepository = companyRepository;
         this.traceabilityAuditService = traceabilityAuditService;
+        this.userService = userService;
+        this.auditorRepository = auditorRepository;
+        this.companyMapper = companyMapper;
     }
 
     /**
@@ -102,11 +122,33 @@ public class CompanyResource {
 
         pageable = pagination != null && pagination ? pageable : null;
 
-        Page<CompanyDTO> page = companyService.findAll(pageable);
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin());
 
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies");
+        Authority authority = new Authority();
+        authority.setName(AuthoritiesConstants.AUDITOR_INTERNAL);
 
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        if (user.get().getAuthorities().contains(authority)) {
+
+            Auditor auditor = auditorRepository.findAuditorByUser_Id(user.get().getId());
+
+            List<CompanyDTO> result = new ArrayList<>();
+
+            for (Company c : auditor.getCompanies()){
+                result.add(companyMapper.toDto(c));
+            }
+
+            return new ResponseEntity<>(result, null, HttpStatus.OK);
+
+
+        } else {
+
+            Page<CompanyDTO> page  = companyService.findAll(pageable);
+
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies");
+
+            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+
+        }
     }
 
     /**

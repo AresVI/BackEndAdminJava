@@ -19,4 +19,7 @@ import java.util.List;
 public interface CompanyContactPersonRepository extends JpaRepository<CompanyContactPerson, Long> {
 
     Page<CompanyContactPerson> findCompanyContactPeopleByCompany_Id(Long company_id, Pageable pageable);
+
+
+
 }

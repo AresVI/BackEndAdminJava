@@ -126,19 +126,30 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     @Override
     @Transactional(readOnly = true)
-    public Page<TraceabilityAuditDTO> findAllFinishedByCategoryAndCompany(Pageable pageable, String category,Long company_id) {
+    public Page<TraceabilityAuditDTO> findAllFinishedByCategoryAndCompany(Pageable pageable, String category,
+                                                                          Long company_id, Set<Company> companySet) {
         log.debug("Request to get all TraceabilityAudits");
 
         String status = "STATUS_FINISHED";
 
         if (category == null && company_id == 0L) {
-            return traceabilityAuditRepository.findAllByStatus(pageable, status)
-                .map(traceabilityAuditMapper::toDto);
+            if (companySet != null) {
+                return traceabilityAuditRepository.findAllByStatusAndCompanyIn(pageable, status, companySet)
+                    .map(traceabilityAuditMapper::toDto);
+            } else {
+                return traceabilityAuditRepository.findAllByStatus(pageable, status)
+                    .map(traceabilityAuditMapper::toDto);
+            }
         }
 
         if (company_id == 0L) {
-            return traceabilityAuditRepository.findAllByCategoryAndStatus(pageable, category, status)
-                .map(traceabilityAuditMapper::toDto);
+            if (companySet != null) {
+                return traceabilityAuditRepository.findAllByCategoryAndStatusAndCompanyIn(pageable, category, status, companySet)
+                    .map(traceabilityAuditMapper::toDto);
+            } else {
+                return traceabilityAuditRepository.findAllByCategoryAndStatus(pageable, category, status)
+                    .map(traceabilityAuditMapper::toDto);
+            }
         }
 
         if (category == null) {

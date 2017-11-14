@@ -59,10 +59,11 @@ export class StartComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.traceabilityAudit = new TraceabilityAudit();
+        this.traceabilityAudit.companyId = 0;
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.traceabilityAudit = new TraceabilityAudit();
         this.loadAllCompanies();
         this.filter_company = '';
         this.companies = [];
@@ -102,11 +103,11 @@ export class StartComponent implements OnInit {
     }
 
     changeCompanyId() {
+        this.traceabilityAudit.companyId = this.traceabilityAudit.company.id;
 
         this.loadAllCompanyContactPeople();
 
         this.traceabilityAudit.companyContactPersonId = 0;
-
     }
 
     changeCompanyContactPeopleId() {

@@ -1,14 +1,16 @@
 package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.labausegtic.aresvi.domain.AuditProcessRecommendation;
+import com.labausegtic.aresvi.domain.Auditor;
+import com.labausegtic.aresvi.domain.Authority;
 import com.labausegtic.aresvi.domain.StatusTraceabilityAudit;
-import com.labausegtic.aresvi.service.AuditProcessRecommendationService;
+import com.labausegtic.aresvi.domain.User;
+import com.labausegtic.aresvi.repository.AuditorRepository;
+import com.labausegtic.aresvi.security.AuthoritiesConstants;
+import com.labausegtic.aresvi.security.SecurityUtils;
 import com.labausegtic.aresvi.service.RecommendationService;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
-import com.labausegtic.aresvi.service.dto.AuditProcessDTO;
-import com.labausegtic.aresvi.service.dto.AuditProcessRecommendationDTO;
-import com.labausegtic.aresvi.service.dto.RecommendationDTO;
+import com.labausegtic.aresvi.service.UserService;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
@@ -30,7 +32,6 @@ import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * REST controller for managing TraceabilityAudit.
@@ -47,9 +48,15 @@ public class TraceabilityAuditResource {
 
     private final RecommendationService recommendationService;
 
-    public TraceabilityAuditResource(TraceabilityAuditService traceabilityAuditService, RecommendationService recommendationService) {
+    private final UserService userService;
+
+    private final AuditorRepository auditorRepository;
+
+    public TraceabilityAuditResource(TraceabilityAuditService traceabilityAuditService, RecommendationService recommendationService, UserService userService, AuditorRepository auditorRepository) {
         this.traceabilityAuditService = traceabilityAuditService;
         this.recommendationService = recommendationService;
+        this.userService = userService;
+        this.auditorRepository = auditorRepository;
     }
 
     /**
@@ -150,7 +157,17 @@ public class TraceabilityAuditResource {
 
         Page<TraceabilityAuditDTO> page;
 
-        page = traceabilityAuditService.findAllFinishedByCategoryAndCompany(pageable, category, company_id) ;
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin());
+
+        Authority authority = new Authority();
+        authority.setName(AuthoritiesConstants.AUDITOR_INTERNAL);
+
+        if (user.get().getAuthorities().contains(authority)) {
+            Auditor auditor = auditorRepository.findAuditorByUser_Id(user.get().getId());
+            page = traceabilityAuditService.findAllFinishedByCategoryAndCompany(pageable, category, company_id, auditor.getCompanies()) ;
+        } else {
+            page = traceabilityAuditService.findAllFinishedByCategoryAndCompany(pageable, category, company_id, null) ;
+        }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/traceability-audits/finished");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

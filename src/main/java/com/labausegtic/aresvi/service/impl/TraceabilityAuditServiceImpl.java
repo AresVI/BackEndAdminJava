@@ -407,9 +407,9 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
             countLevel5/totalLevel5
         );
 
-        ResultInferenceDTO category = brmsService.getCategory(inferenceParameterDTO);
+        // ResultInferenceDTO category = brmsService.getCategory(inferenceParameterDTO);
 
-        traceabilityAudit.setCategory(category.getCategory());
+        traceabilityAudit.setCategory("B"); // category.getCategory());
 
         traceabilityAuditRepository.save(traceabilityAudit);
 

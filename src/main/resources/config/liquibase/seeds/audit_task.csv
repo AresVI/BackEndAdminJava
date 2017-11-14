@@ -1,30 +1,13 @@
 id;name;container_id
 1;Preparación de la Tierra;1
-2;Preparación de Plantas;1
-3;Preparación para Riego;1
-4;Plantación de Vid;1
-5;Análisis de Madurez;1
 6;Cosecha;1
 7;Traslado de Uva;1
-8;Sanitización de elementos de elaboración;2
-9;Recepción de cosecha;2
 10;Despalillado;2
 11;Estrujado;2
 12;Prensado de orujos;3
-13;Mezcla de vinos;3
-14;Decantación sólidos – líquidos;3
 15;Depositar en cubas y barricas;4
 16;Retiro del mosto;4
-17;Añadir dióxido de azufre;5
-18;Enviar a fermentación;6
-19;Adicionar bacterias malolácticas;6
-20;Iniciar fermentación lenta;6
-21;Seleccionar residuos sólidos;7
-22;Desechar residuos sólidos;7
-23;Seleccionar barricas y conservar el vino en barricas;7
 24;Analizar pureza del vino;8
 25;Depositar en Barríca de Reposo;9
-26;Seleccionar Carateríasticas de Tapón y Botella;10
 27;Fraccionar;10
-28;Etiquetar;10
 29;Despacho;10

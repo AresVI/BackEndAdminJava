@@ -44,6 +44,7 @@ export const userMgmtRoute: Routes = [
             'pagingParams': UserResolvePagingParams
         },
         data: {
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'userManagement.home.title'
         }
     },
@@ -51,6 +52,7 @@ export const userMgmtRoute: Routes = [
         path: 'user-management/:login',
         component: UserMgmtDetailComponent,
         data: {
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'userManagement.home.title'
         }
     }
@@ -60,16 +62,25 @@ export const userDialogRoute: Routes = [
     {
         path: 'user-management-new',
         component: UserDialogComponent,
+        data: {
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
+        },
         outlet: 'popup'
     },
     {
         path: 'user-management/:login/edit',
         component: UserDialogComponent,
+        data: {
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
+        },
         outlet: 'popup'
     },
     {
         path: 'user-management/:login/delete',
         component: UserDeleteDialogComponent,
+        data: {
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
+        },
         outlet: 'popup'
     }
 ];

@@ -33,7 +33,7 @@ export const auditorRoute: Routes = [
             'pagingParams': AuditorResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.auditor.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const auditorRoute: Routes = [
         path: 'auditor/:id',
         component: AuditorDetailComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.auditor.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -53,7 +53,7 @@ export const auditorPopupRoute: Routes = [
         path: 'auditor-new',
         component: AuditorPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.auditor.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const auditorPopupRoute: Routes = [
         path: 'auditor/:id/edit',
         component: AuditorPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.auditor.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -73,7 +73,7 @@ export const auditorPopupRoute: Routes = [
         path: 'auditor/:id/delete',
         component: AuditorDeletePopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.auditor.home.title'
         },
         canActivate: [UserRouteAccessService],

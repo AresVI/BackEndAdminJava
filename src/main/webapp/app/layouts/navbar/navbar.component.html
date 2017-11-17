@@ -10,7 +10,19 @@
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="nav navbar-nav navbar-right ml-auto">
 
-            <li *jhiHasAnyAuthority="['ROLE_AUDITOR_INTERNAL', 'ROLE_AUDITOR_EXTERNAL']" ngbDropdown class="nav-item pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE']" ngbDropdown class="nav-item pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="user-management" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <span jhiTranslate="global.menu.admin.userManagement">User management</span>
+                </a>
+            </li>
+
+            <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE']" ngbDropdown class="nav-item pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="auditor" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <span jhiTranslate="global.menu.entities.auditor">Auditor</span>
+                </a>
+            </li>
+
+            <li *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL', 'ROLE_AUDITOR_INTERNAL']" ngbDropdown class="nav-item pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="/search/traceability_audit" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <span jhiTranslate="global.menu.search.traceability_audit">Search Traceability Audit</span>
                 </a>
@@ -63,7 +75,7 @@
                         <a class="dropdown-item" routerLink="category-attribute" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.categoryAttribute">Category Attribute</span>
-                        </a>
+                        </a>adminadmini                                 *jhiHasAnyAuthority="['ROLE_ADMINISTRATOR']"
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="audit-task" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">

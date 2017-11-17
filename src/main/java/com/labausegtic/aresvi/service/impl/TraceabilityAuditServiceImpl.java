@@ -384,32 +384,32 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         inferenceParameterDTO.setLevelComputerization(levelComputerization);
 
         inferenceParameterDTO.setPercentageNotRequired(
-            (countNotRequired/totalNotRequired)
+            totalNotRequired == 0 ? 0 : (countNotRequired/totalNotRequired)
         );
 
         inferenceParameterDTO.setPercentageLevel1(
-            countLevel1/totalLevel1
+            totalLevel1 == 0 ? 0 : countLevel1/totalLevel1
         );
 
         inferenceParameterDTO.setPercentageLevel2(
-            countLevel2/totalLevel2
+            totalLevel2 == 0 ? 0 : countLevel2/totalLevel2
         );
 
         inferenceParameterDTO.setPercentageLevel3(
-            countLevel3/totalLevel3
+            totalLevel3 == 0 ? 0 : countLevel3/totalLevel3
         );
 
         inferenceParameterDTO.setPercentageLevel4(
-            countLevel4/totalLevel4
+            totalLevel4 == 0 ? 0 : countLevel4/totalLevel4
         );
 
         inferenceParameterDTO.setPercentageLevel5(
-            countLevel5/totalLevel5
+            totalLevel5 == 0 ? 0 : countLevel5/totalLevel5
         );
 
-        // ResultInferenceDTO category = brmsService.getCategory(inferenceParameterDTO);
+        ResultInferenceDTO category = brmsService.getCategory(inferenceParameterDTO);
 
-        traceabilityAudit.setCategory("B"); // category.getCategory());
+        traceabilityAudit.setCategory(category.getCategory());
 
         traceabilityAuditRepository.save(traceabilityAudit);
 

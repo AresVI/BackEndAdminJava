@@ -298,30 +298,3 @@ textarea{
     resize: none;
     height: 250px;
 }
-
-.navbar-dark .navbar-nav .nav-link{
-    color: white;
-}
-
-a.list-group-item-info, button.list-group-item-info {
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.list-group-item-info {
-    color: #0c5460;
-    background-color: #096675;
-}
-
-.list-group-item:last-child {
-    margin-bottom: 0;
-    border-bottom-right-radius: .25rem;
-    border-bottom-left-radius: .25rem;
-    font-size: 17px;
-    font-weight: 400;
-}
-
-.jh-navbar[_ngcontent-c2] a.nav-link[_ngcontent-c2] {
-    font-weight: 400;
-}

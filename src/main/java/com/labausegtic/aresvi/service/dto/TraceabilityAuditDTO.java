@@ -1,12 +1,10 @@
 package com.labausegtic.aresvi.service.dto;
 
-
-import java.time.Instant;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the TraceabilityAudit entity.
@@ -24,7 +22,19 @@ public class TraceabilityAuditDTO implements Serializable {
 
     private CompanyDTO company;
 
+    private CompanyContactPersonDTO companyContactPerson;
+
+    private Long companyContactPersonId;
+
     private String category;
+
+    private String status;
+
+    private Set<RecommendationDTO> recommendationSet;
+
+    private Set<AuditProcessDTO> auditProcesses;
+
+    private Instant finishedDate;
 
     public Long getId() {
         return id;
@@ -74,6 +84,58 @@ public class TraceabilityAuditDTO implements Serializable {
         this.category = category;
     }
 
+    public CompanyContactPersonDTO getCompanyContactPerson() {
+        return companyContactPerson;
+    }
+
+    public void setCompanyContactPerson(CompanyContactPersonDTO companyContactPerson) {
+        this.companyContactPerson = companyContactPerson;
+    }
+
+    public Long getCompanyContactPersonId() {
+        return companyContactPersonId;
+    }
+
+    public void setCompanyContactPersonId(Long companyContactPersonId) {
+        this.companyContactPersonId = companyContactPersonId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Set<RecommendationDTO> getRecommendationSet() {
+        return recommendationSet;
+    }
+
+    public void setRecommendationDTOSet(Set<RecommendationDTO> recommendationSet) {
+        this.recommendationSet = recommendationSet;
+    }
+
+    public void setRecommendationSet(Set<RecommendationDTO> recommendationSet) {
+        this.recommendationSet = recommendationSet;
+    }
+
+    public Set<AuditProcessDTO> getAuditProcesses() {
+        return auditProcesses;
+    }
+
+    public void setAuditProcesses(Set<AuditProcessDTO> auditProcesses) {
+        this.auditProcesses = auditProcesses;
+    }
+
+    public Instant getFinishedDate() {
+        return finishedDate;
+    }
+
+    public void setFinishedDate(Instant finishedDate) {
+        this.finishedDate = finishedDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -101,6 +163,7 @@ public class TraceabilityAuditDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", creationDate='" + getCreationDate() + "'" +
+            ", companyContactPersonId='" + getCompanyContactPersonId() + "'" +
             "}";
     }
 }

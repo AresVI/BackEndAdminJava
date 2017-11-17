@@ -1,0 +1,18 @@
+id;name;audit_task_id
+1;Identificación del predio;1
+2;Uso de Agroquimicos;1
+3;Calidad microbiológica del agua utilizada en la aplicación de agroquímicos;1
+9;Identificación de los lotes de cosecha;6
+10;Traslado de materia prima;7
+11;Método de despalillado.;10
+12;Método de estrujado.;11
+13;Vino obtenido de los orujos.;12
+14;Orujos y semillas.;12
+15;Productos agregados al mosto durante el proceso de vinificación;15
+16;Productos agregados al mosto.;16
+17;Analizar pureza del vino.;24
+18;Productos agregados al vino durante el proceso de estabilización.;25
+19;Envasado.;27
+20;Despacho de lotes de productos terminados para su comercialización.;29
+
+

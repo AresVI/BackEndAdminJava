@@ -2,20 +2,20 @@
     "aresViApp": {
         "weighting" : {
             "home": {
-                "title": "Weightings",
-                "createLabel": "Crear nuevo Weighting",
-                "createOrEditLabel": "Crear o editar Weighting"
+                "title": "Ponderaciones",
+                "createLabel": "Crear nueva Ponderación",
+                "createOrEditLabel": "Crear o editar Ponderación"
             },
-            "created": "Un nuevo Weighting ha sido creado con el identificador {{ param }}",
-            "updated": "Un Weighting ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Weighting ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Ponderación ha sido creada con el identificador {{ param }}",
+            "updated": "Una Ponderación ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Ponderación ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Weighting {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Ponderación {{ id }}?"
             },
             "detail": {
-                "title": "Weighting"
+                "title": "Ponderación"
             },
-            "value": "Value"
+            "value": "Valor"
         }
     }
 }

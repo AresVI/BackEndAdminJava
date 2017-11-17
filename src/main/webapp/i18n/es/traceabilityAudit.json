@@ -6,19 +6,46 @@
                 "createLabel": "Crear nueva Auditoría de Trazabilidad",
                 "createOrEditLabel": "Crear o editar una Auditoría de Trazabilidad"
             },
-            "created": "Una nueva Auditoría de Trazabilidad ha sido creada con el identificador {{ param }}",
+            "created": "Una nueva Auditoría de Trazabilidad ha sido creada para la bodega \"{{ param }}\"",
             "updated": "Una Auditoría de Trazabilidad ha sido actualizada con el identificador {{ param }}",
             "deleted": "Una Auditoría de Trazabilidad ha sido eliminada con el identificador {{ param }}",
+            "started": "La {{ param }} ha sido iniciada con éxito",
+            "finished": "La {{ param }} ha sido finalizada con éxito",
             "delete": {
                 "question": "¿Seguro que quiere eliminar la Auditoría de Trazabilidad {{ id }}?"
+            },
+            "start": {
+                "question": "¿Seguro que desa iniciar la {{ name }}?"
+            },
+            "finish": {
+                "question": "¿Seguro que desa finalizar la {{ name }}?"
             },
             "detail": {
                 "title": "Auditoría de Trazabilidad"
             },
+            "status_values": {
+                "STATUS_NOT_STARTED": "No Iniciada",
+                "STATUS_STARTED": "Iniciada",
+                "STATUS_IN_PROGRESS": "En Progreso",
+                "STATUS_CANCELED": "Cancelada",
+                "STATUS_FINISHED": "Finalizada"
+            },
             "name": "Nombre",
-            "creationDate": "Fecha de Craación",
+            "status": "Estado",
+            "creationDate": "Fecha de Creación",
+            "finishedDate": "Fecha de Finalización",
             "auditProcesses": "Proceso",
-            "company": "Bodega"
+            "company": "Bodega",
+            "category": "Categoría",
+            "company_contact_person": "Persona de Contacto",
+            "audit_processes": "Procesos a Auditar",
+            "action": {
+                "view": "Ver Proceso",
+                "cancel": "Cancelar Proceso",
+                "start": "Iniciar Proceso",
+                "finish": "Finalizar Proceso",
+                "audit": "Realizar Auditoría"
+            }
         }
     }
 }

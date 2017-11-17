@@ -23,14 +23,6 @@
                 </small>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="aresViApp.auditProcess.traceabilityAudit" for="field_traceabilityAudit">Traceability Audit</label>
-            <select class="form-control" id="field_traceabilityAudit" name="traceabilityAudit" [(ngModel)]="auditProcess.traceabilityAuditId" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="traceabilityAuditOption.id" *ngFor="let traceabilityAuditOption of traceabilityaudits; trackBy: trackTraceabilityAuditById">{{traceabilityAuditOption.id}}</option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

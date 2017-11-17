@@ -1,37 +1,126 @@
 
 <div *ngIf="auditTaskRecommendation">
-    <h2><span jhiTranslate="aresViApp.auditTaskRecommendation.detail.title">Audit Task Recommendation</span> {{auditTaskRecommendation.id}}</h2>
+    <h2>
+         <span jhiTranslate="aresViApp.auditTaskRecommendation.detail.title"
+               translateValues="{name: '{{auditTaskRecommendation.auditTask.name}}'}">
+            Audit Task Recommendation
+        </span>
+    </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.auditTaskRecommendation.description">Description</span></dt>
-        <dd>
-            <span>{{auditTaskRecommendation.description}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.auditTaskRecommendation.auditProcessRecom">Audit Process Recom</span></dt>
-        <dd>
-            <div *ngIf="auditTaskRecommendation.auditProcessRecomId">
-                <a [routerLink]="['/audit-process-recommendation', auditTaskRecommendation.auditProcessRecomId]">{{auditTaskRecommendation.auditProcessRecomId}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.auditTaskRecommendation.auditTask">Audit Task</span></dt>
-        <dd>
-            <div *ngIf="auditTaskRecommendation.auditTaskId">
-                <a [routerLink]="['/audit-task', auditTaskRecommendation.auditTaskId]">{{auditTaskRecommendation.auditTaskId}}</a>
-            </div>
-        </dd>
-    </dl>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+    <form name="auditForm" (ngSubmit)="save()" novalidate #auditForm="ngForm">
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'audit-task-recommendation/'+ auditTaskRecommendation.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
+        <div class="card mb-3">
+
+            <div class="card-body">
+
+                <h4>Atributos: </h4>
+
+                <div class="card mb-3" *ngFor="let attrCatRecom of auditTaskRecommendation.categoryAttrRecommendationSet">
+                    <div class="card-header">
+
+                        <button type="button" class="btn {{attrCatRecom.description.length > 0 ? 'btn-success' : 'btn-outline-dark' }} btn-sm mr-2"
+                                (click)="openModalCategoryAttr(contentCatAttrR, attrCatRecom)">
+                            <i class="fa fa-file-text-o"></i>
+                        </button>
+
+                        {{attrCatRecom.categoryAttribute.name}}
+
+                    </div>
+                    <div class="card-body">
+
+                        <ul class="list-group" *ngFor="let attrRecomm of attrCatRecom.attributeRecommendationSet">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-auto pr-1">
+                                        <button type="button"
+                                                class="btn {{attrRecomm.description.length > 0 ? 'btn-success' : 'btn-outline-dark' }} btn-sm"
+                                                (click)="openModalAttribute(contentAttrR, attrRecomm)">
+                                            <i class="fa fa-file-text-o"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                       name="field_attribute_{{attrRecomm.id}}" id="field_attribute_{{attrRecomm.id}}"
+                                                       [(ngModel)]="attrRecomm.implemented"  />
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description">{{attrRecomm.attribute.name}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4>Recomendación: </h4>
+                <textarea class="form-control" name="description" id="field_description"
+                          [(ngModel)]="auditTaskRecommendation.description"></textarea>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" [disabled]="auditForm.form.invalid || isSaving" class="btn btn-primary">
+                <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+            <button
+                type="button" class="btn btn-secondary"
+                [routerLink]="['/audit-process-recommendation', auditTaskRecommendation.auditProcessRecomId]">
+                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+
+    </form>
+
 </div>
+
+<ng-template #contentAttrR let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Recomendación Atributo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <textarea class="form-control" name="recommendation_attribute" id="field_recommendation_attribute"
+                  [(ngModel)]="recommendationAttribute"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="d('Close click')">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="c('Close click')">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #contentCatAttrR let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Recomendación Categoría de Atributo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <textarea class="form-control" name="recommendation_category_attribute" id="field_recommendation_category_attribute"
+                  [(ngModel)]="recommendationCategoryAttr"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="d('Close click')">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="c('Close click')">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</ng-template>

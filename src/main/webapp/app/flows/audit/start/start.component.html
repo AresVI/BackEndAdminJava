@@ -1,0 +1,96 @@
+<jhi-alert></jhi-alert>
+
+<div>
+    <h2>
+        <span jhiTranslate="aresViApp.flow-audit.start.home.title">Start Process</span>
+    </h2>
+</div>
+
+
+<form name="startForm" role="form" novalidate (ngSubmit)="save()" #startForm="ngForm">
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <div class="form-group">
+
+        <label class="form-control-label" jhiTranslate="aresViApp.traceabilityAudit.company">Company</label>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                <div class="form-group">
+                    <input class="form-control" [(ngModel)]="filter_company" [ngModelOptions]="{standalone: true}" placeholder="Filtro Bodega">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="button"[routerLink]="['/', { outlets: { popup: ['company-new'] } }]">
+                        <i class="fa fa-plus"></i>
+                        <span  jhiTranslate="aresViApp.company.home.createLabel">
+                        Create new Company
+                    </span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <select class="form-control" name="company" [(ngModel)]="traceabilityAudit.company" size="5" (change)="changeCompanyId()" required >
+            <option [ngValue]="getSelected(traceabilityAudit.company, c)" *ngFor = "let c of companies |filter:filter_company; trackBy: trackCompanyById">
+                {{c.name}} ( {{c.identifier}} )
+            </option>
+        </select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label class="form-control-label" jhiTranslate="aresViApp.traceabilityAudit.company_contact_person">CompanyContactPerson</label>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                <select class="form-control" name="company" [(ngModel)]="traceabilityAudit.companyContactPersonId"
+                        (change)="changeCompanyContactPeopleId()" required >
+                    <option [ngValue]="0">- Seleccione una Persona de Contacto -</option>
+                    <option *ngFor = "let p of companyContactPeople" [value]="p.id">
+                        {{p.last_name}}, {{p.first_name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="button" [disabled]="traceabilityAudit.companyId < 1"
+                            [routerLink]="['/', { outlets: { popup: [ 'process', 'audit', 'start', 'company', traceabilityAudit.companyId, 'company-contact-person-new'] } }]">
+                        <i class="fa fa-plus"></i>
+                        <span  jhiTranslate="aresViApp.company_contact_person.home.createLabel">
+                            Create new CompanyContactPerson
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label jhiTranslate="aresViApp.traceabilityAudit.audit_processes" for="field_auditProcesses">Precesos a Auditar</label>
+        <select class="form-control" id="field_auditProcesses" size="3" multiple name="auditProcesses" [(ngModel)]="traceabilityAudit.auditProcesses" required>
+            <option [ngValue]="getSelected(traceabilityAudit.auditProcesses, ap)" *ngFor="let ap of auditProcesses; trackBy: trackAuditProcessById">{{ap.name}}</option>
+        </select>
+    </div>
+
+    <div>
+        <button type="submit" [disabled]="startForm.form.invalid || isSaving || traceabilityAudit.companyContactPersonId < 1" class="btn btn-success">
+            <span class="fa fa-save"></span>&nbsp;
+            <span jhiTranslate="entity.action.save">Save</span>
+        </button>
+        <a class="btn btn-secondary" routerLink="/process/audit/dashboard">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </a>
+    </div>
+
+</form>

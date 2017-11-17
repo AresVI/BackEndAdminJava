@@ -1,6 +1,6 @@
 package com.labausegtic.aresvi.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -14,10 +14,6 @@ import java.util.Objects;
  * A TraceabilityAudit.
  */
 @Entity
-@NamedNativeQuery(name = "traceability_audit.findLastByCompanyId",
-    query="SELECT * FROM traceability_audit t where t.company_id = :company_id order by t.creation_date DESC Limit 1;",
-    resultClass = TraceabilityAudit.class
-)
 @Table(name = "traceability_audit")
 public class TraceabilityAudit implements Serializable {
 
@@ -34,15 +30,30 @@ public class TraceabilityAudit implements Serializable {
     @Column(name = "category")
     private String category;
 
+    @NotNull
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "creation_date")
     private Instant creationDate;
 
-    @OneToMany(mappedBy = "traceabilityAudit")
-    @JsonIgnore
+    @Column(name = "finished_date")
+    private Instant finishedDate;
+
+    @NotNull
+    @ManyToMany
+    @JoinTable(name = "traceability_audit_audit_process",
+        joinColumns = @JoinColumn(name="traceability_audit_id", referencedColumnName="id"),
+        inverseJoinColumns = @JoinColumn(name="audit_process_id", referencedColumnName="id"))
     private Set<AuditProcess> auditProcesses = new HashSet<>();
 
+    @NotNull
     @ManyToOne
     private Company company;
+
+    @NotNull
+    @ManyToOne
+    private CompanyContactPerson companyContactPerson;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -101,18 +112,6 @@ public class TraceabilityAudit implements Serializable {
         return this;
     }
 
-    public TraceabilityAudit addAuditProcesses(AuditProcess auditProcess) {
-        this.auditProcesses.add(auditProcess);
-        auditProcess.setTraceabilityAudit(this);
-        return this;
-    }
-
-    public TraceabilityAudit removeAuditProcesses(AuditProcess auditProcess) {
-        this.auditProcesses.remove(auditProcess);
-        auditProcess.setTraceabilityAudit(null);
-        return this;
-    }
-
     public void setAuditProcesses(Set<AuditProcess> auditProcesses) {
         this.auditProcesses = auditProcesses;
     }
@@ -129,6 +128,31 @@ public class TraceabilityAudit implements Serializable {
     public void setCompany(Company company) {
         this.company = company;
     }
+
+    public CompanyContactPerson getCompanyContactPerson() {
+        return companyContactPerson;
+    }
+
+    public void setCompanyContactPerson(CompanyContactPerson companyContactPerson) {
+        this.companyContactPerson = companyContactPerson;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getFinishedDate() {
+        return finishedDate;
+    }
+
+    public void setFinishedDate(Instant finishedDate) {
+        this.finishedDate = finishedDate;
+    }
+
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override
@@ -157,6 +181,7 @@ public class TraceabilityAudit implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", creationDate='" + getCreationDate() + "'" +
+            ", companyContactPerson='" + getCompanyContactPerson() + "'" +
             "}";
     }
 }

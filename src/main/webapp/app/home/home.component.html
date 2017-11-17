@@ -1,13 +1,28 @@
 <div class="row">
     <div class="col-md-12">
-        <div [ngSwitch]="isAuthenticated()">
-            <div class="alert auto-hide alert-success" *ngSwitchCase="true">
-                <span *ngIf="account" jhiTranslate="home.logged.message"
-                      translateValues="{username: '{{account.login}}'}"> You are logged in as user "{{account.login}}". </span>
+        <div class="jumbotron" [ngSwitch]="isAuthenticated()">
+            <span class="hipster img-fluid rounded"></span>
+            <p class="lead text-center"></p>
+            <div class="row justify-content-center" *ngSwitchCase="true">
+                <div class="col-12 col-sm-6 col-md-4 text-center p-1">
+                    <a class="btn btn-lg btn-success btn-block" routerLink="process/audit/dashboard">
+                        <span jhiTranslate="global.menu.flow.dashboard_audit">Dashboards Audit</span>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 text-center p-1" *jhiHasAnyAuthority="['ROLE_AUDITOR_INTERNAL', 'ROLE_AUDITOR_EXTERNAL']">
+                    <a class="btn btn-lg btn-success btn-block" routerLink="/search/traceability_audit">
+                        <span jhiTranslate="global.menu.search.traceability_audit">Search Traceability Audit</span>
+                    </a>
+                </div>
+            </div>
+            <div class="row justify-content-center" *ngSwitchCase="false">
+                <div class="col-12 col-sm-6 col-md-4 text-center p-1">
+                    <button type="button" class="btn btn-lg btn-success btn-block" (click)="login()">
+                        <i class="fa fa-fw fa-sign-in" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.account.login">Sign in</span>
+                    </button>
+                </div>
             </div>
         </div>
-
-        <span class="hipster img-fluid rounded"></span>
-
     </div>
 </div>

@@ -6,22 +6,25 @@
             "home": "Inicio",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
-                "main": "Entidades",
+                "main": "Módulos",
                 "attribute": "Atributos",
-                "categoryAttribute": "Categoría de Atributos",
-                "container": "Contenedor",
-                "auditTask": "Tarea de Auditoría",
-                "auditProcess": "Proceso de Auditoría",
+                "categoryAttribute": "Categorías de Atributos",
+                "container": "Contenedores",
+                "auditTask": "Tareas de Auditoría",
+                "auditProcess": "Procesos de Auditoría",
                 "participant": "Participante",
-                "weighting": "Ponderacion",
-                "traceabilityAudit": "Auditoría de Trazabilidad",
-                "company": "Bodega",
+                "weighting": "Ponderaciones",
+                "traceabilityAudit": "Auditorías de Trazabilidad",
+                "company": "Bodegas",
                 "recommendation": "Recomendación",
                 "auditProcessRecommendation": "Audit Process Recommendation",
                 "auditTaskRecommendation": "Audit Task Recommendation",
                 "categoryAttributeRecommendation": "Category Attribute Recommendation",
                 "attributeRecommendation": "Attribute Recommendation",
-                "categoryAttRecommendation": "Category Att Recommendation",
+                "categoryAttrRecommendation": "Category Att Recommendation",
+                "auditor": "Auditor",
+                "companyContactPerson": "Persona de Contacto de la Empresa",
+                "cancellationTraceabilityAudit": "Cancelaciones de Auditorías de Trazabilidad",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -32,6 +35,13 @@
                 "login": "Iniciar sesión",
                 "logout": "Cerrar la sesión",
                 "register": "Crear una cuenta"
+            },
+            "flow": {
+                "init_audit": "Iniciar Auditoría",
+                "dashboard_audit": "Panel Auditorías"
+            },
+            "search": {
+                "traceability_audit": "Buscar Auditorías"
             },
             "admin": {
                 "main": "Administración",
@@ -99,7 +109,13 @@
         "ribbon": {
             "dev":"Development"
         },
-        "item-count": "Monstrando {{first}} - {{second}} de {{total}} artículos."
+        "item-count": "Monstrando {{first}} - {{second}} de {{total}} artículos.",
+        "value": {
+            "boolean": {
+                "true": "Sí",
+                "false": "No"
+            }
+        }
     },
     "entity": {
         "action": {
@@ -111,7 +127,8 @@
             "edit": "Editar",
             "open": "Open",
             "save": "Guardar",
-            "view": "Vista"
+            "view": "Ver",
+            "close": "Cerrar"
         },
         "detail": {
             "field": "Campo",
@@ -119,6 +136,12 @@
         },
         "delete": {
             "title": "Confirmar operación de borrado"
+        },
+        "start": {
+            "title": "Confirmar operación de iniciación"
+        },
+        "finish": {
+            "title": "Confirmar operación de finalización"
         },
         "validation": {
             "required": "Este campo es obligatorio.",
@@ -134,14 +157,14 @@
         }
     },
     "error": {
-        "internalServerError": "Internal server error",
+        "internalServerError": "Error de servidor interno",
         "server.not.reachable": "Servidor no accesible",
-        "url.not.found": "Not found",
+        "url.not.found": "No encontrado",
         "NotNull": "¡El campo {{fieldName}} no puede estar vacío!",
         "Size": "¡El campo {{fieldName}} no cumple con los requisitos de tamaño mínimo/máximo!",
-        "userexists": "Login name already used!",
-        "emailexists": "Email is already in use!",
-        "idexists": "A new {{entityName}} cannot already have an ID"
+        "userexists": "El nombre de logueo ya está en uso!",
+        "emailexists": "El email ya está en uso!",
+        "idexists": "Un nuevo {{entityName}} no puede tener ese ID"
     },
     "footer": "pie de página"
 }

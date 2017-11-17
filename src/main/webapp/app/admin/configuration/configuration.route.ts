@@ -6,6 +6,7 @@ export const configurationRoute: Route = {
     path: 'jhi-configuration',
     component: JhiConfigurationComponent,
     data: {
+        authorities: ['ROLE_ADMINISTRATOR'],
         pageTitle: 'configuration.title'
     }
 };

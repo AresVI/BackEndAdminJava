@@ -15,6 +15,9 @@
             "detail": {
                 "title": "Bodega"
             },
+            "action": {
+                "viewCompanyContactPerson": "Personas de Contacto"
+            },
             "name": "Nombre",
             "identifier": "CUIT"
         }

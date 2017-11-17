@@ -1,0 +1,87 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCompanyContactPersonLabel" jhiTranslate="aresViApp.company_contact_person.home.createOrEditLabel">Create or edit a Company Contact Person</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!company_contact_person.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="company_contact_person.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.company_contact_person.first_name" for="field_first_name">First Name</label>
+            <input type="text" class="form-control" name="first_name" id="field_first_name"
+                [(ngModel)]="company_contact_person.first_name" required />
+            <div [hidden]="!(editForm.controls.first_name?.dirty && editForm.controls.first_name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.first_name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.company_contact_person.last_name" for="field_last_name">Last Name</label>
+            <input type="text" class="form-control" name="last_name" id="field_last_name"
+                [(ngModel)]="company_contact_person.last_name" required />
+            <div [hidden]="!(editForm.controls.last_name?.dirty && editForm.controls.last_name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.last_name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.company_contact_person.email" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                [(ngModel)]="company_contact_person.email" required pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$" />
+            <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.email?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'Email' }">
+                    This field should follow pattern for "Email".
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.company_contact_person.telephone" for="field_telephone">Telephone</label>
+            <input type="text" class="form-control" name="telephone" id="field_telephone"
+                [(ngModel)]="company_contact_person.telephone" required pattern="^(\+\d{2})?(9?)(\d{3})-?(\d{3})-?(\d{4})$" />
+            <div [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.telephone?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.telephone?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'Telephone' }">
+                    This field should follow pattern for "Telephone".
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.company_contact_person.job_possition" for="field_job_possition">Job Possition</label>
+            <input type="text" class="form-control" name="job_possition" id="field_job_possition"
+                [(ngModel)]="company_contact_person.job_possition"  />
+        </div>
+        <div [hidden]="!(editForm.controls.company?.dirty && editForm.controls.company?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.company?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

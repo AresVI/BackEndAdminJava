@@ -19,9 +19,17 @@ public class AuditProcessRecommendationDTO implements Serializable {
     @Lob
     private String description;
 
+    private boolean reviewed;
+
     private Long recommendationId;
 
+    private RecommendationDTO recommendation;
+
     private Long auditProcessId;
+
+    private AuditProcessDTO auditProcess;
+
+    private Set<AuditTaskRecommendationDTO> auditTaskRecommendationSet;
 
     public Long getId() {
         return id;
@@ -53,6 +61,38 @@ public class AuditProcessRecommendationDTO implements Serializable {
 
     public void setAuditProcessId(Long auditProcessId) {
         this.auditProcessId = auditProcessId;
+    }
+
+    public AuditProcessDTO getAuditProcess() {
+        return auditProcess;
+    }
+
+    public void setAuditProcess(AuditProcessDTO auditProcess) {
+        this.auditProcess = auditProcess;
+    }
+
+    public Set<AuditTaskRecommendationDTO> getAuditTaskRecommendationSet() {
+        return auditTaskRecommendationSet;
+    }
+
+    public void setAuditTaskRecommendationSet(Set<AuditTaskRecommendationDTO> auditTaskRecommendationSet) {
+        this.auditTaskRecommendationSet = auditTaskRecommendationSet;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
+    public RecommendationDTO getRecommendation() {
+        return recommendation;
+    }
+
+    public void setRecommendation(RecommendationDTO recommendation) {
+        this.recommendation = recommendation;
     }
 
     @Override

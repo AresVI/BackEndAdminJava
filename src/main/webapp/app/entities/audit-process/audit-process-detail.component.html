@@ -8,12 +8,6 @@
         <dd>
             <span>{{auditProcess.name}}</span>
         </dd>
-        <dt><span jhiTranslate="aresViApp.auditProcess.traceabilityAudit">Traceability Audit</span></dt>
-        <dd>
-            <div *ngIf="auditProcess.traceabilityAuditId">
-                <a [routerLink]="['/traceability-audit', auditProcess.traceabilityAuditId]">{{auditProcess.traceabilityAuditId}}</a>
-            </div>
-        </dd>
     </dl>
 
     <button type="submit"

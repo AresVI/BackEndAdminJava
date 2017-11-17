@@ -1,0 +1,49 @@
+<jhi-alert></jhi-alert>
+<div>
+    <h1>
+        <span jhiTranslate="aresViApp.flow-audit.dashboard.home.title">Dashboard Traceability Audit</span>
+    </h1>
+</div>
+<hr/>
+<div class="row align-items-center">
+    <nav class="col-12 col-sm-12 col-md-3 d-block bg-teal sidebar">
+        <h2 class="text-center">Comenzar Auditoría</h2>
+        <hr/>
+        <a class="btn btn-success btn-block btn-lg" routerLink="/process/audit/start">
+            <span jhiTranslate="global.menu.flow.init_audit">Init Audit</span>
+        </a>
+    </nav>
+
+    <div class="col-sm-12 ml-sm-auto col-md-9 pt-3 border-light border border-right-0 border-top-0 border-bottom-0" role="main">
+        <h2 class="text-center">Listado de Auditorías por Estado</h2>
+        <hr/>
+
+        <div class="row">
+            <div class="col-12 col-sm-6 -col-md-4 mb-4">
+                <h4>No Iniciadas</h4>
+                <a class="btn btn-outline-info btn-block" routerLink="/process/audit/status/not_started">
+                    <span jhiTranslate="aresViApp.flow-audit.lists.by_status.not_stated">List Not Stated</span>
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 -col-md-4 mb-4">
+                <h4>En Proceso</h4>
+                <a class="btn btn-outline-info btn-block" routerLink="/process/audit/status/in_progress"
+                    >
+                    <span jhiTranslate="aresViApp.flow-audit.lists.by_status.in_progress">List In Progress</span>
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 -col-md-4 mb-4">
+                <h4>Finalizadas</h4>
+                <a class="btn btn-outline-info btn-block" routerLink="/process/audit/status/finished">
+                    <span jhiTranslate="aresViApp.flow-audit.lists.by_status.finished">List Finished</span>
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 -col-md-4 mb-4">
+                <h4>Canceladas</h4>
+                <a class="btn btn-outline-info btn-block" routerLink="/process/audit/status/canceled">
+                    <span jhiTranslate="aresViApp.flow-audit.lists.by_status.canceled">ListCanceled</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

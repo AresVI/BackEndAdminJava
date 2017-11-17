@@ -33,7 +33,7 @@ export const containerRoute: Routes = [
             'pagingParams': ContainerResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.container.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const containerRoute: Routes = [
         path: 'container/:id',
         component: ContainerDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.container.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -53,7 +53,7 @@ export const containerPopupRoute: Routes = [
         path: 'container-new',
         component: ContainerPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.container.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const containerPopupRoute: Routes = [
         path: 'container/:id/edit',
         component: ContainerPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.container.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -73,7 +73,7 @@ export const containerPopupRoute: Routes = [
         path: 'container/:id/delete',
         component: ContainerDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.container.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -6,6 +6,7 @@ export const metricsRoute: Route = {
     path: 'jhi-metrics',
     component: JhiMetricsMonitoringComponent,
     data: {
+        authorities: ['ROLE_ADMINISTRATOR'],
         pageTitle: 'metrics.title'
     }
 };

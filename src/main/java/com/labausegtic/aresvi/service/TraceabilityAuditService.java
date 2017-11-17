@@ -1,9 +1,13 @@
 package com.labausegtic.aresvi.service;
 
-import com.labausegtic.aresvi.domain.TraceabilityAudit;
+import com.labausegtic.aresvi.domain.Company;
+import com.labausegtic.aresvi.service.dto.ComparativeTaskRecommendationDTO;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * Service Interface for managing TraceabilityAudit.
@@ -26,6 +30,10 @@ public interface TraceabilityAuditService {
      */
     Page<TraceabilityAuditDTO> findAll(Pageable pageable);
 
+    Page<TraceabilityAuditDTO> findAllByStatus(Pageable pageable, String status);
+
+    Page<TraceabilityAuditDTO> findAllFinishedByCategoryAndCompany(Pageable pageable, String category, Long company_id, Set<Company> companySet);
+
     /**
      *  Get the "id" traceabilityAudit.
      *
@@ -34,7 +42,7 @@ public interface TraceabilityAuditService {
      */
     TraceabilityAuditDTO findOne(Long id);
 
-    TraceabilityAuditDTO findLastByCompanyId(Long company_id);
+    TraceabilityAuditDTO findAllLastByCompanyId(Long company_id);
 
     /**
      *  Delete the "id" traceabilityAudit.
@@ -42,4 +50,12 @@ public interface TraceabilityAuditService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    TraceabilityAuditDTO startTraceabilityAudit(Long id);
+
+    TraceabilityAuditDTO finishTraceabilityAudit(Long id);
+
+    Set<TraceabilityAuditDTO> findLastTwoTraceabilityAuditsFinished(Long id);
+
+    List<ComparativeTaskRecommendationDTO> compareLastTwoTraceabilityAuditsFinished(Long id, Long process_id);
 }

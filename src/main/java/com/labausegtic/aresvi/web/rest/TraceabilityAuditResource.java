@@ -1,7 +1,16 @@
 package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.labausegtic.aresvi.domain.Auditor;
+import com.labausegtic.aresvi.domain.Authority;
+import com.labausegtic.aresvi.domain.StatusTraceabilityAudit;
+import com.labausegtic.aresvi.domain.User;
+import com.labausegtic.aresvi.repository.AuditorRepository;
+import com.labausegtic.aresvi.security.AuthoritiesConstants;
+import com.labausegtic.aresvi.security.SecurityUtils;
+import com.labausegtic.aresvi.service.RecommendationService;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
+import com.labausegtic.aresvi.service.UserService;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
@@ -37,8 +46,17 @@ public class TraceabilityAuditResource {
 
     private final TraceabilityAuditService traceabilityAuditService;
 
-    public TraceabilityAuditResource(TraceabilityAuditService traceabilityAuditService) {
+    private final RecommendationService recommendationService;
+
+    private final UserService userService;
+
+    private final AuditorRepository auditorRepository;
+
+    public TraceabilityAuditResource(TraceabilityAuditService traceabilityAuditService, RecommendationService recommendationService, UserService userService, AuditorRepository auditorRepository) {
         this.traceabilityAuditService = traceabilityAuditService;
+        this.recommendationService = recommendationService;
+        this.userService = userService;
+        this.auditorRepository = auditorRepository;
     }
 
     /**
@@ -57,11 +75,32 @@ public class TraceabilityAuditResource {
         }
 
         traceabilityAuditDTO.setCreationDate(Instant.now());
+        traceabilityAuditDTO.setStatus(StatusTraceabilityAudit.NOT_STARTED);
 
         TraceabilityAuditDTO result = traceabilityAuditService.save(traceabilityAuditDTO);
         return ResponseEntity.created(new URI("/api/traceability-audits/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/traceability-audits/{id}/start")
+    @Timed
+    public ResponseEntity<Void> startTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+
+        TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.startTraceabilityAudit(id);
+
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowStartAlert(ENTITY_NAME, traceabilityAuditDTO.getName())).build();
+
+    }
+
+    @PostMapping("/traceability-audits/{id}/finish")
+    @Timed
+    public ResponseEntity<Void> finishTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+
+        TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.finishTraceabilityAudit(id);
+
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowFinishAlert(ENTITY_NAME, traceabilityAuditDTO.getName())).build();
+
     }
 
     /**
@@ -94,10 +133,43 @@ public class TraceabilityAuditResource {
      */
     @GetMapping("/traceability-audits")
     @Timed
-    public ResponseEntity<List<TraceabilityAuditDTO>> getAllTraceabilityAudits(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<TraceabilityAuditDTO>> getAllTraceabilityAudits(@ApiParam Pageable pageable, @ApiParam String status) {
         log.debug("REST request to get a page of TraceabilityAudits");
-        Page<TraceabilityAuditDTO> page = traceabilityAuditService.findAll(pageable);
+
+        Page<TraceabilityAuditDTO> page;
+
+        if (status != null ) {
+            page = traceabilityAuditService.findAllByStatus(pageable, status);
+        } else {
+            page = traceabilityAuditService.findAll(pageable);
+        }
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/traceability-audits");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/traceability-audits/finished")
+    @Timed
+    public ResponseEntity<List<TraceabilityAuditDTO>> getAllFinishedTraceabilityAudits(
+            @ApiParam Pageable pageable, @ApiParam String category, @ApiParam Long company_id
+        ) {
+        log.debug("REST request to get a page of TraceabilityAudits");
+
+        Page<TraceabilityAuditDTO> page;
+
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin());
+
+        Authority authority = new Authority();
+        authority.setName(AuthoritiesConstants.AUDITOR_INTERNAL);
+
+        if (user.get().getAuthorities().contains(authority)) {
+            Auditor auditor = auditorRepository.findAuditorByUser_Id(user.get().getId());
+            page = traceabilityAuditService.findAllFinishedByCategoryAndCompany(pageable, category, company_id, auditor.getCompanies()) ;
+        } else {
+            page = traceabilityAuditService.findAllFinishedByCategoryAndCompany(pageable, category, company_id, null) ;
+        }
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/traceability-audits/finished");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
@@ -112,6 +184,11 @@ public class TraceabilityAuditResource {
     public ResponseEntity<TraceabilityAuditDTO> getTraceabilityAudit(@PathVariable Long id) {
         log.debug("REST request to get TraceabilityAudit : {}", id);
         TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.findOne(id);
+
+        traceabilityAuditDTO.setRecommendationDTOSet(
+            recommendationService.findAllByTraceabilityAudit_Id(traceabilityAuditDTO.getId())
+        );
+
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(traceabilityAuditDTO));
     }
 

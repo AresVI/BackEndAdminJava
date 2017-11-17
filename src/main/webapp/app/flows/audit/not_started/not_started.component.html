@@ -1,0 +1,78 @@
+<jhi-alert></jhi-alert>
+<div>
+    <h2>
+        <span jhiTranslate="aresViApp.flow-audit.not_started.home.title">Not Started Traceability Audit</span>
+    </h2>
+</div>
+<hr/>
+<div class="row">
+</div>
+<br/>
+<div class="table-responsive" *ngIf="traceabilityAudits && traceabilityAudits.length > 0">
+    <table class="table table-striped">
+        <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="aresViApp.traceabilityAudit.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="aresViApp.traceabilityAudit.status">Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="creationDate"><span jhiTranslate="aresViApp.traceabilityAudit.creationDate">Creation Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="companyId"><span jhiTranslate="aresViApp.traceabilityAudit.company">Company</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let traceabilityAudit of traceabilityAudits ;trackBy: trackId">
+            <td><a [routerLink]="['../traceability-audit', traceabilityAudit.id ]">{{traceabilityAudit.id}}</a></td>
+            <td>{{traceabilityAudit.name}}</td>
+            <td><span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span></td>
+            <td>{{traceabilityAudit.creationDate | date:'dd/MM/yyyy HH:mm'}}</td>
+            <td>
+                <div *ngIf="traceabilityAudit.companyId">
+                    <a [routerLink]="['/company', traceabilityAudit.companyId  ]" >{{traceabilityAudit.company.name}} ({{traceabilityAudit.company.identifier}})</a>
+                </div>
+            </td>
+            <td class="text-right">
+                <div class="btn-group flex-btn-group-container">
+                    <button type="button"
+                            [routerLink]="['/', { outlets: { popup: 'traceability-audit/'+ traceabilityAudit.id + '/start'} }]"
+                            replaceUrl="true"
+                            *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL']"
+                            class="btn btn-success btn-sm">
+                        <span class="fa fa-hourglass-start"></span>
+                        <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.start">Start</span>
+                    </button>
+                    <button type="button"
+                            [routerLink]="['/', { outlets: { popup: ['traceability-audit', traceabilityAudit.id, 'cancellation-new'] } }]"
+                            *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE']"
+                            class="btn btn-danger btn-sm">
+                        <span class="fa fa-ban"></span>
+                        <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.cancel">Cancel</span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="card border-secondary mb-4" *ngIf="traceabilityAudits && traceabilityAudits.length < 1">
+    <div class="card-body mt-2">
+        <h4 class="card-title text-secondary text-center">
+            No se encontraron Auditorías de Trazabilidad no iniciadas.
+        </h4>
+    </div>
+</div>
+
+<div *ngIf="traceabilityAudits && traceabilityAudits.length">
+    <div class="row justify-content-center">
+        <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+    <div class="row justify-content-center">
+        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+    </div>
+</div>
+
+<a class="btn btn-secondary" routerLink="/process/audit/dashboard">
+    <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+</a>

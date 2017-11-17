@@ -17,8 +17,6 @@ public class AuditProcessDTO implements Serializable {
     @NotNull
     private String name;
 
-    private Long traceabilityAuditId;
-
     public Long getId() {
         return id;
     }
@@ -33,14 +31,6 @@ public class AuditProcessDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getTraceabilityAuditId() {
-        return traceabilityAuditId;
-    }
-
-    public void setTraceabilityAuditId(Long traceabilityAuditId) {
-        this.traceabilityAuditId = traceabilityAuditId;
     }
 
     @Override

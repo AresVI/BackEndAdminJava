@@ -6,6 +6,10 @@ body, h1, h2, h3, h4 {
     font-weight: 300;
 }
 
+h5{
+    font-size: 22px;
+}
+
 body {
     background: #e4e5e6;
 }
@@ -88,6 +92,9 @@ Custom alerts for notification
 ========================================================================== */
 .alerts .alert{
     text-overflow: ellipsis;
+    position: fixed;
+    right: 20px !important ;
+    top: 20px !important ;
 }
 .alert pre{
     background: none;
@@ -127,6 +134,43 @@ Custom alerts for notification
     .alerts .toast {
         width: 50%;
     }
+}
+
+#toast-container {
+    position: fixed;
+    z-index: 999999;
+}
+
+.toast-top-right {
+    top: 12px;
+    right: 12px;
+}
+
+#toast-container .toast {
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 6px;
+    padding: 15px 15px 15px 50px;
+    width: 300px;
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    box-shadow: 0 0 12px #000000;
+    opacity: 1;
+    cursor: pointer;
+}
+
+#toast-container .toast p{
+    margin: 0;
+}
+
+#toast-container .toast.toast-success {
+    background-image: url("../images/icon-success.png") !important;
+}
+
+.toast-success {
+    background-color: #51A351;
 }
 
 /* ==========================================================================
@@ -204,7 +248,7 @@ button{
 }
 
 
-.auto-hide {
+.auto-hide2 {
     animation: autoHideAnimation .5s ease-in 5s forwards;
 
     animation-fill-mode: forwards;
@@ -218,4 +262,39 @@ button{
         background: none;
         border: none;
     }
+}
+
+select{
+    cursor: pointer;
+}
+
+select option{
+    padding: 5px;
+    cursor: pointer;
+}
+
+select option:nth-child(odd){
+    background: #efefef;
+}
+
+
+@media screen and (max-width: 1370px){
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+}
+
+.border-light {
+    border-color: #b9b9b9!important;
+}
+
+textarea{
+    resize: none;
+    height: 250px;
 }

@@ -9,8 +9,41 @@
     </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="nav navbar-nav navbar-right ml-auto">
+
+            <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE']" ngbDropdown class="nav-item pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="user-management" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <span jhiTranslate="global.menu.admin.userManagement">User management</span>
+                </a>
+            </li>
+
+            <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE']" ngbDropdown class="nav-item pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="auditor" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <span jhiTranslate="global.menu.entities.auditor">Auditor</span>
+                </a>
+            </li>
+
+            <li *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL', 'ROLE_AUDITOR_INTERNAL']" ngbDropdown class="nav-item pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/search/traceability_audit" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <span jhiTranslate="global.menu.search.traceability_audit">Search Traceability Audit</span>
+                </a>
+            </li>
+
+            <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL']" ngbDropdown class="nav-item pointer"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/process/audit/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <span jhiTranslate="global.menu.flow.dashboard_audit">Dashboard Audit</span>
+                </a>
+            </li>
+
+            <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL']" ngbDropdown class="nav-item pointer"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="company" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <span jhiTranslate="global.menu.entities.company">Company</span>
+                </a>
+            </li>
+
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="'ROLE_ADMINISTRATOR'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <i class="fa fa-th-list" aria-hidden="true"></i>
@@ -21,39 +54,9 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li>
-                        <a class="dropdown-item" routerLink="attribute" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="company" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.attribute">Attribute</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="category-attribute" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.categoryAttribute">Category Attribute</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="container" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.container">Container</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="audit-task" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.auditTask">Audit Task</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="audit-process" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.auditProcess">Audit Process</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="participant" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.participant">Participant</span>
+                            <span jhiTranslate="global.menu.entities.company">Company</span>
                         </a>
                     </li>
                     <li>
@@ -63,57 +66,52 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="traceability-audit" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="attribute" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.traceabilityAudit">Traceability Audit</span>
+                            <span jhiTranslate="global.menu.entities.attribute">Attribute</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="company" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="category-attribute" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.company">Company</span>
+                            <span jhiTranslate="global.menu.entities.categoryAttribute">Category Attribute</span>
+                        </a>adminadmini                                 *jhiHasAnyAuthority="['ROLE_ADMINISTRATOR']"
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="audit-task" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.auditTask">Audit Task</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="participant" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.recommendation">Recommendation</span>
+                            <span jhiTranslate="global.menu.entities.participant">Participant</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="audit-process-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="container" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.auditProcessRecommendation">Audit Process Recommendation</span>
+                            <span jhiTranslate="global.menu.entities.container">Container</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="audit-task-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="audit-process" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.auditTaskRecommendation">Audit Task Recommendation</span>
+                            <span jhiTranslate="global.menu.entities.auditProcess">Audit Process</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="category-attribute-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="auditor" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.categoryAttributeRecommendation">Category Attribute Recommendation</span>
+                            <span jhiTranslate="global.menu.entities.auditor">Auditor</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="attribute-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.attributeRecommendation">Attribute Recommendation</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="category-att-recommendation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.categoryAttRecommendation">Category Att Recommendation</span>
-                        </a>
-                    </li>
+
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="'ROLE_ADMINISTRATOR'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -166,38 +164,25 @@
                     <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                 </ul>
             </li>
-            <li ngbDropdown class="nav-item dropdown pointer" *ngIf="languages">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown" *ngIf="languages.length > 1">
-                    <span>
-                        <i class="fa fa-flag" aria-hidden="true"></i>
-                        <span jhiTranslate="global.menu.language">Language</span>
-                    </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu *ngIf="languages.length > 1">
-                    <li *ngFor="let language of languages">
-                        <a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);" (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>
-                    </li>
-                </ul>
-            </li>
             <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">
                     <i class="fa fa-user" aria-hidden="true"></i>
-                    <span jhiTranslate="global.menu.account.main" *ngIf="!getUserFullName()">
+                    <span jhiTranslate="global.menu.account.main" *ngIf="!fullName">
                       Account
                     </span>
-                    <span *ngIf="getUserFullName()">
-                      {{getUserFullName()}}
+                    <span *ngIf="fullName">
+                      {{fullName}}
                     </span>
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-                    <li *ngIf="getUserName()">
+                    <li *ngIf="account">
                         <div class="dropdown-item" >
-                            <span>{{getUserName()}}</span>
+                            {{account.displayName}}
                         </div>
                     </li>
-                    <li role="separator" class="divider" *ngIf="getUserName()"></li>
+                    <li role="separator" class="divider" *ngIf="account"></li>
                     <li *ngSwitchCase="true">
                         <a class="dropdown-item" routerLink="settings" routerLinkActive="active" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-wrench" aria-hidden="true"></i>
@@ -223,7 +208,7 @@
                             <span jhiTranslate="global.menu.account.login">Sign in</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="false">
+                    <li *ngSwitchCase="false" [hidden]="true">
                         <a class="dropdown-item" routerLink="register" routerLinkActive="active" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-user-plus" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.account.register">Register</span>

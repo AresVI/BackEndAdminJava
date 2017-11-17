@@ -66,8 +66,6 @@ export class RecommendationService {
 
     private convert(recommendation: Recommendation): Recommendation {
         const copy: Recommendation = Object.assign({}, recommendation);
-
-        copy.creationDate = this.dateUtils.toDate(recommendation.creationDate);
         return copy;
     }
 }

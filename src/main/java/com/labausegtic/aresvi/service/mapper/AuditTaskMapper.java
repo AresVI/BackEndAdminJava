@@ -12,10 +12,11 @@ import org.mapstruct.*;
 public interface AuditTaskMapper extends EntityMapper <AuditTaskDTO, AuditTask> {
 
     @Mapping(source = "container.id", target = "containerId")
-    AuditTaskDTO toDto(AuditTask auditTask); 
+    AuditTaskDTO toDto(AuditTask auditTask);
 
     @Mapping(source = "containerId", target = "container")
-    AuditTask toEntity(AuditTaskDTO auditTaskDTO); 
+    AuditTask toEntity(AuditTaskDTO auditTaskDTO);
+
     default AuditTask fromId(Long id) {
         if (id == null) {
             return null;

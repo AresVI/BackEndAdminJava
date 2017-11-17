@@ -28,7 +28,7 @@
                 <td>{{categoryAttribute.name}}</td>
                 <td>
                     <div *ngIf="categoryAttribute.auditTaskId">
-                        <a [routerLink]="['../audit-task', categoryAttribute.auditTaskId  ]" >{{categoryAttribute.auditTaskId}}</a>
+                        <a [routerLink]="['../audit-task', categoryAttribute.auditTaskId  ]" >{{categoryAttribute.auditTask.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

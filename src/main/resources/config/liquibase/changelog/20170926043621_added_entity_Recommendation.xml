@@ -30,6 +30,14 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="level_computerization" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="reviewed" type="bit">
+                <constraints nullable="true" />
+            </column>
+
             <column name="creation_date" type="timestamp">
                 <constraints nullable="true" />
             </column>
@@ -38,10 +46,15 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="auditor_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+
         <dropDefaultValue tableName="recommendation" columnName="creation_date" columnDataType="datetime"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

@@ -14,7 +14,7 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 })
 export class CompanyComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     companies: Company[];
     error: any;
     success: any;

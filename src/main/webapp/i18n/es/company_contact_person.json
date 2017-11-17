@@ -1,0 +1,26 @@
+{
+    "aresViApp": {
+        "company_contact_person" : {
+            "home": {
+                "title": "Persona de Contacto",
+                "createLabel": "Crear nueva Persona de Contacto",
+                "createOrEditLabel": "Crear o editar Persona de Contacto"
+            },
+            "created": "Una nueva Persona de Contacto ha sido creada con el identificador {{ param }}",
+            "updated": "Una Persona de Contacto ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Persona de Contacto ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la Persona de Contacto {{ id }}?"
+            },
+            "detail": {
+                "title": "Persona de Contacto"
+            },
+            "first_name": "Nombre",
+            "last_name": "Apellido",
+            "email": "Email",
+            "telephone": "Teléfono",
+            "job_possition": "Puesto",
+            "company": "Bodega"
+        }
+    }
+}

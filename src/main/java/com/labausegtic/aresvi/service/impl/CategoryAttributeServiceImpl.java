@@ -1,9 +1,12 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.service.AttributeService;
 import com.labausegtic.aresvi.service.CategoryAttributeService;
 import com.labausegtic.aresvi.domain.CategoryAttribute;
 import com.labausegtic.aresvi.repository.CategoryAttributeRepository;
+import com.labausegtic.aresvi.service.dto.CategoryAttributeCompleteDTO;
 import com.labausegtic.aresvi.service.dto.CategoryAttributeDTO;
+import com.labausegtic.aresvi.service.mapper.CategoryAttributeCompleteMapper;
 import com.labausegtic.aresvi.service.mapper.CategoryAttributeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -24,11 +30,18 @@ public class CategoryAttributeServiceImpl implements CategoryAttributeService{
 
     private final CategoryAttributeRepository categoryAttributeRepository;
 
-    private final CategoryAttributeMapper categoryAttributeMapper;
+    private final AttributeService attributeService;
 
-    public CategoryAttributeServiceImpl(CategoryAttributeRepository categoryAttributeRepository, CategoryAttributeMapper categoryAttributeMapper) {
+    private final CategoryAttributeMapper categoryAttributeMapper;
+    private final CategoryAttributeCompleteMapper categoryAttributeCompleteMapper;
+
+    public CategoryAttributeServiceImpl(CategoryAttributeRepository categoryAttributeRepository,
+                                        AttributeService attributeService, CategoryAttributeMapper categoryAttributeMapper,
+                                        CategoryAttributeCompleteMapper categoryAttributeCompleteMapper) {
         this.categoryAttributeRepository = categoryAttributeRepository;
+        this.attributeService = attributeService;
         this.categoryAttributeMapper = categoryAttributeMapper;
+        this.categoryAttributeCompleteMapper = categoryAttributeCompleteMapper;
     }
 
     /**
@@ -57,6 +70,25 @@ public class CategoryAttributeServiceImpl implements CategoryAttributeService{
         log.debug("Request to get all CategoryAttributes");
         return categoryAttributeRepository.findAll(pageable)
             .map(categoryAttributeMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Set<CategoryAttributeCompleteDTO> findAllByAuditTaskId(Long AuditTaskId){
+        Set<CategoryAttributeCompleteDTO> result = new HashSet<>();
+
+        for (CategoryAttribute ca: categoryAttributeRepository.findAllByAuditTask_Id(AuditTaskId)) {
+
+            CategoryAttributeCompleteDTO categoryAttributeCompleteDTO = categoryAttributeCompleteMapper.toDto(ca);
+
+            categoryAttributeCompleteDTO.setAttributeSet(
+                attributeService.findAllByCategoryAttribute_Id(categoryAttributeCompleteDTO.getId())
+            );
+
+            result.add(categoryAttributeCompleteDTO);
+        }
+
+        return result;
     }
 
     /**

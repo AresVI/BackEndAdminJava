@@ -1,10 +1,11 @@
 package com.labausegtic.aresvi.service.dto;
 
 
+import org.joda.time.DateTime;
+
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
@@ -20,9 +21,19 @@ public class RecommendationDTO implements Serializable {
 
     private Integer qualification;
 
+    private boolean reviewed;
+
+    private Integer levelComputerization;
+
     private Instant creationDate;
 
     private Long traceabilityAuditId;
+
+    private Set<AuditProcessRecommendationDTO> auditProcessRecommendationSet;
+
+    private Long auditorId;
+
+    private AuditorDTO auditor;
 
     public Long getId() {
         return id;
@@ -62,6 +73,46 @@ public class RecommendationDTO implements Serializable {
 
     public void setTraceabilityAuditId(Long traceabilityAuditId) {
         this.traceabilityAuditId = traceabilityAuditId;
+    }
+
+    public Set<AuditProcessRecommendationDTO> getAuditProcessRecommendationSet() {
+        return auditProcessRecommendationSet;
+    }
+
+    public void setAuditProcessRecommendationSet(Set<AuditProcessRecommendationDTO> auditProcessRecommendationSet) {
+        this.auditProcessRecommendationSet = auditProcessRecommendationSet;
+    }
+
+    public Long getAuditorId() {
+        return auditorId;
+    }
+
+    public void setAuditorId(Long auditorId) {
+        this.auditorId = auditorId;
+    }
+
+    public AuditorDTO getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(AuditorDTO auditor) {
+        this.auditor = auditor;
+    }
+
+    public Integer getLevelComputerization() {
+        return levelComputerization;
+    }
+
+    public void setLevelComputerization(Integer levelComputerization) {
+        this.levelComputerization = levelComputerization;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
     }
 
     @Override

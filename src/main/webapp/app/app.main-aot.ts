@@ -5,5 +5,5 @@ import { AresViAppModuleNgFactory } from '../../../../target/aot/src/main/webapp
 ProdConfig();
 
 platformBrowser().bootstrapModuleFactory(AresViAppModuleNgFactory)
-.then((success) => console.log(`Application started`))
-.catch((err) => console.error(err));
+    .then((success) => console.log(`Application started`))
+    .catch((err) => console.error(err));

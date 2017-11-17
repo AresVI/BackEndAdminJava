@@ -7,12 +7,18 @@
         Added the constraints for entity TraceabilityAudit.
     -->
     <changeSet id="20170926043619-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="company_id"
                                  baseTableName="traceability_audit"
                                  constraintName="fk_traceability_audit_company_id"
                                  referencedColumnNames="id"
                                  referencedTableName="company"/>
+
+        <addForeignKeyConstraint baseColumnNames="company_contact_person_id"
+                                         baseTableName="traceability_audit"
+                                         constraintName="fk_traceability_audit_company_contact_person_id"
+                                         referencedColumnNames="id"
+                                         referencedTableName="company_contact_person"/>
 
     </changeSet>
 </databaseChangeLog>

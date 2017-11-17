@@ -3,7 +3,10 @@ package com.labausegtic.aresvi.service.impl;
 import com.labausegtic.aresvi.service.AuditTaskService;
 import com.labausegtic.aresvi.domain.AuditTask;
 import com.labausegtic.aresvi.repository.AuditTaskRepository;
+import com.labausegtic.aresvi.service.CategoryAttributeService;
+import com.labausegtic.aresvi.service.dto.AuditTaskCompleteDTO;
 import com.labausegtic.aresvi.service.dto.AuditTaskDTO;
+import com.labausegtic.aresvi.service.mapper.AuditTaskCompleteMapper;
 import com.labausegtic.aresvi.service.mapper.AuditTaskMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -24,11 +30,18 @@ public class AuditTaskServiceImpl implements AuditTaskService{
 
     private final AuditTaskRepository auditTaskRepository;
 
+    private final CategoryAttributeService categoryAttributeService;
+
     private final AuditTaskMapper auditTaskMapper;
 
-    public AuditTaskServiceImpl(AuditTaskRepository auditTaskRepository, AuditTaskMapper auditTaskMapper) {
+    private final AuditTaskCompleteMapper auditTaskCompleteMapper;
+
+    public AuditTaskServiceImpl(AuditTaskRepository auditTaskRepository, CategoryAttributeService categoryAttributeService, AuditTaskMapper auditTaskMapper,
+                                AuditTaskCompleteMapper auditTaskCompleteMapper) {
         this.auditTaskRepository = auditTaskRepository;
+        this.categoryAttributeService = categoryAttributeService;
         this.auditTaskMapper = auditTaskMapper;
+        this.auditTaskCompleteMapper = auditTaskCompleteMapper;
     }
 
     /**
@@ -57,6 +70,25 @@ public class AuditTaskServiceImpl implements AuditTaskService{
         log.debug("Request to get all AuditTasks");
         return auditTaskRepository.findAll(pageable)
             .map(auditTaskMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Set<AuditTaskCompleteDTO> findAllByContainer_Id(Long  containerId){
+        Set<AuditTaskCompleteDTO> result = new HashSet<>();
+
+        for (AuditTask at:auditTaskRepository.findAllByContainer_Id(containerId)) {
+
+            AuditTaskCompleteDTO auditTaskCompleteDTO = auditTaskCompleteMapper.toDto(at);
+
+            auditTaskCompleteDTO.setCategoryAttributeSet(
+                categoryAttributeService.findAllByAuditTaskId(auditTaskCompleteDTO.getId())
+            );
+
+            result.add(auditTaskCompleteDTO);
+        }
+
+        return result;
     }
 
     /**

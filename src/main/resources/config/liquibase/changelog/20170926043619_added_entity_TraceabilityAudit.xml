@@ -30,14 +30,47 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="company_id" type="bigint">
+            <column name="finished_date" type="datetime">
                 <constraints nullable="true" />
+            </column>
+
+            <column name="company_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="company_contact_person_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="category" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+
         <dropDefaultValue tableName="traceability_audit" columnName="creation_date" columnDataType="datetime"/>
-        
+
+        <createTable tableName="traceability_audit_audit_process">
+            <column name="traceability_audit_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="audit_process_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/seeds/traceability_audit.csv"
+                  separator=";"
+                  tableName="traceability_audit"/>
+
+        <addPrimaryKey columnNames="traceability_audit_id, audit_process_id" tableName="traceability_audit_audit_process"/>
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

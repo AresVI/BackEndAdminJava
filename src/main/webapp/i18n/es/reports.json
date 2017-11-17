@@ -1,0 +1,14 @@
+{
+    "aresViApp": {
+        "reports" : {
+            "last_two_results": {
+                "index": {
+                    "title": "Comparar Auditorías"
+                },
+                "process": {
+                    "title": "Comparar Auditorías - Nivel Proceso"
+                }
+            }
+        }
+    }
+}

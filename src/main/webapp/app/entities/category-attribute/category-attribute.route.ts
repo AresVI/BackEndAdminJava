@@ -33,7 +33,7 @@ export const categoryAttributeRoute: Routes = [
             'pagingParams': CategoryAttributeResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttribute.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const categoryAttributeRoute: Routes = [
         path: 'category-attribute/:id',
         component: CategoryAttributeDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttribute.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -53,7 +53,7 @@ export const categoryAttributePopupRoute: Routes = [
         path: 'category-attribute-new',
         component: CategoryAttributePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttribute.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const categoryAttributePopupRoute: Routes = [
         path: 'category-attribute/:id/edit',
         component: CategoryAttributePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttribute.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -73,7 +73,7 @@ export const categoryAttributePopupRoute: Routes = [
         path: 'category-attribute/:id/delete',
         component: CategoryAttributeDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.categoryAttribute.home.title'
         },
         canActivate: [UserRouteAccessService],

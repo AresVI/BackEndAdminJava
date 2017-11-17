@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiAlertService } from 'ng-jhipster';
 
 import { TraceabilityAudit } from './traceability-audit.model';
 import { TraceabilityAuditService } from './traceability-audit.service';
@@ -15,7 +15,7 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 })
 export class TraceabilityAuditComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     traceabilityAudits: TraceabilityAudit[];
     error: any;
     success: any;

@@ -2,23 +2,29 @@
     "aresViApp": {
         "recommendation" : {
             "home": {
-                "title": "Recommendations",
-                "createLabel": "Crear nuevo Recommendation",
-                "createOrEditLabel": "Crear o editar Recommendation"
+                "title": "Recomendaciones",
+                "createLabel": "Crear nueva Recomendación",
+                "createOrEditLabel": "Crear o editar Recomendación",
+                "qualifyLabel": "Calificar Recomendación"
             },
-            "created": "Un nuevo Recommendation ha sido creado con el identificador {{ param }}",
-            "updated": "Un Recommendation ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Recommendation ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Recomendación ha sido creada con el identificador {{ param }}",
+            "updated": "Una Recomendación ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Recomendación ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Recommendation {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Recomendación {{ id }}?"
             },
             "detail": {
-                "title": "Recommendation"
+                "title": "Recomendación"
             },
-            "name": "Name",
-            "qualification": "Qualification",
-            "creationDate": "Creation Date",
-            "traceabilityAudit": "Traceability Audit"
+            "action": {
+                "qualify": "Caliificar"
+            },
+            "name": "Mombre",
+            "qualification": "Calificación",
+            "creationDate": "Día de Creación",
+            "traceabilityAudit": "Auditoría de Trazabilidad",
+            "levelComputerization": "Nivel de Informatización",
+            "auditor": "Auditor"
         }
     }
 }

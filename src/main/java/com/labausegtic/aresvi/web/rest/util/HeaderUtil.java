@@ -34,6 +34,14 @@ public final class HeaderUtil {
         return createAlert(APPLICATION_NAME + "." + entityName + ".deleted", param);
     }
 
+    public static HttpHeaders createFlowStartAlert(String entityName, String param) {
+        return createAlert(APPLICATION_NAME + "." + entityName + ".started", param);
+    }
+
+    public static HttpHeaders createFlowFinishAlert(String entityName, String param) {
+        return createAlert(APPLICATION_NAME + "." + entityName + ".finished", param);
+    }
+
     public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {
         log.error("Entity processing failed, {}", defaultMessage);
         HttpHeaders headers = new HttpHeaders();

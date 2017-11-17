@@ -1,0 +1,75 @@
+<jhi-alert></jhi-alert>
+<div>
+    <h2>
+        <span jhiTranslate="aresViApp.flow-audit.canceled.home.title">Not Started Traceability Audit</span>
+    </h2>
+</div>
+<hr/>
+<div class="row">
+</div>
+<br/>
+<div class="table-responsive" *ngIf="cancellationTraceabilityAudits && cancellationTraceabilityAudits.length > 0">
+    <table class="table table-striped">
+        <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="aresViApp.traceabilityAudit.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="aresViApp.traceabilityAudit.status">Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="creationDate"><span jhiTranslate="aresViApp.traceabilityAudit.creationDate">Creation Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="companyId"><span jhiTranslate="aresViApp.traceabilityAudit.company">Company</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cancellationTraceabilityAudit of cancellationTraceabilityAudits ;trackBy: trackId">
+            <td>
+                {{cancellationTraceabilityAudit.traceabilityAuditId}}
+            </td>
+            <td>{{cancellationTraceabilityAudit.traceabilityAuditName}}</td>
+            <td>
+                <span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{cancellationTraceabilityAudit.traceabilityAudit.status}}">
+                    {{cancellationTraceabilityAudit.traceabilityAudit.status}}
+                </span>
+            </td>
+            <td>{{cancellationTraceabilityAudit.traceabilityAudit.creationDate | date: 'dd/MM/yyyy HH:mm'}}</td>
+            <td>
+                <div *ngIf="cancellationTraceabilityAudit.traceabilityAudit.company">
+                    <a [routerLink]="['/company', cancellationTraceabilityAudit.traceabilityAudit.company.id  ]" >
+                        {{cancellationTraceabilityAudit.traceabilityAudit.company.name}} ({{cancellationTraceabilityAudit.traceabilityAudit.company.identifier}})
+                    </a>
+                </div>
+            </td>
+            <td class="text-right">
+                <div class="btn-group flex-btn-group-container">
+                    <button type="button"
+                            [routerLink]="['/cancellation-traceability-audit', cancellationTraceabilityAudit.id ]"
+                            class="btn btn-info btn-sm">
+                        <span class="fa fa-eye"></span>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card border-secondary mb-4" *ngIf="cancellationTraceabilityAudits && cancellationTraceabilityAudits.length < 1">
+    <div class="card-body mt-2">
+        <h4 class="card-title text-secondary text-center">
+            No se encontraron Auditorías de Trazabilidad canceladas.
+        </h4>
+    </div>
+</div>
+
+<div *ngIf="cancellationTraceabilityAudits && cancellationTraceabilityAudits.length">
+    <div class="row justify-content-center">
+        <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+    <div class="row justify-content-center">
+        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+    </div>
+</div>
+<a class="btn btn-secondary" routerLink="/process/audit/dashboard">
+    <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+</a>

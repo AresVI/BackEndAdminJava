@@ -1,0 +1,35 @@
+
+<div *ngIf="auditor">
+    <h2><span jhiTranslate="aresViApp.auditor.detail.title">Auditor</span> {{auditor.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.auditor.internal">Internal</span></dt>
+        <dd>
+            <span>{{auditor.internal}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditor.user">User</span></dt>
+        <dd>
+            {{auditor.user?.login}}
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditor.companies">Companies</span></dt>
+        <dd>
+            <span *ngFor="let companies of auditor.companies; let last = last">
+                <a [routerLink]="['/company', companies?.id ]">{{companies.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'auditor/'+ auditor.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

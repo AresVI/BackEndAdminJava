@@ -1,9 +1,11 @@
 package com.labausegtic.aresvi.domain;
 
 
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -19,10 +21,15 @@ public class AuditTaskRecommendation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(name = "revised_date")
+    private Instant revisedDate;
+
     @Lob
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "reviewed")
+    private boolean reviewed;
 
     @ManyToOne
     private AuditProcessRecommendation auditProcessRecom;
@@ -74,9 +81,26 @@ public class AuditTaskRecommendation implements Serializable {
         return this;
     }
 
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
     public void setAuditTask(AuditTask auditTask) {
         this.auditTask = auditTask;
     }
+
+    public Instant getRevisedDate() {
+        return revisedDate;
+    }
+
+    public void setRevisedDate(Instant revisedDate) {
+        this.revisedDate = revisedDate;
+    }
+
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override

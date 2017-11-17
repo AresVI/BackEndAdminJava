@@ -2,22 +2,22 @@
     "aresViApp": {
         "attributeRecommendation" : {
             "home": {
-                "title": "Attribute Recommendations",
-                "createLabel": "Crear nuevo Attribute Recommendation",
-                "createOrEditLabel": "Crear o editar Attribute Recommendation"
+                "title": "Recomendaciones de Atributos",
+                "createLabel": "Crear nueva Recomendación de Atributo",
+                "createOrEditLabel": "Crear o editar Recomendación de Atributo"
             },
-            "created": "Un nuevo Attribute Recommendation ha sido creado con el identificador {{ param }}",
-            "updated": "Un Attribute Recommendation ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Attribute Recommendation ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Recomendación de Atributo ha sido creada con el identificador {{ param }}",
+            "updated": "Una Recomendación de Atributo ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Recomendación de Atributo ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Attribute Recommendation {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Recomendación de Atributo {{ id }}?"
             },
             "detail": {
-                "title": "Attribute Recommendation"
+                "title": "Recomendación de Atributo"
             },
-            "description": "Description",
-            "categoryAttRecom": "Category Att Recom",
-            "attribute": "Attribute"
+            "description": "Descripción",
+            "categoryAttRecom": "Categoría de Recomendación de Atributo",
+            "attribute": "Atributo"
         }
     }
 }

@@ -14,7 +14,7 @@ export const auditTaskRecommendationRoute: Routes = [
         path: 'audit-task-recommendation',
         component: AuditTaskRecommendationComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.auditTaskRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -22,7 +22,7 @@ export const auditTaskRecommendationRoute: Routes = [
         path: 'audit-task-recommendation/:id',
         component: AuditTaskRecommendationDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.auditTaskRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -34,7 +34,7 @@ export const auditTaskRecommendationPopupRoute: Routes = [
         path: 'audit-task-recommendation-new',
         component: AuditTaskRecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.auditTaskRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -44,7 +44,7 @@ export const auditTaskRecommendationPopupRoute: Routes = [
         path: 'audit-task-recommendation/:id/edit',
         component: AuditTaskRecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.auditTaskRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -54,7 +54,7 @@ export const auditTaskRecommendationPopupRoute: Routes = [
         path: 'audit-task-recommendation/:id/delete',
         component: AuditTaskRecommendationDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.auditTaskRecommendation.home.title'
         },
         canActivate: [UserRouteAccessService],

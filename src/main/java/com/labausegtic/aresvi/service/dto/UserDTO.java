@@ -149,6 +149,10 @@ public class UserDTO {
         return authorities;
     }
 
+    public void setAuthorities(Set<String> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +

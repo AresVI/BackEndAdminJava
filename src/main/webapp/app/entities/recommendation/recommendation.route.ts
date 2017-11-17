@@ -14,7 +14,7 @@ export const recommendationRoute: Routes = [
         path: 'recommendation',
         component: RecommendationComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.recommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -22,7 +22,7 @@ export const recommendationRoute: Routes = [
         path: 'recommendation/:id',
         component: RecommendationDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.recommendation.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -34,7 +34,7 @@ export const recommendationPopupRoute: Routes = [
         path: 'recommendation-new',
         component: RecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.recommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -44,7 +44,7 @@ export const recommendationPopupRoute: Routes = [
         path: 'recommendation/:id/edit',
         component: RecommendationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.recommendation.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -54,7 +54,7 @@ export const recommendationPopupRoute: Routes = [
         path: 'recommendation/:id/delete',
         component: RecommendationDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMINISTRATOR'],
             pageTitle: 'aresViApp.recommendation.home.title'
         },
         canActivate: [UserRouteAccessService],

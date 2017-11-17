@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.domain;
 
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -21,17 +22,27 @@ public class Recommendation implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "qualification")
     private Integer qualification;
 
-    @Column(name = "creation_date")
+    @Column(name = "reviewed")
+    private boolean reviewed;
+
+    @Column(name = "level_computerization")
+    private Integer levelComputerization;
+
+    @CreatedDate
+    @Column(name = "creation_date", updatable = false)
     private Instant creationDate;
 
     @ManyToOne
     private TraceabilityAudit traceabilityAudit;
+
+    @ManyToOne
+    private Auditor auditor;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -93,6 +104,31 @@ public class Recommendation implements Serializable {
     public void setTraceabilityAudit(TraceabilityAudit traceabilityAudit) {
         this.traceabilityAudit = traceabilityAudit;
     }
+
+    public Auditor getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(Auditor auditor) {
+        this.auditor = auditor;
+    }
+
+    public Integer getLevelComputerization() {
+        return levelComputerization;
+    }
+
+    public void setLevelComputerization(Integer levelComputerization) {
+        this.levelComputerization = levelComputerization;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override

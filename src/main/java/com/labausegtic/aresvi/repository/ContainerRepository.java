@@ -1,9 +1,10 @@
 package com.labausegtic.aresvi.repository;
 
 import com.labausegtic.aresvi.domain.Container;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
+import java.util.Set;
 
 
 /**
@@ -12,5 +13,7 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface ContainerRepository extends JpaRepository<Container, Long> {
+
+    Set<Container> findAllByAuditProcess_Id(Long auditProcess);
 
 }

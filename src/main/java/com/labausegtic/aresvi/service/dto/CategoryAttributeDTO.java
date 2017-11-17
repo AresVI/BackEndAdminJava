@@ -19,6 +19,8 @@ public class CategoryAttributeDTO implements Serializable {
 
     private Long auditTaskId;
 
+    private AuditTaskDTO auditTask;
+
     public Long getId() {
         return id;
     }
@@ -41,6 +43,14 @@ public class CategoryAttributeDTO implements Serializable {
 
     public void setAuditTaskId(Long auditTaskId) {
         this.auditTaskId = auditTaskId;
+    }
+
+    public AuditTaskDTO getAuditTask() {
+        return auditTask;
+    }
+
+    public void setAuditTask(AuditTaskDTO auditTask) {
+        this.auditTask = auditTask;
     }
 
     @Override

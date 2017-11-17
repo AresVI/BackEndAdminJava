@@ -1,37 +1,52 @@
 
 <div *ngIf="auditProcessRecommendation">
-    <h2><span jhiTranslate="aresViApp.auditProcessRecommendation.detail.title">Audit Process Recommendation</span> {{auditProcessRecommendation.id}}</h2>
+    <h2>
+        <span jhiTranslate="aresViApp.auditProcessRecommendation.detail.title"
+              translateValues="{name: '{{auditProcessRecommendation.auditProcess.name}}'}">
+            Audit Process Recommendation
+        </span>
+    </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.auditProcessRecommendation.description">Description</span></dt>
-        <dd>
-            <span>{{auditProcessRecommendation.description}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.auditProcessRecommendation.recommendation">Recommendation</span></dt>
-        <dd>
-            <div *ngIf="auditProcessRecommendation.recommendationId">
-                <a [routerLink]="['/recommendation', auditProcessRecommendation.recommendationId]">{{auditProcessRecommendation.recommendationId}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.auditProcessRecommendation.auditProcess">Audit Process</span></dt>
-        <dd>
-            <div *ngIf="auditProcessRecommendation.auditProcessId">
-                <a [routerLink]="['/audit-process', auditProcessRecommendation.auditProcessId]">{{auditProcessRecommendation.auditProcessId}}</a>
-            </div>
-        </dd>
-    </dl>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+    <form name="auditForm" (ngSubmit)="save()" novalidate #auditForm="ngForm">
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'audit-process-recommendation/'+ auditProcessRecommendation.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
+        <div class="card mb-3">
+            <div class="card-body">
+
+                <h4>Actividades: </h4>
+
+                <div class="list-group">
+                    <a *ngFor="let auditTaskRecom of auditProcessRecommendation.auditTaskRecommendationSet"
+                       [routerLink]="['/audit-task-recommendation', auditTaskRecom.id ]"
+                       class="list-group-item list-group-item-action {{auditTaskRecom.reviewed ? 'list-group-item-success' : 'list-group-item-info'}}">
+                        <i class="fa fa-check-square-o" aria-hidden="true" [hidden]="!auditTaskRecom.reviewed"></i>
+                        {{auditTaskRecom.auditTask.name}}
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4>Descripción: </h4>
+                <textarea class="form-control" name="description" id="field_description"
+                          [(ngModel)]="auditProcessRecommendation.description"></textarea>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" [disabled]="auditForm.form.invalid || isSaving || !allAuditTaskReviewed" class="btn btn-primary">
+                <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+            <button
+                type="button" class="btn btn-secondary"
+                [routerLink]="['/recommendation', auditProcessRecommendation.recommendationId]">
+                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+
+    </form>
+
 </div>

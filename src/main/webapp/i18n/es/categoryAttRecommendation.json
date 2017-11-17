@@ -1,23 +1,23 @@
 {
     "aresViApp": {
-        "categoryAttRecommendation" : {
+        "categoryAttrRecommendation" : {
             "home": {
-                "title": "Category Att Recommendations",
-                "createLabel": "Crear nuevo Category Att Recommendation",
-                "createOrEditLabel": "Crear o editar Category Att Recommendation"
+                "title": "Recomendaciones de Categoría de Atributo",
+                "createLabel": "Crear nueva Recomendación de Categoría de Atributo",
+                "createOrEditLabel": "Crear o editar Recomendación de Categoría de Atributo"
             },
-            "created": "Un nuevo Category Att Recommendation ha sido creado con el identificador {{ param }}",
-            "updated": "Un Category Att Recommendation ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Category Att Recommendation ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Recomendación de Categoría de Atributo ha sido creada con el identificador {{ param }}",
+            "updated": "Una Recomendación de Categoría de Atributo ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Recomendación de Categoría de Atributo ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Category Att Recommendation {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Recomendación de Categoría de Atributo {{ id }}?"
             },
             "detail": {
-                "title": "Category Att Recommendation"
+                "title": "Recomendación de Categoría de Atributo"
             },
-            "description": "Description",
-            "auditTaskRecom": "Audit Task Recom",
-            "categoryAttribute": "Category Attribute"
+            "description": "Descripción",
+            "auditTaskRecom": "Recomendación de la Tarea de Auditoría",
+            "categoryAttribute": "Categoría de Atributo"
         }
     }
 }

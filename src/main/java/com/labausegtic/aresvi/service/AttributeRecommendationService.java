@@ -4,6 +4,8 @@ import com.labausegtic.aresvi.service.dto.AttributeRecommendationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Set;
+
 /**
  * Service Interface for managing AttributeRecommendation.
  */
@@ -32,6 +34,8 @@ public interface AttributeRecommendationService {
      *  @return the entity
      */
     AttributeRecommendationDTO findOne(Long id);
+
+    Set<AttributeRecommendationDTO> findAllByCategoryAttrRecom_Id(Long categoryAttrRecom_id);
 
     /**
      *  Delete the "id" attributeRecommendation.

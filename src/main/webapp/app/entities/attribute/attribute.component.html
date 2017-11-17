@@ -28,15 +28,15 @@
             <tr *ngFor="let attribute of attributes ;trackBy: trackId">
                 <td><a [routerLink]="['../attribute', attribute.id ]">{{attribute.id}}</a></td>
                 <td>{{attribute.name}}</td>
-                <td>{{attribute.required}}</td>
+                <td><span jhiTranslate="global.value.boolean.{{attribute.required}}">{{attribute.required}}</span></td>
                 <td>
                     <div *ngIf="attribute.weightingId">
-                        <a [routerLink]="['../weighting', attribute.weightingId  ]" >{{attribute.weightingId}}</a>
+                        <a [routerLink]="['../weighting', attribute.weightingId  ]" >Nivel {{attribute.weighting.value}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="attribute.categoryAttributeId">
-                        <a [routerLink]="['../category-attribute', attribute.categoryAttributeId  ]" >{{attribute.categoryAttributeId}}</a>
+                        <a [routerLink]="['../category-attribute', attribute.categoryAttributeId  ]" >{{attribute.categoryAttributeId ? attribute.categoryAttribute.name : "--"}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -2,22 +2,22 @@
     "aresViApp": {
         "auditTaskRecommendation" : {
             "home": {
-                "title": "Audit Task Recommendations",
-                "createLabel": "Crear nuevo Audit Task Recommendation",
-                "createOrEditLabel": "Crear o editar Audit Task Recommendation"
+                "title": "Recomendaciones de las Tareas de Auditoría",
+                "createLabel": "Crear nueva Recomendación de la Tarea de Auditoría",
+                "createOrEditLabel": "Crear o editar Recomendación de la Tarea de Auditoría"
             },
-            "created": "Un nuevo Audit Task Recommendation ha sido creado con el identificador {{ param }}",
-            "updated": "Un Audit Task Recommendation ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Audit Task Recommendation ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Recomendación de la Tarea de Auditoría ha sido creada con el identificador {{ param }}",
+            "updated": "Una Recomendación de la Tarea de Auditoría ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Recomendación de la Tarea de Auditoría ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Audit Task Recommendation {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Recomendación de la Tarea de Auditoría {{ id }}?"
             },
             "detail": {
-                "title": "Audit Task Recommendation"
+                "title": "Auditoría de la Actividad - {{name}}"
             },
-            "description": "Description",
-            "auditProcessRecom": "Audit Process Recom",
-            "auditTask": "Audit Task"
+            "description": "Descripción",
+            "auditProcessRecom": "Recomendación del Proceso de Auditoría",
+            "auditTask": "Tarea de Auditoría"
         }
     }
 }

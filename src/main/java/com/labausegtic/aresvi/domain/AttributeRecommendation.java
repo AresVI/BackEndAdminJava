@@ -1,6 +1,5 @@
 package com.labausegtic.aresvi.domain;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -24,8 +23,11 @@ public class AttributeRecommendation implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "implemented")
+    private boolean implemented;
+
     @ManyToOne
-    private CategoryAttRecommendation categoryAttRecom;
+    private CategoryAttrRecommendation categoryAttrRecom;
 
     @ManyToOne
     private Attribute attribute;
@@ -52,17 +54,25 @@ public class AttributeRecommendation implements Serializable {
         this.description = description;
     }
 
-    public CategoryAttRecommendation getCategoryAttRecom() {
-        return categoryAttRecom;
+    public boolean isImplemented() {
+        return implemented;
     }
 
-    public AttributeRecommendation categoryAttRecom(CategoryAttRecommendation categoryAttRecommendation) {
-        this.categoryAttRecom = categoryAttRecommendation;
+    public void setImplemented(boolean implemented) {
+        this.implemented = implemented;
+    }
+
+    public CategoryAttrRecommendation getCategoryAttRecom() {
+        return categoryAttrRecom;
+    }
+
+    public AttributeRecommendation categoryAttrRecom(CategoryAttrRecommendation categoryAttrRecommendation) {
+        this.categoryAttrRecom = categoryAttrRecommendation;
         return this;
     }
 
-    public void setCategoryAttRecom(CategoryAttRecommendation categoryAttRecommendation) {
-        this.categoryAttRecom = categoryAttRecommendation;
+    public void setCategoryAttRecom(CategoryAttrRecommendation categoryAttrRecommendation) {
+        this.categoryAttrRecom = categoryAttrRecommendation;
     }
 
     public Attribute getAttribute() {

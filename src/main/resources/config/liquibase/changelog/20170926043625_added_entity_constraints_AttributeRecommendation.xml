@@ -7,12 +7,12 @@
         Added the constraints for entity AttributeRecommendation.
     -->
     <changeSet id="20170926043625-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="category_att_recom_id"
+
+        <addForeignKeyConstraint baseColumnNames="category_attr_recom_id"
                                  baseTableName="attribute_recommendation"
-                                 constraintName="fk_attribute_recommendation_category_att_recom_id"
+                                 constraintName="fk_attribute_recommendation_category_attr_recom_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="category_att_recommendation"/>
+                                 referencedTableName="category_attr_recommendation"/>
 
         <addForeignKeyConstraint baseColumnNames="attribute_id"
                                  baseTableName="attribute_recommendation"

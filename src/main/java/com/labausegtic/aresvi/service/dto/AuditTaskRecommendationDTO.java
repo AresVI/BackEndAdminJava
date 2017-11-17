@@ -1,9 +1,8 @@
 package com.labausegtic.aresvi.service.dto;
 
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
+import java.time.Instant;
 import java.util.Set;
 import java.util.Objects;
 import javax.persistence.Lob;
@@ -19,9 +18,17 @@ public class AuditTaskRecommendationDTO implements Serializable {
     @Lob
     private String description;
 
+    private boolean reviewed;
+
     private Long auditProcessRecomId;
 
     private Long auditTaskId;
+
+    private AuditTaskDTO auditTask;
+
+    private Set<CategoryAttrRecommendationDTO> CategoryAttrRecommendationSet;
+
+    private Instant revisedDate;
 
     public Long getId() {
         return id;
@@ -53,6 +60,38 @@ public class AuditTaskRecommendationDTO implements Serializable {
 
     public void setAuditTaskId(Long auditTaskId) {
         this.auditTaskId = auditTaskId;
+    }
+
+    public AuditTaskDTO getAuditTask() {
+        return auditTask;
+    }
+
+    public void setAuditTask(AuditTaskDTO auditTask) {
+        this.auditTask = auditTask;
+    }
+
+    public Set<CategoryAttrRecommendationDTO> getCategoryAttrRecommendationSet() {
+        return CategoryAttrRecommendationSet;
+    }
+
+    public void setCategoryAttrRecommendationSet(Set<CategoryAttrRecommendationDTO> categoryAttrRecommendationSet) {
+        CategoryAttrRecommendationSet = categoryAttrRecommendationSet;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
+    public Instant getRevisedDate() {
+        return revisedDate;
+    }
+
+    public void setRevisedDate(Instant revisedDate) {
+        this.revisedDate = revisedDate;
     }
 
     @Override

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.Set;
+
 
 /**
  * Spring Data JPA repository for the Attribute entity.
@@ -12,5 +14,7 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface AttributeRepository extends JpaRepository<Attribute, Long> {
+
+    Set<Attribute> findAllByCategoryAttribute_Id(Long categoryAttributeId);
 
 }

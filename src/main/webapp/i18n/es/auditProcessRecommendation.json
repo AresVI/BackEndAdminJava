@@ -2,22 +2,26 @@
     "aresViApp": {
         "auditProcessRecommendation" : {
             "home": {
-                "title": "Audit Process Recommendations",
-                "createLabel": "Crear nuevo Audit Process Recommendation",
-                "createOrEditLabel": "Crear o editar Audit Process Recommendation"
+                "title": "Recomendaciones del Proceso de Auditoría",
+                "createLabel": "Crear nueva Recomendación del Proceso de Auditoría",
+                "createOrEditLabel": "Crear o editar Recomendación del Proceso de Auditoría",
+                "describeLabel": "Describir Proceso de Auditoría"
             },
-            "created": "Un nuevo Audit Process Recommendation ha sido creado con el identificador {{ param }}",
-            "updated": "Un Audit Process Recommendation ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Audit Process Recommendation ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Recomendación del Proceso de Auditoría ha sido creada con el identificador {{ param }}",
+            "updated": "Una Recomendación del Proceso de Auditoría ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Recomendación del Proceso de Auditoría ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Audit Process Recommendation {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Recomendación del Proceso de Auditoría {{ id }}?"
             },
             "detail": {
-                "title": "Audit Process Recommendation"
+                "title": "Auditoría del Proceso - {{name}}"
             },
-            "description": "Description",
-            "recommendation": "Recommendation",
-            "auditProcess": "Audit Process"
+            "action": {
+                "describe": "Describir Proceso"
+            },
+            "description": "Descripción",
+            "recommendation": "Recomendación",
+            "auditProcess": "Proceso de Auditoría"
         }
     }
 }

@@ -25,6 +25,8 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
+import {AresViFlowModule} from './flows/flow.module';
+import {AresViReportModule} from './reports/report.module';
 
 @NgModule({
     imports: [
@@ -36,6 +38,8 @@ import {
         AresViAdminModule,
         AresViAccountModule,
         AresViEntityModule,
+        AresViFlowModule,
+        AresViReportModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

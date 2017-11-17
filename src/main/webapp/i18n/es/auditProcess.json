@@ -2,21 +2,21 @@
     "aresViApp": {
         "auditProcess" : {
             "home": {
-                "title": "Audit Processes",
-                "createLabel": "Crear nuevo Audit Process",
-                "createOrEditLabel": "Crear o editar Audit Process"
+                "title": "Procesos de Auditoría",
+                "createLabel": "Crear nuevo Proceso de Auditoría",
+                "createOrEditLabel": "Crear o editar Proceso de Auditoría"
             },
-            "created": "Un nuevo Audit Process ha sido creado con el identificador {{ param }}",
-            "updated": "Un Audit Process ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Audit Process ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo Proceso de Auditoría ha sido creado con el identificador {{ param }}",
+            "updated": "Un Proceso de Auditoría ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Proceso de Auditoría ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Audit Process {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Proceso de Auditoría {{ id }}?"
             },
             "detail": {
-                "title": "Audit Process"
+                "title": "Proceso de Auditoría"
             },
-            "name": "Name",
-            "traceabilityAudit": "Traceability Audit"
+            "name": "Nombre",
+            "traceabilityAudit": "Auditoría de Trazabilidad"
         }
     }
 }

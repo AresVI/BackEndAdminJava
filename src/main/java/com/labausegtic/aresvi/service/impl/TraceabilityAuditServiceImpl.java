@@ -235,6 +235,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
             auditProcessRecommendation.setTaken(false);
 
+            auditProcessRecommendation.setBonitaBpmCaseId(0L);
+
             auditProcessRecommendation.setRecommendation(recommendation);
 
             auditProcessRecommendationRepository.save(auditProcessRecommendation);

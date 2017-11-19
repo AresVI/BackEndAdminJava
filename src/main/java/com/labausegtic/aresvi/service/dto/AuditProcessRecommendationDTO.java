@@ -29,6 +29,8 @@ public class AuditProcessRecommendationDTO implements Serializable {
 
     private AuditProcessDTO auditProcess;
 
+    private Long bonitaBpmCaseId;
+
     private Set<AuditTaskRecommendationDTO> auditTaskRecommendationSet;
 
     private boolean taken;
@@ -103,6 +105,14 @@ public class AuditProcessRecommendationDTO implements Serializable {
 
     public void setTaken(boolean taken) {
         this.taken = taken;
+    }
+
+    public Long getBonitaBpmCaseId() {
+        return bonitaBpmCaseId;
+    }
+
+    public void setBonitaBpmCaseId(Long bonitaBpmCaseId) {
+        this.bonitaBpmCaseId = bonitaBpmCaseId;
     }
 
     @Override

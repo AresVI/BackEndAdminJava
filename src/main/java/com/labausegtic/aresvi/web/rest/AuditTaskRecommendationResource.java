@@ -111,6 +111,14 @@ public class AuditTaskRecommendationResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditTaskRecommendationDTO));
     }
 
+    @GetMapping("/audit-task-recommendations/{id}")
+    @Timed
+    public ResponseEntity<AuditTaskRecommendationDTO> getAuditTaskRecommendationNotById(@PathVariable Long id) {
+        log.debug("REST request to get AuditTaskRecommendation : {}", id);
+        AuditTaskRecommendationDTO auditTaskRecommendationDTO = auditTaskRecommendationService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditTaskRecommendationDTO));
+    }
+
     /**
      * DELETE  /audit-task-recommendations/:id : delete the "id" auditTaskRecommendation.
      *

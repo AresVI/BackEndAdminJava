@@ -82,6 +82,17 @@ public class AuditProcessRecommendationResource {
             .body(result);
     }
 
+    @PutMapping("/audit-process-recommendations/{id}/take")
+    @Timed
+    public ResponseEntity<AuditProcessRecommendationDTO> takeAuditProcessRecommendation(@PathVariable Long id) throws URISyntaxException {
+
+        AuditProcessRecommendationDTO result = auditProcessRecommendationService.takeAuditProcessRecommendation(id);
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
     /**
      * GET  /audit-process-recommendations : get all the auditProcessRecommendations.
      *
@@ -95,6 +106,16 @@ public class AuditProcessRecommendationResource {
         Page<AuditProcessRecommendationDTO> page = auditProcessRecommendationService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/audit-process-recommendations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/audit-process-recommendations/in-progress")
+    @Timed
+    public ResponseEntity<List<AuditProcessRecommendationDTO>> getAllAuditProcessRecommendationsInProgress(
+                @ApiParam Long audit_process_id
+    ) {
+        log.debug("REST request to get a page of AuditProcessRecommendations");
+        List<AuditProcessRecommendationDTO> result = auditProcessRecommendationService.findAllInProgressByProcessId(audit_process_id);
+        return new ResponseEntity<>(result, null, HttpStatus.OK);
     }
 
     /**

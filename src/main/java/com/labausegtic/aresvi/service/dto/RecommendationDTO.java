@@ -29,6 +29,8 @@ public class RecommendationDTO implements Serializable {
 
     private Long traceabilityAuditId;
 
+    private TraceabilityAuditDTO traceabilityAudit;
+
     private Set<AuditProcessRecommendationDTO> auditProcessRecommendationSet;
 
     private Long auditorId;
@@ -113,6 +115,14 @@ public class RecommendationDTO implements Serializable {
 
     public void setReviewed(boolean reviewed) {
         this.reviewed = reviewed;
+    }
+
+    public TraceabilityAuditDTO getTraceabilityAudit() {
+        return traceabilityAudit;
+    }
+
+    public void setTraceabilityAudit(TraceabilityAuditDTO traceabilityAudit) {
+        this.traceabilityAudit = traceabilityAudit;
     }
 
     @Override

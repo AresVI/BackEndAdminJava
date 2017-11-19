@@ -233,6 +233,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
             auditProcessRecommendation.setReviewed(false);
 
+            auditProcessRecommendation.setTaken(false);
+
             auditProcessRecommendation.setRecommendation(recommendation);
 
             auditProcessRecommendationRepository.save(auditProcessRecommendation);

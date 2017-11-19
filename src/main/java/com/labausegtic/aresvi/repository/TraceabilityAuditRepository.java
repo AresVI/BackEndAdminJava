@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -21,6 +22,7 @@ public interface TraceabilityAuditRepository extends JpaRepository<TraceabilityA
     Set<TraceabilityAudit> findByCompanyIdOrderByFinishedDateDesc(long company_id);
 
     Page<TraceabilityAudit> findAllByStatus(Pageable pageable, String status);
+    List<TraceabilityAudit> findAllByStatus(String status);
 
     Page<TraceabilityAudit> findAllByStatusAndCompanyIn(Pageable pageable, String status, Set<Company> companySet);
 

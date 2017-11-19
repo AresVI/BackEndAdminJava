@@ -4,6 +4,7 @@ import com.labausegtic.aresvi.service.dto.AuditProcessRecommendationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -43,4 +44,8 @@ public interface AuditProcessRecommendationService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    List<AuditProcessRecommendationDTO> findAllInProgressByProcessId(Long audit_process_id);
+
+    AuditProcessRecommendationDTO takeAuditProcessRecommendation(Long id);
 }

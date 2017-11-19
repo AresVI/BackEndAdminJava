@@ -26,6 +26,9 @@ public class AuditProcessRecommendation implements Serializable {
     @Column(name = "reviewed")
     private boolean reviewed;
 
+    @Column(name = "taken")
+    private boolean taken;
+
     @ManyToOne
     private Recommendation recommendation;
 
@@ -86,6 +89,14 @@ public class AuditProcessRecommendation implements Serializable {
 
     public void setReviewed(boolean reviewed) {
         this.reviewed = reviewed;
+    }
+
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
     }
 
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove

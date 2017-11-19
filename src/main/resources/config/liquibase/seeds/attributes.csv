@@ -1,0 +1,83 @@
+id;name;required;weighting_id;category_attribute_id
+1;Identificación del predio en que está ubicada la viña;true;2;1
+2;Código de inscripción de la viña (según reglamentación de la autoridad competente);true;1;1
+5;Identificación de cepas por cuarteles;true;1;1
+7;Tipo de conducción, año de plantación;false;NULL;1
+15;CUIT del propietario;false;NULL;1
+17;Nombre del ingrediente activo;true;2;2
+18;Dosis aplicada;true;2;2
+19;Identificación de los cuarteles a los cuales se aplicó;true;2;2
+21;Fecha de aplicación;true;2;2
+25;Identificación del personal que preparó y aplicó el producto;true;3;2
+30;Resultado del análisis de agua;false;NULL;3
+31;Fecha del análisis;false;NULL;3
+32;Identificación de la fuente del agua empleada;false;NULL;3
+33;Identificación del laboratorio externo;false;NULL;3
+75;Denominación de la finca;true;2;9
+79;Número o código del lote de cosecha CIU;true;1;9
+80;Cepa Variedad;true;1;9
+81;Número de viñedo;true;1;9
+83;Fecha de cosecha;true;1;9
+84;Tipo de cosecha utilizada (manual diurna, manual nocturno, mecanizado);false;NULL;9
+85;Peso en kg de cada lote (peso neto y tara del camión);true;3;9
+86;Tipo de envase caja, bin o granel;true;2;9
+88;Grados baumé de la uva;true;2;9
+89;Estado sanitario de las uvas.;false;NULL;9
+90;Temperatura de cosecha;false;NULL;9
+91;Número o código del lote de cosecha;true;1;10
+92;Fecha y hora de despacho;true;2;10
+93;Identificación del destinatario al que se remite el lote de cosecha;true;2;10
+94;Tipo de envases, capacidad y número en que se despacha el lote de cosecha;true;2;10
+95;Patente del vehículo de transporte;true;3;10
+98;Número y copia de guía de despacho, la cual debe incluir la información solicitada por INV ;true;1;10
+99;Métodode despalillado.;true;5;11
+100;Peso resultante.;true;5;11
+101;Método de estrujado.;true;5;12
+102;Peso resultante.;true;5;12
+103;Método de separación del vino de los orujos.;true;5;13
+104;Fecha de la operación de separación del vino de los orujos.;true;5;13
+105;Tipo y volumen de vino obtenido de los orujos, expresado en litros.;true;5;13
+106;Número o código de lote como vino de orujos.;true;5;13
+107;Lote de recepción.;true;5;14
+108;Destino de orujos.;true;5;14
+109;Destino de semillas.;true;5;14
+110;Identificación del proveedor.;true;5;15
+111;Número o código del lote y proveedor.;true;5;15
+112;Fecha de inicio de prestaciones de barrica.;true;5;15
+113;Tipo y material de la barrica.;true;5;15
+114;Identificación de la cuba, barrica o estanque de fermentación en que es agregado.;true;5;15
+115;Volumen en vinificación, expresado en litros.;true;5;15
+116;Nombre del profesional que autorizó cada una de las adiciones.;true;5;15
+120;Nivel de dióxido de azufre.;true;5;17
+121;Identificación del lote.;true;5;17
+122;Materiales agregados para la clarificación.;true;5;17
+123;Dosis agregada para la floculación.;true;5;17
+124;Fecha de agregado.;true;5;17
+125;Determinación de la calidad del vino.;true;5;17
+200;Identificación del lote de recepción en bodega de estabilización.;true;5;18
+201;Identificación de la operación en que se utiliza cada producto agregado.;true;5;18
+202;Identificación de los productos utilizados por su denominación química y comercial, con número de lote e identificación del proveedor.;true;5;18
+203;Dosis aplicadas.;true;5;18
+204;Fecha de la aplicación.;true;5;18
+205;Identificación del profesional que prescribió la aplicación del tratamiento.;true;5;18
+206;Identificación del personal que aplicó el tratamiento.;true;5;18
+210;Número o código del lote.;true;5;19
+211;Volumen fraccionado.;true;5;19
+212;Cepas.;true;5;19
+213;Año de cosecha.;true;5;19
+214;Tipo y capacidad de los envases con la identificación del lote y proveedores.;true;5;19
+215;Tipo de embalaje y número de envases que integra.;true;5;19
+216;Marca.;true;5;19
+217;Tipo de etiqueta.;true;5;19
+218;Cantidad de botellas.;true;5;19
+219;Fecha y hora de finalización de un pallet.;true;5;19
+220;Número de análisis del INV.;true;5;19
+230;Número de guía o factura con la que se realiza el transporte, según legislación vigente.;true;5;20
+231;Patente.;true;5;20
+232;Tipo de vehículo.;true;5;20
+233;Fecha de despacho.;true;5;20
+234;Identificación del lote de producto terminado que se envía.;true;5;20
+235;Volumen expresado en litros.;true;5;20
+236;Destinatario;true;5;20
+237;Hora de salida.;true;5;20
+238;Guía de despacho INV.;true;5;20

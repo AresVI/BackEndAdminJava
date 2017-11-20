@@ -181,5 +181,15 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
         return auditProcessRecommendationMapper.toDto(auditProcessRecommendation);
     }
 
+    @Override
+    public AuditProcessRecommendationDTO findByBonitaBpmCaseId(Long bonitaBpmCaseId) {
+        AuditProcessRecommendation auditProcessRecommendation = auditProcessRecommendationRepository.findByBonitaBpmCaseId(bonitaBpmCaseId);
+        AuditProcessRecommendationDTO auditProcessRecommendationDTO = auditProcessRecommendationMapper.toDto(auditProcessRecommendation);
+        auditProcessRecommendationDTO.setAuditTaskRecommendationSet(
+            auditTaskRecommendationServiceService.findAllByAuditProcessRecom_Id(auditProcessRecommendationDTO.getId())
+        );
+        return auditProcessRecommendationDTO;
+    }
+
 
 }

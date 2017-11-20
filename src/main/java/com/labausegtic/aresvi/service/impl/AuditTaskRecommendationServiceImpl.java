@@ -1,5 +1,7 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.domain.AuditProcessRecommendation;
+import com.labausegtic.aresvi.repository.AuditProcessRecommendationRepository;
 import com.labausegtic.aresvi.service.AttributeRecommendationService;
 import com.labausegtic.aresvi.service.AuditTaskRecommendationService;
 import com.labausegtic.aresvi.domain.AuditTaskRecommendation;
@@ -34,16 +36,20 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
 
     private final AuditTaskRecommendationMapper auditTaskRecommendationMapper;
 
+    private final AuditProcessRecommendationRepository auditProcessRecommendationRepository;
+
     private final CategoryAttrRecommendationService categoryAttrRecommendationService;
 
     private final AttributeRecommendationService attributeRecommendationService;
 
     public AuditTaskRecommendationServiceImpl(AuditTaskRecommendationRepository auditTaskRecommendationRepository,
                                               AuditTaskRecommendationMapper auditTaskRecommendationMapper,
+                                              AuditProcessRecommendationRepository auditProcessRecommendationRepository,
                                               CategoryAttrRecommendationService categoryAttrRecommendationService,
                                               AttributeRecommendationService attributeRecommendationService) {
         this.auditTaskRecommendationRepository = auditTaskRecommendationRepository;
         this.auditTaskRecommendationMapper = auditTaskRecommendationMapper;
+        this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
         this.categoryAttrRecommendationService = categoryAttrRecommendationService;
         this.attributeRecommendationService = attributeRecommendationService;
     }
@@ -146,5 +152,25 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
     public void delete(Long id) {
         log.debug("Request to delete AuditTaskRecommendation : {}", id);
         auditTaskRecommendationRepository.delete(id);
+    }
+
+    @Override
+    public AuditTaskRecommendationDTO findOneByBonitaBpmCaseIdAndAuditTaskId(Long bonitaBpmCaseId, Long audit_task_id) {
+
+        AuditProcessRecommendation auditProcessRecommendation = auditProcessRecommendationRepository.findByBonitaBpmCaseId(bonitaBpmCaseId);
+
+        AuditTaskRecommendation auditTaskRecommendation;
+
+        auditTaskRecommendation = auditTaskRecommendationRepository.findByAuditProcessRecomIdAndAuditTaskId(
+            auditProcessRecommendation.getId(), audit_task_id
+        );
+
+        AuditTaskRecommendationDTO auditTaskRecommendationDTO = auditTaskRecommendationMapper.toDto(auditTaskRecommendation);
+
+        auditTaskRecommendationDTO.setCategoryAttrRecommendationSet(
+            categoryAttrRecommendationService.findAllByAuditTaskRecom_Id(auditTaskRecommendationDTO.getId())
+        );
+
+        return auditTaskRecommendationDTO;
     }
 }

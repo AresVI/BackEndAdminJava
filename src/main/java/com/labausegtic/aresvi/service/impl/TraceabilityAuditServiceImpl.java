@@ -2,6 +2,7 @@ package com.labausegtic.aresvi.service.impl;
 
 import com.labausegtic.aresvi.domain.*;
 import com.labausegtic.aresvi.service.BRMSService;
+import com.labausegtic.aresvi.service.BonitaBPMService;
 import com.labausegtic.aresvi.service.UserService;
 import com.labausegtic.aresvi.service.dto.*;
 import com.labausegtic.aresvi.repository.*;
@@ -235,9 +236,9 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
             auditProcessRecommendation.setTaken(false);
 
-            auditProcessRecommendation.setBonitaBpmCaseId(0L);
-
             auditProcessRecommendation.setRecommendation(recommendation);
+
+            BonitaBPMService.startBPMProcess(auditProcessRecommendation);
 
             auditProcessRecommendationRepository.save(auditProcessRecommendation);
 

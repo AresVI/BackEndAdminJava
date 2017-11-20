@@ -48,4 +48,6 @@ public interface AuditProcessRecommendationService {
     List<AuditProcessRecommendationDTO> findAllInProgressByProcessId(Long audit_process_id);
 
     AuditProcessRecommendationDTO takeAuditProcessRecommendation(Long id);
+
+    AuditProcessRecommendationDTO findByBonitaBpmCaseId(Long bonita_bpm_case_id);
 }

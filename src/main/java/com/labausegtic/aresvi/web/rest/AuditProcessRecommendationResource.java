@@ -132,6 +132,14 @@ public class AuditProcessRecommendationResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditProcessRecommendationDTO));
     }
 
+    @GetMapping("/bonita-bpm-case/{bonita_bpm_case_id}")
+    @Timed
+    public ResponseEntity<AuditProcessRecommendationDTO> getAuditProcessRecommendationByBonitaBpmCaseId(@PathVariable Long bonita_bpm_case_id) {
+        log.debug("REST request to get AuditProcessRecommendation : {}", bonita_bpm_case_id);
+        AuditProcessRecommendationDTO auditProcessRecommendationDTO = auditProcessRecommendationService.findByBonitaBpmCaseId(bonita_bpm_case_id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditProcessRecommendationDTO));
+    }
+
     /**
      * DELETE  /audit-process-recommendations/:id : delete the "id" auditProcessRecommendation.
      *

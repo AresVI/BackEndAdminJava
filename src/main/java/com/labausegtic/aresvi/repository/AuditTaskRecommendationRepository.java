@@ -21,4 +21,6 @@ public interface AuditTaskRecommendationRepository extends JpaRepository<AuditTa
 
     List<AuditTaskRecommendation> findAllByAuditProcessRecom_IdAndAuditTaskIsIn(Long auditProcess_Id, List<AuditTask> auditTaskList);
 
+    AuditTaskRecommendation findByAuditProcessRecomIdAndAuditTaskId(Long auditProcess_Id, Long auditTask_Id);
+
 }

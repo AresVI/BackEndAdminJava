@@ -43,4 +43,6 @@ public interface AuditTaskRecommendationService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    AuditTaskRecommendationDTO findOneByBonitaBpmCaseIdAndAuditTaskId(Long bonita_bpm_case_id, Long audit_task_id);
 }

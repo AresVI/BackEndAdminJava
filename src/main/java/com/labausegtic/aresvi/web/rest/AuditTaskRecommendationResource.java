@@ -111,11 +111,17 @@ public class AuditTaskRecommendationResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditTaskRecommendationDTO));
     }
 
-    @GetMapping("/audit-task-recommendations/{id}")
+    @GetMapping("/bonita-bpm-case/{bonita_bpm_case_id}/audit-task/{audit_task_id}")
     @Timed
-    public ResponseEntity<AuditTaskRecommendationDTO> getAuditTaskRecommendationNotById(@PathVariable Long id) {
-        log.debug("REST request to get AuditTaskRecommendation : {}", id);
-        AuditTaskRecommendationDTO auditTaskRecommendationDTO = auditTaskRecommendationService.findOne(id);
+    public ResponseEntity<AuditTaskRecommendationDTO> getAuditTaskRecommendationNotById(
+        @PathVariable Long bonita_bpm_case_id,
+        @PathVariable Long audit_task_id
+    ) {
+
+        AuditTaskRecommendationDTO auditTaskRecommendationDTO;
+
+        auditTaskRecommendationDTO = auditTaskRecommendationService.findOneByBonitaBpmCaseIdAndAuditTaskId(bonita_bpm_case_id, audit_task_id);
+
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditTaskRecommendationDTO));
     }
 

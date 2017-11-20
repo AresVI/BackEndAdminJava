@@ -22,4 +22,7 @@ public interface AuditProcessRecommendationRepository extends JpaRepository<Audi
     AuditProcessRecommendation findByRecommendation_IdAndAuditProcessId(Long recommendation_id, Long process_id);
 
     List<AuditProcessRecommendation> findByRecommendationInAndAuditProcessId(List<Recommendation> recommendationList, Long process_id);
+
+    AuditProcessRecommendation findByBonitaBpmCaseId(Long bonitaBpmCaseId);
+
 }

@@ -28,7 +28,7 @@
             <label class="form-control-label" jhiTranslate="aresViApp.categoryAttribute.auditTask" for="field_auditTask">Audit Task</label>
             <select class="form-control" id="field_auditTask" name="auditTask" [(ngModel)]="categoryAttribute.auditTaskId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="auditTaskOption.id" *ngFor="let auditTaskOption of audittasks; trackBy: trackAuditTaskById">{{auditTaskOption.id}}</option>
+                <option [ngValue]="auditTaskOption.id" *ngFor="let auditTaskOption of audittasks; trackBy: trackAuditTaskById">{{auditTaskOption.name}}</option>
             </select>
         </div>
     </div>

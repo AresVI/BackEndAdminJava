@@ -28,13 +28,13 @@
             <label class="form-control-label" jhiTranslate="aresViApp.container.participant" for="field_participant">Participant</label>
             <select class="form-control" id="field_participant" name="participant" [(ngModel)]="container.participantId">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="participantOption.id" *ngFor="let participantOption of participants; trackBy: trackParticipantById">{{participantOption.id}}</option>
+                <option [ngValue]="participantOption.id" *ngFor="let participantOption of participants; trackBy: trackParticipantById">{{participantOption.name}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="aresViApp.container.auditProcess" for="field_auditProcess">Audit Process</label>
             <select class="form-control" id="field_auditProcess" name="auditProcess" [(ngModel)]="container.auditProcessId" >
-                <option [ngValue]="auditProcessOption.id" *ngFor="let auditProcessOption of auditprocesses; trackBy: trackAuditProcessById">{{auditProcessOption.id}}</option>
+                <option [ngValue]="auditProcessOption.id" *ngFor="let auditProcessOption of auditprocesses; trackBy: trackAuditProcessById">{{auditProcessOption.name}}</option>
             </select>
         </div>
     </div>

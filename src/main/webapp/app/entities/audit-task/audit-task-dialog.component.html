@@ -28,7 +28,7 @@
             <label class="form-control-label" jhiTranslate="aresViApp.auditTask.container" for="field_container">Container</label>
             <select class="form-control" id="field_container" name="container" [(ngModel)]="auditTask.containerId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="containerOption.id" *ngFor="let containerOption of containers; trackBy: trackContainerById">{{containerOption.id}}</option>
+                <option [ngValue]="containerOption.id" *ngFor="let containerOption of containers; trackBy: trackContainerById">{{containerOption.name}}</option>
             </select>
         </div>
     </div>

@@ -1,23 +1,22 @@
 
 <div *ngIf="container">
-    <h2><span jhiTranslate="aresViApp.container.detail.title">Container</span> {{container.id}}</h2>
+    <h2><span jhiTranslate="aresViApp.container.detail.title">Container</span> - {{container.name}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.container.name">Name</span></dt>
-        <dd>
-            <span>{{container.name}}</span>
-        </dd>
         <dt><span jhiTranslate="aresViApp.container.participant">Participant</span></dt>
         <dd>
             <div *ngIf="container.participantId">
                 <a [routerLink]="['/participant', container.participantId]">{{container.participantId}}</a>
             </div>
+            <div *ngIf="!container.participantId">
+                -- Sin Participante --
+            </div>
         </dd>
         <dt><span jhiTranslate="aresViApp.container.auditProcess">Audit Process</span></dt>
         <dd>
             <div *ngIf="container.auditProcessId">
-                <a [routerLink]="['/audit-process', container.auditProcessId]">{{container.auditProcessId}}</a>
+                <a [routerLink]="['/audit-process', container.auditProcessId]">{{container.auditProcess.name}}</a>
             </div>
         </dd>
     </dl>

@@ -1,17 +1,12 @@
 
 <div *ngIf="categoryAttribute">
-    <h2><span jhiTranslate="aresViApp.categoryAttribute.detail.title">Category Attribute</span> {{categoryAttribute.id}}</h2>
-    <hr>
+    <h2><span jhiTranslate="aresViApp.categoryAttribute.detail.title">Category Attribute</span> - {{categoryAttribute.name}}</h2>    <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.categoryAttribute.name">Name</span></dt>
-        <dd>
-            <span>{{categoryAttribute.name}}</span>
-        </dd>
         <dt><span jhiTranslate="aresViApp.categoryAttribute.auditTask">Audit Task</span></dt>
         <dd>
             <div *ngIf="categoryAttribute.auditTaskId">
-                <a [routerLink]="['/audit-task', categoryAttribute.auditTaskId]">{{categoryAttribute.auditTaskId}}</a>
+                <a [routerLink]="['/audit-task', categoryAttribute.auditTaskId]">{{categoryAttribute.auditTask.name}}</a>
             </div>
         </dd>
     </dl>

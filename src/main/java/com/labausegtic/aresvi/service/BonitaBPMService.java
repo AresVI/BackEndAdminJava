@@ -1,11 +1,9 @@
 package com.labausegtic.aresvi.service;
 
+import com.labausegtic.aresvi.config.ApplicationProperties;
 import com.labausegtic.aresvi.domain.AuditProcessRecommendation;
 
-import org.bonitasoft.engine.api.ApiAccessType;
-import org.bonitasoft.engine.api.LoginAPI;
-import org.bonitasoft.engine.api.ProcessAPI;
-import org.bonitasoft.engine.api.TenantAPIAccessor;
+import org.bonitasoft.engine.api.*;
 import org.bonitasoft.engine.bpm.process.*;
 import org.bonitasoft.engine.search.Order;
 import org.bonitasoft.engine.search.SearchOptions;
@@ -21,12 +19,27 @@ import java.util.Map;
 
 public class BonitaBPMService {
 
-    private static final String username = "caballerojavier13";
-    private static final String password = "36416999";
-    private static final String bonitaHost = "165.227.89.229";
-    private static final String bonitaPort = "35407";
+    private String username;
+    private String password;
+    private String bonitaHost;
+    private String bonitaPort;
 
-    public static void startBPMProcess(AuditProcessRecommendation auditProcessRecommendation){
+    public BonitaBPMService(ApplicationProperties applicationProperties) {
+        this.bonitaHost = applicationProperties.getBonita().getHost();
+        this.bonitaPort = applicationProperties.getBonita().getPort();
+        this.username = applicationProperties.getBonita().getUsername();
+        this.password = applicationProperties.getBonita().getPassword();
+
+        System.out.println("==========================================================================");
+        System.out.println(this.bonitaHost);
+        System.out.println(this.bonitaPort);
+        System.out.println(this.username);
+        System.out.println(this.password);
+        System.out.println("==========================================================================");
+
+    }
+
+    public void startBPMProcess(AuditProcessRecommendation auditProcessRecommendation){
 
         try {
             Map<String, String> settings = new HashMap<>();

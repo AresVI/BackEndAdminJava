@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.config.ApplicationProperties;
 import com.labausegtic.aresvi.domain.*;
 import com.labausegtic.aresvi.service.BRMSService;
 import com.labausegtic.aresvi.service.BonitaBPMService;
@@ -60,6 +61,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final AuditTaskMapper auditTaskMapper;
 
+    private final ApplicationProperties applicationProperties;
+
     public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository,
                                         RecommendationRepository recommendationRepository,
                                         AuditProcessRecommendationRepository auditProcessRecommendationRepository,
@@ -70,7 +73,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                                         AttributeRepository attributeRepository,
                                         AttributeRecommendationRepository attributeRecommendationRepository,
                                         BRMSService brmsService, TraceabilityAuditMapper traceabilityAuditMapper,
-                                        UserService userService, AuditorRepository auditorRepository, AuditTaskMapper auditTaskMapper) {
+                                        UserService userService, AuditorRepository auditorRepository, AuditTaskMapper auditTaskMapper,
+                                        ApplicationProperties applicationProperties) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
         this.recommendationRepository = recommendationRepository;
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
@@ -86,6 +90,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         this.userService = userService;
         this.auditorRepository = auditorRepository;
         this.auditTaskMapper = auditTaskMapper;
+        this.applicationProperties = applicationProperties;
     }
 
     /**
@@ -238,7 +243,9 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
             auditProcessRecommendation.setRecommendation(recommendation);
 
-            BonitaBPMService.startBPMProcess(auditProcessRecommendation);
+            BonitaBPMService bonitaBPMService = new BonitaBPMService(applicationProperties);
+
+            bonitaBPMService.startBPMProcess(auditProcessRecommendation);
 
             auditProcessRecommendationRepository.save(auditProcessRecommendation);
 

@@ -57,6 +57,7 @@ spring:
 liquibase:
     contexts: dev
 
+
 # ===================================================================
 # To enable SSL, generate a certificate using:
 # keytool -genkey -alias AresVI -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
@@ -134,3 +135,8 @@ jhipster:
 # ===================================================================
 
 application:
+    bonita:
+        host: "localhost"
+        port: "35407"
+        username: "system"
+        password: "system"

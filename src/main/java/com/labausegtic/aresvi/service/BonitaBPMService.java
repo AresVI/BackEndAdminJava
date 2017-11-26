@@ -19,58 +19,73 @@ import java.util.Map;
 
 public class BonitaBPMService {
 
+    private LoginAPI loginAPI;
+    private APISession apiSession;
+
     private String username;
     private String password;
     private String bonitaHost;
     private String bonitaPort;
+    private final int MAX_PROCESS_COUNT = 3;
 
     public BonitaBPMService(ApplicationProperties applicationProperties) {
         this.bonitaHost = applicationProperties.getBonita().getHost();
         this.bonitaPort = applicationProperties.getBonita().getPort();
         this.username = applicationProperties.getBonita().getUsername();
         this.password = applicationProperties.getBonita().getPassword();
-
-        System.out.println("==========================================================================");
-        System.out.println(this.bonitaHost);
-        System.out.println(this.bonitaPort);
-        System.out.println(this.username);
-        System.out.println(this.password);
-        System.out.println("==========================================================================");
-
     }
 
     public void startBPMProcess(AuditProcessRecommendation auditProcessRecommendation){
+        try {
+            loginBonita();
+            //List the deployed processes
+            ProcessAPI processAPI = TenantAPIAccessor.getProcessAPI(this.apiSession);
+            SearchOptions searchOptions = new SearchOptionsBuilder(0, this.MAX_PROCESS_COUNT).sort(ProcessDeploymentInfoSearchDescriptor.DEPLOYMENT_DATE, Order.DESC).done();
+            SearchResult<ProcessDeploymentInfo> deploymentInfoResults = processAPI.searchProcessDeploymentInfos(searchOptions);
+            for (int i = 0; i <deploymentInfoResults.getResult().size(); i++) {
+                // start the process
+                if (auditProcessRecommendation.getAuditProcess().getName().equalsIgnoreCase(deploymentInfoResults.getResult().get(i).getDisplayName())) {
+                    ProcessInstance processInstance = processAPI.startProcess(deploymentInfoResults.getResult().get(i).getProcessId());
+                    auditProcessRecommendation.setBonitaBpmCaseId(processInstance.getId());
+                }
+            }
+            logoutBonita();
+        } catch (Exception e) {
+            auditProcessRecommendation.setBonitaBpmCaseId(0L);
+        }
+    }
 
+    public void stopBPMProcess(AuditProcessRecommendation auditProcessRecommendation){
+        if (auditProcessRecommendation.getBonitaBpmCaseId() != 0L) {
+            try {
+                loginBonita();
+                ProcessAPI processAPI = TenantAPIAccessor.getProcessAPI(this.apiSession);
+                processAPI.cancelProcessInstance(auditProcessRecommendation.getBonitaBpmCaseId());
+                logoutBonita();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void loginBonita(){
         try {
             Map<String, String> settings = new HashMap<>();
             settings.put("server.url", "http://" + bonitaHost + ":" + bonitaPort);
             settings.put("application.name", "bonita");
             APITypeManager.setAPITypeAndParams(ApiAccessType.HTTP, settings);
             // get the LoginAPI using the TenantAPIAccessor
-            LoginAPI loginAPI = TenantAPIAccessor.getLoginAPI();
+            this.loginAPI = TenantAPIAccessor.getLoginAPI();
             // log in to the tenant to create a session
-            APISession apiSession = loginAPI.login(username, password);
-            //List the deployed processes
-            ProcessAPI processAPI = TenantAPIAccessor.getProcessAPI(apiSession);
-            SearchOptions searchOptions = new SearchOptionsBuilder(0, 3).sort(ProcessDeploymentInfoSearchDescriptor.DEPLOYMENT_DATE, Order.DESC).done();
-            SearchResult<ProcessDeploymentInfo> deploymentInfoResults = processAPI.searchProcessDeploymentInfos(searchOptions);
-            System.out.println("Cantidad de procesos deployados: " + deploymentInfoResults.getResult().size());
+            this.apiSession = loginAPI.login(username, password);
+        } catch (Exception ignore) {}
+    }
 
-            for (int i = 0; i <deploymentInfoResults.getResult().size(); i++) {
-                // start the process
-                if (auditProcessRecommendation.getAuditProcess().getName().equalsIgnoreCase(deploymentInfoResults.getResult().get(i).getDisplayName())) {
-                    ProcessInstance processInstance = processAPI.startProcess(deploymentInfoResults.getResult().get(i).getProcessId());
-                    System.out.println("Una nueva instancia del proceso " + processInstance.getName() + " fue iniciada correctamente con Id: " + processInstance.getId());
-                    auditProcessRecommendation.setBonitaBpmCaseId(processInstance.getId());
-                }
-            }
-            // don't forget to log out:
-            loginAPI.logout(apiSession);
-        } catch (Exception e) {
-            e.printStackTrace();
-            auditProcessRecommendation.setBonitaBpmCaseId(0L);
-        }
-
+    private void logoutBonita(){
+        // don't forget to log out:
+        try {
+            this.loginAPI.logout(this.apiSession);
+        } catch (Exception ignored) {}
     }
 
 }

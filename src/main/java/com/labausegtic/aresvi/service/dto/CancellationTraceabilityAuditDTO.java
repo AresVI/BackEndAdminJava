@@ -9,9 +9,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the CancelationTraceabilityAudit entity.
+ * A DTO for the CancellationTraceabilityAudit entity.
  */
-public class CancelationTraceabilityAuditDTO implements Serializable {
+public class CancellationTraceabilityAuditDTO implements Serializable {
 
     private Long id;
 
@@ -104,11 +104,11 @@ public class CancelationTraceabilityAuditDTO implements Serializable {
             return false;
         }
 
-        CancelationTraceabilityAuditDTO cancelationTraceabilityAuditDTO = (CancelationTraceabilityAuditDTO) o;
-        if(cancelationTraceabilityAuditDTO.getId() == null || getId() == null) {
+        CancellationTraceabilityAuditDTO cancellationTraceabilityAuditDTO = (CancellationTraceabilityAuditDTO) o;
+        if(cancellationTraceabilityAuditDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), cancelationTraceabilityAuditDTO.getId());
+        return Objects.equals(getId(), cancellationTraceabilityAuditDTO.getId());
     }
 
     @Override
@@ -118,7 +118,7 @@ public class CancelationTraceabilityAuditDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "CancelationTraceabilityAuditDTO{" +
+        return "CancellationTraceabilityAuditDTO{" +
             "id=" + getId() +
             ", justification='" + getJustification() + "'" +
             "}";

@@ -15,10 +15,10 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity CancelationTraceabilityAudit.
+        Added the entity CancellationTraceabilityAudit.
     -->
     <changeSet id="20171017041035-1" author="jhipster">
-        <createTable tableName="cancelation_traceability_audit">
+        <createTable tableName="cancellation_traceability_audit">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -34,7 +34,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

@@ -59,8 +59,6 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final AuditorRepository auditorRepository;
 
-    private final AuditTaskMapper auditTaskMapper;
-
     private final ApplicationProperties applicationProperties;
 
     public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository,
@@ -73,7 +71,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                                         AttributeRepository attributeRepository,
                                         AttributeRecommendationRepository attributeRecommendationRepository,
                                         BRMSService brmsService, TraceabilityAuditMapper traceabilityAuditMapper,
-                                        UserService userService, AuditorRepository auditorRepository, AuditTaskMapper auditTaskMapper,
+                                        UserService userService, AuditorRepository auditorRepository,
                                         ApplicationProperties applicationProperties) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
         this.recommendationRepository = recommendationRepository;
@@ -89,7 +87,6 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         this.traceabilityAuditMapper = traceabilityAuditMapper;
         this.userService = userService;
         this.auditorRepository = auditorRepository;
-        this.auditTaskMapper = auditTaskMapper;
         this.applicationProperties = applicationProperties;
     }
 
@@ -538,7 +535,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         for (CategoryAttrRecommendation caR_Old: categoryAttrRecommendationListOld) {
             for (CategoryAttrRecommendation caR_New: categoryAttrRecommendationListNew) {
-                if (caR_Old.getCategoryAttribute().getId() == caR_New.getCategoryAttribute().getId()) {
+                if (Objects.equals(caR_Old.getCategoryAttribute().getId(), caR_New.getCategoryAttribute().getId())) {
 
                     ComparativeCatAttrRecommendationDTO comparativeCatAttrRecommendationDTO;
 

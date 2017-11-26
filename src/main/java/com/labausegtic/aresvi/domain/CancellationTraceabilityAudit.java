@@ -7,11 +7,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A CancelationTraceabilityAudit.
+ * A CancellationTraceabilityAudit.
  */
 @Entity
-@Table(name = "cancelation_traceability_audit")
-public class CancelationTraceabilityAudit implements Serializable {
+@Table(name = "cancellation_traceability_audit")
+public class CancellationTraceabilityAudit implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class CancelationTraceabilityAudit implements Serializable {
         return justification;
     }
 
-    public CancelationTraceabilityAudit justification(String justification) {
+    public CancellationTraceabilityAudit justification(String justification) {
         this.justification = justification;
         return this;
     }
@@ -58,7 +58,7 @@ public class CancelationTraceabilityAudit implements Serializable {
         return traceabilityAudit;
     }
 
-    public CancelationTraceabilityAudit traceabilityAudit(TraceabilityAudit traceabilityAudit) {
+    public CancellationTraceabilityAudit traceabilityAudit(TraceabilityAudit traceabilityAudit) {
         this.traceabilityAudit = traceabilityAudit;
         return this;
     }
@@ -71,7 +71,7 @@ public class CancelationTraceabilityAudit implements Serializable {
         return user;
     }
 
-    public CancelationTraceabilityAudit user(User user) {
+    public CancellationTraceabilityAudit user(User user) {
         this.user = user;
         return this;
     }
@@ -89,11 +89,11 @@ public class CancelationTraceabilityAudit implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CancelationTraceabilityAudit cancelationTraceabilityAudit = (CancelationTraceabilityAudit) o;
-        if (cancelationTraceabilityAudit.getId() == null || getId() == null) {
+        CancellationTraceabilityAudit cancellationTraceabilityAudit = (CancellationTraceabilityAudit) o;
+        if (cancellationTraceabilityAudit.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), cancelationTraceabilityAudit.getId());
+        return Objects.equals(getId(), cancellationTraceabilityAudit.getId());
     }
 
     @Override
@@ -103,7 +103,7 @@ public class CancelationTraceabilityAudit implements Serializable {
 
     @Override
     public String toString() {
-        return "CancelationTraceabilityAudit{" +
+        return "CancellationTraceabilityAudit{" +
             "id=" + getId() +
             ", justification='" + getJustification() + "'" +
             "}";

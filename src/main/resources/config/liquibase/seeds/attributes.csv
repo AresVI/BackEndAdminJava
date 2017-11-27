@@ -41,19 +41,6 @@ id;name;required;weighting_id;category_attribute_id
 107;Lote de recepción.;true;5;14
 108;Destino de orujos.;true;5;14
 109;Destino de semillas.;true;5;14
-110;Identificación del proveedor.;true;5;15
-111;Número o código del lote y proveedor.;true;5;15
-112;Fecha de inicio de prestaciones de barrica.;true;5;15
-113;Tipo y material de la barrica.;true;5;15
-114;Identificación de la cuba, barrica o estanque de fermentación en que es agregado.;true;5;15
-115;Volumen en vinificación, expresado en litros.;true;5;15
-116;Nombre del profesional que autorizó cada una de las adiciones.;true;5;15
-120;Nivel de dióxido de azufre.;true;5;17
-121;Identificación del lote.;true;5;17
-122;Materiales agregados para la clarificación.;true;5;17
-123;Dosis agregada para la floculación.;true;5;17
-124;Fecha de agregado.;true;5;17
-125;Determinación de la calidad del vino.;true;5;17
 200;Identificación del lote de recepción en bodega de estabilización.;true;5;18
 201;Identificación de la operación en que se utiliza cada producto agregado.;true;5;18
 202;Identificación de los productos utilizados por su denominación química y comercial, con número de lote e identificación del proveedor.;true;5;18

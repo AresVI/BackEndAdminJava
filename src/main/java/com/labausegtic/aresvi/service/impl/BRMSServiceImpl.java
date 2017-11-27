@@ -2,6 +2,7 @@ package com.labausegtic.aresvi.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.labausegtic.aresvi.config.ApplicationProperties;
 import com.labausegtic.aresvi.service.BRMSService;
 import com.labausegtic.aresvi.service.dto.InferenceParameterDTO;
 import com.labausegtic.aresvi.service.dto.ResultInferenceDTO;
@@ -21,13 +22,21 @@ public class BRMSServiceImpl implements BRMSService {
 
     private final Logger log = LoggerFactory.getLogger(BRMSServiceImpl.class);
 
+    private String BRMS_Host;
+    private String BRMS_Port;
+
+    public BRMSServiceImpl(ApplicationProperties applicationProperties) {
+        this.BRMS_Host = applicationProperties.getDrools().getHost();
+        this.BRMS_Port = applicationProperties.getDrools().getPort();
+    }
+
     @Override
     public ResultInferenceDTO getCategory(InferenceParameterDTO inferenceParameterDTO) {
 
         ResultInferenceDTO resultInferenceDTO = new ResultInferenceDTO();
 
         try {
-            HttpResponse<JsonNode> response = Unirest.post("http://165.227.89.229:7000/api/inference")
+            HttpResponse<JsonNode> response = Unirest.post("http://" + BRMS_Host + ":" + BRMS_Port + "/api/inference")
                 .header("content-type", "application/json")
                 .header("cache-control", "no-cache")
                 .body(writeValue(inferenceParameterDTO))

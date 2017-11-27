@@ -15,6 +15,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="aresViApp.traceabilityAudit.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="aresViApp.traceabilityAudit.status">Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="creationDate"><span jhiTranslate="aresViApp.traceabilityAudit.finishedDate">Finished Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="companyId"><span jhiTranslate="aresViApp.traceabilityAudit.company">Company</span> <span class="fa fa-sort"></span></th>
             <th></th>
@@ -25,6 +26,7 @@
             <td><a [routerLink]="['../traceability-audit', traceabilityAudit.id ]">{{traceabilityAudit.id}}</a></td>
             <td>{{traceabilityAudit.name}}</td>
             <td><span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span></td>
+            <td>{{traceabilityAudit.category != '' ? 'Categoría ' + traceabilityAudit.category : '-- Sin Categoría --'}}</span></td>
             <td>{{traceabilityAudit.finishedDate | date:'dd/MM/yyyy HH:mm'}}</td>
             <td>
                 <div *ngIf="traceabilityAudit.companyId">
@@ -33,11 +35,19 @@
             </td>
             <td class="text-right">
                 <div class="btn-group flex-btn-group-container">
-                    <button type="submit"
+                    <button type="button"
                             [routerLink]="['/traceability-audit', traceabilityAudit.id ]"
+                            *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL']"
                             class="btn btn-info btn-sm">
                         <span class="fa fa-eye"></span>
                         <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                    </button>
+                    <button type="button"
+                            [routerLink]="['/', { outlets: { popup: ['traceability-audit', traceabilityAudit.id, 'categorize_again']}}]"
+                            *jhiHasAnyAuthority="'ROLE_ADMINISTRATOR'"
+                            class="btn btn-primary btn-sm">
+                        <span class="fa fa-refresh"></span>
+                        <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.categorize_again">Categorize Again</span>
                     </button>
                 </div>
             </td>

@@ -7,6 +7,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {FinishedComponent} from './finished.component';
 import {flowAuditFinishedRoute, TraceabilityAuditResolvePagingParams} from './finished.route';
 import {TraceabilityAuditService} from '../../../entities/traceability-audit/traceability-audit.service';
+import {
+    TraceabilityAuditCategorizeAgainAuditDialogComponent,
+    TraceabilityAuditCategorizeAgainAuditPopupComponent
+} from './traceability-audit-categorize-again-audit-dialog.component';
 
 const ENTITY_STATES = [
     ...flowAuditFinishedRoute
@@ -19,9 +23,13 @@ const ENTITY_STATES = [
         RouterModule.forRoot(ENTITY_STATES , { useHash: true })
     ],
     declarations: [
-        FinishedComponent
+        FinishedComponent,
+        TraceabilityAuditCategorizeAgainAuditPopupComponent,
+        TraceabilityAuditCategorizeAgainAuditDialogComponent
     ],
     entryComponents: [
+        TraceabilityAuditCategorizeAgainAuditPopupComponent,
+        TraceabilityAuditCategorizeAgainAuditDialogComponent
     ],
     providers: [
         TraceabilityAuditService,

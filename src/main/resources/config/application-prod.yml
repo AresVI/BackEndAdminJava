@@ -131,3 +131,6 @@ application:
         port: 35407
         username: system
         password: system
+    drools:
+        host: 165.227.89.229
+        port: 7000

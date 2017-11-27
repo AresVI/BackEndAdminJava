@@ -51,8 +51,6 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final AttributeRecommendationRepository attributeRecommendationRepository;
 
-    private final BRMSService brmsService;
-
     private final TraceabilityAuditMapper traceabilityAuditMapper;
 
     private final UserService userService;
@@ -70,7 +68,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                                         CategoryAttrRecommendationRepository categoryAttrRecommendationRepository,
                                         AttributeRepository attributeRepository,
                                         AttributeRecommendationRepository attributeRecommendationRepository,
-                                        BRMSService brmsService, TraceabilityAuditMapper traceabilityAuditMapper,
+                                        TraceabilityAuditMapper traceabilityAuditMapper,
                                         UserService userService, AuditorRepository auditorRepository,
                                         ApplicationProperties applicationProperties) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
@@ -83,7 +81,6 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         this.categoryAttrRecommendationRepository = categoryAttrRecommendationRepository;
         this.attributeRepository = attributeRepository;
         this.attributeRecommendationRepository = attributeRecommendationRepository;
-        this.brmsService = brmsService;
         this.traceabilityAuditMapper = traceabilityAuditMapper;
         this.userService = userService;
         this.auditorRepository = auditorRepository;
@@ -415,6 +412,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         inferenceParameterDTO.setPercentageLevel5(
             totalLevel5 == 0 ? 0 : countLevel5/totalLevel5
         );
+
+        BRMSService brmsService = new BRMSServiceImpl(applicationProperties);
 
         ResultInferenceDTO category = brmsService.getCategory(inferenceParameterDTO);
 

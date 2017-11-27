@@ -24,9 +24,11 @@ public class BonitaBPMService {
 
     private String username;
     private String password;
+
     private String bonitaHost;
     private String bonitaPort;
-    private final int MAX_PROCESS_COUNT = 3;
+
+    private static final int MAX_PROCESS_COUNT = 3;
 
     public BonitaBPMService(ApplicationProperties applicationProperties) {
         this.bonitaHost = applicationProperties.getBonita().getHost();
@@ -40,7 +42,7 @@ public class BonitaBPMService {
             loginBonita();
             //List the deployed processes
             ProcessAPI processAPI = TenantAPIAccessor.getProcessAPI(this.apiSession);
-            SearchOptions searchOptions = new SearchOptionsBuilder(0, this.MAX_PROCESS_COUNT).sort(ProcessDeploymentInfoSearchDescriptor.DEPLOYMENT_DATE, Order.DESC).done();
+            SearchOptions searchOptions = new SearchOptionsBuilder(0, BonitaBPMService.MAX_PROCESS_COUNT).sort(ProcessDeploymentInfoSearchDescriptor.DEPLOYMENT_DATE, Order.DESC).done();
             SearchResult<ProcessDeploymentInfo> deploymentInfoResults = processAPI.searchProcessDeploymentInfos(searchOptions);
             for (int i = 0; i <deploymentInfoResults.getResult().size(); i++) {
                 // start the process

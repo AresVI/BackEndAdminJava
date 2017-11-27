@@ -28,7 +28,7 @@
                 </a>
             </li>
 
-            <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL']" ngbDropdown class="nav-item pointer"
+            <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL']" ngbDropdown class="nav-item pointer"
                 routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="/process/audit/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <span jhiTranslate="global.menu.flow.dashboard_audit">Dashboard Audit</span>

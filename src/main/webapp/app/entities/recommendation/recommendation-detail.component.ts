@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager } from 'ng-jhipster';
+import {Location} from '@angular/common';
 
 import { Recommendation } from './recommendation.model';
 import { RecommendationService } from './recommendation.service';
@@ -19,16 +20,19 @@ export class RecommendationDetailComponent implements OnInit, OnDestroy {
     private eventSubscriber: Subscription;
     isSaving: boolean;
     allProcessReviewed: boolean;
+    hostname;
 
     constructor(
         private eventManager: JhiEventManager,
         private recommendationService: RecommendationService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private location: Location
     ) {
     }
 
     ngOnInit() {
+        this.hostname = location.hostname;
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
         });

@@ -298,3 +298,7 @@ textarea{
     resize: none;
     height: 250px;
 }
+
+.bg-light {
+    background-color: #f2f2f2!important;
+}

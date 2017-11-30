@@ -11,6 +11,7 @@ export class AuditProcessRecommendation implements BaseEntity {
         public recommendationId?: number,
         public recommendation?: Recommendation,
         public auditProcessId?: number,
+        public bonitaBpmCaseId?: number,
         public auditProcess?: AuditProcess,
         public auditTaskRecommendationSet?: AuditTaskRecommendation[]
     ) {

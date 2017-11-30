@@ -25,6 +25,7 @@
                 "auditor": "Auditor",
                 "companyContactPerson": "Persona de Contacto de la Empresa",
                 "cancellationTraceabilityAudit": "Cancelaciones de Auditorías de Trazabilidad",
+                "companyAddress": "Company Address",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

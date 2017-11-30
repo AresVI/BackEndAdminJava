@@ -17,6 +17,7 @@ import { AresViCategoryAttrRecommendationModule } from './category-attr-recommen
 import { AresViAuditorModule } from './auditor/auditor.module';
 import { AresViCompanyContactPersonModule } from './company-contact-person/company-contact-person.module';
 import { AresViCancellationTraceabilityAuditModule } from './cancellation-traceability-audit/cancellation-traceability-audit.module';
+import { AresViCompanyAddressModule } from './company-address/company-address.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AresViCancellationTraceabilityAuditModule } from './cancellation-tracea
         AresViAuditorModule,
         AresViCompanyContactPersonModule,
         AresViCancellationTraceabilityAuditModule,
+        AresViCompanyAddressModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

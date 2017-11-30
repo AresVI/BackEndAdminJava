@@ -1,0 +1,26 @@
+{
+    "aresViApp": {
+        "companyAddress" : {
+            "home": {
+                "title": "Company Addresses",
+                "createLabel": "Crear nuevo Company Address",
+                "createOrEditLabel": "Crear o editar Company Address"
+            },
+            "created": "Un nuevo Company Address ha sido creado con el identificador {{ param }}",
+            "updated": "Un Company Address ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Company Address ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Company Address {{ id }}?"
+            },
+            "detail": {
+                "title": "Company Address"
+            },
+            "street": "Street",
+            "city": "City",
+            "state": "State",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "company": "Company"
+        }
+    }
+}

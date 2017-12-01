@@ -3,14 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
-import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { CompanyAddress } from './company-address.model';
 import { CompanyAddressPopupService } from './company-address-popup.service';
 import { CompanyAddressService } from './company-address.service';
-import { Company, CompanyService } from '../company';
-import { ResponseWrapper } from '../../shared';
+import { Company } from '../company';
 
 @Component({
     selector: 'jhi-company-address-dialog',
@@ -27,26 +26,12 @@ export class CompanyAddressDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
         private companyAddressService: CompanyAddressService,
-        private companyService: CompanyService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.companyService
-            .query({filter: 'companyaddress-is-null'})
-            .subscribe((res: ResponseWrapper) => {
-                if (!this.companyAddress.companyId) {
-                    this.companies = res.json;
-                } else {
-                    this.companyService
-                        .find(this.companyAddress.companyId)
-                        .subscribe((subRes: Company) => {
-                            this.companies = [subRes].concat(res.json);
-                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
-                }
-            }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -71,6 +56,7 @@ export class CompanyAddressDialogComponent implements OnInit {
 
     private onSaveSuccess(result: CompanyAddress) {
         this.eventManager.broadcast({ name: 'companyAddressListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'companyListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -105,10 +91,10 @@ export class CompanyAddressPopupComponent implements OnInit, OnDestroy {
         this.routeSub = this.route.params.subscribe((params) => {
             if ( params['id'] ) {
                 this.companyAddressPopupService
-                    .open(CompanyAddressDialogComponent as Component, params['id']);
+                    .open(CompanyAddressDialogComponent as Component, params['company_id'], params['id']);
             } else {
                 this.companyAddressPopupService
-                    .open(CompanyAddressDialogComponent as Component);
+                    .open(CompanyAddressDialogComponent as Component, params['company_id']);
             }
         });
     }

@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface CompanyAddressRepository extends JpaRepository<CompanyAddress, Long> {
 
+    CompanyAddress findFirstByCompanyId(Long compnay_id);
+
 }

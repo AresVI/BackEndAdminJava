@@ -39,4 +39,6 @@ public interface CompanyAddressService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    CompanyAddressDTO findOneByCompanyId(Long id);
 }

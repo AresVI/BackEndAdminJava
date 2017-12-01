@@ -2,25 +2,25 @@
     "aresViApp": {
         "companyAddress" : {
             "home": {
-                "title": "Company Addresses",
-                "createLabel": "Crear nuevo Company Address",
-                "createOrEditLabel": "Crear o editar Company Address"
+                "title": "Dirección",
+                "createLabel": "Crear nueva Dirección",
+                "createOrEditLabel": "Crear o editar Dirección"
             },
-            "created": "Un nuevo Company Address ha sido creado con el identificador {{ param }}",
-            "updated": "Un Company Address ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Company Address ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Dirección ha sido creada con el identificador {{ param }}",
+            "updated": "Una Dirección ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Dirección ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Company Address {{ id }}?"
+                "question": "¿Seguro que quiere eliminar la Dirección {{ id }}?"
             },
             "detail": {
-                "title": "Company Address"
+                "title": "Dirección"
             },
-            "street": "Street",
-            "city": "City",
-            "state": "State",
-            "latitude": "Latitude",
-            "longitude": "Longitude",
-            "company": "Company"
+            "street": "Calle",
+            "city": "Ciudad",
+            "state": "Provincia",
+            "latitude": "Latitud",
+            "longitude": "Longitud",
+            "company": "Bodega"
         }
     }
 }

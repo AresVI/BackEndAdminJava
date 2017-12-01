@@ -83,4 +83,10 @@ public class CompanyAddressServiceImpl implements CompanyAddressService{
         log.debug("Request to delete CompanyAddress : {}", id);
         companyAddressRepository.delete(id);
     }
+
+    @Override
+    public CompanyAddressDTO findOneByCompanyId(Long company_id) {
+        CompanyAddress companyAddress = companyAddressRepository.findFirstByCompanyId(company_id);
+        return companyAddressMapper.toDto(companyAddress);
+    }
 }

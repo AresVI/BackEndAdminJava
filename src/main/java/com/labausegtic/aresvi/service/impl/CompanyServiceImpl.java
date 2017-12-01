@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.service.CompanyAddressService;
 import com.labausegtic.aresvi.service.CompanyService;
 import com.labausegtic.aresvi.domain.Company;
 import com.labausegtic.aresvi.repository.CompanyRepository;
@@ -8,7 +9,6 @@ import com.labausegtic.aresvi.service.mapper.CompanyMapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,9 +28,13 @@ public class CompanyServiceImpl implements CompanyService{
 
     private final CompanyMapper companyMapper;
 
-    public CompanyServiceImpl(CompanyRepository companyRepository, CompanyMapper companyMapper) {
+    private final CompanyAddressService companyAddressService;
+
+    public CompanyServiceImpl(CompanyRepository companyRepository, CompanyMapper companyMapper,
+                              CompanyAddressService companyAddressService) {
         this.companyRepository = companyRepository;
         this.companyMapper = companyMapper;
+        this.companyAddressService = companyAddressService;
     }
 
     /**
@@ -72,7 +76,9 @@ public class CompanyServiceImpl implements CompanyService{
     public CompanyDTO findOne(Long id) {
         log.debug("Request to get Company : {}", id);
         Company company = companyRepository.findOne(id);
-        return companyMapper.toDto(company);
+        CompanyDTO companyDTO = companyMapper.toDto(company);
+        companyDTO.setCompanyAddress(companyAddressService.findOneByCompanyId(company.getId()));
+        return companyDTO;
     }
 
     @Override

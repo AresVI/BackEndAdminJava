@@ -17,22 +17,24 @@ export class CompanyAddressPopupService {
         this.ngbModalRef = null;
     }
 
-    open(component: Component, id?: number | any): Promise<NgbModalRef> {
+    open(component: Component, company_id: number, id?: number | any): Promise<NgbModalRef> {
         return new Promise<NgbModalRef>((resolve, reject) => {
             const isOpen = this.ngbModalRef !== null;
             if (isOpen) {
                 resolve(this.ngbModalRef);
             }
-
             if (id) {
                 this.companyAddressService.find(id).subscribe((companyAddress) => {
+                    companyAddress.companyId = company_id;
                     this.ngbModalRef = this.companyAddressModalRef(component, companyAddress);
                     resolve(this.ngbModalRef);
                 });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
-                    this.ngbModalRef = this.companyAddressModalRef(component, new CompanyAddress());
+                    const companyAddress: CompanyAddress = new CompanyAddress();
+                    companyAddress.companyId = company_id;
+                    this.ngbModalRef = this.companyAddressModalRef(component, companyAddress);
                     resolve(this.ngbModalRef);
                 }, 0);
             }

@@ -50,7 +50,27 @@ export const companyAddressRoute: Routes = [
 
 export const companyAddressPopupRoute: Routes = [
     {
+        path: 'company/:company_id/company-address-new',
+        component: CompanyAddressPopupComponent,
+        data: {
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
+            pageTitle: 'aresViApp.companyAddress.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
         path: 'company-address-new',
+        component: CompanyAddressPopupComponent,
+        data: {
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
+            pageTitle: 'aresViApp.companyAddress.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'company/:company_id/company-address/:id/edit',
         component: CompanyAddressPopupComponent,
         data: {
             authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],

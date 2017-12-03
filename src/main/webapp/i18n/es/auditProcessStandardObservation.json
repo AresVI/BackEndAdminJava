@@ -1,0 +1,21 @@
+{
+    "aresViApp": {
+        "auditProcessStandardObservation" : {
+            "home": {
+                "title": "Observaciones Estándar de Proceso de Auditoría",
+                "createLabel": "Crear nueva Observación Estándar de Proceso de Auditoría",
+                "createOrEditLabel": "Crear o editar Observación Estándar de Proceso de Auditoría"
+            },
+            "created": "Una nueva Observación Estándar de Proceso de Auditoría ha sido creada con el identificador {{ param }}",
+            "updated": "Una Observación Estándar de Proceso de Auditoría ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Observación Estándar de Proceso de Auditoría ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Audit Process Standard Observation {{ id }}?"
+            },
+            "detail": {
+                "title": "Observación Estándar de Proceso de Auditoría"
+            },
+            "observation": "Observación"
+        }
+    }
+}

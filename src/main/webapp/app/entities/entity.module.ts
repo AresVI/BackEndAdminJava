@@ -18,6 +18,8 @@ import { AresViAuditorModule } from './auditor/auditor.module';
 import { AresViCompanyContactPersonModule } from './company-contact-person/company-contact-person.module';
 import { AresViCancellationTraceabilityAuditModule } from './cancellation-traceability-audit/cancellation-traceability-audit.module';
 import { AresViCompanyAddressModule } from './company-address/company-address.module';
+import { AresViAuditProcessStandardObservationModule } from './audit-process-standard-observation/audit-process-standard-observation.module';
+import { AresViAuditTaskStandardObservationModule } from './audit-task-standard-observation/audit-task-standard-observation.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -40,6 +42,8 @@ import { AresViCompanyAddressModule } from './company-address/company-address.mo
         AresViCompanyContactPersonModule,
         AresViCancellationTraceabilityAuditModule,
         AresViCompanyAddressModule,
+        AresViAuditProcessStandardObservationModule,
+        AresViAuditTaskStandardObservationModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

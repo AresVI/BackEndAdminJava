@@ -26,6 +26,8 @@
                 "companyContactPerson": "Persona de Contacto de la Empresa",
                 "cancellationTraceabilityAudit": "Cancelaciones de Auditorías de Trazabilidad",
                 "companyAddress": "Company Address",
+                "auditProcessStandardObservation": "Observación Estándar de Procesos de Auditoría",
+                "auditTaskStandardObservation": "Observación Estándar de Tareas de Auditoría",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

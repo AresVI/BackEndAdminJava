@@ -39,8 +39,8 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
 
-    lat: number;
-    lng: number;
+    lat: string;
+    lng: string;
     mapZoom: number;
 
     title = 'app';
@@ -79,25 +79,28 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInTraceabilityAudits();
-        this.lat = -33.066796;
-        this.lng = -68.5094036;
-        this.mapZoom = 16;
-
-        const url = 'https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyB1cBm4iFiova0nbWSXHMKg0473TzCqcEI' +
-            '&center=' + this.lat + ',' + this.lng + '&zoom=' +  this.zoom + '&size=400x400' +
-            '&markers=color:red|' + this.lat + ',' + this.lng ;
-
-        this.urlMap =  this.sanitizer.bypassSecurityTrustResourceUrl(url);
-
-        const googleMapsUrl = 'https://www.google.com.ar/maps/dir//' + this.lat + ',' + this.lng + '/@' + this.lat + ',' + this.lng + ',14z';
-
-        this.linkGoogleMaps =  this.sanitizer.bypassSecurityTrustResourceUrl(googleMapsUrl);
 
     }
 
     load(id) {
         this.companyService.find(id).subscribe((company) => {
             this.company = company;
+            if (company.companyAddress) {
+                this.lat = company.companyAddress.latitude;
+                this.lng = company.companyAddress.longitude;
+                this.mapZoom = 16;
+
+                const url = 'https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyB1cBm4iFiova0nbWSXHMKg0473TzCqcEI'
+                    + '&center=' + this.lat + ',' + this.lng + '&zoom=' + this.zoom + '&size=400x400'
+                    + '&markers=color:red|' + this.lat + ',' + this.lng;
+
+                this.urlMap = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+
+                const googleMapsUrl = 'https://www.google.com.ar/maps/dir//' + this.lat + ',' + this.lng + '/@' + this.lat
+                    + ',' + this.lng + ',' + this.mapZoom + 'z';
+
+                this.linkGoogleMaps = this.sanitizer.bypassSecurityTrustResourceUrl(googleMapsUrl);
+            }
             this.loadAll();
         });
     }

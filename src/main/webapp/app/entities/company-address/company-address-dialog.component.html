@@ -36,34 +36,61 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="aresViApp.companyAddress.state" for="field_state">State</label>
-            <input type="text" class="form-control" name="state" id="field_state"
-                [(ngModel)]="companyAddress.state" required />
+            <select class="form-control" id="field_state" name="state" [(ngModel)]="companyAddress.state" required>
+                <option [ngValue]="null"></option>
+                <option value="Buenos Aires">Bs. As.</option>
+                <option value="Catamarca">Catamarca</option>
+                <option value="Chaco">Chaco</option>
+                <option value="Chubut">Chubut</option>
+                <option value="Cordoba">Cordoba</option>
+                <option value="Corrientes">Corrientes</option>
+                <option value="Entre Rios">Entre Rios</option>
+                <option value="Formosa">Formosa</option>
+                <option value="Jujuy">Jujuy</option>
+                <option value="La Pampa">La Pampa</option>
+                <option value="La Rioja">La Rioja</option>
+                <option value="Mendoza">Mendoza</option>
+                <option value="Misiones">Misiones</option>
+                <option value="Neuquen">Neuquen</option>
+                <option value="Rio Negro">Rio Negro</option>
+                <option value="Salta">Salta</option>
+                <option value="San Juan">San Juan</option>
+                <option value="San Luis">San Luis</option>
+                <option value="Santa Cruz">Santa Cruz</option>
+                <option value="Santa Fe">Santa Fe</option>
+                <option value="Sgo. del Estero">Sgo. del Estero</option>
+                <option value="Tierra del Fuego">Tierra del Fuego</option>
+                <option value="Tucuman">Tucuman</option>
+            </select>
             <div [hidden]="!(editForm.controls.state?.dirty && editForm.controls.state?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.state?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
+                       [hidden]="!editForm.controls.state?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
                 </small>
             </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="aresViApp.companyAddress.latitude" for="field_latitude">Latitude</label>
             <input type="text" class="form-control" name="latitude" id="field_latitude"
-                [(ngModel)]="companyAddress.latitude"  />
+                [(ngModel)]="companyAddress.latitude" required/>
+            <div [hidden]="!(editForm.controls.latitude?.dirty && editForm.controls.latitude?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.latitude?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="aresViApp.companyAddress.longitude" for="field_longitude">Longitude</label>
             <input type="text" class="form-control" name="longitude" id="field_longitude"
-                [(ngModel)]="companyAddress.longitude"  />
+                [(ngModel)]="companyAddress.longitude" required/>
+            <div [hidden]="!(editForm.controls.longitude?.dirty && editForm.controls.longitude?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.longitude?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
         </div>
-        <!--
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="aresViApp.companyAddress.company" for="field_company">Company</label>
-            <select class="form-control" id="field_company" name="company" [(ngModel)]="companyAddress.companyId">
-                <option [ngValue]="null"></option>
-                <option [ngValue]="companyOption.id" *ngFor="let companyOption of companies; trackBy: trackCompanyById">{{companyOption.id}}</option>
-            </select>
-        </div>
-        -->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

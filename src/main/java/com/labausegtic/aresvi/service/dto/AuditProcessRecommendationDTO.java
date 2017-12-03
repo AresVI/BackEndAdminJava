@@ -19,6 +19,8 @@ public class AuditProcessRecommendationDTO implements Serializable {
     @Lob
     private String description;
 
+    private String standardObservation;
+
     private boolean reviewed;
 
     private Long recommendationId;
@@ -49,6 +51,14 @@ public class AuditProcessRecommendationDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStandardObservation() {
+        return standardObservation;
+    }
+
+    public void setStandardObservation(String standardObservation) {
+        this.standardObservation = standardObservation;
     }
 
     public Long getRecommendationId() {

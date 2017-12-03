@@ -28,6 +28,9 @@ public class AuditTaskRecommendation implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "standard_observation")
+    private String standardObservation;
+
     @Column(name = "reviewed")
     private boolean reviewed;
 
@@ -57,6 +60,19 @@ public class AuditTaskRecommendation implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStandardObservation() {
+        return standardObservation;
+    }
+
+    public AuditTaskRecommendation standardObservation(String standardObservation) {
+        this.standardObservation = standardObservation;
+        return this;
+    }
+
+    public void setStandardObservation(String standardObservation) {
+        this.standardObservation = standardObservation;
     }
 
     public AuditProcessRecommendation getAuditProcessRecom() {

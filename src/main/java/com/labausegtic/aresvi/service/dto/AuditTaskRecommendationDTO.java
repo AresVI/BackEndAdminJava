@@ -20,6 +20,8 @@ public class AuditTaskRecommendationDTO implements Serializable {
 
     private boolean reviewed;
 
+    private String standardObservation;
+
     private Long auditProcessRecomId;
 
     private Long auditTaskId;
@@ -92,6 +94,14 @@ public class AuditTaskRecommendationDTO implements Serializable {
 
     public void setRevisedDate(Instant revisedDate) {
         this.revisedDate = revisedDate;
+    }
+
+    public String getStandardObservation() {
+        return standardObservation;
+    }
+
+    public void setStandardObservation(String standardObservation) {
+        this.standardObservation = standardObservation;
     }
 
     @Override

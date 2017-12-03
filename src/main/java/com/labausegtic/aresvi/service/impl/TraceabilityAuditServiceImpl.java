@@ -231,6 +231,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
             auditProcessRecommendation.setDescription("");
 
+            auditProcessRecommendation.setStandardObservation("");
+
             auditProcessRecommendation.setReviewed(false);
 
             auditProcessRecommendation.setTaken(false);
@@ -258,6 +260,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                     auditTaskRecommendation.setAuditTask(at);
 
                     auditTaskRecommendation.setDescription("");
+
+                    auditTaskRecommendation.setStandardObservation("");
 
                     auditTaskRecommendation.setReviewed(false);
 

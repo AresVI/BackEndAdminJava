@@ -8,43 +8,34 @@
     <div class="col-12 mb-3">
         <div class="card" *ngIf="!company.companyAddress">
             <div class="card-body">
-            <button class="btn btn-primary btn-block jh-create-entity create-company-address"
-                    [routerLink]="['/', { outlets: { popup: ['company', company.id, 'company-address-new'] } }]">
-                <span class="fa fa-plus"></span>
-                <span  jhiTranslate="aresViApp.companyAddress.home.createLabel">Create new Company Address</span>
-            </button>
-        </div>
+                <button class="btn btn-primary btn-block jh-create-entity create-company-address"
+                        [routerLink]="['/', { outlets: { popup: ['company', company.id, 'company-address-new'] } }]">
+                    <span class="fa fa-plus"></span>
+                    <span  jhiTranslate="aresViApp.companyAddress.home.createLabel">Create new Company Address</span>
+                </button>
+            </div>
         </div>
         <div class="card" *ngIf="company.companyAddress">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <dl class="row-md jh-entity-details">
-                                    <dt><span jhiTranslate="aresViApp.companyAddress.street">Street</span></dt>
-                                    <dd>
-                                        <span>{{company.companyAddress.street}}</span>
-                                    </dd>
-                                    <dt><span jhiTranslate="aresViApp.companyAddress.city">City</span></dt>
-                                    <dd>
-                                        <span>{{company.companyAddress.city}}</span>
-                                    </dd>
-                                    <dt><span jhiTranslate="aresViApp.companyAddress.state">State</span></dt>
-                                    <dd>
-                                        <span>{{company.companyAddress.state}}</span>
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-
-                            </div>
-                        </div>
-                    </div>
+                <h4 class="card-title">Dirección</h4>
+                <div class="col-12 mb-3">
+                    <dl class="row-md jh-entity-details m-0 float-left" >
+                        <dt><span jhiTranslate="aresViApp.companyAddress.street">Street</span></dt>
+                        <dd>
+                            <span>{{company.companyAddress.street}}</span>
+                        </dd>
+                        <dt><span jhiTranslate="aresViApp.companyAddress.city">City</span></dt>
+                        <dd>
+                            <span>{{company.companyAddress.city}}</span>
+                        </dd>
+                        <dt><span jhiTranslate="aresViApp.companyAddress.state">State</span></dt>
+                        <dd>
+                            <span>{{company.companyAddress.state}}</span>
+                        </dd>
+                    </dl>
+                    <a [href]="linkGoogleMaps" target="_blank" class="float-right">
+                        <img [src]="urlMap" class="img-fluid rounded">
+                    </a>
                 </div>
             </div>
         </div>

@@ -39,8 +39,7 @@ import {AresViReportModule} from './reports/report.module';
         AresViAccountModule,
         AresViEntityModule,
         AresViFlowModule,
-        AresViReportModule,
-        // jhipster-needle-angular-add-module JHipster will add new module here
+        AresViReportModule
     ],
     declarations: [
         JhiMainComponent,

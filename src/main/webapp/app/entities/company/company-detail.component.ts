@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Pipe} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
@@ -11,6 +11,9 @@ import {Principal} from '../../shared/auth/principal.service';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+
+@Pipe({ name: 'safe' })
 @Component({
     selector: 'jhi-company-detail',
     templateUrl: './company-detail.component.html'
@@ -36,6 +39,16 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
 
+    lat: number;
+    lng: number;
+    mapZoom: number;
+
+    title = 'app';
+    zoom = 16;
+
+    urlMap: SafeResourceUrl;
+    linkGoogleMaps: SafeResourceUrl;
+
     constructor(
         private traceabilityAuditService: TraceabilityAuditService,
         private companyService: CompanyService,
@@ -45,7 +58,8 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private sanitizer: DomSanitizer
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
@@ -65,6 +79,20 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInTraceabilityAudits();
+        this.lat = -33.066796;
+        this.lng = -68.5094036;
+        this.mapZoom = 16;
+
+        const url = 'https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyB1cBm4iFiova0nbWSXHMKg0473TzCqcEI' +
+            '&center=' + this.lat + ',' + this.lng + '&zoom=' +  this.zoom + '&size=400x400' +
+            '&markers=color:red|' + this.lat + ',' + this.lng ;
+
+        this.urlMap =  this.sanitizer.bypassSecurityTrustResourceUrl(url);
+
+        const googleMapsUrl = 'https://www.google.com.ar/maps/dir//' + this.lat + ',' + this.lng + '/@' + this.lat + ',' + this.lng + ',14z';
+
+        this.linkGoogleMaps =  this.sanitizer.bypassSecurityTrustResourceUrl(googleMapsUrl);
+
     }
 
     load(id) {

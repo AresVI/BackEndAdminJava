@@ -22,6 +22,7 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
     actionText: string;
     allRecommendationReviewed: boolean;
     description: string;
+    standardObservation: string;
     account: Account;
 
     constructor(
@@ -42,6 +43,7 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
         this.registerChangeInTraceabilityAudits();
         this.actionText = 'Realizar Auditoría';
         this.description = '';
+        this.standardObservation = '';
     }
 
     load(id) {
@@ -126,14 +128,17 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
         );
     }
 
-    openModalDescription(content, description: string) {
+    openModalDescription(content, description: string, standardObservation: string) {
 
         this.description = description;
+        this.standardObservation = standardObservation;
 
         this.modalService.open(content).result.then(() => {
             this.description = '';
+            this.standardObservation = '';
             }, (reason) => {
             this.description = '';
+            this.standardObservation = '';
         });
     }
 }

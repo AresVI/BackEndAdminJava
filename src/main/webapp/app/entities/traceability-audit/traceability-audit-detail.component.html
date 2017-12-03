@@ -63,10 +63,10 @@
         <h3 class="card-header bg-primary text-white">
             <span jhiTranslate="aresViApp.auditProcess.detail.title">Process</span>:
             {{auditProcessRecom.auditProcess.name}}
-            <button type="button" class="btn btn-outline-dark"
+            <button type="button" class="btn btn-outline-light"
                     [hidden]="auditProcessRecom.description.length < 1"
-                    (click)="openModalDescription(modal_description, auditProcessRecom.description)">
-                <i class="fa fa-file-text-o"></i> Ver Recomendación
+                    (click)="openModalDescription(modal_description, auditProcessRecom.description, auditProcessRecom.standardObservation)">
+                <i class="fa fa-file-text-o"></i>
             </button>
         </h3>
 
@@ -80,7 +80,7 @@
                         <small class="text-secondary">({{auditTaskRecom.revisedDate | date: 'dd/MM/yyyy HH:mm'}})</small>
                         <button type="button" class="btn btn-outline-dark btn-sm"
                                 [hidden]="auditTaskRecom.description.length < 1"
-                                (click)="openModalDescription(modal_description, auditTaskRecom.description)">
+                                (click)="openModalDescription(modal_description, auditTaskRecom.description, auditTaskRecom.standardObservation)">
                             <i class="fa fa-file-text-o"></i>
                         </button>
                     </h4>
@@ -152,12 +152,14 @@
 
 <ng-template #modal_description let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Ver Recomendación</h4>
+        <h4 class="modal-title">Ver Observaciones</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
+        <input name="standard_observation" id="field_standard_observation" readonly class="form-control mb-3"
+               [(ngModel)]="standardObservation" >
         <textarea class="form-control" name="description" id="field_description" readonly
                   [(ngModel)]="description"></textarea>
     </div>

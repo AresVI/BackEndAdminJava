@@ -65,6 +65,9 @@
             <button type="submit" [disabled]="auditForm.form.invalid || isSaving || !recommendation.levelComputerization || !allProcessReviewed" class="btn btn-primary">
                 <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
             </button>
+            <button type="button" (click)="load(recommendation.id)" class="btn btn-primary">
+                <span class="fa fa-refresh"></span>&nbsp; Refrescar
+            </button>
             <button type="button"
                     [routerLink]="['/traceability-audit', recommendation.traceabilityAuditId ]"
                     class="btn btn-secondary">

@@ -461,11 +461,11 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         traceabilityAuditList = query.toArray(traceabilityAuditList);
 
         List<AuditTaskRecommendation> auditTaskRecommendationListOld = getAuditTaskRecommendationFromTraceabilityAuditAndProcessId(
-            traceabilityAuditList[0], process_id, auditTaskList
+            traceabilityAuditList[1], process_id, auditTaskList
         );
 
         List<AuditTaskRecommendation> auditTaskRecommendationListNew = getAuditTaskRecommendationFromTraceabilityAuditAndProcessId(
-            traceabilityAuditList[1], process_id, auditTaskList
+            traceabilityAuditList[0], process_id, auditTaskList
         );
 
 

@@ -130,6 +130,12 @@
 
     <div [hidden]="traceabilityAudit.status == 'STATUS_FINISHED'">
 
+        <button type="button"
+                [routerLink]="['/process/audit/status/in_progress']"
+                class="btn btn-secondary">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+
         <button type="button" [disabled]="!allRecommendationReviewed"
                 [routerLink]="['/', { outlets: { popup: 'traceability-audit/'+ traceabilityAudit.id + '/finish'} }]"
                 replaceUrl="true" class="btn btn-primary"
@@ -137,12 +143,6 @@
                 *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL']">
             <span class="fa fa-send"></span>
             <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.finish">Finish</span>
-        </button>
-
-        <button type="button"
-                [routerLink]="['/process/audit/status/in_progress']"
-                class="btn btn-secondary">
-            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
         </button>
 
     </div>

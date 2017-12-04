@@ -64,7 +64,7 @@
             <span jhiTranslate="aresViApp.auditProcess.detail.title">Process</span>:
             {{auditProcessRecom.auditProcess.name}}
             <button type="button" class="btn btn-outline-light"
-                    [hidden]="auditProcessRecom.description.length < 1"
+                    [hidden]="auditProcessRecom.description.length < 1 && auditProcessRecom.standardObservation.length < 1"
                     (click)="openModalDescription(modal_description, auditProcessRecom.description, auditProcessRecom.standardObservation)">
                 <i class="fa fa-file-text-o"></i>
             </button>
@@ -79,7 +79,7 @@
                         {{auditTaskRecom.auditTask.name}}
                         <small class="text-secondary">({{auditTaskRecom.revisedDate | date: 'dd/MM/yyyy HH:mm'}})</small>
                         <button type="button" class="btn btn-outline-dark btn-sm"
-                                [hidden]="auditTaskRecom.description.length < 1"
+                                [hidden]="auditTaskRecom.description.length < 1 && auditTaskRecom.standardObservation.length < 1"
                                 (click)="openModalDescription(modal_description, auditTaskRecom.description, auditTaskRecom.standardObservation)">
                             <i class="fa fa-file-text-o"></i>
                         </button>

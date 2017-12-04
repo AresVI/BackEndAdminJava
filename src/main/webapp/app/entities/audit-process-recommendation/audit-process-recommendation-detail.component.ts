@@ -1,12 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import {JhiEventManager, JhiDataUtils, JhiAlertService} from 'ng-jhipster';
 
 import { AuditProcessRecommendation } from './audit-process-recommendation.model';
 import { AuditProcessRecommendationService } from './audit-process-recommendation.service';
 import {Observable} from 'rxjs/Observable';
 import {AuditTaskRecommendation} from '../audit-task-recommendation/audit-task-recommendation.model';
+import {AuditProcessStandardObservation} from '../audit-process-standard-observation/audit-process-standard-observation.model';
+import {AuditProcessStandardObservationService} from '../audit-process-standard-observation/audit-process-standard-observation.service';
+import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 
 @Component({
     selector: 'jhi-audit-process-recommendation-detail',
@@ -20,12 +23,16 @@ export class AuditProcessRecommendationDetailComponent implements OnInit, OnDest
     isSaving: boolean;
     allAuditTaskReviewed: boolean;
 
+    auditProcessStandardObservations: AuditProcessStandardObservation[];
+
     constructor(
         private eventManager: JhiEventManager,
         private dataUtils: JhiDataUtils,
         private auditProcessRecommendationService: AuditProcessRecommendationService,
         private route: ActivatedRoute,
+        private alertService: JhiAlertService,
         private router: Router,
+        private auditProcessStandardObservationService: AuditProcessStandardObservationService,
     ) {
     }
 
@@ -35,6 +42,7 @@ export class AuditProcessRecommendationDetailComponent implements OnInit, OnDest
             this.load(params['id']);
         });
         this.registerChangeInAuditProcessRecommendations();
+        this.loadAllAuditProcessStandardObservations();
     }
 
     load(id) {
@@ -104,5 +112,21 @@ export class AuditProcessRecommendationDetailComponent implements OnInit, OnDest
             'auditProcessRecommendationListModification',
             (response) => this.load(this.auditProcessRecommendation.id)
         );
+    }
+
+    private loadAllAuditProcessStandardObservations() {
+
+        this.auditProcessStandardObservationService.queryAll().subscribe(
+            (res: ResponseWrapper) => this.onSuccessAuditProcessStandardObservations(res.json, res.headers),
+            (res: ResponseWrapper) => this.onErrorAuditProcessStandardObservations(res.json)
+        );
+
+    }
+
+    private onSuccessAuditProcessStandardObservations(data, headers) {
+        this.auditProcessStandardObservations = data;
+    }
+    private onErrorAuditProcessStandardObservations(error) {
+        this.alertService.error(error.message, null, null);
     }
 }

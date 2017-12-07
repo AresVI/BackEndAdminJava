@@ -1,12 +1,17 @@
 package com.labausegtic.aresvi.web.rest.errors;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.dao.ConcurrencyFailureException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.zalando.problem.DefaultProblem;
@@ -102,6 +107,26 @@ public class ExceptionTranslator implements ProblemHandling {
         }
     }
 
+    @ExceptionHandler(MySQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<Problem> handleConcurrencyFailure(MySQLIntegrityConstraintViolationException ex, NativeWebRequest request) {
+        Problem problem = Problem.builder()
+            .withStatus(Status.CONFLICT)
+            .with("message", ErrorConstants.ERR_VALIDATION_DUPLICATE)
+            .with("detail", ex.getLocalizedMessage())
+            .build();
+        return create(ex, problem, request);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Problem> handleConcurrencyFailure(ConstraintViolationException ex, NativeWebRequest request) {
+        Problem problem = Problem.builder()
+            .withStatus(Status.ACCEPTED)
+            .with("message", ErrorConstants.ERR_VALIDATION_DUPLICATE)
+            .with("detail", ex.getLocalizedMessage())
+            .build();
+        return create(ex, problem, request);
+    }
+
     @ExceptionHandler(ConcurrencyFailureException.class)
     public ResponseEntity<Problem> handleConcurrencyFailure(ConcurrencyFailureException ex, NativeWebRequest request) {
         Problem problem = Problem.builder()
@@ -110,4 +135,5 @@ public class ExceptionTranslator implements ProblemHandling {
             .build();
         return create(ex, problem, request);
     }
+
 }

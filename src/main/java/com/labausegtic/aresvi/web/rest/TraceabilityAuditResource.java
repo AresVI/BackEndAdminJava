@@ -83,17 +83,18 @@ public class TraceabilityAuditResource {
             .body(result);
     }
 
-    @PostMapping("/traceability-audits/{id}/start")
+    @PutMapping("/traceability-audits/{id}/start")
     @Timed
-    public ResponseEntity<Void> startTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<TraceabilityAuditDTO> startTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
 
         TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.startTraceabilityAudit(id);
 
-        return ResponseEntity.ok().headers(HeaderUtil.createFlowStartAlert(ENTITY_NAME, traceabilityAuditDTO.getName())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowStartAlert(ENTITY_NAME, traceabilityAuditDTO.getName()))
+            .body(traceabilityAuditDTO);
 
     }
 
-    @PostMapping("/traceability-audits/{id}/finish")
+    @PutMapping("/traceability-audits/{id}/finish")
     @Timed
     public ResponseEntity<Void> finishTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
 

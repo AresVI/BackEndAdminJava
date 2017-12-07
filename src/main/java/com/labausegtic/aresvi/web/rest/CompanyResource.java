@@ -127,7 +127,7 @@ public class CompanyResource {
         Authority authority = new Authority();
         authority.setName(AuthoritiesConstants.AUDITOR_INTERNAL);
 
-        if (user.get().getAuthorities().contains(authority)) {
+        if (user.isPresent() && user.get().getAuthorities().contains(authority)) {
 
             Auditor auditor = auditorRepository.findAuditorByUser_Id(user.get().getId());
 

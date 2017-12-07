@@ -19,7 +19,13 @@
                 "viewCompanyContactPerson": "Personas de Contacto"
             },
             "name": "Nombre",
-            "identifier": "CUIT"
+            "identifier": "CUIT",
+            "error":{
+                "duplicated_field": {
+                    "name": "Ya existe una bodega con el nombre seleccionado",
+                    "identifier": "Ya existe una bodega con el CUIT seleccionado"
+                }
+            }
         }
     }
 }

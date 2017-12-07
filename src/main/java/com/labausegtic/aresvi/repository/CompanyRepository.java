@@ -23,4 +23,6 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
 
     Page<Company> findAllByIdIn(Pageable pageable, Set<Company> companies);
 
+    Company findCompanyByNameOrIdentifier(String name, String identifier);
+
 }

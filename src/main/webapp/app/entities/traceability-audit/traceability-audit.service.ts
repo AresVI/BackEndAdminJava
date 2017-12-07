@@ -55,11 +55,11 @@ export class TraceabilityAuditService {
     }
 
     start(id: number): Observable<Response> {
-        return this.http.post(`${this.resourceUrl}/${id}/start`, {});
+        return this.http.put(`${this.resourceUrl}/${id}/start`, {});
     }
 
     finish(id: number): Observable<Response> {
-        return this.http.post(`${this.resourceUrl}/${id}/finish`, {});
+        return this.http.put(`${this.resourceUrl}/${id}/finish`, {});
     }
 
     delete(id: number): Observable<Response> {

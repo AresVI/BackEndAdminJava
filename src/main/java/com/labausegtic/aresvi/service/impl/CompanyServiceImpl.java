@@ -7,12 +7,18 @@ import com.labausegtic.aresvi.repository.CompanyRepository;
 import com.labausegtic.aresvi.service.dto.CompanyDTO;
 import com.labausegtic.aresvi.service.mapper.CompanyMapper;
 
+import com.labausegtic.aresvi.web.rest.errors.CustomParameterizedException;
+import com.thoughtworks.xstream.converters.reflection.AbstractReflectionConverter;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.SQLException;
+import java.util.Objects;
 
 
 /**
@@ -47,6 +53,35 @@ public class CompanyServiceImpl implements CompanyService{
     public CompanyDTO save(CompanyDTO companyDTO) {
         log.debug("Request to save Company : {}", companyDTO);
         Company company = companyMapper.toEntity(companyDTO);
+        Company foundCompany = companyRepository.findCompanyByNameOrIdentifier(company.getName(), company.getIdentifier());
+        CustomParameterizedException customParameterizedException;
+        if (company.getId() != null) {
+            if (!Objects.equals(company.getId(), foundCompany.getId())) {
+                if (Objects.equals(company.getName(), foundCompany.getName())) {
+                    customParameterizedException = new CustomParameterizedException(
+                        "aresViApp.company.error.duplicated_field.name"
+                    );
+                } else {
+                    customParameterizedException = new CustomParameterizedException(
+                        "aresViApp.company.error.duplicated_field.identifier"
+                    );
+                }
+                throw customParameterizedException;
+            }
+        } else {
+            if (foundCompany != null) {
+                if (Objects.equals(company.getName(), foundCompany.getName())) {
+                    customParameterizedException = new CustomParameterizedException(
+                        "aresViApp.company.error.duplicated_field.name"
+                    );
+                } else {
+                    customParameterizedException = new CustomParameterizedException(
+                        "aresViApp.company.error.duplicated_field.identifier"
+                    );
+                }
+                throw customParameterizedException;
+            }
+        }
         company = companyRepository.save(company);
         return companyMapper.toDto(company);
     }

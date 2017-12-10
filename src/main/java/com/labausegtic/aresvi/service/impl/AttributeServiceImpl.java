@@ -117,9 +117,9 @@ public class AttributeServiceImpl implements AttributeService{
 
         if(required){
             WeightingDTO weightingDTO = weightingService.findOneByValue(level.intValue());
-            return attributeRepository.findFirst10ByWeightingId(weightingDTO.getId());
+            return attributeRepository.findTop9ByWeightingId(weightingDTO.getId());
         } else {
-            return attributeRepository.findFirst10ByRequiredFalse();
+            return attributeRepository.findTop9ByRequiredFalse();
         }
 
     }

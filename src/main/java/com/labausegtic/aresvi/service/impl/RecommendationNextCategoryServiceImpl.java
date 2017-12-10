@@ -91,8 +91,6 @@ public class RecommendationNextCategoryServiceImpl implements RecommendationNext
 
     private List<AuditProcessRecommendationDTO> getRecommendation(List<Attribute> attributeList){
 
-        RecommendationDTO result = new RecommendationDTO();
-
         List<AttributeRecommendation> attributeRecommendationList;
 
         attributeRecommendationList = attributeRecommendationService.findAllInAttributeListAndNotImplemented(attributeList);

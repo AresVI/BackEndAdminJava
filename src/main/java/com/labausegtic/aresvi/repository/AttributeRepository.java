@@ -18,7 +18,7 @@ public interface AttributeRepository extends JpaRepository<Attribute, Long> {
 
     Set<Attribute> findAllByCategoryAttribute_Id(Long categoryAttributeId);
 
-    List<Attribute> findTopTenByWeightingId(Long weightingId);
+    List<Attribute> findFirst10ByWeightingId(Long weightingId);
 
-    List<Attribute> findTopTenByRequiredFalse();
+    List<Attribute> findFirst10ByRequiredFalse();
 }

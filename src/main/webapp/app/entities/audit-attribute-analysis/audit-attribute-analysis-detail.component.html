@@ -1,0 +1,51 @@
+
+<div *ngIf="auditAttributeAnalysis">
+    <h2><span jhiTranslate="aresViApp.auditAttributeAnalysis.detail.title">Audit Attribute Analysis</span> {{auditAttributeAnalysis.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.auditAttributeAnalysis.percentageNotRequired">Percentage Not Required</span></dt>
+        <dd>
+            <span>{{auditAttributeAnalysis.percentageNotRequired}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel1">Percentage Level 1</span></dt>
+        <dd>
+            <span>{{auditAttributeAnalysis.percentageLevel1}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel2">Percentage Level 2</span></dt>
+        <dd>
+            <span>{{auditAttributeAnalysis.percentageLevel2}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel3">Percentage Level 3</span></dt>
+        <dd>
+            <span>{{auditAttributeAnalysis.percentageLevel3}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel4">Percentage Level 4</span></dt>
+        <dd>
+            <span>{{auditAttributeAnalysis.percentageLevel4}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel5">Percentage Level 5</span></dt>
+        <dd>
+            <span>{{auditAttributeAnalysis.percentageLevel5}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.auditAttributeAnalysis.traceabilityAudit">Traceability Audit</span></dt>
+        <dd>
+            <div *ngIf="auditAttributeAnalysis.traceabilityAuditId">
+                <a [routerLink]="['/traceability-audit', auditAttributeAnalysis.traceabilityAuditId]">{{auditAttributeAnalysis.traceabilityAuditName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'audit-attribute-analysis/'+ auditAttributeAnalysis.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

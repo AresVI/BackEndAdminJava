@@ -5,6 +5,7 @@ import com.labausegtic.aresvi.service.dto.CategoryAttrRecommendationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,7 +29,7 @@ public interface CategoryAttrRecommendationService {
      */
     Page<CategoryAttrRecommendationDTO> findAll(Pageable pageable);
 
-    Set<CategoryAttrRecommendationDTO> findAllByAuditTaskRecom_Id(Long auditTaskRecom_id);
+    List<CategoryAttrRecommendationDTO> findAllByAuditTaskRecom_Id(Long auditTaskRecom_id);
 
     /**
      *  Get the "id" categoryAttRecommendation.

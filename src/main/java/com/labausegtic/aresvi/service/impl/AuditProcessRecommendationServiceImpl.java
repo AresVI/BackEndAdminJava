@@ -88,9 +88,9 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
     }
 
     @Override
-    public Set<AuditProcessRecommendationDTO> findAllByRecommendation_Id(Long recommendation_id) {
+    public List<AuditProcessRecommendationDTO> findAllByRecommendation_Id(Long recommendation_id) {
 
-        Set<AuditProcessRecommendationDTO> result = new HashSet<>();
+        List<AuditProcessRecommendationDTO> result = new ArrayList<>();
 
         Set<AuditProcessRecommendation> auditProcessRecommendations;
 

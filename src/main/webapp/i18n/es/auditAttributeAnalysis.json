@@ -1,0 +1,27 @@
+{
+    "aresViApp": {
+        "auditAttributeAnalysis" : {
+            "home": {
+                "title": "Audit Attribute Analyses",
+                "createLabel": "Crear nuevo Audit Attribute Analysis",
+                "createOrEditLabel": "Crear o editar Audit Attribute Analysis"
+            },
+            "created": "Un nuevo Audit Attribute Analysis ha sido creado con el identificador {{ param }}",
+            "updated": "Un Audit Attribute Analysis ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Audit Attribute Analysis ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Audit Attribute Analysis {{ id }}?"
+            },
+            "detail": {
+                "title": "Audit Attribute Analysis"
+            },
+            "percentageNotRequired": "Percentage Not Required",
+            "percentageLevel1": "Percentage Level 1",
+            "percentageLevel2": "Percentage Level 2",
+            "percentageLevel3": "Percentage Level 3",
+            "percentageLevel4": "Percentage Level 4",
+            "percentageLevel5": "Percentage Level 5",
+            "traceabilityAudit": "Traceability Audit"
+        }
+    }
+}

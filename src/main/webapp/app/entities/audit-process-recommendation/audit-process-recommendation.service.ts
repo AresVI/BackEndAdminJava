@@ -11,6 +11,8 @@ export class AuditProcessRecommendationService {
 
     private resourceUrl = SERVER_API_URL + 'api/audit-process-recommendations';
 
+    private resource_recommendation_next_category = SERVER_API_URL + 'api/recommendation-next-category';
+
     constructor(private http: Http) { }
 
     create(auditProcessRecommendation: AuditProcessRecommendation): Observable<AuditProcessRecommendation> {
@@ -41,6 +43,12 @@ export class AuditProcessRecommendationService {
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
+    }
+
+    getRecommendationNextCategory(company_id: number): Observable<AuditProcessRecommendation[]> {
+        return this.http.get(`${this.resource_recommendation_next_category}/${company_id}`).map((res: Response) => {
+            return res.json();
+        });
     }
 
     private convertResponse(res: Response): ResponseWrapper {

@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.repository;
 
+import com.labausegtic.aresvi.domain.Attribute;
 import com.labausegtic.aresvi.domain.AttributeRecommendation;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -32,5 +33,7 @@ public interface AttributeRecommendationRepository extends JpaRepository<Attribu
         "    AND ar.categoryAttrRecom.id = car.id"
     )
     Set<AttributeRecommendation> findAllForTraceabilityAuditId(@Param("traceability_audit_id") long traceability_audit_id);
+
+    List<AttributeRecommendation> findAllByAttributeInAndImplementedIsFalse(List<Attribute> attributeList);
 
 }

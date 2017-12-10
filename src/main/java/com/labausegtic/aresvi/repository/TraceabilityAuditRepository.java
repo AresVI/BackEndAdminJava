@@ -19,7 +19,7 @@ import java.util.Set;
 @Repository
 public interface TraceabilityAuditRepository extends JpaRepository<TraceabilityAudit, Long> {
 
-    Set<TraceabilityAudit> findByCompanyIdOrderByFinishedDateDesc(long company_id);
+    TraceabilityAudit findFirstByCompanyIdOrderByFinishedDateDesc(long company_id);
 
     Page<TraceabilityAudit> findAllByStatus(Pageable pageable, String status);
     List<TraceabilityAudit> findAllByStatus(String status);

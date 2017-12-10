@@ -96,11 +96,12 @@ public class TraceabilityAuditResource {
 
     @PutMapping("/traceability-audits/{id}/finish")
     @Timed
-    public ResponseEntity<Void> finishTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<TraceabilityAuditDTO> finishTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
 
         TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.finishTraceabilityAudit(id);
 
-        return ResponseEntity.ok().headers(HeaderUtil.createFlowFinishAlert(ENTITY_NAME, traceabilityAuditDTO.getName())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowFinishAlert(ENTITY_NAME, traceabilityAuditDTO.getName()))
+            .body(traceabilityAuditDTO);
 
     }
 

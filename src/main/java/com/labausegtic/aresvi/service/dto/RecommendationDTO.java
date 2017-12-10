@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 
@@ -31,7 +32,7 @@ public class RecommendationDTO implements Serializable {
 
     private TraceabilityAuditDTO traceabilityAudit;
 
-    private Set<AuditProcessRecommendationDTO> auditProcessRecommendationSet;
+    private List<AuditProcessRecommendationDTO> auditProcessRecommendationSet;
 
     private Long auditorId;
 
@@ -77,14 +78,6 @@ public class RecommendationDTO implements Serializable {
         this.traceabilityAuditId = traceabilityAuditId;
     }
 
-    public Set<AuditProcessRecommendationDTO> getAuditProcessRecommendationSet() {
-        return auditProcessRecommendationSet;
-    }
-
-    public void setAuditProcessRecommendationSet(Set<AuditProcessRecommendationDTO> auditProcessRecommendationSet) {
-        this.auditProcessRecommendationSet = auditProcessRecommendationSet;
-    }
-
     public Long getAuditorId() {
         return auditorId;
     }
@@ -123,6 +116,14 @@ public class RecommendationDTO implements Serializable {
 
     public void setTraceabilityAudit(TraceabilityAuditDTO traceabilityAudit) {
         this.traceabilityAudit = traceabilityAudit;
+    }
+
+    public List<AuditProcessRecommendationDTO> getAuditProcessRecommendationSet() {
+        return auditProcessRecommendationSet;
+    }
+
+    public void setAuditProcessRecommendationSet(List<AuditProcessRecommendationDTO> auditProcessRecommendationSet) {
+        this.auditProcessRecommendationSet = auditProcessRecommendationSet;
     }
 
     @Override

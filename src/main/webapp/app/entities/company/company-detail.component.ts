@@ -12,6 +12,9 @@ import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import {AuditProcessRecommendation} from '../audit-process-recommendation/audit-process-recommendation.model';
+import {AuditProcessRecommendationService} from '../audit-process-recommendation/audit-process-recommendation.service';
 
 @Pipe({ name: 'safe' })
 @Component({
@@ -26,6 +29,8 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     private eventSubscriber: Subscription;
 
     traceabilityAudits: TraceabilityAudit[];
+
+    recommendationNextLevel: AuditProcessRecommendation[];
 
     error: any;
     success: any;
@@ -51,6 +56,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
 
     constructor(
         private traceabilityAuditService: TraceabilityAuditService,
+        private auditProcessRecommendationService: AuditProcessRecommendationService,
         private companyService: CompanyService,
         private parseLinks: JhiParseLinks,
         private alertService: JhiAlertService,
@@ -59,7 +65,8 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
         private router: Router,
         private eventManager: JhiEventManager,
         private route: ActivatedRoute,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private modalService: NgbModal
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
@@ -79,7 +86,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInTraceabilityAudits();
-
+        this.recommendationNextLevel = [];
     }
 
     load(id) {
@@ -174,6 +181,25 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
             result.push('id');
         }
         return result;
+    }
+
+    openModalRecommendationNextLevel(content) {
+
+        const options: NgbModalOptions = {
+            size: 'lg'
+        };
+
+        this.auditProcessRecommendationService.getRecommendationNextCategory(this.company.id)
+            .subscribe( (res: AuditProcessRecommendation[]) => {
+
+                this.recommendationNextLevel = res;
+
+                this.modalService.open(content, options).result.then(() => {
+                    this.recommendationNextLevel = [];
+                }, (reason) => {
+                    this.recommendationNextLevel = [];
+                });
+            });
     }
 
     private onSuccess(data, headers) {

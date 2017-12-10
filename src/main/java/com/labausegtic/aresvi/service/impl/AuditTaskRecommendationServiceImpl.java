@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -101,8 +103,8 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
     }
 
     @Override
-    public Set<AuditTaskRecommendationDTO> findAllByAuditProcessRecom_Id(Long auditProcessRecom_id) {
-        Set<AuditTaskRecommendationDTO> result = new HashSet<>();
+    public List<AuditTaskRecommendationDTO> findAllByAuditProcessRecom_Id(Long auditProcessRecom_id) {
+        List<AuditTaskRecommendationDTO> result = new ArrayList<>();
 
         Set<AuditTaskRecommendation> AuditTaskRecommendations;
 

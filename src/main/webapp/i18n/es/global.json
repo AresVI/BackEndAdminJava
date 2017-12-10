@@ -28,6 +28,7 @@
                 "companyAddress": "Company Address",
                 "auditProcessStandardObservation": "Observación Estándar de Procesos de Auditoría",
                 "auditTaskStandardObservation": "Observación Estándar de Tareas de Auditoría",
+                "auditAttributeAnalysis": "Audit Attribute Analysis",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

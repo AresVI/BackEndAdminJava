@@ -28,7 +28,7 @@ public interface AuditProcessRecommendationService {
      */
     Page<AuditProcessRecommendationDTO> findAll(Pageable pageable);
 
-    Set<AuditProcessRecommendationDTO> findAllByRecommendation_Id(Long recommendation_id);
+    List<AuditProcessRecommendationDTO> findAllByRecommendation_Id(Long recommendation_id);
 
     /**
      *  Get the "id" auditProcessRecommendation.

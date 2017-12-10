@@ -39,4 +39,7 @@ public interface WeightingService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    WeightingDTO findOneByValue(Integer value);
+
 }

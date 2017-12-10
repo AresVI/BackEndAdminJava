@@ -30,7 +30,7 @@ id;name;required;weighting_id;category_attribute_id
 94;Tipo de envases, capacidad y número en que se despacha el lote de cosecha;true;2;10
 95;Patente del vehículo de transporte;true;3;10
 98;Número y copia de guía de despacho, la cual debe incluir la información solicitada por INV ;true;1;10
-99;Métodode despalillado.;true;5;11
+99;Métodode despalillado.;true;4;11
 100;Peso resultante.;true;5;11
 101;Método de estrujado.;true;5;12
 102;Peso resultante.;true;5;12
@@ -44,10 +44,10 @@ id;name;required;weighting_id;category_attribute_id
 200;Identificación del lote de recepción en bodega de estabilización.;true;5;18
 201;Identificación de la operación en que se utiliza cada producto agregado.;true;5;18
 202;Identificación de los productos utilizados por su denominación química y comercial, con número de lote e identificación del proveedor.;true;5;18
-203;Dosis aplicadas.;true;5;18
+203;Dosis aplicadas.;true;4;18
 204;Fecha de la aplicación.;true;5;18
 205;Identificación del profesional que prescribió la aplicación del tratamiento.;true;5;18
-206;Identificación del personal que aplicó el tratamiento.;true;5;18
+206;Identificación del personal que aplicó el tratamiento.;true;4;18
 210;Número o código del lote.;true;5;19
 211;Volumen fraccionado.;true;5;19
 212;Cepas.;true;5;19

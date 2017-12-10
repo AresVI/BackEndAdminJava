@@ -83,4 +83,10 @@ public class WeightingServiceImpl implements WeightingService{
         log.debug("Request to delete Weighting : {}", id);
         weightingRepository.delete(id);
     }
+
+    @Override
+    public WeightingDTO findOneByValue(Integer value) {
+        Weighting weighting = weightingRepository.findFirstByValue(value);
+        return weightingMapper.toDto(weighting);
+    }
 }

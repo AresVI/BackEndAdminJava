@@ -25,6 +25,7 @@
     <include file="config/liquibase/changelog/20171130030745_added_entity_CompanyAddress.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171203174741_added_entity_AuditProcessStandardObservation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171203175634_added_entity_AuditTaskStandardObservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171210155722_added_entity_AuditAttributeAnalysis.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20170926043612_added_entity_constraints_Attribute.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170926043613_added_entity_constraints_CategoryAttribute.xml" relativeToChangelogFile="false"/>
@@ -41,5 +42,6 @@
     <include file="config/liquibase/changelog/20171014051644_added_entity_constraints_CompanyContactPerson.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171017041035_added_entity_constraints_CancellationTraceabilityAudit.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171130030745_added_entity_constraints_CompanyAddress.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171210155722_added_entity_constraints_AuditAttributeAnalysis.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

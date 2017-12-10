@@ -1,12 +1,10 @@
 package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.labausegtic.aresvi.domain.TraceabilityAudit;
 import com.labausegtic.aresvi.service.RecommendationService;
 import com.labausegtic.aresvi.service.CompanyService;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
 import com.labausegtic.aresvi.service.dto.CompanyDTO;
-import com.labausegtic.aresvi.service.dto.RecommendationDTO;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -47,7 +45,7 @@ public class SearchResultResource {
 
         CompanyDTO company = companyService.findOneByIdentification(identification);
 
-        TraceabilityAuditDTO traceabilityAudit = traceabilityAuditService.findAllLastByCompanyId(company.getId());
+        TraceabilityAuditDTO traceabilityAudit = traceabilityAuditService.findLastByCompanyId(company.getId());
 
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(traceabilityAudit));
     }

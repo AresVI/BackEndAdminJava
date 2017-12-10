@@ -1,7 +1,7 @@
 version: '2'
 services:
     aresvi-app:
-        image: caballerojavier13/admin_aresvi:3.0.2
+        image: caballerojavier13/admin_aresvi:3.2.0
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
             - SPRING_DATASOURCE_URL=jdbc:mysql://aresvi-mysql:3306/aresvi?useUnicode=true&characterEncoding=utf8&useSSL=false

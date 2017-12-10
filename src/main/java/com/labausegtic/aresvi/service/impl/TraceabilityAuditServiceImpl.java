@@ -2,14 +2,10 @@ package com.labausegtic.aresvi.service.impl;
 
 import com.labausegtic.aresvi.config.ApplicationProperties;
 import com.labausegtic.aresvi.domain.*;
-import com.labausegtic.aresvi.service.BRMSService;
-import com.labausegtic.aresvi.service.BonitaBPMService;
-import com.labausegtic.aresvi.service.UserService;
+import com.labausegtic.aresvi.service.*;
 import com.labausegtic.aresvi.service.dto.*;
 import com.labausegtic.aresvi.repository.*;
 import com.labausegtic.aresvi.security.SecurityUtils;
-import com.labausegtic.aresvi.service.TraceabilityAuditService;
-import com.labausegtic.aresvi.service.mapper.AuditTaskMapper;
 import com.labausegtic.aresvi.service.mapper.TraceabilityAuditMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +55,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final ApplicationProperties applicationProperties;
 
+    private final AuditAttributeAnalysisService auditAttributeAnalysisService;
+
     public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository,
                                         RecommendationRepository recommendationRepository,
                                         AuditProcessRecommendationRepository auditProcessRecommendationRepository,
@@ -70,7 +68,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                                         AttributeRecommendationRepository attributeRecommendationRepository,
                                         TraceabilityAuditMapper traceabilityAuditMapper,
                                         UserService userService, AuditorRepository auditorRepository,
-                                        ApplicationProperties applicationProperties) {
+                                        ApplicationProperties applicationProperties, AuditAttributeAnalysisService auditAttributeAnalysisService) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
         this.recommendationRepository = recommendationRepository;
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
@@ -85,6 +83,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         this.userService = userService;
         this.auditorRepository = auditorRepository;
         this.applicationProperties = applicationProperties;
+        this.auditAttributeAnalysisService = auditAttributeAnalysisService;
     }
 
     /**
@@ -177,15 +176,11 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     @Override
     @Transactional(readOnly = true)
-    public TraceabilityAuditDTO findAllLastByCompanyId(Long company_id) {
+    public TraceabilityAuditDTO findLastByCompanyId(Long company_id) {
 
-        Set<TraceabilityAudit> traceabilityAuditSet = traceabilityAuditRepository.findByCompanyIdOrderByFinishedDateDesc(company_id);
+        TraceabilityAudit traceabilityAudit= traceabilityAuditRepository.findFirstByCompanyIdOrderByFinishedDateDesc(company_id);
 
-        if (traceabilityAuditSet.size() > 0) {
-            return traceabilityAuditMapper.toDto((TraceabilityAudit)(traceabilityAuditSet.toArray()[0]));
-        } else {
-            return null;
-        }
+        return traceabilityAuditMapper.toDto(traceabilityAudit);
 
     }
 
@@ -425,7 +420,26 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         traceabilityAuditRepository.save(traceabilityAudit);
 
+        saveAuditAttributeAnalysisResource(traceabilityAudit, inferenceParameterDTO);
+
         return traceabilityAuditMapper.toDto(traceabilityAudit);
+
+    }
+
+    private void saveAuditAttributeAnalysisResource(TraceabilityAudit traceabilityAudit, InferenceParameterDTO inferenceParameterDTO){
+
+        AuditAttributeAnalysisDTO auditAttributeAnalysis = new AuditAttributeAnalysisDTO();
+
+        auditAttributeAnalysis.setTraceabilityAuditId(traceabilityAudit.getId());
+
+        auditAttributeAnalysis.setPercentageNotRequired(inferenceParameterDTO.getPercentageNotRequired());
+        auditAttributeAnalysis.setPercentageLevel1(inferenceParameterDTO.getPercentageLevel1());
+        auditAttributeAnalysis.setPercentageLevel2(inferenceParameterDTO.getPercentageLevel2());
+        auditAttributeAnalysis.setPercentageLevel3(inferenceParameterDTO.getPercentageLevel3());
+        auditAttributeAnalysis.setPercentageLevel4(inferenceParameterDTO.getPercentageLevel4());
+        auditAttributeAnalysis.setPercentageLevel5(inferenceParameterDTO.getPercentageLevel5());
+
+        auditAttributeAnalysisService.save(auditAttributeAnalysis);
 
     }
 
@@ -500,9 +514,9 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
     }
 
     private List<ComparativeTaskRecommendationDTO> compareTwoAuditTaskRecommendationLists(
-                List<AuditTaskRecommendation> auditTaskRecommendationListOld,
-                List<AuditTaskRecommendation> auditTaskRecommendationListNew
-            ){
+        List<AuditTaskRecommendation> auditTaskRecommendationListOld,
+        List<AuditTaskRecommendation> auditTaskRecommendationListNew
+    ){
 
         List<ComparativeTaskRecommendationDTO> comparativeTaskRecommendationDTOList = new ArrayList<>();
 
@@ -530,9 +544,9 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
     }
 
     private List<ComparativeCatAttrRecommendationDTO> compareTwoCatAttrRecommendationLists(
-                List<CategoryAttrRecommendation> categoryAttrRecommendationListOld,
-                List<CategoryAttrRecommendation> categoryAttrRecommendationListNew
-            ) {
+        List<CategoryAttrRecommendation> categoryAttrRecommendationListOld,
+        List<CategoryAttrRecommendation> categoryAttrRecommendationListNew
+    ) {
 
         List<ComparativeCatAttrRecommendationDTO> comparativeCatAttrRecommendationList = new ArrayList<>();
 
@@ -562,9 +576,9 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
     }
 
     private List<ComparativeAttributeRecommendationDTO> compareTwoAttributeRecommendationLists(
-                List<AttributeRecommendation> attributeRecommendationListOld,
-                List<AttributeRecommendation> attributeRecommendationListNew
-            ) {
+        List<AttributeRecommendation> attributeRecommendationListOld,
+        List<AttributeRecommendation> attributeRecommendationListNew
+    ) {
 
         List<ComparativeAttributeRecommendationDTO> comparativeAttributeRecommendationList = new ArrayList<>();
 

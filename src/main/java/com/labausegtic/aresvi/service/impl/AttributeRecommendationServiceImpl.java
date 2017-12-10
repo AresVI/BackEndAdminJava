@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.domain.Attribute;
 import com.labausegtic.aresvi.domain.AttributeRecommendation;
 import com.labausegtic.aresvi.service.AttributeRecommendationService;
 import com.labausegtic.aresvi.domain.AttributeRecommendation;
@@ -107,5 +108,12 @@ public class AttributeRecommendationServiceImpl implements AttributeRecommendati
     public void delete(Long id) {
         log.debug("Request to delete AttributeRecommendation : {}", id);
         attributeRecommendationRepository.delete(id);
+    }
+
+    @Override
+    public List<AttributeRecommendation> findAllInAttributeListAndNotImplemented(List<Attribute> attributeList) {
+
+        return attributeRecommendationRepository.findAllByAttributeInAndImplementedIsFalse(attributeList);
+
     }
 }

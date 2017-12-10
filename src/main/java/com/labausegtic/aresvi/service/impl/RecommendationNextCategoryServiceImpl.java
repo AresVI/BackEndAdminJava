@@ -69,7 +69,7 @@ public class RecommendationNextCategoryServiceImpl implements RecommendationNext
 
             recommendationNextCategory = brmsService.getRecommendationNextCategory(recommendationParameterNextCategoryDTO);
 
-            return getRecommendation(getAllAttributesByLevel(recommendationNextCategory.getLevel()));
+            return getRecommendation(traceabilityAuditDTO.getId(), getAllAttributesByLevel(recommendationNextCategory.getLevel()));
 
         } else {
             return null;
@@ -89,11 +89,13 @@ public class RecommendationNextCategoryServiceImpl implements RecommendationNext
 
     }
 
-    private List<AuditProcessRecommendationDTO> getRecommendation(List<Attribute> attributeList){
+    private List<AuditProcessRecommendationDTO> getRecommendation(Long traceability_id, List<Attribute> attributeList){
 
         List<AttributeRecommendation> attributeRecommendationList;
 
-        attributeRecommendationList = attributeRecommendationService.findAllInAttributeListAndNotImplemented(attributeList);
+        attributeRecommendationList = attributeRecommendationService.findAllForTraceabilityAuditIdAndAttributeInAndImplementedIsFalse(
+            traceability_id, attributeList
+        );
 
         List<Long> categoryAttrRecommendations = new ArrayList<>();
         List<CategoryAttrRecommendationDTO> categoryAttrRecommendationDTOList = new ArrayList<>();

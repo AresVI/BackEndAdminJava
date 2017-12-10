@@ -47,6 +47,5 @@ public interface AttributeRecommendationService {
      */
     void delete(Long id);
 
-    List<AttributeRecommendation> findAllInAttributeListAndNotImplemented(List<Attribute> attributeList);
-
+    List<AttributeRecommendation> findAllForTraceabilityAuditIdAndAttributeInAndImplementedIsFalse(Long traceability_id, List<Attribute> attributeList);
 }

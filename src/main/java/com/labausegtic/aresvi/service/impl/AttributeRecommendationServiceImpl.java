@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -111,9 +112,17 @@ public class AttributeRecommendationServiceImpl implements AttributeRecommendati
     }
 
     @Override
-    public List<AttributeRecommendation> findAllInAttributeListAndNotImplemented(List<Attribute> attributeList) {
+    public List<AttributeRecommendation> findAllForTraceabilityAuditIdAndAttributeInAndImplementedIsFalse(Long traceability_id, List<Attribute> attributeList) {
 
-        return attributeRecommendationRepository.findAllByAttributeInAndImplementedIsFalse(attributeList);
+        List<Long> attribute_ids = new ArrayList<>();
+
+        for (Attribute a : attributeList){
+            attribute_ids.add(a.getId());
+        }
+
+        return attributeRecommendationRepository.findAllForTraceabilityAuditIdAndAttributeInAndImplementedIsFalse(
+            traceability_id, attribute_ids
+        );
 
     }
 }

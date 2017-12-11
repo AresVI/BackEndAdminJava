@@ -45,8 +45,14 @@ public class SearchResultResource {
 
         CompanyDTO company = companyService.findOneByIdentification(identification);
 
-        TraceabilityAuditDTO traceabilityAudit = traceabilityAuditService.findLastByCompanyId(company.getId());
+        if(company != null) {
 
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(traceabilityAudit));
+            TraceabilityAuditDTO traceabilityAudit = traceabilityAuditService.findLastByCompanyId(company.getId());
+
+            return ResponseUtil.wrapOrNotFound(Optional.ofNullable(traceabilityAudit));
+
+        } else {
+            return ResponseUtil.wrapOrNotFound(Optional.ofNullable(null));
+        }
     }
 }

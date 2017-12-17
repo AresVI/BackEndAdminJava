@@ -68,7 +68,7 @@
                     <option value=""> -- Sin observación predefinida -- </option>
                     <option *ngFor="let atso of auditTaskStandardObservations" value="{{atso.observation}}">{{atso.observation}}</option>
                 </select>
-                <textarea class="form-control" name="description" id="field_description"
+                <textarea class="form-control" name="description" id="field_description" maxlength="5000"
                           [(ngModel)]="auditTaskRecommendation.description"></textarea>
             </div>
         </div>
@@ -96,7 +96,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <textarea class="form-control" name="recommendation_attribute" id="field_recommendation_attribute"
+        <textarea class="form-control" name="recommendation_attribute" id="field_recommendation_attribute" maxlength="5000"
                   [(ngModel)]="recommendationAttribute"></textarea>
     </div>
     <div class="modal-footer">
@@ -118,7 +118,7 @@
     </div>
     <div class="modal-body">
         <textarea class="form-control" name="recommendation_category_attribute" id="field_recommendation_category_attribute"
-                  [(ngModel)]="recommendationCategoryAttr"></textarea>
+                  maxlength="5000" [(ngModel)]="recommendationCategoryAttr"></textarea>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="d('Close click')">

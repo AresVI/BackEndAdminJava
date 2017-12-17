@@ -37,7 +37,7 @@
                     <option *ngFor="let apso of auditProcessStandardObservations" value="{{apso.observation}}">{{apso.observation}}</option>
                 </select>
                 <textarea class="form-control" name="description" id="field_description"
-                          [(ngModel)]="auditProcessRecommendation.description"></textarea>
+                          [(ngModel)]="auditProcessRecommendation.description" maxlength="5000"></textarea>
             </div>
         </div>
 

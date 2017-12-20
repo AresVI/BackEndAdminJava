@@ -105,6 +105,17 @@ public class TraceabilityAuditResource {
 
     }
 
+    @PutMapping("/traceability-audits/{id}/categorize-again")
+    @Timed
+    public ResponseEntity<TraceabilityAuditDTO> categorizeAgainTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+
+        TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.categorizeAgainTraceabilityAudit(id);
+
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowCategorizeAgainAlert(ENTITY_NAME, traceabilityAuditDTO.getName()))
+            .body(traceabilityAuditDTO);
+
+    }
+
     /**
      * PUT  /traceability-audits : Updates an existing traceabilityAudit.
      *

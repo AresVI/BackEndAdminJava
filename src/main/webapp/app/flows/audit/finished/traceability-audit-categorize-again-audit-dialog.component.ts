@@ -28,7 +28,7 @@ export class TraceabilityAuditCategorizeAgainAuditDialogComponent {
     }
 
     confirmCategorizeAgain(id: number) {
-        this.traceabilityAuditService.finish(id).subscribe((response) => {
+        this.traceabilityAuditService.categorizeAgain(id).subscribe((response) => {
             this.eventManager.broadcast({
                 name: 'traceabilityAuditListModification',
                 content: 'Categorize Again an traceabilityAudit'

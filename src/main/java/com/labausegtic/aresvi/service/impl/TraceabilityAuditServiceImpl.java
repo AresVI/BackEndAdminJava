@@ -426,6 +426,40 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     }
 
+    @Override
+    public TraceabilityAuditDTO categorizeAgainTraceabilityAudit(Long id) {
+
+        TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
+
+        AuditAttributeAnalysisDTO attributeAnalysisDTO = auditAttributeAnalysisService.getOneByTraceabilityAuditId(id);
+
+        Set<Recommendation> recommendationSet = recommendationRepository.findAllByTraceabilityAudit_Id(traceabilityAudit.getId());
+
+        Integer levelComputerization = ((Recommendation) recommendationSet.toArray()[0]).getLevelComputerization();
+
+
+        InferenceParameterDTO inferenceParameterDTO = new InferenceParameterDTO();
+
+        inferenceParameterDTO.setLevelComputerization(levelComputerization);
+        inferenceParameterDTO.setPercentageNotRequired(attributeAnalysisDTO.getPercentageNotRequired());
+        inferenceParameterDTO.setPercentageLevel1(attributeAnalysisDTO.getPercentageLevel1());
+        inferenceParameterDTO.setPercentageLevel2(attributeAnalysisDTO.getPercentageLevel2());
+        inferenceParameterDTO.setPercentageLevel3(attributeAnalysisDTO.getPercentageLevel3());
+        inferenceParameterDTO.setPercentageLevel4(attributeAnalysisDTO.getPercentageLevel4());
+        inferenceParameterDTO.setPercentageLevel5(attributeAnalysisDTO.getPercentageLevel5());
+
+        BRMSService brmsService = new BRMSServiceImpl(applicationProperties);
+
+        ResultInferenceDTO category = brmsService.getCategory(inferenceParameterDTO);
+
+        traceabilityAudit.setCategory(category.getCategory());
+
+        traceabilityAuditRepository.save(traceabilityAudit);
+
+        return traceabilityAuditMapper.toDto(traceabilityAudit);
+
+    }
+
     private void saveAuditAttributeAnalysisResource(TraceabilityAudit traceabilityAudit, InferenceParameterDTO inferenceParameterDTO){
 
         AuditAttributeAnalysisDTO auditAttributeAnalysis = new AuditAttributeAnalysisDTO();

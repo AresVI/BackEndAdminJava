@@ -62,6 +62,10 @@ export class TraceabilityAuditService {
         return this.http.put(`${this.resourceUrl}/${id}/finish`, {});
     }
 
+    categorizeAgain(id: number): Observable<Response> {
+        return this.http.put(`${this.resourceUrl}/${id}/categorize-again`, {});
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

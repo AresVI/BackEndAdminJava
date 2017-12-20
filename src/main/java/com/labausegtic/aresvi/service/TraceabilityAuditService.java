@@ -55,6 +55,8 @@ public interface TraceabilityAuditService {
 
     TraceabilityAuditDTO finishTraceabilityAudit(Long id);
 
+    TraceabilityAuditDTO categorizeAgainTraceabilityAudit(Long id);
+
     Set<TraceabilityAuditDTO> findLastTwoTraceabilityAuditsFinished(Long id);
 
     List<ComparativeTaskRecommendationDTO> compareLastTwoTraceabilityAuditsFinished(Long id, Long process_id);

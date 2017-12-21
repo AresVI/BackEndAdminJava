@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -70,9 +71,9 @@ public class CategoryAttrRecommendationServiceImpl implements CategoryAttrRecomm
     }
 
     @Override
-    public Set<CategoryAttrRecommendationDTO> findAllByAuditTaskRecom_Id(Long auditTaskRecom_id) {
+    public List<CategoryAttrRecommendationDTO> findAllByAuditTaskRecom_Id(Long auditTaskRecom_id) {
 
-        Set<CategoryAttrRecommendationDTO> result = new HashSet<>();
+        List<CategoryAttrRecommendationDTO> result = new ArrayList<>();
 
         List<CategoryAttrRecommendation> categoryAttrRecommendations;
 

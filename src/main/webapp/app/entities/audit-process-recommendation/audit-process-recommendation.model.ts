@@ -7,10 +7,12 @@ export class AuditProcessRecommendation implements BaseEntity {
     constructor(
         public id?: number,
         public description?: any,
+        public standardObservation?: string,
         public reviewed?: boolean,
         public recommendationId?: number,
         public recommendation?: Recommendation,
         public auditProcessId?: number,
+        public bonitaBpmCaseId?: number,
         public auditProcess?: AuditProcess,
         public auditTaskRecommendationSet?: AuditTaskRecommendation[]
     ) {

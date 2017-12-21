@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "auditor"
+        },
+        {
+            "relationshipName": "companies",
+            "otherEntityName": "company",
+            "relationshipType": "many-to-many",
+            "relationshipValidateRules": [],
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "internal_auditor"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "internal",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171008124944",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "auditor",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

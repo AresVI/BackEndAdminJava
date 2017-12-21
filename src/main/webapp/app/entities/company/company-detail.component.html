@@ -4,35 +4,91 @@
         {{company.name}} ({{company.identifier}})
     </h2>
     <hr>
-    <div class="container-fluid mb-3">
+
+    <div class="col-12 mb-3">
         <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="card">
+            <div class="col-12 col-sm-6 mb-3">
+                <div class="card" *ngIf="!company.companyAddress">
                     <div class="card-body">
-                        <h4 class="card-title">Personas de Contacto</h4>
-                        <a class="btn btn-info btn-block btn-lg"
-                           [routerLink]="['/company', company.id, 'company-contact-person' ]">
-                            <span class="fa fa-users"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="aresViApp.company.action.viewCompanyContactPerson">View</span>
-                        </a>
+                        <button class="btn btn-primary btn-block jh-create-entity create-company-address"
+                                [routerLink]="['/', { outlets: { popup: ['company', company.id, 'company-address-new'] } }]">
+                            <span class="fa fa-plus"></span>
+                            <span  jhiTranslate="aresViApp.companyAddress.home.createLabel">Create new Company Address</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card" *ngIf="company.companyAddress">
+                    <div class="card-body">
+                        <h4 class="card-title">Dirección</h4>
+                        <div class="col-12 mb-3">
+                            <dl class="row-md jh-entity-details m-0 float-left" >
+                                <dt><span jhiTranslate="aresViApp.companyAddress.street">Street</span></dt>
+                                <dd>
+                                    <span>{{company.companyAddress.street}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="aresViApp.companyAddress.city">City</span></dt>
+                                <dd>
+                                    <span>{{company.companyAddress.city}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="aresViApp.companyAddress.state">State</span></dt>
+                                <dd>
+                                    <span>{{company.companyAddress.state}}</span>
+                                </dd>
+                            </dl>
+                            <a [href]="linkGoogleMaps" target="_blank" class="float-right">
+                                <img [src]="urlMap" class="img-fluid rounded">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Comparar Últimas Dos Auditorías</h4>
-                        <button class="btn btn-info btn-block btn-lg" type="button"
-                           [disabled]="!traceabilityAudits || traceabilityAudits.length < 2"
-                           [routerLink]="['/company', company.id, 'compare_results' ]">
-                            <span class="fa fa-file-text-o"></span>
-                            Comparar Auditorías
-                        </button>
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title">Personas de Contacto</h4>
+                                    <a class="btn btn-info btn-block btn-lg"
+                                       [routerLink]="['/company', company.id, 'company-contact-person' ]">
+                                        <span class="fa fa-users"></span>
+                                        <span class="" jhiTranslate="aresViApp.company.action.viewCompanyContactPerson">View</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title">Comparar Últimas Dos Auditorías</h4>
+                                    <button class="btn btn-info btn-block btn-lg" type="button"
+                                            [disabled]="!traceabilityAudits || traceabilityAudits.length < 2"
+                                            [routerLink]="['/company', company.id, 'compare_results' ]">
+                                        <span class="fa fa-file-text-o"></span>
+                                        Comparar Auditorías
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title">Recommendación para pasar a la Siguiente Categoría</h4>
+                                    <button class="btn btn-info btn-block btn-lg" type="button"
+                                            [disabled]="!traceabilityAudits || traceabilityAudits.length < 1"
+                                            (click)="openModalRecommendationNextLevel(contentRecommendationNextCategory)">
+                                        <span class="fa fa-file-text-o"></span>
+                                        Ver Recommendación
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="col-12 mb-3">
         <div class="card">
@@ -98,7 +154,7 @@
     </div>
 
     <button type="button"
-            [routerLink]="['/company']"
+            (click)="previousState()"
             class="btn btn-secondary">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
@@ -110,5 +166,42 @@
             class="btn btn-primary">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
+
+    <ng-template #contentRecommendationNextCategory let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Recomendaciones para Pasar a la Siguiente Categoria</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <div class="card" *ngFor="let apr of recommendationNextLevel">
+                <div class="card-header">
+                    <h4>{{apr.auditProcess.name}}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card" *ngFor="let atr of apr.auditTaskRecommendationSet">
+                        <h4 class="card-title pl-3 pt-2">{{atr.auditTask.name}}</h4>
+                        <div *ngFor="let car of atr.categoryAttrRecommendationSet">
+                            <p class="font-weight-bold pl-3 ">{{car.categoryAttribute.name}}</p>
+                            <ul>
+                                <li *ngFor="let ar of car.attributeRecommendationSet">
+                                    {{ar.attribute.name}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="d('Close click')">
+                <span class="fa fa-close"></span>&nbsp;<span jhiTranslate="entity.action.close">close</span>
+            </button>
+        </div>
+    </ng-template>
 
 </div>

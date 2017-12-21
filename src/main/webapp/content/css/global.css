@@ -298,3 +298,17 @@ textarea{
     resize: none;
     height: 250px;
 }
+
+.bg-light {
+    background-color: #f2f2f2!important;
+}
+
+agm-map {
+    height: 300px;
+}
+
+.sebm-google-map-container {
+    height: 300px;
+}
+
+google-map {display:block; width: inherit; height: inherit}

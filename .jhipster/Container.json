@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "participant",
+            "otherEntityName": "participant",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "container"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "auditProcess",
+            "otherEntityName": "auditProcess",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170926043614",
+    "entityTableName": "container",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

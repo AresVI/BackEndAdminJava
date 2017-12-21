@@ -9,6 +9,7 @@ import { UserDialogComponent } from './user-management-dialog.component';
 import { UserDeleteDialogComponent } from './user-management-delete-dialog.component';
 
 import { Principal } from '../../shared';
+import {UserRouteAccessService} from '../../shared/auth/user-route-access-service';
 
 @Injectable()
 export class UserResolve implements CanActivate {
@@ -46,7 +47,8 @@ export const userMgmtRoute: Routes = [
         data: {
             authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'userManagement.home.title'
-        }
+        },
+        canActivate: [UserRouteAccessService]
     },
     {
         path: 'user-management/:login',
@@ -65,6 +67,7 @@ export const userDialogRoute: Routes = [
         data: {
             authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
         },
+        canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {
@@ -73,6 +76,7 @@ export const userDialogRoute: Routes = [
         data: {
             authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
         },
+        canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {

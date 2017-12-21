@@ -56,61 +56,54 @@
         </div>
     </div>
 
-    <div class="card" *ngFor="let recommendation of traceabilityAudit.recommendationSet" [hidden]="traceabilityAudit.status == 'STATUS_IN_PROGRESS'">
+    <div *ngFor="let recommendation of traceabilityAudit.recommendationSet" [hidden]="traceabilityAudit.status == 'STATUS_IN_PROGRESS'">
 
-        <h3 class="card-header">
-            {{ recommendation.name }}
+    <div class="card" *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet">
+
+        <h3 class="card-header bg-primary text-white">
+            <span jhiTranslate="aresViApp.auditProcess.detail.title">Process</span>:
+            {{auditProcessRecom.auditProcess.name}}
+            <button type="button" class="btn btn-outline-light"
+                    [hidden]="auditProcessRecom.description.length < 1 && auditProcessRecom.standardObservation.length < 1"
+                    (click)="openModalDescription(modal_description, auditProcessRecom.description, auditProcessRecom.standardObservation)">
+                <i class="fa fa-file-text-o"></i>
+            </button>
         </h3>
 
         <div class="card-body">
 
             <ul class="list-group">
-                <li class="list-group-item p-0" *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet">
+                <li class="list-group-item p-0" *ngFor="let auditTaskRecom of auditProcessRecom.auditTaskRecommendationSet">
 
-                    <h4 class="border mb-1 p-3 w-100">
-                        <span jhiTranslate="aresViApp.auditProcess.detail.title">Process</span>:
-                        {{auditProcessRecom.auditProcess.name}}
-                        <button type="button" class="btn btn-outline-dark"
-                                [hidden]="auditProcessRecom.description.length < 1"
-                                (click)="openModalDescription(modal_description, auditProcessRecom.description)">
-                            <i class="fa fa-file-text-o"></i> Ver Recomendación
+                    <h4 class="mb-1 p-3 w-100 bg-light">
+                        {{auditTaskRecom.auditTask.name}}
+                        <small class="text-secondary">({{auditTaskRecom.revisedDate | date: 'dd/MM/yyyy HH:mm'}})</small>
+                        <button type="button" class="btn btn-outline-dark btn-sm"
+                                [hidden]="auditTaskRecom.description.length < 1 && auditTaskRecom.standardObservation.length < 1"
+                                (click)="openModalDescription(modal_description, auditTaskRecom.description, auditTaskRecom.standardObservation)">
+                            <i class="fa fa-file-text-o"></i>
                         </button>
                     </h4>
 
-                    <div class="w-100" *ngFor="let auditTaskRecom of auditProcessRecom.auditTaskRecommendationSet">
+                    <div class="w-100" *ngFor="let categoryAttrRecom of auditTaskRecom.categoryAttrRecommendationSet">
                         <h5 class="mb-4 mt-4 px-4">
-                            {{auditTaskRecom.auditTask.name}}
-                            <small class="text-secondary">({{auditTaskRecom.revisedDate | date: 'dd/MM/yyyy HH:mm'}})</small>
+                            {{categoryAttrRecom.categoryAttribute.name}}
                             <button type="button" class="btn btn-outline-dark btn-sm"
-                                    [hidden]="auditTaskRecom.description.length < 1"
-                                    (click)="openModalDescription(modal_description, auditTaskRecom.description)">
+                                    [hidden]="categoryAttrRecom.description.length < 1"
+                                    (click)="openModalDescription(modal_description, categoryAttrRecom.description)">
                                 <i class="fa fa-file-text-o"></i>
                             </button>
                         </h5>
                         <ul>
-                            <li *ngFor="let categoryAttrRecom of auditTaskRecom.categoryAttrRecommendationSet">
-                                <p class="m-2">
-                                    <strong>
-                                        {{categoryAttrRecom.categoryAttribute.name}}
-                                        <button type="button" class="btn btn-outline-dark btn-sm"
-                                                [hidden]="categoryAttrRecom.description.length < 1"
-                                                (click)="openModalDescription(modal_description, categoryAttrRecom.description)">
-                                            <i class="fa fa-file-text-o"></i>
-                                        </button>
-                                    </strong>
+                            <li *ngFor="let attributeRecom of categoryAttrRecom.attributeRecommendationSet">
+                                <p class="{{attributeRecom.implemented ? 'text-success': 'text-danger' }}">
+                                    {{attributeRecom.attribute.name}}
+                                    <button type="button" class="btn btn-outline-dark btn-sm"
+                                            [hidden]="attributeRecom.description.length < 1"
+                                            (click)="openModalDescription(modal_description, attributeRecom.description)">
+                                        <i class="fa fa-file-text-o"></i>
+                                    </button>
                                 </p>
-                                <ul>
-                                    <li *ngFor="let attributeRecom of categoryAttrRecom.attributeRecommendationSet">
-                                        <p class="{{attributeRecom.implemented ? 'text-success': 'text-danger' }}">
-                                            {{attributeRecom.attribute.name}}
-                                            <button type="button" class="btn btn-outline-dark btn-sm"
-                                                    [hidden]="attributeRecom.description.length < 1"
-                                                    (click)="openModalDescription(modal_description, attributeRecom.description)">
-                                                <i class="fa fa-file-text-o"></i>
-                                            </button>
-                                        </p>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -119,6 +112,8 @@
             </ul>
 
         </div>
+
+    </div>
 
     </div>
 
@@ -135,6 +130,12 @@
 
     <div [hidden]="traceabilityAudit.status == 'STATUS_FINISHED'">
 
+        <button type="button"
+                [routerLink]="['/process/audit/status/in_progress']"
+                class="btn btn-secondary">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+
         <button type="button" [disabled]="!allRecommendationReviewed"
                 [routerLink]="['/', { outlets: { popup: 'traceability-audit/'+ traceabilityAudit.id + '/finish'} }]"
                 replaceUrl="true" class="btn btn-primary"
@@ -144,12 +145,6 @@
             <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.finish">Finish</span>
         </button>
 
-        <button type="button"
-                [routerLink]="['/process/audit/status/in_progress']"
-                class="btn btn-secondary">
-            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-        </button>
-
     </div>
 
 </div>
@@ -157,13 +152,15 @@
 
 <ng-template #modal_description let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Ver Recomendación</h4>
+        <h4 class="modal-title">Ver Observaciones</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <textarea class="form-control" name="description" id="field_description" readonly
+        <input name="standard_observation" id="field_standard_observation" readonly class="form-control mb-3"
+               [(ngModel)]="standardObservation" >
+        <textarea class="form-control" name="description" id="field_description" readonly maxlength="5000"
                   [(ngModel)]="description"></textarea>
     </div>
 

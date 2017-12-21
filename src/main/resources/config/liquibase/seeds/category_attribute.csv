@@ -8,11 +8,6 @@ id;name;audit_task_id
 12;Método de estrujado.;11
 13;Vino obtenido de los orujos.;12
 14;Orujos y semillas.;12
-15;Productos agregados al mosto durante el proceso de vinificación;15
-16;Productos agregados al mosto.;16
-17;Analizar pureza del vino.;24
 18;Productos agregados al vino durante el proceso de estabilización.;25
 19;Envasado.;27
 20;Despacho de lotes de productos terminados para su comercialización.;29
-
-

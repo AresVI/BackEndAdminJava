@@ -3,6 +3,9 @@ import {FinishedComponent} from './finished.component';
 import {JhiPaginationUtil} from 'ng-jhipster';
 import {Injectable} from '@angular/core';
 import {UserRouteAccessService} from '../../../shared/auth/user-route-access-service';
+import {
+    TraceabilityAuditCategorizeAgainAuditPopupComponent
+} from './traceability-audit-categorize-again-audit-dialog.component';
 
 @Injectable()
 export class TraceabilityAuditResolvePagingParams implements Resolve<any> {
@@ -32,5 +35,15 @@ export const flowAuditFinishedRoute: Routes = [
             pageTitle: 'aresViApp.flow-audit.finished.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
+    },
+    {
+        path: 'traceability-audit/:id/categorize_again',
+        component: TraceabilityAuditCategorizeAgainAuditPopupComponent,
+        data: {
+            authorities: ['ROLE_ADMINISTRATOR'],
+            pageTitle: 'aresViApp.flow-audit.finished.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
 ];

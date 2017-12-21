@@ -1,0 +1,20 @@
+<form name="startAuditForm" (ngSubmit)="confirmCategorizeAgain(traceabilityAudit.id)">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="aresViApp.traceabilityAudit.categorize_again.title">Confirm start operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <p jhiTranslate="aresViApp.traceabilityAudit.categorize_again.question" translateValues="{name: '{{traceabilityAudit.name}}'}">Are you sure you want to start this Traceability Audit?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-primary">
+            <span class="fa fa-bolt"></span>&nbsp;
+            <span class="d-none d-md-inline" jhiTranslate="aresViApp.traceabilityAudit.action.categorize_again">Categorize Again</span>
+        </button>
+    </div>
+</form>

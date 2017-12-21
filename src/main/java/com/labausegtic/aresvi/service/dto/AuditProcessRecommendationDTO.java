@@ -3,9 +3,7 @@ package com.labausegtic.aresvi.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 import javax.persistence.Lob;
 
 /**
@@ -19,6 +17,8 @@ public class AuditProcessRecommendationDTO implements Serializable {
     @Lob
     private String description;
 
+    private String standardObservation;
+
     private boolean reviewed;
 
     private Long recommendationId;
@@ -29,7 +29,11 @@ public class AuditProcessRecommendationDTO implements Serializable {
 
     private AuditProcessDTO auditProcess;
 
-    private Set<AuditTaskRecommendationDTO> auditTaskRecommendationSet;
+    private Long bonitaBpmCaseId;
+
+    private List<AuditTaskRecommendationDTO> auditTaskRecommendationSet;
+
+    private boolean taken;
 
     public Long getId() {
         return id;
@@ -45,6 +49,14 @@ public class AuditProcessRecommendationDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStandardObservation() {
+        return standardObservation;
+    }
+
+    public void setStandardObservation(String standardObservation) {
+        this.standardObservation = standardObservation;
     }
 
     public Long getRecommendationId() {
@@ -71,14 +83,6 @@ public class AuditProcessRecommendationDTO implements Serializable {
         this.auditProcess = auditProcess;
     }
 
-    public Set<AuditTaskRecommendationDTO> getAuditTaskRecommendationSet() {
-        return auditTaskRecommendationSet;
-    }
-
-    public void setAuditTaskRecommendationSet(Set<AuditTaskRecommendationDTO> auditTaskRecommendationSet) {
-        this.auditTaskRecommendationSet = auditTaskRecommendationSet;
-    }
-
     public boolean isReviewed() {
         return reviewed;
     }
@@ -93,6 +97,37 @@ public class AuditProcessRecommendationDTO implements Serializable {
 
     public void setRecommendation(RecommendationDTO recommendation) {
         this.recommendation = recommendation;
+    }
+
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
+    }
+
+    public Long getBonitaBpmCaseId() {
+        return bonitaBpmCaseId;
+    }
+
+    public void setBonitaBpmCaseId(Long bonitaBpmCaseId) {
+        this.bonitaBpmCaseId = bonitaBpmCaseId;
+    }
+
+    public List<AuditTaskRecommendationDTO> getAuditTaskRecommendationSet() {
+        return auditTaskRecommendationSet;
+    }
+
+    public void setAuditTaskRecommendationSet(List<AuditTaskRecommendationDTO> auditTaskRecommendationSet) {
+        this.auditTaskRecommendationSet = auditTaskRecommendationSet;
+    }
+
+    public void addAuditTaskRecommendationSet(AuditTaskRecommendationDTO auditTaskRecommendation) {
+        if(this.auditTaskRecommendationSet == null) {
+            this.auditTaskRecommendationSet = new ArrayList<>();
+        }
+        this.auditTaskRecommendationSet.add(auditTaskRecommendation);
     }
 
     @Override

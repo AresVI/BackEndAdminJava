@@ -23,6 +23,10 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="description" type="clob">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="standard_observation" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -36,6 +40,14 @@
 
             <column name="reviewed" type="bit">
                 <constraints nullable="true" />
+            </column>
+
+            <column name="taken" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bonita_bpm_base_id" type="bigint">
+                <constraints nullable="false"/>
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

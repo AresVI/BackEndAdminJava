@@ -3,7 +3,8 @@ package com.labausegtic.aresvi.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Lob;
 
@@ -20,13 +21,15 @@ public class AuditTaskRecommendationDTO implements Serializable {
 
     private boolean reviewed;
 
+    private String standardObservation;
+
     private Long auditProcessRecomId;
 
     private Long auditTaskId;
 
     private AuditTaskDTO auditTask;
 
-    private Set<CategoryAttrRecommendationDTO> CategoryAttrRecommendationSet;
+    private List<CategoryAttrRecommendationDTO> categoryAttrRecommendationSet;
 
     private Instant revisedDate;
 
@@ -70,12 +73,19 @@ public class AuditTaskRecommendationDTO implements Serializable {
         this.auditTask = auditTask;
     }
 
-    public Set<CategoryAttrRecommendationDTO> getCategoryAttrRecommendationSet() {
-        return CategoryAttrRecommendationSet;
+    public List<CategoryAttrRecommendationDTO> getCategoryAttrRecommendationSet() {
+        return categoryAttrRecommendationSet;
     }
 
-    public void setCategoryAttrRecommendationSet(Set<CategoryAttrRecommendationDTO> categoryAttrRecommendationSet) {
-        CategoryAttrRecommendationSet = categoryAttrRecommendationSet;
+    public void setCategoryAttrRecommendationSet(List<CategoryAttrRecommendationDTO> categoryAttrRecommendationSet) {
+        this.categoryAttrRecommendationSet = categoryAttrRecommendationSet;
+    }
+
+    public void addCategoryAttrRecommendationSet(CategoryAttrRecommendationDTO categoryAttrRecommendation) {
+        if(this.categoryAttrRecommendationSet == null) {
+            this.categoryAttrRecommendationSet = new ArrayList<>();
+        }
+        this.categoryAttrRecommendationSet.add(categoryAttrRecommendation);
     }
 
     public boolean isReviewed() {
@@ -92,6 +102,14 @@ public class AuditTaskRecommendationDTO implements Serializable {
 
     public void setRevisedDate(Instant revisedDate) {
         this.revisedDate = revisedDate;
+    }
+
+    public String getStandardObservation() {
+        return standardObservation;
+    }
+
+    public void setStandardObservation(String standardObservation) {
+        this.standardObservation = standardObservation;
     }
 
     @Override

@@ -140,8 +140,5 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-/.jhipster/
 /.idea/
-/.mvn/
 /node_modules/
-/yarn.lock

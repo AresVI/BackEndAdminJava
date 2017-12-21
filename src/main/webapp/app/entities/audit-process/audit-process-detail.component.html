@@ -1,13 +1,9 @@
 
 <div *ngIf="auditProcess">
-    <h2><span jhiTranslate="aresViApp.auditProcess.detail.title">Audit Process</span> {{auditProcess.id}}</h2>
+    <h2><span jhiTranslate="aresViApp.auditProcess.detail.title">Audit Process</span> - {{auditProcess.name}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.auditProcess.name">Name</span></dt>
-        <dd>
-            <span>{{auditProcess.name}}</span>
-        </dd>
     </dl>
 
     <button type="submit"

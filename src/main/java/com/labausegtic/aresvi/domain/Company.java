@@ -16,7 +16,10 @@ import java.util.Set;
     query="SELECT * FROM company c WHERE c.identifier = ':identifier'",
     resultClass = Company.class
 )
-@Table(name = "company")
+@Table(
+    name = "company",
+    uniqueConstraints = @UniqueConstraint(columnNames = "identifier")
+)
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;

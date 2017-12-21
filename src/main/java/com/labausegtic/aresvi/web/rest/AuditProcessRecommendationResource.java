@@ -82,6 +82,17 @@ public class AuditProcessRecommendationResource {
             .body(result);
     }
 
+    @PutMapping("/audit-process-recommendations/{id}/take")
+    @Timed
+    public ResponseEntity<AuditProcessRecommendationDTO> takeAuditProcessRecommendation(@PathVariable Long id) throws URISyntaxException {
+
+        AuditProcessRecommendationDTO result = auditProcessRecommendationService.takeAuditProcessRecommendation(id);
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
     /**
      * GET  /audit-process-recommendations : get all the auditProcessRecommendations.
      *
@@ -97,6 +108,16 @@ public class AuditProcessRecommendationResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/audit-process-recommendations/in-progress")
+    @Timed
+    public ResponseEntity<List<AuditProcessRecommendationDTO>> getAllAuditProcessRecommendationsInProgress(
+                @ApiParam Long audit_process_id
+    ) {
+        log.debug("REST request to get a page of AuditProcessRecommendations");
+        List<AuditProcessRecommendationDTO> result = auditProcessRecommendationService.findAllInProgressByProcessId(audit_process_id);
+        return new ResponseEntity<>(result, null, HttpStatus.OK);
+    }
+
     /**
      * GET  /audit-process-recommendations/:id : get the "id" auditProcessRecommendation.
      *
@@ -108,6 +129,14 @@ public class AuditProcessRecommendationResource {
     public ResponseEntity<AuditProcessRecommendationDTO> getAuditProcessRecommendation(@PathVariable Long id) {
         log.debug("REST request to get AuditProcessRecommendation : {}", id);
         AuditProcessRecommendationDTO auditProcessRecommendationDTO = auditProcessRecommendationService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditProcessRecommendationDTO));
+    }
+
+    @GetMapping("/bonita-bpm-case/{bonita_bpm_case_id}")
+    @Timed
+    public ResponseEntity<AuditProcessRecommendationDTO> getAuditProcessRecommendationByBonitaBpmCaseId(@PathVariable Long bonita_bpm_case_id) {
+        log.debug("REST request to get AuditProcessRecommendation : {}", bonita_bpm_case_id);
+        AuditProcessRecommendationDTO auditProcessRecommendationDTO = auditProcessRecommendationService.findByBonitaBpmCaseId(bonita_bpm_case_id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditProcessRecommendationDTO));
     }
 

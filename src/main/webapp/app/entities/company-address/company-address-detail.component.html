@@ -1,0 +1,47 @@
+
+<div *ngIf="companyAddress">
+    <h2><span jhiTranslate="aresViApp.companyAddress.detail.title">Company Address</span> {{companyAddress.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.companyAddress.street">Street</span></dt>
+        <dd>
+            <span>{{companyAddress.street}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.companyAddress.city">City</span></dt>
+        <dd>
+            <span>{{companyAddress.city}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.companyAddress.state">State</span></dt>
+        <dd>
+            <span>{{companyAddress.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.companyAddress.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{companyAddress.latitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.companyAddress.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{companyAddress.longitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.companyAddress.company">Company</span></dt>
+        <dd>
+            <div *ngIf="companyAddress.companyId">
+                <a [routerLink]="['/company', companyAddress.companyId]">{{companyAddress.companyId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="button"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'company-address/'+ companyAddress.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

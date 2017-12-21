@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.domain.Attribute;
 import com.labausegtic.aresvi.domain.AttributeRecommendation;
 import com.labausegtic.aresvi.service.AttributeRecommendationService;
 import com.labausegtic.aresvi.domain.AttributeRecommendation;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -107,5 +109,20 @@ public class AttributeRecommendationServiceImpl implements AttributeRecommendati
     public void delete(Long id) {
         log.debug("Request to delete AttributeRecommendation : {}", id);
         attributeRecommendationRepository.delete(id);
+    }
+
+    @Override
+    public List<AttributeRecommendation> findAllForTraceabilityAuditIdAndAttributeInAndImplementedIsFalse(Long traceability_id, List<Attribute> attributeList) {
+
+        List<Long> attribute_ids = new ArrayList<>();
+
+        for (Attribute a : attributeList){
+            attribute_ids.add(a.getId());
+        }
+
+        return attributeRecommendationRepository.findAllForTraceabilityAuditIdAndAttributeInAndImplementedIsFalse(
+            traceability_id, attribute_ids
+        );
+
     }
 }

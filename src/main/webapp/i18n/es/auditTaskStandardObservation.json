@@ -1,0 +1,21 @@
+{
+    "aresViApp": {
+        "auditTaskStandardObservation" : {
+            "home": {
+                "title": "Observaciones Estándar de Tareas de Auditoría",
+                "createLabel": "Crear nueva Observación Estándar de Tareas de Auditoría",
+                "createOrEditLabel": "Crear o editar una Observación Estándar de Tareas de Auditoría"
+            },
+            "created": "Una nueva Observación Estándar de Tareas de Auditoría ha sido creada con el identificador {{ param }}",
+            "updated": "Una Audit Observación Estándar de Tareas de Auditoría ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Observación Estándar de Tareas de Auditoría ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la Observación Estándar de Tareas de Auditoría {{ id }}?"
+            },
+            "detail": {
+                "title": "Observación Estándar de Tareas de Auditoría"
+            },
+            "observation": "Observación"
+        }
+    }
+}

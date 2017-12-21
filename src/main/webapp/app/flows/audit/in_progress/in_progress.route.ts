@@ -28,7 +28,7 @@ export const flowAuditInProgressRoute: Routes = [
             'pagingParams': TraceabilityAuditResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
+            authorities: ['ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL'],
             pageTitle: 'aresViApp.flow-audit.in_progress.home.title'
         },
         canActivate: [UserRouteAccessService]

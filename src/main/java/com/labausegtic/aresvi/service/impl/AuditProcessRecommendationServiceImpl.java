@@ -1,10 +1,14 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.domain.Recommendation;
+import com.labausegtic.aresvi.domain.StatusTraceabilityAudit;
+import com.labausegtic.aresvi.domain.TraceabilityAudit;
+import com.labausegtic.aresvi.repository.RecommendationRepository;
+import com.labausegtic.aresvi.repository.TraceabilityAuditRepository;
 import com.labausegtic.aresvi.service.AuditProcessRecommendationService;
 import com.labausegtic.aresvi.domain.AuditProcessRecommendation;
 import com.labausegtic.aresvi.repository.AuditProcessRecommendationRepository;
 import com.labausegtic.aresvi.service.AuditTaskRecommendationService;
-import com.labausegtic.aresvi.service.AuditTaskService;
 import com.labausegtic.aresvi.service.dto.AuditProcessRecommendationDTO;
 import com.labausegtic.aresvi.service.mapper.AuditProcessRecommendationMapper;
 import org.slf4j.Logger;
@@ -14,7 +18,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -33,12 +39,19 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
 
     private final AuditTaskRecommendationService auditTaskRecommendationServiceService;
 
+    private final RecommendationRepository recommendationRepository;
+    private final TraceabilityAuditRepository traceabilityAuditRepository;
+
     public AuditProcessRecommendationServiceImpl(AuditProcessRecommendationRepository auditProcessRecommendationRepository,
                                                  AuditProcessRecommendationMapper auditProcessRecommendationMapper,
-                                                 AuditTaskRecommendationService auditTaskRecommendationServiceService) {
+                                                 AuditTaskRecommendationService auditTaskRecommendationServiceService,
+                                                 RecommendationRepository recommendationRepository,
+                                                 TraceabilityAuditRepository traceabilityAuditRepository) {
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
         this.auditProcessRecommendationMapper = auditProcessRecommendationMapper;
         this.auditTaskRecommendationServiceService = auditTaskRecommendationServiceService;
+        this.recommendationRepository = recommendationRepository;
+        this.traceabilityAuditRepository = traceabilityAuditRepository;
     }
 
     /**
@@ -75,9 +88,9 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
     }
 
     @Override
-    public Set<AuditProcessRecommendationDTO> findAllByRecommendation_Id(Long recommendation_id) {
+    public List<AuditProcessRecommendationDTO> findAllByRecommendation_Id(Long recommendation_id) {
 
-        Set<AuditProcessRecommendationDTO> result = new HashSet<>();
+        List<AuditProcessRecommendationDTO> result = new ArrayList<>();
 
         Set<AuditProcessRecommendation> auditProcessRecommendations;
 
@@ -128,4 +141,55 @@ public class AuditProcessRecommendationServiceImpl implements AuditProcessRecomm
         log.debug("Request to delete AuditProcessRecommendation : {}", id);
         auditProcessRecommendationRepository.delete(id);
     }
+
+    @Override
+    public List<AuditProcessRecommendationDTO> findAllInProgressByProcessId(Long audit_process_id) {
+
+        List<AuditProcessRecommendationDTO> result = new ArrayList<>();
+
+        List<TraceabilityAudit> traceabilityAuditList;
+        traceabilityAuditList = traceabilityAuditRepository.findAllByStatus(StatusTraceabilityAudit.IN_PROGRESS);
+
+        List<Recommendation> recommendationList;
+        recommendationList = recommendationRepository.findAllByTraceabilityAuditIn(traceabilityAuditList);
+
+        List<AuditProcessRecommendation> auditProcessRecommendations;
+
+        auditProcessRecommendations = auditProcessRecommendationRepository.findByRecommendationInAndAuditProcessId(
+            recommendationList, audit_process_id
+        );
+
+        for (AuditProcessRecommendation apr : auditProcessRecommendations){
+
+            result.add(auditProcessRecommendationMapper.toDto(apr));
+
+        }
+
+        return result;
+
+    }
+
+    @Override
+    public AuditProcessRecommendationDTO takeAuditProcessRecommendation(Long id) {
+
+        AuditProcessRecommendation auditProcessRecommendation = auditProcessRecommendationRepository.findOne(id);
+
+        auditProcessRecommendation.setTaken(true);
+
+        auditProcessRecommendation = auditProcessRecommendationRepository.save(auditProcessRecommendation);
+
+        return auditProcessRecommendationMapper.toDto(auditProcessRecommendation);
+    }
+
+    @Override
+    public AuditProcessRecommendationDTO findByBonitaBpmCaseId(Long bonitaBpmCaseId) {
+        AuditProcessRecommendation auditProcessRecommendation = auditProcessRecommendationRepository.findByBonitaBpmCaseId(bonitaBpmCaseId);
+        AuditProcessRecommendationDTO auditProcessRecommendationDTO = auditProcessRecommendationMapper.toDto(auditProcessRecommendation);
+        auditProcessRecommendationDTO.setAuditTaskRecommendationSet(
+            auditTaskRecommendationServiceService.findAllByAuditProcessRecom_Id(auditProcessRecommendationDTO.getId())
+        );
+        return auditProcessRecommendationDTO;
+    }
+
+
 }

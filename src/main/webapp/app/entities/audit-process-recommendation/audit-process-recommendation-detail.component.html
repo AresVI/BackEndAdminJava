@@ -30,9 +30,14 @@
 
         <div class="card mb-3">
             <div class="card-body">
-                <h4>Descripción: </h4>
+                <h4>Observaciones: </h4>
+                <select class="form-control mb-3" name="standard_observation" id="field_standard_observation"
+                        [(ngModel)]="auditProcessRecommendation.standardObservation">
+                    <option value=""> -- Sin observación predefinida -- </option>
+                    <option *ngFor="let apso of auditProcessStandardObservations" value="{{apso.observation}}">{{apso.observation}}</option>
+                </select>
                 <textarea class="form-control" name="description" id="field_description"
-                          [(ngModel)]="auditProcessRecommendation.description"></textarea>
+                          [(ngModel)]="auditProcessRecommendation.description" maxlength="5000"></textarea>
             </div>
         </div>
 

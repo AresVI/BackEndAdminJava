@@ -42,7 +42,7 @@ public interface TraceabilityAuditService {
      */
     TraceabilityAuditDTO findOne(Long id);
 
-    TraceabilityAuditDTO findAllLastByCompanyId(Long company_id);
+    TraceabilityAuditDTO findLastByCompanyId(Long company_id);
 
     /**
      *  Delete the "id" traceabilityAudit.
@@ -54,6 +54,8 @@ public interface TraceabilityAuditService {
     TraceabilityAuditDTO startTraceabilityAudit(Long id);
 
     TraceabilityAuditDTO finishTraceabilityAudit(Long id);
+
+    TraceabilityAuditDTO categorizeAgainTraceabilityAudit(Long id);
 
     Set<TraceabilityAuditDTO> findLastTwoTraceabilityAuditsFinished(Long id);
 

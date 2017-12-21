@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.repository;
 
+import com.labausegtic.aresvi.domain.Attribute;
 import com.labausegtic.aresvi.domain.AttributeRecommendation;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -32,5 +33,25 @@ public interface AttributeRecommendationRepository extends JpaRepository<Attribu
         "    AND ar.categoryAttrRecom.id = car.id"
     )
     Set<AttributeRecommendation> findAllForTraceabilityAuditId(@Param("traceability_audit_id") long traceability_audit_id);
+
+    @Query( name = "findAllForTraceabilityAuditIdAndAttributeInAndImplementedIsFalse",
+        value =
+        "SELECT ar \n" +
+        "FROM  \n" +
+        "    AttributeRecommendation as ar, CategoryAttrRecommendation as car, AuditTaskRecommendation as atr, AuditProcessRecommendation as apr, Recommendation as r\n" +
+        "WHERE  \n" +
+        "    r.traceabilityAudit.id = :traceability_audit_id \n" +
+        "    AND apr.recommendation.id = r.id \n" +
+        "    AND atr.auditProcessRecom.id = apr.id \n" +
+        "    AND car.auditTaskRecom.id = atr.id \n" +
+        "    AND ar.categoryAttrRecom.id = car.id" +
+        "    AND ar.implemented = false" +
+        "    AND ar.attribute.id in :attribute_ids"
+    )
+    List<AttributeRecommendation> findAllForTraceabilityAuditIdAndAttributeInAndImplementedIsFalse(
+        @Param("traceability_audit_id") long traceability_audit_id, @Param("attribute_ids") List<Long> attribute_ids
+    );
+
+    List<AttributeRecommendation> findAllByAttributeInAndImplementedIsFalse(List<Attribute> attributeList);
 
 }

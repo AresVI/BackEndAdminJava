@@ -43,7 +43,7 @@ export const traceabilityAuditRoute: Routes = [
         path: 'traceability-audit/:id',
         component: TraceabilityAuditDetailComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL', 'ROLE_AUDITOR_INTERNAL'],
+            authorities: ['ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL', 'ROLE_AUDITOR_INTERNAL'],
             pageTitle: 'aresViApp.traceabilityAudit.home.title'
         },
         canActivate: [UserRouteAccessService]

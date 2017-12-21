@@ -18,6 +18,8 @@ public class CompanyDTO implements Serializable {
     @NotNull
     private String identifier;
 
+    private CompanyAddressDTO companyAddress;
+
     public Long getId() {
         return id;
     }
@@ -40,6 +42,14 @@ public class CompanyDTO implements Serializable {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    public CompanyAddressDTO getCompanyAddress() {
+        return companyAddress;
+    }
+
+    public void setCompanyAddress(CompanyAddressDTO companyAddress) {
+        this.companyAddress = companyAddress;
     }
 
     @Override

@@ -6,7 +6,7 @@
                 "createLabel": "Cancelar la Auditoría de Trazabilidad",
                 "createOrEditLabel": "Crear o editar Cancellation Traceability Audit"
             },
-            "created": "Un nuevo Cancellation Traceability Audit ha sido creado con el identificador {{ param }}",
+            "created": "La Auditoría de Trazabilidad ha sido cancelada correctamente",
             "updated": "Un Cancellation Traceability Audit ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Cancellation Traceability Audit ha sido eliminado con el identificador {{ param }}",
             "delete": {

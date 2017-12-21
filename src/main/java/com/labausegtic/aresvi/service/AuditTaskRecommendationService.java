@@ -4,6 +4,7 @@ import com.labausegtic.aresvi.service.dto.AuditTaskRecommendationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -27,7 +28,7 @@ public interface AuditTaskRecommendationService {
      */
     Page<AuditTaskRecommendationDTO> findAll(Pageable pageable);
 
-    Set<AuditTaskRecommendationDTO> findAllByAuditProcessRecom_Id(Long auditProcessRecom_id);
+    List<AuditTaskRecommendationDTO> findAllByAuditProcessRecom_Id(Long auditProcessRecom_id);
 
     /**
      *  Get the "id" auditTaskRecommendation.
@@ -43,4 +44,6 @@ public interface AuditTaskRecommendationService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    AuditTaskRecommendationDTO findOneByBonitaBpmCaseIdAndAuditTaskId(Long bonita_bpm_case_id, Long audit_task_id);
 }

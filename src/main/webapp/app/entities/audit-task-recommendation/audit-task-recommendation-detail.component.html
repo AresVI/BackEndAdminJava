@@ -15,17 +15,15 @@
 
             <div class="card-body">
 
-                <h4>Atributos: </h4>
-
                 <div class="card mb-3" *ngFor="let attrCatRecom of auditTaskRecommendation.categoryAttrRecommendationSet">
                     <div class="card-header">
-
+                        <!--
                         <button type="button" class="btn {{attrCatRecom.description.length > 0 ? 'btn-success' : 'btn-outline-dark' }} btn-sm mr-2"
                                 (click)="openModalCategoryAttr(contentCatAttrR, attrCatRecom)">
                             <i class="fa fa-file-text-o"></i>
                         </button>
-
-                        {{attrCatRecom.categoryAttribute.name}}
+                        -->
+                        <h5 class="m-0">{{attrCatRecom.categoryAttribute.name}}</h5>
 
                     </div>
                     <div class="card-body">
@@ -33,6 +31,7 @@
                         <ul class="list-group" *ngFor="let attrRecomm of attrCatRecom.attributeRecommendationSet">
                             <li class="list-group-item">
                                 <div class="row">
+                                    <!--
                                     <div class="col-auto pr-1">
                                         <button type="button"
                                                 class="btn {{attrRecomm.description.length > 0 ? 'btn-success' : 'btn-outline-dark' }} btn-sm"
@@ -40,6 +39,7 @@
                                             <i class="fa fa-file-text-o"></i>
                                         </button>
                                     </div>
+                                    -->
                                     <div class="col">
                                         <div class="form-check">
                                             <label class="custom-control custom-checkbox">
@@ -62,8 +62,13 @@
 
         <div class="card mb-3">
             <div class="card-body">
-                <h4>Recomendación: </h4>
-                <textarea class="form-control" name="description" id="field_description"
+                <h4>Observaciones: </h4>
+                <select class="form-control mb-3" name="standard_observation" id="field_standard_observation"
+                            [(ngModel)]="auditTaskRecommendation.standardObservation">
+                    <option value=""> -- Sin observación predefinida -- </option>
+                    <option *ngFor="let atso of auditTaskStandardObservations" value="{{atso.observation}}">{{atso.observation}}</option>
+                </select>
+                <textarea class="form-control" name="description" id="field_description" maxlength="5000"
                           [(ngModel)]="auditTaskRecommendation.description"></textarea>
             </div>
         </div>
@@ -91,7 +96,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <textarea class="form-control" name="recommendation_attribute" id="field_recommendation_attribute"
+        <textarea class="form-control" name="recommendation_attribute" id="field_recommendation_attribute" maxlength="5000"
                   [(ngModel)]="recommendationAttribute"></textarea>
     </div>
     <div class="modal-footer">
@@ -113,7 +118,7 @@
     </div>
     <div class="modal-body">
         <textarea class="form-control" name="recommendation_category_attribute" id="field_recommendation_category_attribute"
-                  [(ngModel)]="recommendationCategoryAttr"></textarea>
+                  maxlength="5000" [(ngModel)]="recommendationCategoryAttr"></textarea>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="d('Close click')">

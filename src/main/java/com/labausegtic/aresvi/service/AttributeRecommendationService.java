@@ -1,9 +1,12 @@
 package com.labausegtic.aresvi.service;
 
+import com.labausegtic.aresvi.domain.Attribute;
+import com.labausegtic.aresvi.domain.AttributeRecommendation;
 import com.labausegtic.aresvi.service.dto.AttributeRecommendationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -43,4 +46,6 @@ public interface AttributeRecommendationService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    List<AttributeRecommendation> findAllForTraceabilityAuditIdAndAttributeInAndImplementedIsFalse(Long traceability_id, List<Attribute> attributeList);
 }

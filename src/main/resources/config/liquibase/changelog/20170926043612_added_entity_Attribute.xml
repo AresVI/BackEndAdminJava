@@ -40,7 +40,7 @@
         </createTable>
 
         <loadData encoding="UTF-8"
-                  file="config/liquibase/seeds/attribute.csv"
+                  file="config/liquibase/seeds/attributes.csv"
                   separator=";"
                   tableName="attribute">
                 <column name="required" type="BOOLEAN" />

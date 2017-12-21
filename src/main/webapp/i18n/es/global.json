@@ -25,6 +25,10 @@
                 "auditor": "Auditor",
                 "companyContactPerson": "Persona de Contacto de la Empresa",
                 "cancellationTraceabilityAudit": "Cancelaciones de Auditorías de Trazabilidad",
+                "companyAddress": "Company Address",
+                "auditProcessStandardObservation": "Observación Estándar de Procesos de Auditoría",
+                "auditTaskStandardObservation": "Observación Estándar de Tareas de Auditoría",
+                "auditAttributeAnalysis": "Audit Attribute Analysis",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -164,7 +168,14 @@
         "Size": "¡El campo {{fieldName}} no cumple con los requisitos de tamaño mínimo/máximo!",
         "userexists": "El nombre de logueo ya está en uso!",
         "emailexists": "El email ya está en uso!",
-        "idexists": "Un nuevo {{entityName}} no puede tener ese ID"
+        "idexists": "Un nuevo {{entityName}} no puede tener ese ID",
+        "userManagement": {
+            "validation": {
+                "on_delete": {
+                    "with_data": "El usuario posee actividad dentro del sistema"
+                }
+            }
+        }
     },
     "footer": "pie de página"
 }

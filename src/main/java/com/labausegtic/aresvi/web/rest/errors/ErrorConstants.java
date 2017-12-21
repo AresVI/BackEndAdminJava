@@ -9,6 +9,7 @@ public final class ErrorConstants {
     public static final URI DEFAULT_TYPE = URI.create("http://www.jhipster.tech/problem/problem-with-message");
     public static final URI CONSTRAINT_VIOLATION_TYPE = URI.create("http://www.jhipster.tech/problem/contraint-violation");
     public static final URI PARAMETERIZED_TYPE = URI.create("http://www.jhipster.tech/problem/parameterized");
+    public static final String ERR_VALIDATION_DUPLICATE = "entity.validation.duplicate";
 
     private ErrorConstants() {
     }

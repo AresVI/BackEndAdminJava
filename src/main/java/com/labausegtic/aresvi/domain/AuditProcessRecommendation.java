@@ -23,8 +23,17 @@ public class AuditProcessRecommendation implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "standard_observation")
+    private String standardObservation;
+
     @Column(name = "reviewed")
     private boolean reviewed;
+
+    @Column(name = "taken")
+    private boolean taken;
+
+    @Column(name = "bonita_bpm_base_id")
+    private Long bonitaBpmCaseId;
 
     @ManyToOne
     private Recommendation recommendation;
@@ -52,6 +61,19 @@ public class AuditProcessRecommendation implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStandardObservation() {
+        return standardObservation;
+    }
+
+    public AuditProcessRecommendation standardObservation(String standardObservation) {
+        this.standardObservation = standardObservation;
+        return this;
+    }
+
+    public void setStandardObservation(String standardObservation) {
+        this.standardObservation = standardObservation;
     }
 
     public Recommendation getRecommendation() {
@@ -88,6 +110,22 @@ public class AuditProcessRecommendation implements Serializable {
         this.reviewed = reviewed;
     }
 
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
+    }
+
+    public Long getBonitaBpmCaseId() {
+        return bonitaBpmCaseId;
+    }
+
+    public void setBonitaBpmCaseId(Long bonitaBpmCaseId) {
+        this.bonitaBpmCaseId = bonitaBpmCaseId;
+    }
+
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override
@@ -115,6 +153,7 @@ public class AuditProcessRecommendation implements Serializable {
         return "AuditProcessRecommendation{" +
             "id=" + getId() +
             ", description='" + getDescription() + "'" +
+            ", standardObservation='" + getStandardObservation() + "'" +
             "}";
     }
 }

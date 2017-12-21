@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "traceabilityAudit",
+            "otherEntityName": "traceabilityAudit",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "qualification",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20170926043621",
+    "entityTableName": "recommendation",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl"
+}

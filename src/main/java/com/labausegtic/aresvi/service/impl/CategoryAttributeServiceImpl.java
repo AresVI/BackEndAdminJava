@@ -33,6 +33,7 @@ public class CategoryAttributeServiceImpl implements CategoryAttributeService{
     private final AttributeService attributeService;
 
     private final CategoryAttributeMapper categoryAttributeMapper;
+
     private final CategoryAttributeCompleteMapper categoryAttributeCompleteMapper;
 
     public CategoryAttributeServiceImpl(CategoryAttributeRepository categoryAttributeRepository,

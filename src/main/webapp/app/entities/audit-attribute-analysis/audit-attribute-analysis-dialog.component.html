@@ -1,0 +1,62 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAuditAttributeAnalysisLabel" jhiTranslate="aresViApp.auditAttributeAnalysis.home.createOrEditLabel">Create or edit a Audit Attribute Analysis</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!auditAttributeAnalysis.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="auditAttributeAnalysis.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditAttributeAnalysis.percentageNotRequired" for="field_percentageNotRequired">Percentage Not Required</label>
+            <input type="number" class="form-control" name="percentageNotRequired" id="field_percentageNotRequired"
+                [(ngModel)]="auditAttributeAnalysis.percentageNotRequired"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel1" for="field_percentageLevel1">Percentage Level 1</label>
+            <input type="number" class="form-control" name="percentageLevel1" id="field_percentageLevel1"
+                [(ngModel)]="auditAttributeAnalysis.percentageLevel1"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel2" for="field_percentageLevel2">Percentage Level 2</label>
+            <input type="number" class="form-control" name="percentageLevel2" id="field_percentageLevel2"
+                [(ngModel)]="auditAttributeAnalysis.percentageLevel2"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel3" for="field_percentageLevel3">Percentage Level 3</label>
+            <input type="number" class="form-control" name="percentageLevel3" id="field_percentageLevel3"
+                [(ngModel)]="auditAttributeAnalysis.percentageLevel3"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel4" for="field_percentageLevel4">Percentage Level 4</label>
+            <input type="number" class="form-control" name="percentageLevel4" id="field_percentageLevel4"
+                [(ngModel)]="auditAttributeAnalysis.percentageLevel4"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditAttributeAnalysis.percentageLevel5" for="field_percentageLevel5">Percentage Level 5</label>
+            <input type="number" class="form-control" name="percentageLevel5" id="field_percentageLevel5"
+                [(ngModel)]="auditAttributeAnalysis.percentageLevel5"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.auditAttributeAnalysis.traceabilityAudit" for="field_traceabilityAudit">Traceability Audit</label>
+            <select class="form-control" id="field_traceabilityAudit" name="traceabilityAudit" [(ngModel)]="auditAttributeAnalysis.traceabilityAuditId">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="traceabilityAuditOption.id" *ngFor="let traceabilityAuditOption of traceabilityaudits; trackBy: trackTraceabilityAuditById">{{traceabilityAuditOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

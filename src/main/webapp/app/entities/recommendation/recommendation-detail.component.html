@@ -41,12 +41,20 @@
                 <h4>Procesos: </h4>
 
                 <div class="list-group">
-                    <a *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet"
-                       [routerLink]="['/audit-process-recommendation', auditProcessRecom.id ]"
-                       class="list-group-item list-group-item-action {{auditProcessRecom.reviewed ? 'list-group-item-success' : 'list-group-item-info'}}">
-                        <i class="fa fa-check-square-o" aria-hidden="true" [hidden]="!auditProcessRecom.reviewed"></i>
-                        {{auditProcessRecom.auditProcess.name}}
-                    </a>
+                    <div *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet">
+                        <a [routerLink]="['/audit-process-recommendation', auditProcessRecom.id ]"
+                           *ngIf="auditProcessRecom.bonitaBpmCaseId < 1"
+                           class="list-group-item list-group-item-action {{auditProcessRecom.reviewed ? 'list-group-item-success' : 'list-group-item-info'}}">
+                            <i class="fa fa-check-square-o" aria-hidden="true" [hidden]="!auditProcessRecom.reviewed"></i>
+                            {{auditProcessRecom.auditProcess.name}}
+                        </a>
+                        <a href="http://{{hostname}}:35407/bonita/portal/homepage" target="_blank"
+                           *ngIf="auditProcessRecom.bonitaBpmCaseId > 0"
+                           class="list-group-item list-group-item-action {{auditProcessRecom.reviewed ? 'list-group-item-success' : 'list-group-item-info'}}">
+                            <i class="fa fa-check-square-o" aria-hidden="true" [hidden]="!auditProcessRecom.reviewed"></i>
+                            {{auditProcessRecom.auditProcess.name}}
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -56,6 +64,9 @@
         <div>
             <button type="submit" [disabled]="auditForm.form.invalid || isSaving || !recommendation.levelComputerization || !allProcessReviewed" class="btn btn-primary">
                 <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+            <button type="button" (click)="load(recommendation.id)" class="btn btn-primary">
+                <span class="fa fa-refresh"></span>&nbsp; Refrescar
             </button>
             <button type="button"
                     [routerLink]="['/traceability-audit', recommendation.traceabilityAuditId ]"

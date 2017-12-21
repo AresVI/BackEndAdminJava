@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="aresViApp.categoryAttrRecommendation.description" for="field_description">Description</label>
-            <textarea class="form-control" name="description" id="field_description"
+            <textarea class="form-control" name="description" id="field_description" maxlength="5000"
                 [(ngModel)]="categoryAttrRecommendation.description" required ></textarea>
             <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                 <small class="form-text text-danger"

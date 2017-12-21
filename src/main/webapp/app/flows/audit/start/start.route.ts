@@ -8,7 +8,7 @@ export const flowAuditStartRoute: Routes = [
         path: 'process/audit/start',
         component: StartComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
+            authorities: ['ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.flow-audit.start.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -17,7 +17,7 @@ export const flowAuditStartRoute: Routes = [
         path: 'process/audit/start/company/:company_id/company-contact-person-new',
         component: CompanyContactPersonAuditStartPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
+            authorities: ['ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.company_contact_person.home.title'
         },
         canActivate: [UserRouteAccessService],

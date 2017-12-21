@@ -3,6 +3,7 @@ package com.labausegtic.aresvi.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 import javax.persistence.Lob;
@@ -64,6 +65,13 @@ public class CategoryAttrRecommendationDTO implements Serializable {
 
     public void setAttributeRecommendationSet(Set<AttributeRecommendationDTO> attributeRecommendationSet) {
         this.attributeRecommendationSet = attributeRecommendationSet;
+    }
+
+    public void addAttributeRecommendationSet(AttributeRecommendationDTO attributeRecommendation) {
+        if(this.attributeRecommendationSet == null){
+            this.attributeRecommendationSet = new HashSet<>();
+        }
+        this.attributeRecommendationSet.add(attributeRecommendation);
     }
 
     public CategoryAttributeDTO getCategoryAttribute() {

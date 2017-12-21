@@ -1,10 +1,12 @@
 package com.labausegtic.aresvi.service;
 
+import com.labausegtic.aresvi.domain.Attribute;
 import com.labausegtic.aresvi.service.dto.AttributeCompleteDTO;
 import com.labausegtic.aresvi.service.dto.AttributeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -44,4 +46,6 @@ public interface AttributeService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    List<Attribute> getByWeighting(Long level, boolean b);
 }

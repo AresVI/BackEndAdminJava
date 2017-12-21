@@ -5,9 +5,6 @@ id;name;container_id
 10;Despalillado;2
 11;Estrujado;2
 12;Prensado de orujos;3
-15;Depositar en cubas y barricas;4
-16;Retiro del mosto;4
-24;Analizar pureza del vino;8
 25;Depositar en Barríca de Reposo;9
 27;Fraccionar;10
 29;Despacho;10

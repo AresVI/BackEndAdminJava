@@ -199,7 +199,17 @@ public class UserResource {
     @Secured(AuthoritiesConstants.ADMINISTRATOR)
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
-        userService.deleteUser(login);
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+        try {
+            userService.deleteUser(login);
+            return ResponseEntity.ok().headers(HeaderUtil.createAlert("userManagement.deleted", login)).build();
+        } catch (Exception ignored){
+            return ResponseEntity.badRequest().headers(
+                HeaderUtil.createFailureAlert(
+                    ENTITY_NAME,
+                    "userManagement.validation.on_delete.with_data",
+                    ""
+                )
+            ).body(null);
+        }
     }
 }

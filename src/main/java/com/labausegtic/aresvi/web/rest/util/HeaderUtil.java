@@ -49,4 +49,8 @@ public final class HeaderUtil {
         headers.add("X-aresViApp-params", entityName);
         return headers;
     }
+
+    public static HttpHeaders createFlowCategorizeAgainAlert(String entityName, String param) {
+        return createAlert(APPLICATION_NAME + "." + entityName + ".categorizeAgain", param);
+    }
 }

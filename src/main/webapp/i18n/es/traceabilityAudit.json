@@ -44,7 +44,12 @@
                 "cancel": "Cancelar Proceso",
                 "start": "Iniciar Proceso",
                 "finish": "Finalizar Proceso",
-                "audit": "Realizar Auditoría"
+                "audit": "Realizar Auditoría",
+                "categorize_again": "Recategorizar"
+            },
+            "categorize_again":{
+                "title": "Confirmar operación de recategorización",
+                "question": "¿Desea recategorizar la auditoría de trazabilidad?"
             }
         }
     }

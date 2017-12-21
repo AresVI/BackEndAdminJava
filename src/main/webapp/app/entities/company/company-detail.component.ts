@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Pipe} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
@@ -11,6 +11,12 @@ import {Principal} from '../../shared/auth/principal.service';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import {AuditProcessRecommendation} from '../audit-process-recommendation/audit-process-recommendation.model';
+import {AuditProcessRecommendationService} from '../audit-process-recommendation/audit-process-recommendation.service';
+
+@Pipe({ name: 'safe' })
 @Component({
     selector: 'jhi-company-detail',
     templateUrl: './company-detail.component.html'
@@ -24,6 +30,8 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
 
     traceabilityAudits: TraceabilityAudit[];
 
+    recommendationNextLevel: AuditProcessRecommendation[];
+
     error: any;
     success: any;
     routeData: any;
@@ -36,8 +44,19 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
 
+    lat: string;
+    lng: string;
+    mapZoom: number;
+
+    title = 'app';
+    zoom = 16;
+
+    urlMap: SafeResourceUrl;
+    linkGoogleMaps: SafeResourceUrl;
+
     constructor(
         private traceabilityAuditService: TraceabilityAuditService,
+        private auditProcessRecommendationService: AuditProcessRecommendationService,
         private companyService: CompanyService,
         private parseLinks: JhiParseLinks,
         private alertService: JhiAlertService,
@@ -45,7 +64,9 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private sanitizer: DomSanitizer,
+        private modalService: NgbModal
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
@@ -65,11 +86,28 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInTraceabilityAudits();
+        this.recommendationNextLevel = [];
     }
 
     load(id) {
         this.companyService.find(id).subscribe((company) => {
             this.company = company;
+            if (company.companyAddress) {
+                this.lat = company.companyAddress.latitude;
+                this.lng = company.companyAddress.longitude;
+                this.mapZoom = 16;
+
+                const url = 'https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyB1cBm4iFiova0nbWSXHMKg0473TzCqcEI'
+                    + '&center=' + this.lat + ',' + this.lng + '&zoom=' + this.zoom + '&size=400x400'
+                    + '&markers=color:red|' + this.lat + ',' + this.lng;
+
+                this.urlMap = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+
+                const googleMapsUrl = 'https://www.google.com.ar/maps/dir//' + this.lat + ',' + this.lng + '/@' + this.lat
+                    + ',' + this.lng + ',' + this.mapZoom + 'z';
+
+                this.linkGoogleMaps = this.sanitizer.bypassSecurityTrustResourceUrl(googleMapsUrl);
+            }
             this.loadAll();
         });
     }
@@ -143,6 +181,25 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
             result.push('id');
         }
         return result;
+    }
+
+    openModalRecommendationNextLevel(content) {
+
+        const options: NgbModalOptions = {
+            size: 'lg'
+        };
+
+        this.auditProcessRecommendationService.getRecommendationNextCategory(this.company.id)
+            .subscribe( (res: AuditProcessRecommendation[]) => {
+
+                this.recommendationNextLevel = res;
+
+                this.modalService.open(content, options).result.then(() => {
+                    this.recommendationNextLevel = [];
+                }, (reason) => {
+                    this.recommendationNextLevel = [];
+                });
+            });
     }
 
     private onSuccess(data, headers) {

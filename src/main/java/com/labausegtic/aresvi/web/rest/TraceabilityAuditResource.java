@@ -83,23 +83,36 @@ public class TraceabilityAuditResource {
             .body(result);
     }
 
-    @PostMapping("/traceability-audits/{id}/start")
+    @PutMapping("/traceability-audits/{id}/start")
     @Timed
-    public ResponseEntity<Void> startTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<TraceabilityAuditDTO> startTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
 
         TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.startTraceabilityAudit(id);
 
-        return ResponseEntity.ok().headers(HeaderUtil.createFlowStartAlert(ENTITY_NAME, traceabilityAuditDTO.getName())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowStartAlert(ENTITY_NAME, traceabilityAuditDTO.getName()))
+            .body(traceabilityAuditDTO);
 
     }
 
-    @PostMapping("/traceability-audits/{id}/finish")
+    @PutMapping("/traceability-audits/{id}/finish")
     @Timed
-    public ResponseEntity<Void> finishTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<TraceabilityAuditDTO> finishTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
 
         TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.finishTraceabilityAudit(id);
 
-        return ResponseEntity.ok().headers(HeaderUtil.createFlowFinishAlert(ENTITY_NAME, traceabilityAuditDTO.getName())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowFinishAlert(ENTITY_NAME, traceabilityAuditDTO.getName()))
+            .body(traceabilityAuditDTO);
+
+    }
+
+    @PutMapping("/traceability-audits/{id}/categorize-again")
+    @Timed
+    public ResponseEntity<TraceabilityAuditDTO> categorizeAgainTraceabilityAudit(@PathVariable Long id) throws URISyntaxException {
+
+        TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.categorizeAgainTraceabilityAudit(id);
+
+        return ResponseEntity.ok().headers(HeaderUtil.createFlowCategorizeAgainAlert(ENTITY_NAME, traceabilityAuditDTO.getName()))
+            .body(traceabilityAuditDTO);
 
     }
 

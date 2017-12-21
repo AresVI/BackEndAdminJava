@@ -1,27 +1,23 @@
 
 <div *ngIf="attribute">
-    <h2><span jhiTranslate="aresViApp.attribute.detail.title">Attribute</span> {{attribute.id}}</h2>
+    <h2><span jhiTranslate="aresViApp.attribute.detail.title">Attribute</span> - {{attribute.name}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.attribute.name">Name</span></dt>
-        <dd>
-            <span>{{attribute.name}}</span>
-        </dd>
         <dt><span jhiTranslate="aresViApp.attribute.required">Required</span></dt>
         <dd>
-            <span>{{attribute.required}}</span>
+            <span>{{attribute.required ? 'Si' : 'No'}}</span>
         </dd>
         <dt><span jhiTranslate="aresViApp.attribute.weighting">Weighting</span></dt>
         <dd>
             <div *ngIf="attribute.weightingId">
-                <a [routerLink]="['/weighting', attribute.weightingId]">{{attribute.weightingId}}</a>
+                <a [routerLink]="['/weighting', attribute.weightingId]">Nivel {{attribute.weighting.value}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="aresViApp.attribute.categoryAttribute">Category Attribute</span></dt>
         <dd>
             <div *ngIf="attribute.categoryAttributeId">
-                <a [routerLink]="['/category-attribute', attribute.categoryAttributeId]">{{attribute.categoryAttributeId}}</a>
+                <a [routerLink]="['/category-attribute', attribute.categoryAttributeId]">{{attribute.categoryAttribute.name}}</a>
             </div>
         </dd>
     </dl>

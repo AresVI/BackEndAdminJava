@@ -1,0 +1,25 @@
+
+<div *ngIf="auditProcessStandardObservation">
+    <h2><span jhiTranslate="aresViApp.auditProcessStandardObservation.detail.title">Audit Process Standard Observation</span> {{auditProcessStandardObservation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.auditProcessStandardObservation.observation">Observation</span></dt>
+        <dd>
+            <span>{{auditProcessStandardObservation.observation}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'audit-process-standard-observation/'+ auditProcessStandardObservation.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

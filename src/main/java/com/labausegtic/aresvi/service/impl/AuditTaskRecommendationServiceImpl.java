@@ -1,5 +1,7 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.domain.AuditProcessRecommendation;
+import com.labausegtic.aresvi.repository.AuditProcessRecommendationRepository;
 import com.labausegtic.aresvi.service.AttributeRecommendationService;
 import com.labausegtic.aresvi.service.AuditTaskRecommendationService;
 import com.labausegtic.aresvi.domain.AuditTaskRecommendation;
@@ -17,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -34,16 +38,20 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
 
     private final AuditTaskRecommendationMapper auditTaskRecommendationMapper;
 
+    private final AuditProcessRecommendationRepository auditProcessRecommendationRepository;
+
     private final CategoryAttrRecommendationService categoryAttrRecommendationService;
 
     private final AttributeRecommendationService attributeRecommendationService;
 
     public AuditTaskRecommendationServiceImpl(AuditTaskRecommendationRepository auditTaskRecommendationRepository,
                                               AuditTaskRecommendationMapper auditTaskRecommendationMapper,
+                                              AuditProcessRecommendationRepository auditProcessRecommendationRepository,
                                               CategoryAttrRecommendationService categoryAttrRecommendationService,
                                               AttributeRecommendationService attributeRecommendationService) {
         this.auditTaskRecommendationRepository = auditTaskRecommendationRepository;
         this.auditTaskRecommendationMapper = auditTaskRecommendationMapper;
+        this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
         this.categoryAttrRecommendationService = categoryAttrRecommendationService;
         this.attributeRecommendationService = attributeRecommendationService;
     }
@@ -95,8 +103,8 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
     }
 
     @Override
-    public Set<AuditTaskRecommendationDTO> findAllByAuditProcessRecom_Id(Long auditProcessRecom_id) {
-        Set<AuditTaskRecommendationDTO> result = new HashSet<>();
+    public List<AuditTaskRecommendationDTO> findAllByAuditProcessRecom_Id(Long auditProcessRecom_id) {
+        List<AuditTaskRecommendationDTO> result = new ArrayList<>();
 
         Set<AuditTaskRecommendation> AuditTaskRecommendations;
 
@@ -146,5 +154,25 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
     public void delete(Long id) {
         log.debug("Request to delete AuditTaskRecommendation : {}", id);
         auditTaskRecommendationRepository.delete(id);
+    }
+
+    @Override
+    public AuditTaskRecommendationDTO findOneByBonitaBpmCaseIdAndAuditTaskId(Long bonitaBpmCaseId, Long audit_task_id) {
+
+        AuditProcessRecommendation auditProcessRecommendation = auditProcessRecommendationRepository.findByBonitaBpmCaseId(bonitaBpmCaseId);
+
+        AuditTaskRecommendation auditTaskRecommendation;
+
+        auditTaskRecommendation = auditTaskRecommendationRepository.findByAuditProcessRecomIdAndAuditTaskId(
+            auditProcessRecommendation.getId(), audit_task_id
+        );
+
+        AuditTaskRecommendationDTO auditTaskRecommendationDTO = auditTaskRecommendationMapper.toDto(auditTaskRecommendation);
+
+        auditTaskRecommendationDTO.setCategoryAttrRecommendationSet(
+            categoryAttrRecommendationService.findAllByAuditTaskRecom_Id(auditTaskRecommendationDTO.getId())
+        );
+
+        return auditTaskRecommendationDTO;
     }
 }

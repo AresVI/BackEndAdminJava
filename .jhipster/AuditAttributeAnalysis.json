@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "traceabilityAudit",
+            "otherEntityName": "traceabilityAudit",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "auditAttributeAnalysis"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "percentageNotRequired",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "percentageLevel1",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "percentageLevel2",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "percentageLevel3",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "percentageLevel4",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "percentageLevel5",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171210155722",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "audit_attribute_analysis",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

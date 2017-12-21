@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "auditProcessRecom",
+            "otherEntityName": "auditProcessRecommendation",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "auditTask",
+            "otherEntityName": "auditTask",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "standardObservation",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170926043623",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "audit_task_recommendation",
+    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll"
+}

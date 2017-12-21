@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "weighting",
+            "otherEntityName": "weighting",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "attribute"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "categoryAttribute",
+            "otherEntityName": "categoryAttribute",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "required",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170926043612",
+    "entityTableName": "attribute",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl"
+}

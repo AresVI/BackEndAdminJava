@@ -12,8 +12,6 @@ services:
     aresvi-mysql:
         image: mysql:5.7.19
         container_name: mysql
-        volumes:
-            - ~/volumes/jhipster/AresVI/mysql/:/var/lib/mysql/
         environment:
             - MYSQL_USER=root
             - MYSQL_ALLOW_EMPTY_PASSWORD=no

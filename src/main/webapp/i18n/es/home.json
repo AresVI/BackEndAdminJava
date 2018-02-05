@@ -1,6 +1,6 @@
 {
     "home": {
-        "title": "AresVI",
+        "title": "AresVI - Administración",
         "subtitle": "Sistema de Metamodelo de Auditoria de Trazabilidad del Proceso Vitivinícola",
         "logged": {
             "message": "Está conectado como \"{{username}}\"."

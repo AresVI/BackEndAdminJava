@@ -132,5 +132,5 @@ application:
         username: system
         password: system
     drools:
-        host: localhost
-        port: 7000
+        host: aresvi-drools
+        port: 8080

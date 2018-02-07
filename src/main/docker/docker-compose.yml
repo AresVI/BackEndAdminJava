@@ -34,8 +34,8 @@ services:
         image: caballerojavier13/mysql-s3-backup-restore
         container_name: mysql-backup
         environment:
-            - FILEPREFIX: Backups/AresVI/backup
-            - S3BUCKET: caballerojavier13-backup
+            - FILEPREFIX=Backups/AresVI/backup
+            - S3BUCKET=caballerojavier13-backup
         command: /cron
         depends_on:
             - aresvi-mysql

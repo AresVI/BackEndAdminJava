@@ -6,7 +6,7 @@ services:
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
             - SPRING_DATASOURCE_URL=jdbc:mysql://aresvi-mysql:3306/aresvi?useUnicode=true&characterEncoding=utf8&useSSL=false
-            - JHIPSTER_SLEEP=20 # gives time for the database to boot before the application
+            - JHIPSTER_SLEEP=30
         ports:
             - 8080:8080
     aresvi-mysql:
@@ -30,3 +30,17 @@ services:
         container_name: redis
         ports:
             - 6379:6379
+    aresvi-mysql-backup:
+        image: caballerojavier13/mysql-s3-backup-restore
+        container_name: mysql-backup
+        environment:
+            - FILEPREFIX: Backups/AresVI/backup
+            - S3BUCKET: caballerojavier13-backup
+        command: /cron
+        depends_on:
+            - aresvi-mysql
+    aresvi-bonita:
+        image: bonita
+        container_name: bonita
+        ports:
+            - 35407:8080

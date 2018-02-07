@@ -41,7 +41,7 @@ services:
             - MYSQL_USER=root
             - MYSQL_PASSWORD=root
             - MYSQL_HOST=mysql
-        command: ./cron
+        command: ./wait
         depends_on:
             - aresvi-mysql
     aresvi-bonita:

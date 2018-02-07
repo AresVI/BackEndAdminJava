@@ -38,6 +38,9 @@ services:
             - S3BUCKET=caballerojavier13-backup
             - AWS_ACCESS_KEY_ID=key_id
             - AWS_SECRET_ACCESS_KEY=secret_key
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=root
+            - MYSQL_HOST=mysql
         command: ./cron
         depends_on:
             - aresvi-mysql

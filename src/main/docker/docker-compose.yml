@@ -36,7 +36,7 @@ services:
         environment:
             - FILEPREFIX=Backups/AresVI/backup
             - S3BUCKET=caballerojavier13-backup
-        command: /cron
+        command: ./cron
         depends_on:
             - aresvi-mysql
     aresvi-bonita:

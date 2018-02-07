@@ -36,6 +36,8 @@ services:
         environment:
             - FILEPREFIX=Backups/AresVI/backup
             - S3BUCKET=caballerojavier13-backup
+            - AWS_ACCESS_KEY_ID=key_id
+            - AWS_SECRET_ACCESS_KEY=secret_key
         command: ./cron
         depends_on:
             - aresvi-mysql

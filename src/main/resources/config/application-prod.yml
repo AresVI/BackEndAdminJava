@@ -127,8 +127,8 @@ jhipster:
 
 application:
     bonita:
-        host: localhost
-        port: 35407
+        host: bonita
+        port: 8080
         username: system
         password: system
     drools:

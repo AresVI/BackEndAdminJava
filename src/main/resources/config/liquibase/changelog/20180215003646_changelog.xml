@@ -1,0 +1,59 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="jcaballero (generated)" id="1518655011059-1">
+        <addColumn tableName="auditor_companies">
+            <column name="auditors_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-2">
+        <addUniqueConstraint columnNames="weighting_id" constraintName="UC_ATTRIBUTEWEIGHTING_ID_COL" tableName="attribute"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-3">
+        <addUniqueConstraint columnNames="name" constraintName="UC_COMPANYNAME_COL" tableName="company"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-4">
+        <addUniqueConstraint columnNames="identifier" constraintName="UK2dbwwm3353woi35l10wr214ws" tableName="company"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-5">
+        <addForeignKeyConstraint baseColumnNames="audit_process_id" baseTableName="traceability_audit_audit_process" constraintName="FKe6f75eswhruyx3ph8lm3m6tdf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="audit_process"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-6">
+        <addForeignKeyConstraint baseColumnNames="auditors_id" baseTableName="auditor_companies" constraintName="FKosf0pv6vov1txew7ob7vxwv4y" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="auditor"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-7">
+        <addForeignKeyConstraint baseColumnNames="traceability_audit_id" baseTableName="traceability_audit_audit_process" constraintName="FKt86ivlxkeuahlg5lu7g6bot8t" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="traceability_audit"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-8">
+        <dropNotNullConstraint columnDataType="bigint" columnName="bonita_bpm_base_id" tableName="audit_process_recommendation"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-9">
+        <dropNotNullConstraint columnDataType="bigint" columnName="company_contact_person_id" tableName="traceability_audit"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-10">
+        <dropNotNullConstraint columnDataType="bigint" columnName="company_id" tableName="traceability_audit"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-11">
+        <addNotNullConstraint columnDataType="clob" columnName="description" tableName="attribute_recommendation"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-12">
+        <dropNotNullConstraint columnDataType="clob" columnName="description" tableName="audit_process_recommendation"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-13">
+        <dropNotNullConstraint columnDataType="clob" columnName="description" tableName="audit_task_recommendation"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-14">
+        <addNotNullConstraint columnDataType="clob" columnName="description" tableName="category_attr_recommendation"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-15">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="name" tableName="recommendation"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-16">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="status" tableName="traceability_audit"/>
+    </changeSet>
+    <changeSet author="jcaballero (generated)" id="1518655011059-17">
+        <dropUniqueConstraint constraintName="UC_ATTRIBUTEWEIGHTING_ID_COL" tableName="attribute"/>
+        <addUniqueConstraint columnNames="weighting_id" constraintName="UC_ATTRIBUTEWEIGHTING_ID_COL" tableName="attribute"/>
+    </changeSet>
+</databaseChangeLog>

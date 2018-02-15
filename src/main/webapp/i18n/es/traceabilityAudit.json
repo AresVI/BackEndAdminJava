@@ -15,10 +15,10 @@
                 "question": "¿Seguro que quiere eliminar la Auditoría de Trazabilidad {{ id }}?"
             },
             "start": {
-                "question": "¿Seguro que desa iniciar la {{ name }}?"
+                "question": "¿Seguro que desea iniciar la {{ name }}?"
             },
             "finish": {
-                "question": "¿Seguro que desa finalizar la {{ name }}?"
+                "question": "Seguro que desea finalizar la {{ name }}?"
             },
             "detail": {
                 "title": "Auditoría de Trazabilidad"

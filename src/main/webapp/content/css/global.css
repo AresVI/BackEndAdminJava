@@ -312,3 +312,8 @@ agm-map {
 }
 
 google-map {display:block; width: inherit; height: inherit}
+
+
+.report-icon{
+    font-size: 160px;
+}

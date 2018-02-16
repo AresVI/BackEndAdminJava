@@ -4,12 +4,20 @@
             <span class="hipster img-fluid rounded"></span>
             <p class="lead text-center"></p>
             <div class="row justify-content-center" *ngSwitchCase="true">
-                <div class="col-12 col-sm-6 col-md-4 text-center p-1">
+                <div class="col-12 col-sm-6 col-md-4 text-center p-1"
+                     *jhiHasAnyAuthority="['ROLE_MANAGER']">
+                    <a class="btn btn-lg btn-success btn-block" routerLink="report">
+                        <span jhiTranslate="global.menu.entities.report">Report</span>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 text-center p-1"
+                     *jhiHasAnyAuthority="['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_INTERNAL', 'ROLE_AUDITOR_EXTERNAL']">
                     <a class="btn btn-lg btn-success btn-block" routerLink="process/audit/dashboard">
                         <span jhiTranslate="global.menu.flow.dashboard_audit">Dashboards Audit</span>
                     </a>
                 </div>
-                <div class="col-12 col-sm-6 col-md-4 text-center p-1" *jhiHasAnyAuthority="['ROLE_AUDITOR_INTERNAL', 'ROLE_AUDITOR_EXTERNAL']">
+                <div class="col-12 col-sm-6 col-md-4 text-center p-1"
+                     *jhiHasAnyAuthority="['ROLE_AUDITOR_INTERNAL', 'ROLE_AUDITOR_EXTERNAL']">
                     <a class="btn btn-lg btn-success btn-block" routerLink="/search/traceability_audit">
                         <span jhiTranslate="global.menu.search.traceability_audit">Search Traceability Audit</span>
                     </a>

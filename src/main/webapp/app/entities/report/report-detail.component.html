@@ -1,0 +1,29 @@
+
+<div *ngIf="report">
+    <h2><span jhiTranslate="aresViApp.report.detail.title">Report</span> {{report.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.report.name">Name</span></dt>
+        <dd>
+            <span>{{report.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.report.iframe">Iframe</span></dt>
+        <dd>
+            <span>{{report.iframe}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'report/'+ report.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

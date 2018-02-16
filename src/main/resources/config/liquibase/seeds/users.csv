@@ -3,3 +3,4 @@ id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;c
 2;admin;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Administrator;Administrator;admin@localhost;;true;es;system;system
 4;administrativo;$2a$10$GJmSLid2t9dHWB4dG5LG9eNi7VTMqxm9fD4Bss4XX9tSSFjGQAgxe;Eugenio;Bustos;administrativo@aresvi.com;;true;es;system;system
 5;auditor1;$2a$10$n4DKUWRVSfh9h71.cBw8WuAtAQpqqiUReNchkViFGmP0HSOMj3LPy;Nicolás;Avellaneda;auditor1@aresvi.com;;true;es;system;system
+6;manager;$2a$10$2/f3JAdLp2Zfarg4bjlMiuVjpP0kZ2hP9tNb30WpTz6E64ObOsXaO;Hector;Bracamonte;hector.bracamonte@aresvi.com;;true;es;system;system

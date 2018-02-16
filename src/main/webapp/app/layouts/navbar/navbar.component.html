@@ -35,6 +35,13 @@
                 </a>
             </li>
 
+            <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATOR', 'ROLE_MANAGER']" ngbDropdown class="nav-item pointer"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="report" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <span jhiTranslate="global.menu.entities.report">Report</span>
+                </a>
+            </li>
+
             <li *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL']" ngbDropdown class="nav-item pointer"
                 routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="company" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">

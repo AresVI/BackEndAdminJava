@@ -21,6 +21,7 @@ import { AresViCompanyAddressModule } from './company-address/company-address.mo
 import { AresViAuditProcessStandardObservationModule } from './audit-process-standard-observation/audit-process-standard-observation.module';
 import { AresViAuditTaskStandardObservationModule } from './audit-task-standard-observation/audit-task-standard-observation.module';
 import { AresViAuditAttributeAnalysisModule } from './audit-attribute-analysis/audit-attribute-analysis.module';
+import { AresViReportModule } from './report/report.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -46,6 +47,7 @@ import { AresViAuditAttributeAnalysisModule } from './audit-attribute-analysis/a
         AresViAuditProcessStandardObservationModule,
         AresViAuditTaskStandardObservationModule,
         AresViAuditAttributeAnalysisModule,
+        AresViReportModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

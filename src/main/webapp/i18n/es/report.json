@@ -1,0 +1,22 @@
+{
+    "aresViApp": {
+        "report" : {
+            "home": {
+                "title": "Reportes",
+                "createLabel": "Crear nuevo reporte",
+                "createOrEditLabel": "Crear o editar reporte"
+            },
+            "created": "Un nuevo reporte ha sido creado con el identificador {{ param }}",
+            "updated": "Un reporte ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un reporte ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar el reporte {{ id }}?"
+            },
+            "detail": {
+                "title": "Reporte"
+            },
+            "name": "Nombre",
+            "iframe": "Iframe"
+        }
+    }
+}

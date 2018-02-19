@@ -1,62 +1,58 @@
-import {Component, OnInit, OnDestroy, Sanitizer} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
 
 import { Report } from './report.model';
 import { ReportService } from './report.service';
-
-import { DomSanitizer } from '@angular/platform-browser';
+import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
+import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
-    selector: 'jhi-report-detail',
-    templateUrl: './report-detail.component.html'
+    selector: 'jhi-report',
+    templateUrl: './report.component.html'
 })
-export class ReportDetailComponent implements OnInit, OnDestroy {
-
-    report: Report;
-    private subscription: Subscription;
-    private eventSubscriber: Subscription;
-    private sanitizer: Sanitizer;
+export class ReportComponent implements OnInit, OnDestroy {
+reports: Report[];
+    currentAccount: any;
+    eventSubscriber: Subscription;
 
     constructor(
-        private eventManager: JhiEventManager,
         private reportService: ReportService,
-        private route: ActivatedRoute
+        private alertService: JhiAlertService,
+        private eventManager: JhiEventManager,
+        private principal: Principal
     ) {
-        this.sanitizer = DomSanitizer;
     }
 
+    loadAll() {
+        this.reportService.query().subscribe(
+            (res: ResponseWrapper) => {
+                this.reports = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
     ngOnInit() {
-        this.subscription = this.route.params.subscribe((params) => {
-            this.load(params['id']);
+        this.loadAll();
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
         });
         this.registerChangeInReports();
     }
 
-    load(id) {
-        this.reportService.find(id).subscribe((report) => {
-            this.report = report;
-        });
-    }
-    previousState() {
-        window.history.back();
-    }
-
     ngOnDestroy() {
-        this.subscription.unsubscribe();
         this.eventManager.destroy(this.eventSubscriber);
     }
 
+    trackId(index: number, item: Report) {
+        return item.id;
+    }
     registerChangeInReports() {
-        this.eventSubscriber = this.eventManager.subscribe(
-            'reportListModification',
-            (response) => this.load(this.report.id)
-        );
+        this.eventSubscriber = this.eventManager.subscribe('reportListModification', (response) => this.loadAll());
     }
 
-    iframeURL() {
-        return this.sanitizer.bypassSecurityTrustUrl(this.report.iframe);
+    private onError(error) {
+        this.alertService.error(error.message, null, null);
     }
-
 }

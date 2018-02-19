@@ -1,10 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Sanitizer} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { Report } from './report.model';
 import { ReportService } from './report.service';
+
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'jhi-report-detail',
@@ -15,12 +17,14 @@ export class ReportDetailComponent implements OnInit, OnDestroy {
     report: Report;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
+    private sanitizer: Sanitizer;
 
     constructor(
         private eventManager: JhiEventManager,
         private reportService: ReportService,
         private route: ActivatedRoute
     ) {
+        this.sanitizer = DomSanitizer;
     }
 
     ngOnInit() {
@@ -50,4 +54,9 @@ export class ReportDetailComponent implements OnInit, OnDestroy {
             (response) => this.load(this.report.id)
         );
     }
+
+    iframeURL() {
+        return this.sanitizer.bypassSecurityTrustUrl(this.report.iframe);
+    }
+
 }

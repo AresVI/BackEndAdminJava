@@ -113,9 +113,9 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser@4.3.2":
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-4.3.2.tgz#7ff0f6a5c29f138faeeb7ab808eb7ab202a08594"
+"@angular/platform-browser@^4.3.2":
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-4.4.6.tgz#a9839c547e1b654fa1d24a89780c8ba6ab8dcce0"
   dependencies:
     tslib "^1.7.1"
 
@@ -154,16 +154,6 @@
 "@ngx-translate/http-loader@0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@ngx-translate/http-loader/-/http-loader-0.1.0.tgz#6029325561d7868fe325a419de2770e98ff1502e"
-
-"@types/google-maps@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@types/google-maps/-/google-maps-3.2.0.tgz#804a3ae9ac9265b4e0d1508b5b9b894867974f82"
-  dependencies:
-    "@types/googlemaps" "*"
-
-"@types/googlemaps@*", "@types/googlemaps@^3.30.0":
-  version "3.30.0"
-  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.0.tgz#ca99a74b97d581b1cdbccf2973d05f26633d1975"
 
 "@types/jasmine@2.5.53":
   version "2.5.53"

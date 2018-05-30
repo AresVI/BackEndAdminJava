@@ -1,0 +1,22 @@
+{
+    "aresViApp": {
+        "productType" : {
+            "home": {
+                "title": "Tipo de Productos",
+                "createLabel": "Crear nuevo Tipo de Producto",
+                "createOrEditLabel": "Crear o editar Tipo de Producto"
+            },
+            "created": "Un nuevo Tipo de Producto ha sido creado con el identificador {{ param }}",
+            "updated": "Un Tipo de Producto ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Tipo de Producto ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Tipo de Producto {{ id }}?"
+            },
+            "detail": {
+                "title": "Tipo de Producto"
+            },
+            "name": "Nombre",
+            "auditProcess": "Proceso de Auditoría"
+        }
+    }
+}

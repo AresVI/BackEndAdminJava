@@ -1,4 +1,4 @@
-///<reference path='../../../../../../../node_modules/@angular/router/src/router.d.ts'/>
+
 import {Component, OnInit} from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,6 +17,8 @@ import {isUndefined} from 'util';
 import {AuditProcess} from '../../../entities/audit-process/audit-process.model';
 import {AuditProcessService} from '../../../entities/audit-process/audit-process.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {ProductTypeService} from '../../../entities/product-type/product-type.service';
+import {ProductType} from '../../../entities/product-type/product-type.model';
 
 @Component({
     selector: 'jhi-flow-audit-start',
@@ -30,6 +32,7 @@ export class StartComponent implements OnInit {
     traceabilityAudit: TraceabilityAudit;
     companies: Company[];
     companyContactPeople: CompanyContactPerson[];
+    productTypes: ProductType[];
     isSaving: boolean;
     error: any;
     success: any;
@@ -47,6 +50,7 @@ export class StartComponent implements OnInit {
         private traceabilityAuditService: TraceabilityAuditService,
         private companyService: CompanyService,
         private auditProcessService: AuditProcessService,
+        private productTypeService: ProductTypeService,
         private alertService: JhiAlertService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
@@ -61,6 +65,7 @@ export class StartComponent implements OnInit {
     ngOnInit() {
         this.traceabilityAudit = new TraceabilityAudit();
         this.traceabilityAudit.companyId = 0;
+        this.traceabilityAudit.productType = null;
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -68,9 +73,11 @@ export class StartComponent implements OnInit {
         this.filter_company = '';
         this.companies = [];
         this.companyContactPeople = [];
+        this.productTypes = [];
         this.registerChangeInCompanies();
         this.registerChangeInCompanyContactPeople();
-        this.loadAllAuditProcess();
+        // this.loadAllAuditProcess();
+        this.loadAllProductTypes();
         this.isSaving = false;
     }
 
@@ -102,6 +109,13 @@ export class StartComponent implements OnInit {
 
     }
 
+    loadAllProductTypes() {
+        this.productTypeService.query({}).subscribe(
+            (res: ResponseWrapper) => this.onSuccessProductTypes(res.json),
+            (res: ResponseWrapper) => this.onErrorProductTypes(res.json)
+        );
+    }
+
     changeCompanyId() {
         this.traceabilityAudit.companyId = this.traceabilityAudit.company.id;
 
@@ -112,6 +126,10 @@ export class StartComponent implements OnInit {
 
     changeCompanyContactPeopleId() {
 
+    }
+
+    changeProductType() {
+        this.auditProcesses = this.traceabilityAudit.productType.auditProcesses;
     }
 
     sort() {
@@ -174,6 +192,14 @@ export class StartComponent implements OnInit {
         this.auditProcesses = data;
     }
     private onErrorAuditProcess(error) {
+        this.alertService.error(error.message, null, null);
+    }
+
+    private onSuccessProductTypes(data) {
+        this.productTypes = data;
+    }
+
+    private onErrorProductTypes(error) {
         this.alertService.error(error.message, null, null);
     }
 

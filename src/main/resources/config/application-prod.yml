@@ -127,10 +127,10 @@ jhipster:
 
 application:
     bonita:
-        host: localhost
+        host: 188.166.27.98
         port: 35407
-        username: system
-        password: system
+        username: auditor1
+        password: auditor1
     drools:
         host: localhost
         port: 7000

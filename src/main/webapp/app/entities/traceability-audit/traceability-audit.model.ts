@@ -3,6 +3,7 @@ import {Company} from '../company/company.model';
 import {CompanyContactPerson} from '../company-contact-person/company-contact-person.model';
 import {AuditProcess} from '../audit-process/audit-process.model';
 import {Recommendation} from '../recommendation/recommendation.model';
+import {ProductType} from '../product-type/product-type.model';
 
 export class TraceabilityAudit implements BaseEntity {
     constructor(
@@ -18,6 +19,8 @@ export class TraceabilityAudit implements BaseEntity {
         public companyContactPersonId?: number,
         public companyContactPerson?: CompanyContactPerson,
         public recommendationSet?: Recommendation[],
+        public productTypeId?: number,
+        public productType?: ProductType,
     ) {
     }
 }

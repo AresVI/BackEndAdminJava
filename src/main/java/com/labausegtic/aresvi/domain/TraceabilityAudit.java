@@ -53,8 +53,8 @@ public class TraceabilityAudit implements Serializable {
     @ManyToOne
     private CompanyContactPerson companyContactPerson;
 
-    @ManyToOne(optional = false)
     @NotNull
+    @ManyToOne
     private ProductType productType;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove

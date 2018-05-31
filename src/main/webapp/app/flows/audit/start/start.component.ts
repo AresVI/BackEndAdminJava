@@ -132,9 +132,11 @@ export class StartComponent implements OnInit {
     changeProductType() {
         if (this.traceabilityAudit.productType) {
             this.auditProcesses = this.traceabilityAudit.productType.auditProcesses;
+            this.traceabilityAudit.productTypeId = this.traceabilityAudit.productType.id;
         } else {
             this.traceabilityAudit.auditProcesses = [];
             this.auditProcesses = [];
+            this.traceabilityAudit.productTypeId = 0;
         }
     }
 

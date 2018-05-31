@@ -20,5 +20,11 @@
                                          referencedColumnNames="id"
                                          referencedTableName="company_contact_person"/>
 
+        <addForeignKeyConstraint baseColumnNames="product_type_id"
+                                 baseTableName="traceability_audit"
+                                 constraintName="fk_traceability_audit_product_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_type"/>
+
     </changeSet>
 </databaseChangeLog>

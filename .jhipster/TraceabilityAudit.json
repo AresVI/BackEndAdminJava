@@ -12,6 +12,15 @@
             "relationshipName": "company",
             "otherEntityName": "company",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "productType",
+            "otherEntityName": "productType",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
         }
     ],
     "fields": [
@@ -28,8 +37,9 @@
         }
     ],
     "changelogDate": "20170926043619",
-    "entityTableName": "traceability_audit",
     "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "traceability_audit",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
 }

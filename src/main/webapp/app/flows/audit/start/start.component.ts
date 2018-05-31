@@ -66,6 +66,7 @@ export class StartComponent implements OnInit {
         this.traceabilityAudit = new TraceabilityAudit();
         this.traceabilityAudit.companyId = 0;
         this.traceabilityAudit.productType = null;
+        this.traceabilityAudit.companyContactPerson = null;
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -121,15 +122,20 @@ export class StartComponent implements OnInit {
 
         this.loadAllCompanyContactPeople();
 
-        this.traceabilityAudit.companyContactPersonId = 0;
+        this.traceabilityAudit.companyContactPerson = null;
     }
 
     changeCompanyContactPeopleId() {
-
+        this.traceabilityAudit.companyContactPersonId = this.traceabilityAudit.companyContactPerson.id;
     }
 
     changeProductType() {
-        this.auditProcesses = this.traceabilityAudit.productType.auditProcesses;
+        if (this.traceabilityAudit.productType) {
+            this.auditProcesses = this.traceabilityAudit.productType.auditProcesses;
+        } else {
+            this.traceabilityAudit.auditProcesses = [];
+            this.auditProcesses = [];
+        }
     }
 
     sort() {

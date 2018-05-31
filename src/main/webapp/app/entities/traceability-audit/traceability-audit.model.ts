@@ -19,7 +19,6 @@ export class TraceabilityAudit implements BaseEntity {
         public companyContactPersonId?: number,
         public companyContactPerson?: CompanyContactPerson,
         public recommendationSet?: Recommendation[],
-        public productTypeId?: number,
         public productType?: ProductType,
     ) {
     }

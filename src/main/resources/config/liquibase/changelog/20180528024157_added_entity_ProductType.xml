@@ -43,6 +43,11 @@
                   separator=";"
                   tableName="product_type"/>
 
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/seeds/product_type_audit_process.csv"
+                  separator=";"
+                  tableName="product_type_audit_process"/>
+
         <addPrimaryKey columnNames="product_types_id, audit_processes_id" tableName="product_type_audit_process"/>
 
     </changeSet>

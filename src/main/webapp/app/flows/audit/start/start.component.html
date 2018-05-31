@@ -51,10 +51,10 @@
         <div class="row">
 
             <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
-                <select class="form-control" name="company" [(ngModel)]="traceabilityAudit.companyContactPersonId"
+                <select class="form-control" name="company" [(ngModel)]="traceabilityAudit.companyContactPerson"
                         (change)="changeCompanyContactPeopleId()" required>
                     <option [ngValue]="">- Seleccione una Persona de Contacto -</option>
-                    <option *ngFor = "let p of companyContactPeople" [value]="p.id">
+                    <option *ngFor = "let p of companyContactPeople" [ngValue]="getSelected(traceabilityAudit.companyContactPerson, p)">
                         {{p.last_name}}, {{p.first_name}}
                     </option>
                 </select>

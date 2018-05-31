@@ -10,6 +10,7 @@ import { TraceabilityAudit } from './traceability-audit.model';
 import { TraceabilityAuditPopupService } from './traceability-audit-popup.service';
 import { TraceabilityAuditService } from './traceability-audit.service';
 import { Company, CompanyService } from '../company';
+import { ProductType, ProductTypeService } from '../product-type';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -23,11 +24,14 @@ export class TraceabilityAuditDialogComponent implements OnInit {
 
     companies: Company[];
 
+    producttypes: ProductType[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
         private traceabilityAuditService: TraceabilityAuditService,
         private companyService: CompanyService,
+        private productTypeService: ProductTypeService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -36,6 +40,8 @@ export class TraceabilityAuditDialogComponent implements OnInit {
         this.isSaving = false;
         this.companyService.query()
             .subscribe((res: ResponseWrapper) => { this.companies = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.productTypeService.query()
+            .subscribe((res: ResponseWrapper) => { this.producttypes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -73,6 +79,10 @@ export class TraceabilityAuditDialogComponent implements OnInit {
     }
 
     trackCompanyById(index: number, item: Company) {
+        return item.id;
+    }
+
+    trackProductTypeById(index: number, item: ProductType) {
         return item.id;
     }
 }

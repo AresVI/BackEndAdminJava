@@ -7,7 +7,6 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { TraceabilityAudit } from './traceability-audit.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
-import {createRequestOptionWithQuery} from '../../shared/model/request-util';
 
 @Injectable()
 export class TraceabilityAuditService {
@@ -42,28 +41,10 @@ export class TraceabilityAuditService {
         });
     }
 
-    query(req?: any, query_object?: object): Observable<ResponseWrapper> {
-        const options = createRequestOptionWithQuery(req, query_object);
+    query(req?: any): Observable<ResponseWrapper> {
+        const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
-    }
-
-    queryFinished(req?: any, query_object?: object): Observable<ResponseWrapper> {
-        const options = createRequestOptionWithQuery(req, query_object);
-        return this.http.get(`${this.resourceUrl}/finished`, options)
-            .map((res: Response) => this.convertResponse(res));
-    }
-
-    start(id: number): Observable<Response> {
-        return this.http.put(`${this.resourceUrl}/${id}/start`, {});
-    }
-
-    finish(id: number): Observable<Response> {
-        return this.http.put(`${this.resourceUrl}/${id}/finish`, {});
-    }
-
-    categorizeAgain(id: number): Observable<Response> {
-        return this.http.put(`${this.resourceUrl}/${id}/categorize-again`, {});
     }
 
     delete(id: number): Observable<Response> {

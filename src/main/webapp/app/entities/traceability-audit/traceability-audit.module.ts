@@ -15,10 +15,6 @@ import {
     traceabilityAuditPopupRoute,
     TraceabilityAuditResolvePagingParams,
 } from './';
-import {
-    TraceabilityAuditFinishAuditDialogComponent,
-    TraceabilityAuditFinishAuditPopupComponent
-} from './traceability-audit-finish-audit-dialog.component';
 
 const ENTITY_STATES = [
     ...traceabilityAuditRoute,
@@ -37,8 +33,6 @@ const ENTITY_STATES = [
         TraceabilityAuditDeleteDialogComponent,
         TraceabilityAuditPopupComponent,
         TraceabilityAuditDeletePopupComponent,
-        TraceabilityAuditFinishAuditDialogComponent,
-        TraceabilityAuditFinishAuditPopupComponent
     ],
     entryComponents: [
         TraceabilityAuditComponent,
@@ -46,8 +40,6 @@ const ENTITY_STATES = [
         TraceabilityAuditPopupComponent,
         TraceabilityAuditDeleteDialogComponent,
         TraceabilityAuditDeletePopupComponent,
-        TraceabilityAuditFinishAuditDialogComponent,
-        TraceabilityAuditFinishAuditPopupComponent
     ],
     providers: [
         TraceabilityAuditService,

@@ -39,6 +39,7 @@
             "category": "Categoría",
             "company_contact_person": "Persona de Contacto",
             "audit_processes": "Procesos a Auditar",
+            "productType": "Tipo de Producto",
             "action": {
                 "view": "Ver Proceso",
                 "cancel": "Cancelar Proceso",

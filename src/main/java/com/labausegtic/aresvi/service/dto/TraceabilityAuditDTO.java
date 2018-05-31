@@ -36,6 +36,10 @@ public class TraceabilityAuditDTO implements Serializable {
 
     private Instant finishedDate;
 
+    private Long productTypeId;
+
+    private ProductTypeDTO productType;
+
     public Long getId() {
         return id;
     }
@@ -134,6 +138,22 @@ public class TraceabilityAuditDTO implements Serializable {
 
     public void setFinishedDate(Instant finishedDate) {
         this.finishedDate = finishedDate;
+    }
+
+    public ProductTypeDTO getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductTypeDTO productType) {
+        this.productType = productType;
+    }
+
+    public Long getProductTypeId() {
+        return productTypeId;
+    }
+
+    public void setProductTypeId(Long productTypeId) {
+        this.productTypeId = productTypeId;
     }
 
     @Override

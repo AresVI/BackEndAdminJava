@@ -1,7 +1,5 @@
 package com.labausegtic.aresvi.domain;
 
-import org.joda.time.DateTime;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -54,6 +52,10 @@ public class TraceabilityAudit implements Serializable {
     @NotNull
     @ManyToOne
     private CompanyContactPerson companyContactPerson;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    private ProductType productType;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -151,6 +153,14 @@ public class TraceabilityAudit implements Serializable {
 
     public void setFinishedDate(Instant finishedDate) {
         this.finishedDate = finishedDate;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
     }
 
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove

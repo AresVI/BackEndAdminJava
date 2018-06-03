@@ -1,7 +1,10 @@
 package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.labausegtic.aresvi.domain.TraceAudit;
 import com.labausegtic.aresvi.service.AuditTaskRecommendationService;
+import com.labausegtic.aresvi.service.TraceAuditService;
+import com.labausegtic.aresvi.service.dto.TraceAuditDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.AuditTaskRecommendationDTO;
@@ -36,8 +39,11 @@ public class AuditTaskRecommendationResource {
 
     private final AuditTaskRecommendationService auditTaskRecommendationService;
 
-    public AuditTaskRecommendationResource(AuditTaskRecommendationService auditTaskRecommendationService) {
+    private final TraceAuditService traceAuditService;
+
+    public AuditTaskRecommendationResource(AuditTaskRecommendationService auditTaskRecommendationService, TraceAuditService traceAuditService) {
         this.auditTaskRecommendationService = auditTaskRecommendationService;
+        this.traceAuditService = traceAuditService;
     }
 
     /**
@@ -76,7 +82,20 @@ public class AuditTaskRecommendationResource {
         if (auditTaskRecommendationDTO.getId() == null) {
             return createAuditTaskRecommendation(auditTaskRecommendationDTO);
         }
+
         AuditTaskRecommendationDTO result = auditTaskRecommendationService.save(auditTaskRecommendationDTO);
+
+        TraceAuditDTO traceAuditDTO = new TraceAuditDTO();
+
+        traceAuditDTO.setAuditTaskRecommendationId(result.getId());
+
+        auditTaskRecommendationDTO = auditTaskRecommendationService.findOne(result.getId());
+
+        System.out.println(auditTaskRecommendationDTO.getAuditProcessRecommendation().getId());
+
+        traceAuditDTO.setTraceabilityAuditId(auditTaskRecommendationDTO.getAuditProcessRecommendation().getRecommendation().getTraceabilityAuditId());
+
+        traceAuditService.save(traceAuditDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, auditTaskRecommendationDTO.getId().toString()))
             .body(result);
@@ -117,6 +136,8 @@ public class AuditTaskRecommendationResource {
         @PathVariable Long bonita_bpm_case_id,
         @PathVariable Long audit_task_id
     ) {
+
+        // TODO: Add the creation of the traceAudit here
 
         AuditTaskRecommendationDTO auditTaskRecommendationDTO;
 

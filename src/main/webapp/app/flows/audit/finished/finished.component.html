@@ -43,6 +43,13 @@
                         <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                     </button>
                     <button type="button"
+                            [routerLink]="['/traceability-audit', traceabilityAudit.id, 'trace-audit' ]"
+                            *jhiHasAnyAuthority="['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE', 'ROLE_AUDITOR_EXTERNAL']"
+                            class="btn btn-info btn-sm">
+                        <span class="fa fa-binoculars"></span>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view_trace">View Trace</span>
+                    </button>
+                    <button type="button"
                             [routerLink]="['/', { outlets: { popup: ['traceability-audit', traceabilityAudit.id, 'categorize_again']}}]"
                             *jhiHasAnyAuthority="'ROLE_ADMINISTRATOR'"
                             class="btn btn-primary btn-sm">

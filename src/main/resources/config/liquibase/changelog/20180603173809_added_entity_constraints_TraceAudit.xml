@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity TraceAudit.
+    -->
+    <changeSet id="20180603173809-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="traceability_audit_id"
+                                 baseTableName="trace_audit"
+                                 constraintName="fk_trace_audit_traceability_audit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="traceability_audit"/>
+
+        <addForeignKeyConstraint baseColumnNames="audit_task_recommendation_id"
+                                 baseTableName="trace_audit"
+                                 constraintName="fk_trace_audit_audit_task_recommendation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="audit_task_recommendation"/>
+
+    </changeSet>
+</databaseChangeLog>

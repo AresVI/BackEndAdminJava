@@ -30,6 +30,7 @@
                 "auditTaskStandardObservation": "Observación Estándar de Tareas de Auditoría",
                 "auditAttributeAnalysis": "Audit Attribute Analysis",
                 "productType": "Tipo de Producto",
+                "traceAudit": "Auditoría de la Trasa",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -133,6 +134,7 @@
             "open": "Open",
             "save": "Guardar",
             "view": "Ver",
+            "view_trace": "Ver trasa",
             "close": "Cerrar"
         },
         "detail": {

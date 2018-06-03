@@ -125,6 +125,12 @@
                             <span jhiTranslate="global.menu.entities.productType">Product Type</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="trace-audit" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.traceAudit">Trace Audit</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

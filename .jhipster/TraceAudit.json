@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "traceabilityAudit",
+            "otherEntityName": "traceabilityAudit",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "auditTaskRecommendation",
+            "otherEntityName": "auditTaskRecommendation",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20180603173809",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "trace_audit",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

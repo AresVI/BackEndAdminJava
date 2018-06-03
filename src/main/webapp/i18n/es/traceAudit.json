@@ -1,0 +1,22 @@
+{
+    "aresViApp": {
+        "traceAudit" : {
+            "home": {
+                "title": "Trace Audits",
+                "createLabel": "Crear nuevo Trace Audit",
+                "createOrEditLabel": "Crear o editar Trace Audit"
+            },
+            "created": "Un nuevo Trace Audit ha sido creado con el identificador {{ param }}",
+            "updated": "Un Trace Audit ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Trace Audit ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Trace Audit {{ id }}?"
+            },
+            "detail": {
+                "title": "Trace Audit"
+            },
+            "traceabilityAudit": "Traceability Audit",
+            "auditTaskRecommendation": "Audit Task Recommendation"
+        }
+    }
+}

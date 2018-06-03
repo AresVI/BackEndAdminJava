@@ -1,5 +1,7 @@
 package com.labausegtic.aresvi.service.dto;
 
+import com.labausegtic.aresvi.domain.AuditProcessRecommendation;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -24,6 +26,8 @@ public class AuditTaskRecommendationDTO implements Serializable {
     private String standardObservation;
 
     private Long auditProcessRecomId;
+
+    private AuditProcessRecommendationDTO auditProcessRecommendation;
 
     private Long auditTaskId;
 
@@ -110,6 +114,14 @@ public class AuditTaskRecommendationDTO implements Serializable {
 
     public void setStandardObservation(String standardObservation) {
         this.standardObservation = standardObservation;
+    }
+
+    public AuditProcessRecommendationDTO getAuditProcessRecommendation() {
+        return auditProcessRecommendation;
+    }
+
+    public void setAuditProcessRecommendation(AuditProcessRecommendationDTO auditProcessRecommendation) {
+        this.auditProcessRecommendation = auditProcessRecommendation;
     }
 
     @Override

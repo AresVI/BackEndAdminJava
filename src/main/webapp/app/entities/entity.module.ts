@@ -22,6 +22,7 @@ import { AresViAuditProcessStandardObservationModule } from './audit-process-sta
 import { AresViAuditTaskStandardObservationModule } from './audit-task-standard-observation/audit-task-standard-observation.module';
 import { AresViAuditAttributeAnalysisModule } from './audit-attribute-analysis/audit-attribute-analysis.module';
 import { AresViProductTypeModule } from './product-type/product-type.module';
+import { AresViTraceAuditModule } from './trace-audit/trace-audit.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -48,6 +49,7 @@ import { AresViProductTypeModule } from './product-type/product-type.module';
         AresViAuditTaskStandardObservationModule,
         AresViAuditAttributeAnalysisModule,
         AresViProductTypeModule,
+        AresViTraceAuditModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

@@ -2,7 +2,7 @@
     "aresViApp": {
         "traceAudit" : {
             "home": {
-                "title": "Trace Audits",
+                "title": "Trasas de Auditoría",
                 "createLabel": "Crear nuevo Trace Audit",
                 "createOrEditLabel": "Crear o editar Trace Audit"
             },

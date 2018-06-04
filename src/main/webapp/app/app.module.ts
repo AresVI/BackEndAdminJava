@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ng2-webstorage';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import { AresViSharedModule, UserRouteAccessService } from './shared';
 import { AresViHomeModule } from './home/home.module';
 import { AresViAdminModule } from './admin/admin.module';
@@ -30,6 +32,7 @@ import {AresViReportModule} from './reports/report.module';
 
 @NgModule({
     imports: [
+        NgbModule.forRoot(),
         BrowserModule,
         LayoutRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),

@@ -312,3 +312,7 @@ agm-map {
 }
 
 google-map {display:block; width: inherit; height: inherit}
+
+.traceAuditsList .card{
+    max-width: 700px;
+}

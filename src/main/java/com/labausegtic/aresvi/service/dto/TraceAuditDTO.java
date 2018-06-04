@@ -17,6 +17,8 @@ public class TraceAuditDTO implements Serializable {
 
     private Long auditTaskRecommendationId;
 
+    private AuditTaskRecommendationDTO auditTaskRecommendation;
+
     public Long getId() {
         return id;
     }
@@ -39,6 +41,14 @@ public class TraceAuditDTO implements Serializable {
 
     public void setAuditTaskRecommendationId(Long auditTaskRecommendationId) {
         this.auditTaskRecommendationId = auditTaskRecommendationId;
+    }
+
+    public AuditTaskRecommendationDTO getAuditTaskRecommendation() {
+        return auditTaskRecommendation;
+    }
+
+    public void setAuditTaskRecommendation(AuditTaskRecommendationDTO auditTaskRecommendation) {
+        this.auditTaskRecommendation = auditTaskRecommendation;
     }
 
     @Override

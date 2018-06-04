@@ -14,7 +14,7 @@ export const traceAuditRoute: Routes = [
         path: 'traceability-audit/:traceabilityAuditId/trace-audit',
         component: TraceAuditComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.traceAudit.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -22,7 +22,7 @@ export const traceAuditRoute: Routes = [
         path: 'traceability-audit/:traceabilityAuditId/trace-audit/:id',
         component: TraceAuditDetailComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.traceAudit.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -34,7 +34,7 @@ export const traceAuditPopupRoute: Routes = [
         path: 'traceability-audit/:traceabilityAuditId/trace-audit-new',
         component: TraceAuditPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.traceAudit.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -44,7 +44,7 @@ export const traceAuditPopupRoute: Routes = [
         path: 'traceability-audit/:traceabilityAuditId/trace-audit/:id/edit',
         component: TraceAuditPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.traceAudit.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -54,7 +54,7 @@ export const traceAuditPopupRoute: Routes = [
         path: 'traceability-audit/:traceabilityAuditId/trace-audit/:id/delete',
         component: TraceAuditDeletePopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_AUDITOR_EXTERNAL', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.traceAudit.home.title'
         },
         canActivate: [UserRouteAccessService],

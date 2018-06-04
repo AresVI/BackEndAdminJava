@@ -7,6 +7,7 @@ import { TraceAudit } from './trace-audit.model';
 import { TraceAuditService } from './trace-audit.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import {AttributeRecommendation} from '../attribute-recommendation';
 
 @Component({
     selector: 'jhi-trace-audit',
@@ -18,6 +19,7 @@ export class TraceAuditComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     traceabilityAuditId: number;
     private subscription: Subscription;
+    page: number;
 
     constructor(
         private traceAuditService: TraceAuditService,
@@ -26,6 +28,8 @@ export class TraceAuditComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private route: ActivatedRoute
     ) {
+        this.page = 1;
+        this.traceAudits = [];
     }
 
     loadAll() {
@@ -56,6 +60,10 @@ export class TraceAuditComponent implements OnInit, OnDestroy {
     }
     registerChangeInTraceAudits() {
         this.eventSubscriber = this.eventManager.subscribe('traceAuditListModification', (response) => this.loadAll());
+    }
+
+    attributeRecommendationSet(element: AttributeRecommendation, index: number, array: [AttributeRecommendation]) {
+        return element.implemented;
     }
 
     private onError(error) {

@@ -1,6 +1,7 @@
 import { BaseEntity } from './../../shared';
 import {AuditTask} from '../audit-task/audit-task.model';
 import {CategoryAttrRecommendation} from '../category-attr-recommendation/category-attr-recommendation.model';
+import {AuditProcessRecommendation} from '../audit-process-recommendation';
 
 export class AuditTaskRecommendation implements BaseEntity {
     constructor(
@@ -9,6 +10,7 @@ export class AuditTaskRecommendation implements BaseEntity {
         public standardObservation?: string,
         public revisedDate?: any,
         public auditProcessRecomId?: number,
+        public auditProcessRecommendation?: AuditProcessRecommendation,
         public auditTaskId?: number,
         public reviewed?: boolean,
         public auditTask?: AuditTask,

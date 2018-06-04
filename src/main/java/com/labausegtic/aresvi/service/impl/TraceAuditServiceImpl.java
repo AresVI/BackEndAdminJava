@@ -1,5 +1,6 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.service.AuditTaskRecommendationService;
 import com.labausegtic.aresvi.service.TraceAuditService;
 import com.labausegtic.aresvi.domain.TraceAudit;
 import com.labausegtic.aresvi.repository.TraceAuditRepository;
@@ -27,9 +28,12 @@ public class TraceAuditServiceImpl implements TraceAuditService{
 
     private final TraceAuditMapper traceAuditMapper;
 
-    public TraceAuditServiceImpl(TraceAuditRepository traceAuditRepository, TraceAuditMapper traceAuditMapper) {
+    private final AuditTaskRecommendationService auditTaskRecommendationService;
+
+    public TraceAuditServiceImpl(TraceAuditRepository traceAuditRepository, TraceAuditMapper traceAuditMapper, AuditTaskRecommendationService auditTaskRecommendationService) {
         this.traceAuditRepository = traceAuditRepository;
         this.traceAuditMapper = traceAuditMapper;
+        this.auditTaskRecommendationService = auditTaskRecommendationService;
     }
 
     /**
@@ -55,9 +59,15 @@ public class TraceAuditServiceImpl implements TraceAuditService{
     @Transactional(readOnly = true)
     public List<TraceAuditDTO> findAll(Long traceabilityAuditId) {
         log.debug("Request to get all TraceAudits");
-        return traceAuditRepository.findAllByTraceabilityAuditId(traceabilityAuditId).stream()
+        LinkedList<TraceAuditDTO> traceAuditList = traceAuditRepository.findAllByTraceabilityAuditId(traceabilityAuditId).stream()
             .map(traceAuditMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
+
+        for (TraceAuditDTO ta: traceAuditList) {
+            ta.setAuditTaskRecommendation(auditTaskRecommendationService.findOne(ta.getAuditTaskRecommendationId()));
+        }
+
+        return traceAuditList;
     }
 
     /**

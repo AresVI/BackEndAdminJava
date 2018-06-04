@@ -23,6 +23,7 @@ import { AresViAuditTaskStandardObservationModule } from './audit-task-standard-
 import { AresViAuditAttributeAnalysisModule } from './audit-attribute-analysis/audit-attribute-analysis.module';
 import { AresViProductTypeModule } from './product-type/product-type.module';
 import { AresViTraceAuditModule } from './trace-audit/trace-audit.module';
+import { AresViProductModule } from './product/product.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -50,6 +51,7 @@ import { AresViTraceAuditModule } from './trace-audit/trace-audit.module';
         AresViAuditAttributeAnalysisModule,
         AresViProductTypeModule,
         AresViTraceAuditModule,
+        AresViProductModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

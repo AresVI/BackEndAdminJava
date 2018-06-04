@@ -6,7 +6,8 @@
 </div>
 <hr/>
 <div class="row align-items-center">
-    <nav class="col-12 col-sm-12 col-md-3 d-block bg-teal sidebar">
+
+    <nav class="col-12 col-sm-12 col-md-3 d-block bg-teal sidebar" *jhiHasAnyAuthority="['ROLE_ADMINISTRATIVE']">
         <h2 class="text-center">Comenzar Auditoría</h2>
         <hr/>
         <a class="btn btn-success btn-block btn-lg" routerLink="/process/audit/start">
@@ -14,7 +15,7 @@
         </a>
     </nav>
 
-    <div class="col-sm-12 ml-sm-auto col-md-9 pt-3 border-light border border-right-0 border-top-0 border-bottom-0" role="main">
+    <div class="col pt-3" role="main">
         <h2 class="text-center">Listado de Auditorías por Estado</h2>
         <hr/>
 

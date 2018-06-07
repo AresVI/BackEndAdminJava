@@ -1,16 +1,24 @@
 package com.labausegtic.aresvi.service.impl;
 
+import com.labausegtic.aresvi.domain.ProductType;
+import com.labausegtic.aresvi.repository.ProductTypeRepository;
+import com.labausegtic.aresvi.service.CompanyService;
 import com.labausegtic.aresvi.service.ProductService;
 import com.labausegtic.aresvi.domain.Product;
 import com.labausegtic.aresvi.repository.ProductRepository;
+import com.labausegtic.aresvi.service.dto.CompanyDTO;
+import com.labausegtic.aresvi.service.dto.CompanyProductDTO;
 import com.labausegtic.aresvi.service.dto.ProductDTO;
+import com.labausegtic.aresvi.service.dto.ProductTypeProductDTO;
 import com.labausegtic.aresvi.service.mapper.ProductMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -24,11 +32,18 @@ public class ProductServiceImpl implements ProductService{
 
     private final ProductRepository productRepository;
 
+    private final CompanyService companyService;
+
+    private final ProductTypeRepository productTypeRepository;
+
     private final ProductMapper productMapper;
 
-    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper,
+                              CompanyService companyService, ProductTypeRepository productTypeRepository) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.companyService = companyService;
+        this.productTypeRepository = productTypeRepository;
     }
 
     /**
@@ -48,15 +63,47 @@ public class ProductServiceImpl implements ProductService{
     /**
      *  Get all the products.
      *
-     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(Pageable pageable) {
+    public CompanyProductDTO findAll(Long company_id) {
         log.debug("Request to get all Products");
-        return productRepository.findAll(pageable)
-            .map(productMapper::toDto);
+
+        CompanyProductDTO companyProductDTO = new CompanyProductDTO();
+
+        CompanyDTO company = companyService.findOne(company_id);
+
+        companyProductDTO.setId(company_id);
+        companyProductDTO.setName(company.getName());
+
+        Set<ProductTypeProductDTO> productTypeProductList = new HashSet<>();
+
+        List<ProductType> productTypes = productTypeRepository.findAll();
+
+        for (ProductType pt: productTypes) {
+            ProductTypeProductDTO productTypeProductDTO = new ProductTypeProductDTO();
+
+            productTypeProductDTO.setId(pt.getId());
+            productTypeProductDTO.setName(pt.getName());
+
+            Set<ProductDTO> productDTOSet = new HashSet<>();
+
+            List<Product> products = productRepository.findAllByCompanyIdAndProductTypeId(company_id, pt.getId());
+
+            for (Product p: products) {
+                productDTOSet.add(productMapper.toDto(p));
+            }
+
+            productTypeProductDTO.setProducts(productDTOSet);
+
+            productTypeProductList.add(productTypeProductDTO);
+        }
+
+        companyProductDTO.setProductTypes(productTypeProductList);
+
+        return companyProductDTO;
+
     }
 
     /**

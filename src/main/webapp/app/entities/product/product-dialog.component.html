@@ -30,15 +30,15 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="aresViApp.product.company" for="field_company">Company</label>
-            <select class="form-control" id="field_company" name="company" [(ngModel)]="product.companyId"  required>
-                <option *ngIf="!editForm.value.company" [ngValue]="null" selected></option>
-                <option [ngValue]="companyOption.id" *ngFor="let companyOption of companies; trackBy: trackCompanyById">{{companyOption.name}}</option>
+            <label class="form-control-label" jhiTranslate="aresViApp.product.productType" for="field_productType">Product Type</label>
+            <select class="form-control" id="field_productType" name="productType" [(ngModel)]="product.productTypeId"  required>
+                <option *ngIf="!editForm.value.productType" [ngValue]="null" selected></option>
+                <option [ngValue]="productTypeOption.id" *ngFor="let productTypeOption of producttypes; trackBy: trackProductTypeById">{{productTypeOption.name}}</option>
             </select>
         </div>
-        <div [hidden]="!(editForm.controls.company?.dirty && editForm.controls.company?.invalid)">
+        <div [hidden]="!(editForm.controls.productType?.dirty && editForm.controls.productType?.invalid)">
             <small class="form-text text-danger"
-                [hidden]="!editForm.controls.company?.errors?.required" jhiTranslate="entity.validation.required">
+                [hidden]="!editForm.controls.productType?.errors?.required" jhiTranslate="entity.validation.required">
                 This field is required.
             </small>
         </div>

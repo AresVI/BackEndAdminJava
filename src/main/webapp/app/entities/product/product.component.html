@@ -1,7 +1,8 @@
 <div>
-    <h2>
-        <span jhiTranslate="aresViApp.product.home.title">Products</span>
-        <button class="btn btn-primary float-right jh-create-entity create-product" [routerLink]="['/', { outlets: { popup: ['product-new'] } }]">
+    <h2 *ngIf="company_product">
+        Bodega {{company_product.name}} - <span jhiTranslate="aresViApp.product.home.title">Products</span>
+        <button class="btn btn-primary float-right jh-create-entity create-product"
+                [routerLink]="['/', { outlets: { popup: ['company', company_product.id, 'product-new'] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="aresViApp.product.home.createLabel">
             Create new Product
@@ -9,64 +10,55 @@
         </button>
     </h2>
     <jhi-alert></jhi-alert>
-    <div class="row">
-    </div>
+
     <br/>
-    <div class="table-responsive" *ngIf="products">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="name"><span jhiTranslate="aresViApp.product.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="picture_url"><span jhiTranslate="aresViApp.product.picture_url">Picture Url</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="companyName"><span jhiTranslate="aresViApp.product.company">Company</span> <span class="fa fa-sort"></span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let product of products ;trackBy: trackId">
-                <td><a [routerLink]="['../product', product.id ]">{{product.id}}</a></td>
-                <td>{{product.name}}</td>
-                <td>{{product.picture_url}}</td>
-                <td>
-                    <div *ngIf="product.companyId">
-                        <a [routerLink]="['../company', product.companyId  ]" >{{product.companyName}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../product', product.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/edit'} }]"
-                                replaceUrl="true"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/delete'} }]"
-                                replaceUrl="true"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-        <div *ngIf="products && products.length">
-            <div class="row justify-content-center">
-                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-            </div>
-            <div class="row justify-content-center">
-                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+    <br/>
+
+    <div *ngIf="company_product">
+
+        <div class="card mb-4" *ngFor="let product_type of company_product.productTypes">
+            <h5 class="card-header">{{product_type.name}}</h5>
+            <div class="card-body">
+
+                <ul class="list-group" *ngIf="product_type.products.length > 0">
+                    <li class="list-group-item" *ngFor="let product of product_type.products ;trackBy: trackId">
+                        <div style="line-height: 31px;" class="float-left">
+                            {{product.name}}
+                        </div>
+                        <div class="float-right">
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/edit'} }]"
+                                    replaceUrl="true"
+                                    class="btn btn-primary btn-sm">
+                                <span class="fa fa-pencil"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    class="btn btn-danger btn-sm">
+                                <span class="fa fa-remove"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="alert alert-warning" role="alert" *ngIf="product_type.products.length < 1">
+                    No hay productos cargados para el tipo de producto seleccionado
+                </div>
+
             </div>
         </div>
+
+    </div>
+
+    <hr>
+
+    <button type="button"
+            [routerLink]="[ '../' ]"
+            class="btn btn-outline-secondary">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
 </div>

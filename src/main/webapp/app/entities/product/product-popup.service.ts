@@ -17,7 +17,7 @@ export class ProductPopupService {
         this.ngbModalRef = null;
     }
 
-    open(component: Component, id?: number | any): Promise<NgbModalRef> {
+    open(component: Component, id?: number | any, company_id?: number | any): Promise<NgbModalRef> {
         return new Promise<NgbModalRef>((resolve, reject) => {
             const isOpen = this.ngbModalRef !== null;
             if (isOpen) {
@@ -32,7 +32,9 @@ export class ProductPopupService {
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
-                    this.ngbModalRef = this.productModalRef(component, new Product());
+                    const p = new Product();
+                    p.companyId = company_id;
+                    this.ngbModalRef = this.productModalRef(component, p);
                     resolve(this.ngbModalRef);
                 }, 0);
             }

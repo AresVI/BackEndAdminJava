@@ -5,6 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { Product } from './product.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {CompanyProduct} from './company_product.model';
 
 @Injectable()
 export class ProductService {
@@ -37,6 +38,12 @@ export class ProductService {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
+    }
+
+    findAll(company_id: number): Observable<CompanyProduct> {
+        return this.http.get(`/api/companies/${company_id}/products`).map((res: Response) => {
+            return res.json();
+        });
     }
 
     delete(id: number): Observable<Response> {

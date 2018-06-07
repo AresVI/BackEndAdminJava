@@ -18,6 +18,12 @@
                 <a [routerLink]="['/company', product.companyId]">{{product.companyName}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="aresViApp.product.productType">Product Type</span></dt>
+        <dd>
+            <div *ngIf="product.productTypeId">
+                <a [routerLink]="['/product-type', product.productTypeId]">{{product.productTypeName}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

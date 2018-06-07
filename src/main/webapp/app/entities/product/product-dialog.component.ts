@@ -10,7 +10,9 @@ import { Product } from './product.model';
 import { ProductPopupService } from './product-popup.service';
 import { ProductService } from './product.service';
 import { Company, CompanyService } from '../company';
+import { ProductType, ProductTypeService } from '../product-type';
 import { ResponseWrapper } from '../../shared';
+import {Subscription} from '../../../../../../node_modules/rxjs';
 
 @Component({
     selector: 'jhi-product-dialog',
@@ -19,15 +21,20 @@ import { ResponseWrapper } from '../../shared';
 export class ProductDialogComponent implements OnInit {
 
     product: Product;
+    company_id: number;
     isSaving: boolean;
+    subscription: Subscription;
 
     companies: Company[];
+
+    producttypes: ProductType[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
         private productService: ProductService,
         private companyService: CompanyService,
+        private productTypeService: ProductTypeService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -36,6 +43,8 @@ export class ProductDialogComponent implements OnInit {
         this.isSaving = false;
         this.companyService.query()
             .subscribe((res: ResponseWrapper) => { this.companies = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.productTypeService.query()
+            .subscribe((res: ResponseWrapper) => { this.producttypes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -75,6 +84,10 @@ export class ProductDialogComponent implements OnInit {
     trackCompanyById(index: number, item: Company) {
         return item.id;
     }
+
+    trackProductTypeById(index: number, item: ProductType) {
+        return item.id;
+    }
 }
 
 @Component({
@@ -94,10 +107,10 @@ export class ProductPopupComponent implements OnInit, OnDestroy {
         this.routeSub = this.route.params.subscribe((params) => {
             if ( params['id'] ) {
                 this.productPopupService
-                    .open(ProductDialogComponent as Component, params['id']);
+                    .open(ProductDialogComponent as Component, params['id'] );
             } else {
                 this.productPopupService
-                    .open(ProductDialogComponent as Component);
+                    .open(ProductDialogComponent as Component, null, params['company_id'] );
             }
         });
     }

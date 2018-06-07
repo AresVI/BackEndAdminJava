@@ -30,6 +30,10 @@ public class Product implements Serializable {
     @NotNull
     private Company company;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private ProductType productType;
+
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -76,6 +80,19 @@ public class Product implements Serializable {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public Product productType(ProductType productType) {
+        this.productType = productType;
+        return this;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { Product } from './product.model';
 import { ProductService } from './product.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import { Principal, ResponseWrapper } from '../../shared';
+import {CompanyProduct} from './company_product.model';
 
 @Component({
     selector: 'jhi-product',
@@ -15,19 +15,15 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 export class ProductComponent implements OnInit, OnDestroy {
 
 currentAccount: any;
-    products: Product[];
+    company_product: CompanyProduct;
+    company_id: number;
     error: any;
     success: any;
     eventSubscriber: Subscription;
+    subscription: Subscription;
     routeData: any;
     links: any;
-    totalItems: any;
-    queryCount: any;
-    itemsPerPage: any;
-    page: any;
     predicate: any;
-    previousPage: any;
-    reverse: any;
 
     constructor(
         private productService: ProductService,
@@ -37,51 +33,17 @@ currentAccount: any;
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private paginationUtil: JhiPaginationUtil,
-        private paginationConfig: PaginationConfig
+        private route: ActivatedRoute
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe((data) => {
-            this.page = data['pagingParams'].page;
-            this.previousPage = data['pagingParams'].page;
-            this.reverse = data['pagingParams'].ascending;
-            this.predicate = data['pagingParams'].predicate;
+        this.subscription = this.route.params.subscribe((params) => {
+            this.company_id = params['company_id'];
         });
     }
 
     loadAll() {
-        this.productService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
-    }
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-    transition() {
-        this.router.navigate(['/product'], {queryParams:
-            {
-                page: this.page,
-                size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
+        this.productService.findAll(this.company_id).subscribe((company_product) => {
+            this.company_product = company_product;
         });
-        this.loadAll();
-    }
-
-    clear() {
-        this.page = 0;
-        this.router.navigate(['/product', {
-            page: this.page,
-            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-        }]);
-        this.loadAll();
     }
     ngOnInit() {
         this.loadAll();
@@ -102,20 +64,9 @@ currentAccount: any;
         this.eventSubscriber = this.eventManager.subscribe('productListModification', (response) => this.loadAll());
     }
 
-    sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
-        }
-        return result;
-    }
-
-    private onSuccess(data, headers) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = headers.get('X-Total-Count');
-        this.queryCount = this.totalItems;
-        // this.page = pagingParams.page;
-        this.products = data;
+    private onSuccess(data) {
+        this.company_product = data;
+        console.log(this.company_product)
     }
     private onError(error) {
         this.alertService.error(error.message, null, null);

@@ -60,6 +60,18 @@
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-body">
+                                    <h4 class="card-title">Productos</h4>
+                                    <a class="btn btn-info btn-block btn-lg"
+                                       [routerLink]="['/company', company.id, 'product' ]">
+                                        <span class="fa fa-truck"></span>
+                                        <span class="" jhiTranslate="aresViApp.company.action.viewProducts">View Products</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-body">
                                     <h4 class="card-title">Comparar Últimas Dos Auditorías</h4>
                                     <button class="btn btn-info btn-block btn-lg" type="button"
                                             [disabled]="!traceabilityAudits || traceabilityAudits.length < 2"

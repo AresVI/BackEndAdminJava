@@ -27,21 +27,21 @@ export class ProductResolvePagingParams implements Resolve<any> {
 
 export const productRoute: Routes = [
     {
-        path: 'product',
+        path: 'company/:company_id/product',
         component: ProductComponent,
         resolve: {
             'pagingParams': ProductResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.product.home.title'
         },
         canActivate: [UserRouteAccessService]
     }, {
-        path: 'product/:id',
+        path: 'company/:company_id/product/:id',
         component: ProductDetailComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.product.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -50,10 +50,10 @@ export const productRoute: Routes = [
 
 export const productPopupRoute: Routes = [
     {
-        path: 'product-new',
+        path: 'company/:company_id/product-new',
         component: ProductPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.product.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const productPopupRoute: Routes = [
         path: 'product/:id/edit',
         component: ProductPopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.product.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -73,7 +73,7 @@ export const productPopupRoute: Routes = [
         path: 'product/:id/delete',
         component: ProductDeletePopupComponent,
         data: {
-            authorities: ['ROLE_ADMINISTRATOR'],
+            authorities: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE'],
             pageTitle: 'aresViApp.product.home.title'
         },
         canActivate: [UserRouteAccessService],

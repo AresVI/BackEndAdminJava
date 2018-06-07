@@ -23,6 +23,10 @@ public class ProductDTO implements Serializable {
 
     private String companyName;
 
+    private Long productTypeId;
+
+    private String productTypeName;
+
     public Long getId() {
         return id;
     }
@@ -61,6 +65,22 @@ public class ProductDTO implements Serializable {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public Long getProductTypeId() {
+        return productTypeId;
+    }
+
+    public void setProductTypeId(Long productTypeId) {
+        this.productTypeId = productTypeId;
+    }
+
+    public String getProductTypeName() {
+        return productTypeName;
+    }
+
+    public void setProductTypeName(String productTypeName) {
+        this.productTypeName = productTypeName;
     }
 
     @Override

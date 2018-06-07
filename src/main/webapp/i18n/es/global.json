@@ -31,7 +31,7 @@
                 "auditAttributeAnalysis": "Audit Attribute Analysis",
                 "productType": "Tipo de Producto",
                 "traceAudit": "Auditoría de la Trasa",
-                "product": "Product",
+                "product": "Productos",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

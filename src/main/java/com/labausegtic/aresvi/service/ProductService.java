@@ -1,8 +1,7 @@
 package com.labausegtic.aresvi.service;
 
+import com.labausegtic.aresvi.service.dto.CompanyProductDTO;
 import com.labausegtic.aresvi.service.dto.ProductDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing Product.
@@ -20,10 +19,9 @@ public interface ProductService {
     /**
      *  Get all the products.
      *
-     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<ProductDTO> findAll(Pageable pageable);
+    CompanyProductDTO findAll(Long company_id);
 
     /**
      *  Get the "id" product.

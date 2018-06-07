@@ -2,22 +2,23 @@
     "aresViApp": {
         "product" : {
             "home": {
-                "title": "Products",
-                "createLabel": "Crear nuevo Product",
-                "createOrEditLabel": "Crear o editar Product"
+                "title": "Productos",
+                "createLabel": "Crear nuevo producto",
+                "createOrEditLabel": "Crear o editar producto"
             },
-            "created": "Un nuevo Product ha sido creado con el identificador {{ param }}",
-            "updated": "Un Product ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Product ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo producto ha sido creado con el identificador {{ param }}",
+            "updated": "Un producto ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un producto ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Product {{ id }}?"
+                "question": "¿Seguro que quiere eliminar el producto {{ id }}?"
             },
             "detail": {
-                "title": "Product"
+                "title": "Producto"
             },
-            "name": "Name",
-            "picture_url": "Picture Url",
-            "company": "Company"
+            "name": "Nombre",
+            "picture_url": "Imágen",
+            "company": "Empresa",
+            "productType": "Tipo de Producto"
         }
     }
 }

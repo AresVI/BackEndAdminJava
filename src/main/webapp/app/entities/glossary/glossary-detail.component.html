@@ -1,0 +1,29 @@
+
+<div *ngIf="glossary">
+    <h2><span jhiTranslate="aresViApp.glossary.detail.title">Glossary</span> {{glossary.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.glossary.concept">Concept</span></dt>
+        <dd>
+            <span>{{glossary.concept}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.glossary.definition">Definition</span></dt>
+        <dd>
+            <span>{{glossary.definition}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'glossary/'+ glossary.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

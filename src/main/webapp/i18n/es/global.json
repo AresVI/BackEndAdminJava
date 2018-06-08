@@ -32,6 +32,7 @@
                 "productType": "Tipo de Producto",
                 "traceAudit": "Auditoría de la Trasa",
                 "product": "Productos",
+                "glossary": "Glosario",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

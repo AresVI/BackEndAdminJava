@@ -1,0 +1,22 @@
+{
+    "aresViApp": {
+        "glossary" : {
+            "home": {
+                "title": "Glosario",
+                "createLabel": "Crear nuevo glosarion",
+                "createOrEditLabel": "Crear o editar glosarion"
+            },
+            "created": "Un nuevo glosarion ha sido creado con el identificador {{ param }}",
+            "updated": "Un glosarion ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un glosarion ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar el glosarion {{ id }}?"
+            },
+            "detail": {
+                "title": "Glosario"
+            },
+            "concept": "Concepto",
+            "definition": "Definición"
+        }
+    }
+}

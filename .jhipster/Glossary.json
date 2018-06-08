@@ -1,0 +1,19 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "concept",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180608031750",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "glossary",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

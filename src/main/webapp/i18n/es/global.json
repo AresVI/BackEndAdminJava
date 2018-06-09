@@ -33,6 +33,7 @@
                 "traceAudit": "Auditoría de la Trasa",
                 "product": "Productos",
                 "glossary": "Glosario",
+                "faqs": "FAQs",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

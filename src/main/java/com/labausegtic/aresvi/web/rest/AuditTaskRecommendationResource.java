@@ -91,8 +91,6 @@ public class AuditTaskRecommendationResource {
 
         auditTaskRecommendationDTO = auditTaskRecommendationService.findOne(result.getId());
 
-        System.out.println(auditTaskRecommendationDTO.getAuditProcessRecommendation().getId());
-
         traceAuditDTO.setTraceabilityAuditId(auditTaskRecommendationDTO.getAuditProcessRecommendation().getRecommendation().getTraceabilityAuditId());
 
         traceAuditService.save(traceAuditDTO);

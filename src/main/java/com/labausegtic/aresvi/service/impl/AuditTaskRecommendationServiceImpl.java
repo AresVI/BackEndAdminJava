@@ -142,8 +142,6 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
         log.debug("Request to get AuditTaskRecommendation : {}", id);
         AuditTaskRecommendation auditTaskRecommendation = auditTaskRecommendationRepository.findOne(id);
 
-        System.out.println(auditTaskRecommendation.getAuditProcessRecom().getId());
-
         AuditTaskRecommendationDTO auditTaskRecommendationDTO = auditTaskRecommendationMapper.toDto(auditTaskRecommendation);
 
         auditTaskRecommendationDTO.setCategoryAttrRecommendationSet(

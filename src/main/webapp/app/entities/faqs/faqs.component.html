@@ -1,0 +1,50 @@
+<div>
+    <h2>
+        <span jhiTranslate="aresViApp.faqs.home.title">Faqs</span>
+        <button class="btn btn-primary float-right jh-create-entity create-faqs"  *jhiHasAnyAuthority="'ROLE_ADMINISTRATOR'"
+                [routerLink]="['/', { outlets: { popup: ['faqs-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="aresViApp.faqs.home.createLabel">
+            Create new Faqs
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="row" *ngIf="faqs && faqs.length > 0">
+
+        <div class="col-12 p-2" *ngFor="let faq of faqs ;trackBy: trackId">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fa fa-commenting"></i>
+                        {{faq.question}}
+                    </h5>
+                    <hr/>
+                    <p class="card-text text-justify"  *ngFor="let p of faq.answer.split('\n')">
+                        {{p}}
+                    </p>
+                </div>
+                <div class="border border-bottom-0 border-left-0 border-right-0 card-body" *jhiHasAnyAuthority="'ROLE_ADMINISTRATOR'">
+                    <button type="submit"
+                            [routerLink]="['/', { outlets: { popup: 'faqs/'+ faq.id + '/edit'} }]"
+                            replaceUrl="true"
+                            class="btn btn-primary btn-sm card-link">
+                        <span class="fa fa-pencil"></span>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
+                    <button type="submit"
+                            [routerLink]="['/', { outlets: { popup: 'faqs/'+ faq.id + '/delete'} }]"
+                            replaceUrl="true"
+                            class="btn btn-danger btn-sm card-link">
+                        <span class="fa fa-remove"></span>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

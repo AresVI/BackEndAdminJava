@@ -1,0 +1,22 @@
+{
+    "aresViApp": {
+        "faqs" : {
+            "home": {
+                "title": "FAQs - Preguntas y respuestas frecuentes",
+                "createLabel": "Crear nueva FAQ",
+                "createOrEditLabel": "Crear o editar FAQ"
+            },
+            "created": "Una nueva FAQ ha sido creado con el identificador {{ param }}",
+            "updated": "Una FAQ ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Una FAQ ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la FAQ {{ id }}?"
+            },
+            "detail": {
+                "title": "FAQ"
+            },
+            "question": "Pregunta",
+            "answer": "Respuesta"
+        }
+    }
+}

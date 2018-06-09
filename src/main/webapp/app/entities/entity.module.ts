@@ -25,6 +25,7 @@ import { AresViProductTypeModule } from './product-type/product-type.module';
 import { AresViTraceAuditModule } from './trace-audit/trace-audit.module';
 import { AresViProductModule } from './product/product.module';
 import { AresViGlossaryModule } from './glossary/glossary.module';
+import { AresViFaqsModule } from './faqs/faqs.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -54,6 +55,7 @@ import { AresViGlossaryModule } from './glossary/glossary.module';
         AresViTraceAuditModule,
         AresViProductModule,
         AresViGlossaryModule,
+        AresViFaqsModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

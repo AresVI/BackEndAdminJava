@@ -27,10 +27,6 @@ public class RecommendationAttribute implements Serializable {
     @NotNull
     private Weighting weighting;
 
-    @ManyToOne(optional = false)
-    @NotNull
-    private Recommendation recommendation;
-
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -64,19 +60,6 @@ public class RecommendationAttribute implements Serializable {
 
     public void setWeighting(Weighting weighting) {
         this.weighting = weighting;
-    }
-
-    public Recommendation getRecommendation() {
-        return recommendation;
-    }
-
-    public RecommendationAttribute recommendation(Recommendation recommendation) {
-        this.recommendation = recommendation;
-        return this;
-    }
-
-    public void setRecommendation(Recommendation recommendation) {
-        this.recommendation = recommendation;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

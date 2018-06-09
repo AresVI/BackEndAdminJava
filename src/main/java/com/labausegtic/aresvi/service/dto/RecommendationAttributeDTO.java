@@ -19,9 +19,7 @@ public class RecommendationAttributeDTO implements Serializable {
 
     private Long weightingId;
 
-    private Long recommendationId;
-
-    private String recommendationName;
+    private WeightingDTO weighting;
 
     public Long getId() {
         return id;
@@ -47,20 +45,12 @@ public class RecommendationAttributeDTO implements Serializable {
         this.weightingId = weightingId;
     }
 
-    public Long getRecommendationId() {
-        return recommendationId;
+    public WeightingDTO getWeighting() {
+        return weighting;
     }
 
-    public void setRecommendationId(Long recommendationId) {
-        this.recommendationId = recommendationId;
-    }
-
-    public String getRecommendationName() {
-        return recommendationName;
-    }
-
-    public void setRecommendationName(String recommendationName) {
-        this.recommendationName = recommendationName;
+    public void setWeighting(WeightingDTO weighting) {
+        this.weighting = weighting;
     }
 
     @Override

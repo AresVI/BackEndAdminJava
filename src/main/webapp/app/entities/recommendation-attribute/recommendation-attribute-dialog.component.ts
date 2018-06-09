@@ -10,7 +10,6 @@ import { RecommendationAttribute } from './recommendation-attribute.model';
 import { RecommendationAttributePopupService } from './recommendation-attribute-popup.service';
 import { RecommendationAttributeService } from './recommendation-attribute.service';
 import { Weighting, WeightingService } from '../weighting';
-import { Recommendation, RecommendationService } from '../recommendation';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -24,14 +23,11 @@ export class RecommendationAttributeDialogComponent implements OnInit {
 
     weightings: Weighting[];
 
-    recommendations: Recommendation[];
-
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
         private recommendationAttributeService: RecommendationAttributeService,
         private weightingService: WeightingService,
-        private recommendationService: RecommendationService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -40,8 +36,6 @@ export class RecommendationAttributeDialogComponent implements OnInit {
         this.isSaving = false;
         this.weightingService.query()
             .subscribe((res: ResponseWrapper) => { this.weightings = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.recommendationService.query()
-            .subscribe((res: ResponseWrapper) => { this.recommendations = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -79,10 +73,6 @@ export class RecommendationAttributeDialogComponent implements OnInit {
     }
 
     trackWeightingById(index: number, item: Weighting) {
-        return item.id;
-    }
-
-    trackRecommendationById(index: number, item: Recommendation) {
         return item.id;
     }
 }

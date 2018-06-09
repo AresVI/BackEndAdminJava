@@ -19,7 +19,6 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="aresViApp.recommendationAttribute.name">Name</span></th>
             <th><span jhiTranslate="aresViApp.recommendationAttribute.weighting">Weighting</span></th>
-            <th><span jhiTranslate="aresViApp.recommendationAttribute.recommendation">Recommendation</span></th>
             <th></th>
             </tr>
             </thead>
@@ -29,22 +28,11 @@
                 <td>{{recommendationAttribute.name}}</td>
                 <td>
                     <div *ngIf="recommendationAttribute.weightingId">
-                        <a [routerLink]="['../weighting', recommendationAttribute.weightingId  ]" >{{recommendationAttribute.weightingId}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="recommendationAttribute.recommendationId">
-                        <a [routerLink]="['../recommendation', recommendationAttribute.recommendationId  ]" >{{recommendationAttribute.recommendationName}}</a>
+                        <a [routerLink]="['../weighting', recommendationAttribute.weightingId  ]" >Nivel {{recommendationAttribute.weighting.value}}</a>
                     </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../recommendation-attribute', recommendationAttribute.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'recommendation-attribute/'+ recommendationAttribute.id + '/edit'} }]"
                                 replaceUrl="true"

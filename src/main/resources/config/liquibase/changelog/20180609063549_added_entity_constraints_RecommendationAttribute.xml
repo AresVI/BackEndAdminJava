@@ -14,11 +14,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="weighting"/>
 
-        <addForeignKeyConstraint baseColumnNames="recommendation_id"
-                                 baseTableName="recommendation_attribute"
-                                 constraintName="fk_recommendation_attribute_recommendation_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="recommendation"/>
-
     </changeSet>
 </databaseChangeLog>

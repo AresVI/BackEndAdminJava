@@ -9,15 +9,6 @@
                 "required"
             ],
             "otherEntityField": "id"
-        },
-        {
-            "relationshipName": "recommendation",
-            "otherEntityName": "recommendation",
-            "relationshipType": "many-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
-            "otherEntityField": "name"
         }
     ],
     "fields": [

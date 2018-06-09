@@ -14,12 +14,6 @@
                 <a [routerLink]="['/weighting', recommendationAttribute.weightingId]">{{recommendationAttribute.weightingId}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="aresViApp.recommendationAttribute.recommendation">Recommendation</span></dt>
-        <dd>
-            <div *ngIf="recommendationAttribute.recommendationId">
-                <a [routerLink]="['/recommendation', recommendationAttribute.recommendationId]">{{recommendationAttribute.recommendationName}}</a>
-            </div>
-        </dd>
     </dl>
 
     <button type="submit"

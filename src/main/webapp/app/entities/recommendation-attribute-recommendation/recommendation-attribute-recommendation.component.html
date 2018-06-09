@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="aresViApp.recommendationAttributeRecommendation.home.title">Recommendation Attribute Recommendations</span>
+        <button class="btn btn-primary float-right jh-create-entity create-recommendation-attribute-recommendation" [routerLink]="['/', { outlets: { popup: ['recommendation-attribute-recommendation-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="aresViApp.recommendationAttributeRecommendation.home.createLabel">
+            Create new Recommendation Attribute Recommendation
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="recommendationAttributeRecommendations">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="aresViApp.recommendationAttributeRecommendation.implemented">Implemented</span></th>
+            <th><span jhiTranslate="aresViApp.recommendationAttributeRecommendation.recommendationAttribute">Recommendation Attribute</span></th>
+            <th><span jhiTranslate="aresViApp.recommendationAttributeRecommendation.recommendation">Recommendation</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let recommendationAttributeRecommendation of recommendationAttributeRecommendations ;trackBy: trackId">
+                <td><a [routerLink]="['../recommendation-attribute-recommendation', recommendationAttributeRecommendation.id ]">{{recommendationAttributeRecommendation.id}}</a></td>
+                <td>{{recommendationAttributeRecommendation.implemented}}</td>
+                <td>
+                    <div *ngIf="recommendationAttributeRecommendation.recommendationAttributeId">
+                        <a [routerLink]="['../recommendation-attribute', recommendationAttributeRecommendation.recommendationAttributeId  ]" >{{recommendationAttributeRecommendation.recommendationAttributeName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="recommendationAttributeRecommendation.recommendationId">
+                        <a [routerLink]="['../recommendation', recommendationAttributeRecommendation.recommendationId  ]" >{{recommendationAttributeRecommendation.recommendationName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../recommendation-attribute-recommendation', recommendationAttributeRecommendation.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'recommendation-attribute-recommendation/'+ recommendationAttributeRecommendation.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'recommendation-attribute-recommendation/'+ recommendationAttributeRecommendation.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

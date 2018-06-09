@@ -1,0 +1,56 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myRecommendationAttributeRecommendationLabel" jhiTranslate="aresViApp.recommendationAttributeRecommendation.home.createOrEditLabel">Create or edit a Recommendation Attribute Recommendation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!recommendationAttributeRecommendation.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="recommendationAttributeRecommendation.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.recommendationAttributeRecommendation.implemented" for="field_implemented">Implemented</label>
+            <input type="checkbox" class="form-control" name="implemented" id="field_implemented"
+                [(ngModel)]="recommendationAttributeRecommendation.implemented"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.recommendationAttributeRecommendation.recommendationAttribute" for="field_recommendationAttribute">Recommendation Attribute</label>
+            <select class="form-control" id="field_recommendationAttribute" name="recommendationAttribute" [(ngModel)]="recommendationAttributeRecommendation.recommendationAttributeId"  required>
+                <option *ngIf="!editForm.value.recommendationAttribute" [ngValue]="null" selected></option>
+                <option [ngValue]="recommendationAttributeOption.id" *ngFor="let recommendationAttributeOption of recommendationattributes; trackBy: trackRecommendationAttributeById">{{recommendationAttributeOption.name}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.recommendationAttribute?.dirty && editForm.controls.recommendationAttribute?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.recommendationAttribute?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="aresViApp.recommendationAttributeRecommendation.recommendation" for="field_recommendation">Recommendation</label>
+            <select class="form-control" id="field_recommendation" name="recommendation" [(ngModel)]="recommendationAttributeRecommendation.recommendationId"  required>
+                <option *ngIf="!editForm.value.recommendation" [ngValue]="null" selected></option>
+                <option [ngValue]="recommendationOption.id" *ngFor="let recommendationOption of recommendations; trackBy: trackRecommendationById">{{recommendationOption.name}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.recommendation?.dirty && editForm.controls.recommendation?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.recommendation?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,37 @@
+
+<div *ngIf="recommendationAttributeRecommendation">
+    <h2><span jhiTranslate="aresViApp.recommendationAttributeRecommendation.detail.title">Recommendation Attribute Recommendation</span> {{recommendationAttributeRecommendation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="aresViApp.recommendationAttributeRecommendation.implemented">Implemented</span></dt>
+        <dd>
+            <span>{{recommendationAttributeRecommendation.implemented}}</span>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.recommendationAttributeRecommendation.recommendationAttribute">Recommendation Attribute</span></dt>
+        <dd>
+            <div *ngIf="recommendationAttributeRecommendation.recommendationAttributeId">
+                <a [routerLink]="['/recommendation-attribute', recommendationAttributeRecommendation.recommendationAttributeId]">{{recommendationAttributeRecommendation.recommendationAttributeName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="aresViApp.recommendationAttributeRecommendation.recommendation">Recommendation</span></dt>
+        <dd>
+            <div *ngIf="recommendationAttributeRecommendation.recommendationId">
+                <a [routerLink]="['/recommendation', recommendationAttributeRecommendation.recommendationId]">{{recommendationAttributeRecommendation.recommendationName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'recommendation-attribute-recommendation/'+ recommendationAttributeRecommendation.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

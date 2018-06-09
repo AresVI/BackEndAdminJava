@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "recommendationAttribute",
+            "otherEntityName": "recommendationAttribute",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "recommendation",
+            "otherEntityName": "recommendation",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "implemented",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20180609164915",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "recommendation_attribute_recom",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

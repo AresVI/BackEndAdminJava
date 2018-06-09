@@ -27,6 +27,7 @@ import { AresViProductModule } from './product/product.module';
 import { AresViGlossaryModule } from './glossary/glossary.module';
 import { AresViFaqsModule } from './faqs/faqs.module';
 import { AresViRecommendationAttributeModule } from './recommendation-attribute/recommendation-attribute.module';
+import { AresViRecommendationAttributeRecommendationModule } from './recommendation-attribute-recommendation/recommendation-attribute-recommendation.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -58,6 +59,7 @@ import { AresViRecommendationAttributeModule } from './recommendation-attribute/
         AresViGlossaryModule,
         AresViFaqsModule,
         AresViRecommendationAttributeModule,
+        AresViRecommendationAttributeRecommendationModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

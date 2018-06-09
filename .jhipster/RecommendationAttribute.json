@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "weighting",
+            "otherEntityName": "weighting",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "recommendation",
+            "otherEntityName": "recommendation",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180609063549",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "recommendation_attribute",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

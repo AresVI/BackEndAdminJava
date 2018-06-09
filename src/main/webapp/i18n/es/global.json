@@ -34,6 +34,7 @@
                 "product": "Productos",
                 "glossary": "Glosario",
                 "faqs": "FAQs",
+                "recommendationAttribute": "Recommendation Attribute",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

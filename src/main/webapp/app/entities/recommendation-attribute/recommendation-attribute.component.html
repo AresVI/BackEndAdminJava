@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="aresViApp.recommendationAttribute.home.title">Recommendation Attributes</span>
+        <button class="btn btn-primary float-right jh-create-entity create-recommendation-attribute" [routerLink]="['/', { outlets: { popup: ['recommendation-attribute-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="aresViApp.recommendationAttribute.home.createLabel">
+            Create new Recommendation Attribute
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="recommendationAttributes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="aresViApp.recommendationAttribute.name">Name</span></th>
+            <th><span jhiTranslate="aresViApp.recommendationAttribute.weighting">Weighting</span></th>
+            <th><span jhiTranslate="aresViApp.recommendationAttribute.recommendation">Recommendation</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let recommendationAttribute of recommendationAttributes ;trackBy: trackId">
+                <td><a [routerLink]="['../recommendation-attribute', recommendationAttribute.id ]">{{recommendationAttribute.id}}</a></td>
+                <td>{{recommendationAttribute.name}}</td>
+                <td>
+                    <div *ngIf="recommendationAttribute.weightingId">
+                        <a [routerLink]="['../weighting', recommendationAttribute.weightingId  ]" >{{recommendationAttribute.weightingId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="recommendationAttribute.recommendationId">
+                        <a [routerLink]="['../recommendation', recommendationAttribute.recommendationId  ]" >{{recommendationAttribute.recommendationName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../recommendation-attribute', recommendationAttribute.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'recommendation-attribute/'+ recommendationAttribute.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'recommendation-attribute/'+ recommendationAttribute.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

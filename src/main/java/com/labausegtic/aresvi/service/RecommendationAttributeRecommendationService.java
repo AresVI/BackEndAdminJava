@@ -22,6 +22,7 @@ public interface RecommendationAttributeRecommendationService {
      *  @return the list of entities
      */
     List<RecommendationAttributeRecommendationDTO> findAll();
+    List<RecommendationAttributeRecommendationDTO> findAll(Long recommendation_id);
 
     /**
      *  Get the "id" recommendationAttributeRecommendation.

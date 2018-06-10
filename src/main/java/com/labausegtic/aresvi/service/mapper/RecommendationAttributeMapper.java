@@ -3,7 +3,6 @@ package com.labausegtic.aresvi.service.mapper;
 import com.labausegtic.aresvi.domain.*;
 import com.labausegtic.aresvi.service.dto.RecommendationAttributeDTO;
 
-import com.labausegtic.aresvi.service.dto.WeightingDTO;
 import org.mapstruct.*;
 
 /**

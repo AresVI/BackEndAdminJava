@@ -1,6 +1,7 @@
 import { BaseEntity } from './../../shared';
 import {AuditProcessRecommendation} from '../audit-process-recommendation/audit-process-recommendation.model';
 import {Auditor} from '../auditor/auditor.model';
+import {RecommendationAttributeRecommendation} from '../recommendation-attribute-recommendation';
 
 export class Recommendation implements BaseEntity {
     constructor(
@@ -13,7 +14,8 @@ export class Recommendation implements BaseEntity {
         public auditorId?: number,
         public auditor?: Auditor,
         public traceabilityAuditId?: number,
-        public auditProcessRecommendationSet?: AuditProcessRecommendation[]
+        public auditProcessRecommendationSet?: AuditProcessRecommendation[],
+        public recommendationAttributeRecommendationSet?: RecommendationAttributeRecommendation[]
     ) {
     }
 }

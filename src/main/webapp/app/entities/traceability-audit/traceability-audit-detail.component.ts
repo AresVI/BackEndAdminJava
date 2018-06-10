@@ -6,9 +6,9 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { TraceabilityAudit } from './traceability-audit.model';
 import { TraceabilityAuditService } from './traceability-audit.service';
-import {Recommendation} from '../recommendation/recommendation.model';
-import {ProfileService} from '../../layouts/profiles/profile.service';
-import {Principal} from '../../shared/auth/principal.service';
+import {RecommendationAttributeRecommendation} from '../recommendation-attribute-recommendation';
+import {Principal} from '../../shared';
+import {Recommendation} from '../recommendation';
 
 @Component({
     selector: 'jhi-traceability-audit-detail',
@@ -140,5 +140,9 @@ export class TraceabilityAuditDetailComponent implements OnInit, OnDestroy {
             this.description = '';
             this.standardObservation = '';
         });
+    }
+
+    recommendationAttributeRecommendationSet(element: RecommendationAttributeRecommendation, index: number, array: [RecommendationAttributeRecommendation]) {
+        return element.implemented;
     }
 }

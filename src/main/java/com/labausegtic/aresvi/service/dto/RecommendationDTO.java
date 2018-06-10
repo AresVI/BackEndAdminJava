@@ -1,13 +1,12 @@
 package com.labausegtic.aresvi.service.dto;
 
 
-import org.joda.time.DateTime;
+import com.labausegtic.aresvi.domain.Recommendation;
 
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -33,6 +32,8 @@ public class RecommendationDTO implements Serializable {
     private TraceabilityAuditDTO traceabilityAudit;
 
     private List<AuditProcessRecommendationDTO> auditProcessRecommendationSet;
+
+    private List<RecommendationAttributeRecommendationDTO> recommendationAttributeRecommendationSet;
 
     private Long auditorId;
 
@@ -124,6 +125,14 @@ public class RecommendationDTO implements Serializable {
 
     public void setAuditProcessRecommendationSet(List<AuditProcessRecommendationDTO> auditProcessRecommendationSet) {
         this.auditProcessRecommendationSet = auditProcessRecommendationSet;
+    }
+
+    public List<RecommendationAttributeRecommendationDTO> getRecommendationAttributeRecommendationSet() {
+        return recommendationAttributeRecommendationSet;
+    }
+
+    public void setRecommendationAttributeRecommendationSet(List<RecommendationAttributeRecommendationDTO> recommendationAttributeRecommendationSet) {
+        this.recommendationAttributeRecommendationSet = recommendationAttributeRecommendationSet;
     }
 
     @Override

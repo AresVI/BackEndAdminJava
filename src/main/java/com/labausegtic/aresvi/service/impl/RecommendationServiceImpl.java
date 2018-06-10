@@ -1,9 +1,11 @@
 package com.labausegtic.aresvi.service.impl;
 
 import com.labausegtic.aresvi.service.AuditProcessRecommendationService;
+import com.labausegtic.aresvi.service.RecommendationAttributeRecommendationService;
 import com.labausegtic.aresvi.service.RecommendationService;
 import com.labausegtic.aresvi.domain.Recommendation;
 import com.labausegtic.aresvi.repository.RecommendationRepository;
+import com.labausegtic.aresvi.service.dto.RecommendationAttributeRecommendationDTO;
 import com.labausegtic.aresvi.service.dto.RecommendationDTO;
 import com.labausegtic.aresvi.service.mapper.RecommendationMapper;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -32,11 +35,15 @@ public class RecommendationServiceImpl implements RecommendationService{
 
     private final AuditProcessRecommendationService auditProcessRecommendationService;
 
+    private final RecommendationAttributeRecommendationService recommendationAttributeRecommendationService;
+
     public RecommendationServiceImpl(RecommendationRepository recommendationRepository, RecommendationMapper recommendationMapper,
-                                     AuditProcessRecommendationService auditProcessRecommendationService) {
+                                     AuditProcessRecommendationService auditProcessRecommendationService,
+                                     RecommendationAttributeRecommendationService recommendationAttributeRecommendationService) {
         this.recommendationRepository = recommendationRepository;
         this.recommendationMapper = recommendationMapper;
         this.auditProcessRecommendationService = auditProcessRecommendationService;
+        this.recommendationAttributeRecommendationService = recommendationAttributeRecommendationService;
     }
 
     /**
@@ -51,7 +58,16 @@ public class RecommendationServiceImpl implements RecommendationService{
         Recommendation recommendation = recommendationMapper.toEntity(recommendationDTO);
         recommendation = recommendationRepository.save(recommendation);
         recommendation.setReviewed(true);
-        return recommendationMapper.toDto(recommendation);
+
+        List<RecommendationAttributeRecommendationDTO> recommendationAttributeRecommendationSet;
+
+        recommendationAttributeRecommendationSet = recommendationDTO.getRecommendationAttributeRecommendationSet();
+
+        for (RecommendationAttributeRecommendationDTO rar: recommendationAttributeRecommendationSet) {
+            recommendationAttributeRecommendationService.save(rar);
+        }
+
+        return recommendationDTO;
     }
 
     /**
@@ -111,6 +127,10 @@ public class RecommendationServiceImpl implements RecommendationService{
             auditProcessRecommendationService.findAllByRecommendation_Id(
                 recommendationDTO.getId()
             )
+        );
+
+        recommendationDTO.setRecommendationAttributeRecommendationSet(
+            recommendationAttributeRecommendationService.findAll(recommendation.getId())
         );
 
         return recommendationDTO;

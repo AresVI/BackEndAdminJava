@@ -60,6 +60,15 @@ public class RecommendationAttributeRecommendationServiceImpl implements Recomme
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<RecommendationAttributeRecommendationDTO> findAll(Long recommendation_id) {
+        log.debug("Request to get all RecommendationAttributeRecommendations");
+        return recommendationAttributeRecommendationRepository.findAllByRecommendationId(recommendation_id).stream()
+            .map(recommendationAttributeRecommendationMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
     /**
      *  Get one recommendationAttributeRecommendation by id.
      *

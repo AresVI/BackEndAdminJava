@@ -57,6 +57,10 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
     private final AuditAttributeAnalysisService auditAttributeAnalysisService;
 
+    private final RecommendationAttributeRecommendationService recommendationAttributeRecommendationService;
+
+    private final RecommendationAttributeService recommendationAttributeService;
+
     public TraceabilityAuditServiceImpl(TraceabilityAuditRepository traceabilityAuditRepository,
                                         RecommendationRepository recommendationRepository,
                                         AuditProcessRecommendationRepository auditProcessRecommendationRepository,
@@ -68,7 +72,10 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
                                         AttributeRecommendationRepository attributeRecommendationRepository,
                                         TraceabilityAuditMapper traceabilityAuditMapper,
                                         UserService userService, AuditorRepository auditorRepository,
-                                        ApplicationProperties applicationProperties, AuditAttributeAnalysisService auditAttributeAnalysisService) {
+                                        ApplicationProperties applicationProperties,
+                                        AuditAttributeAnalysisService auditAttributeAnalysisService,
+                                        RecommendationAttributeRecommendationService recommendationAttributeRecommendationService,
+                                        RecommendationAttributeService recommendationAttributeService) {
         this.traceabilityAuditRepository = traceabilityAuditRepository;
         this.recommendationRepository = recommendationRepository;
         this.auditProcessRecommendationRepository = auditProcessRecommendationRepository;
@@ -84,6 +91,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         this.auditorRepository = auditorRepository;
         this.applicationProperties = applicationProperties;
         this.auditAttributeAnalysisService = auditAttributeAnalysisService;
+        this.recommendationAttributeRecommendationService = recommendationAttributeRecommendationService;
+        this.recommendationAttributeService = recommendationAttributeService;
     }
 
     /**
@@ -216,6 +225,8 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         recommendation = recommendationRepository.save(recommendation);
 
+        createAllRecommendationAttributeRecommendation(recommendation.getId());
+
         Set<AuditProcess> auditProcessSet = traceabilityAudit.getAuditProcesses();
 
         for (AuditProcess ap : auditProcessSet) {
@@ -305,6 +316,28 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
         traceabilityAuditRepository.save(traceabilityAudit);
 
         return traceabilityAuditMapper.toDto(traceabilityAudit);
+
+    }
+
+    private void createAllRecommendationAttributeRecommendation(Long recommendation_id){
+
+        RecommendationAttributeRecommendationDTO recommendationAttributeRecommendationDTO;
+
+        List<RecommendationAttributeDTO> recommendationAttributeList = recommendationAttributeService.findAll();
+
+        for (RecommendationAttributeDTO ra : recommendationAttributeList) {
+
+            recommendationAttributeRecommendationDTO = new RecommendationAttributeRecommendationDTO();
+
+            recommendationAttributeRecommendationDTO.setRecommendationId(recommendation_id);
+
+            recommendationAttributeRecommendationDTO.setRecommendationAttributeId(ra.getId());
+
+            recommendationAttributeRecommendationDTO.setImplemented(false);
+
+            recommendationAttributeRecommendationService.save(recommendationAttributeRecommendationDTO);
+
+        }
 
     }
 

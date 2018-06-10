@@ -9,45 +9,45 @@
     <hr/>
     <jhi-alert-error></jhi-alert-error>
 
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.traceabilityAudit.finishedDate">Finished Date</span></dt>
-        <dd>
-            <span>{{traceabilityAudit.finishedDate | date: 'dd/MM/yyyy HH:mm'}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.traceabilityAudit.company">Company</span></dt>
-        <dd>
-            <div *ngIf="traceabilityAudit.companyId">
-                <a [routerLink]="['/company', traceabilityAudit.companyId]">{{traceabilityAudit.company.name}} ({{traceabilityAudit.company.identifier}})</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.traceabilityAudit.company_contact_person">Company Contact Person</span></dt>
-        <dd>
-            <div *ngIf="traceabilityAudit.companyContactPersonId">
-                <a [routerLink]="['/', { outlets: { popup: 'company/' + traceabilityAudit.companyId + '/company-contact-person/' + traceabilityAudit.companyContactPersonId}}]">
-                    {{traceabilityAudit.companyContactPerson.last_name}}, {{traceabilityAudit.companyContactPerson.first_name}}
-                </a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.traceabilityAudit.status">Status</span></dt>
-        <dd>
-            <span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span>
-        </dd>
-        <dt><span jhiTranslate="aresViApp.recommendation.auditor">Auditor</span></dt>
-        <dd>
-            {{traceabilityAudit.recommendationSet[0].auditor.user.lastName}}, {{traceabilityAudit.recommendationSet[0].auditor.user.firstName}}
-        </dd>
-        <dt *ngIf="traceabilityAudit.productType"><span jhiTranslate="aresViApp.traceabilityAudit.productType">ProductType</span></dt>
-        <dd *ngIf="traceabilityAudit.productType">
-            {{traceabilityAudit.productType.name}}
-        </dd>
-        <dt *ngIf="traceabilityAudit.category"><span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span></dt>
-        <dd *ngIf="traceabilityAudit.category">
-            <span jhiTranslate="aresViApp.traceabilityAudit.category">Category</span> {{traceabilityAudit.category}}
+    <div class="card mb-4">
+        <h3 class="card-header bg-secondary text-white">
+            Detalles:
+        </h3>
+        <div class="card-body">
 
-        </dd>
-    </dl>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="aresViApp.traceabilityAudit.finishedDate">Finished Date</span></dt>
+                <dd>
+                    <span>{{traceabilityAudit.finishedDate | date: 'dd/MM/yyyy HH:mm'}}</span>
+                </dd>
+                <dt><span jhiTranslate="aresViApp.traceabilityAudit.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="aresViApp.traceabilityAudit.status_values.{{traceabilityAudit.status}}">{{traceabilityAudit.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="aresViApp.recommendation.auditor">Auditor</span></dt>
+                <dd>
+                    {{traceabilityAudit.recommendationSet[0].auditor.user.lastName}}, {{traceabilityAudit.recommendationSet[0].auditor.user.firstName}}
+                </dd>
+                <dt *ngIf="traceabilityAudit.productType"><span jhiTranslate="aresViApp.traceabilityAudit.productType">ProductType</span></dt>
+                <dd *ngIf="traceabilityAudit.productType">
+                    {{traceabilityAudit.productType.name}}
+                </dd>
+            </dl>
+        </div>
+    </div>
 
-    <hr *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL']" [hidden]="traceabilityAudit.recommendationSet[0].auditor.user.id != account.id"/>
+    <div class="card mb-4">
+        <h3 class="card-header bg-secondary text-white">
+            Características:
+        </h3>
+        <div class="card-body">
+            <ul class="m-0">
+                <li class="" *ngFor="let rar of traceabilityAudit.recommendationSet[0].recommendationAttributeRecommendationSet.filter(recommendationAttributeRecommendationSet)">
+                    {{rar.recommendationAttributeName}}
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <div class="card" *jhiHasAnyAuthority="['ROLE_AUDITOR_EXTERNAL']"
          [hidden]="traceabilityAudit.status == 'STATUS_FINISHED' || traceabilityAudit.recommendationSet[0].auditor.user.id != account.id ">
@@ -62,62 +62,62 @@
 
     <div *ngFor="let recommendation of traceabilityAudit.recommendationSet" [hidden]="traceabilityAudit.status == 'STATUS_IN_PROGRESS'">
 
-    <div class="card" *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet">
+        <div class="card" *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet">
 
-        <h3 class="card-header bg-primary text-white">
-            <span jhiTranslate="aresViApp.auditProcess.detail.title">Process</span>:
-            {{auditProcessRecom.auditProcess.name}}
-            <button type="button" class="btn btn-outline-light"
-                    [hidden]="auditProcessRecom.description.length < 1 && auditProcessRecom.standardObservation.length < 1"
-                    (click)="openModalDescription(modal_description, auditProcessRecom.description, auditProcessRecom.standardObservation)">
-                <i class="fa fa-file-text-o"></i>
-            </button>
-        </h3>
+            <h3 class="card-header bg-primary text-white">
+                <span jhiTranslate="aresViApp.auditProcess.detail.title">Process</span>:
+                {{auditProcessRecom.auditProcess.name}}
+                <button type="button" class="btn btn-outline-light"
+                        [hidden]="auditProcessRecom.description.length < 1 && auditProcessRecom.standardObservation.length < 1"
+                        (click)="openModalDescription(modal_description, auditProcessRecom.description, auditProcessRecom.standardObservation)">
+                    <i class="fa fa-file-text-o"></i>
+                </button>
+            </h3>
 
-        <div class="card-body">
+            <div class="card-body">
 
-            <ul class="list-group">
-                <li class="list-group-item p-0" *ngFor="let auditTaskRecom of auditProcessRecom.auditTaskRecommendationSet">
+                <ul class="list-group">
+                    <li class="list-group-item p-0" *ngFor="let auditTaskRecom of auditProcessRecom.auditTaskRecommendationSet">
 
-                    <h4 class="mb-1 p-3 w-100 bg-light">
-                        {{auditTaskRecom.auditTask.name}}
-                        <small class="text-secondary">({{auditTaskRecom.revisedDate | date: 'dd/MM/yyyy HH:mm'}})</small>
-                        <button type="button" class="btn btn-outline-dark btn-sm"
-                                [hidden]="auditTaskRecom.description.length < 1 && auditTaskRecom.standardObservation.length < 1"
-                                (click)="openModalDescription(modal_description, auditTaskRecom.description, auditTaskRecom.standardObservation)">
-                            <i class="fa fa-file-text-o"></i>
-                        </button>
-                    </h4>
-
-                    <div class="w-100" *ngFor="let categoryAttrRecom of auditTaskRecom.categoryAttrRecommendationSet">
-                        <h5 class="mb-4 mt-4 px-4">
-                            {{categoryAttrRecom.categoryAttribute.name}}
+                        <h4 class="mb-1 p-3 w-100 bg-light">
+                            {{auditTaskRecom.auditTask.name}}
+                            <small class="text-secondary">({{auditTaskRecom.revisedDate | date: 'dd/MM/yyyy HH:mm'}})</small>
                             <button type="button" class="btn btn-outline-dark btn-sm"
-                                    [hidden]="categoryAttrRecom.description.length < 1"
-                                    (click)="openModalDescription(modal_description, categoryAttrRecom.description)">
+                                    [hidden]="auditTaskRecom.description.length < 1 && auditTaskRecom.standardObservation.length < 1"
+                                    (click)="openModalDescription(modal_description, auditTaskRecom.description, auditTaskRecom.standardObservation)">
                                 <i class="fa fa-file-text-o"></i>
                             </button>
-                        </h5>
-                        <ul>
-                            <li *ngFor="let attributeRecom of categoryAttrRecom.attributeRecommendationSet">
-                                <p class="{{attributeRecom.implemented ? 'text-success': 'text-danger' }}">
-                                    {{attributeRecom.attribute.name}}
-                                    <button type="button" class="btn btn-outline-dark btn-sm"
-                                            [hidden]="attributeRecom.description.length < 1"
-                                            (click)="openModalDescription(modal_description, attributeRecom.description)">
-                                        <i class="fa fa-file-text-o"></i>
-                                    </button>
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
+                        </h4>
 
-                </li>
-            </ul>
+                        <div class="w-100" *ngFor="let categoryAttrRecom of auditTaskRecom.categoryAttrRecommendationSet">
+                            <h5 class="mb-4 mt-4 px-4">
+                                {{categoryAttrRecom.categoryAttribute.name}}
+                                <button type="button" class="btn btn-outline-dark btn-sm"
+                                        [hidden]="categoryAttrRecom.description.length < 1"
+                                        (click)="openModalDescription(modal_description, categoryAttrRecom.description)">
+                                    <i class="fa fa-file-text-o"></i>
+                                </button>
+                            </h5>
+                            <ul>
+                                <li *ngFor="let attributeRecom of categoryAttrRecom.attributeRecommendationSet">
+                                    <p class="{{attributeRecom.implemented ? 'text-success': 'text-danger' }}">
+                                        {{attributeRecom.attribute.name}}
+                                        <button type="button" class="btn btn-outline-dark btn-sm"
+                                                [hidden]="attributeRecom.description.length < 1"
+                                                (click)="openModalDescription(modal_description, attributeRecom.description)">
+                                            <i class="fa fa-file-text-o"></i>
+                                        </button>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </li>
+                </ul>
+
+            </div>
 
         </div>
-
-    </div>
 
     </div>
 

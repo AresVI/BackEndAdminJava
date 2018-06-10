@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.List;
+
 
 /**
  * Spring Data JPA repository for the RecommendationAttributeRecommendation entity.
@@ -13,4 +15,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface RecommendationAttributeRecommendationRepository extends JpaRepository<RecommendationAttributeRecommendation, Long> {
 
+    List<RecommendationAttributeRecommendation> findAllByRecommendationId(Long recommendation_id);
 }

@@ -8,9 +8,11 @@ import com.labausegtic.aresvi.domain.User;
 import com.labausegtic.aresvi.repository.AuditorRepository;
 import com.labausegtic.aresvi.security.AuthoritiesConstants;
 import com.labausegtic.aresvi.security.SecurityUtils;
+import com.labausegtic.aresvi.service.RecommendationAttributeRecommendationService;
 import com.labausegtic.aresvi.service.RecommendationService;
 import com.labausegtic.aresvi.service.TraceabilityAuditService;
 import com.labausegtic.aresvi.service.UserService;
+import com.labausegtic.aresvi.service.dto.RecommendationDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.TraceabilityAuditDTO;
@@ -32,6 +34,7 @@ import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing TraceabilityAudit.
@@ -48,15 +51,20 @@ public class TraceabilityAuditResource {
 
     private final RecommendationService recommendationService;
 
+    private final RecommendationAttributeRecommendationService recommendationAttributeRecommendationService;
+
     private final UserService userService;
 
     private final AuditorRepository auditorRepository;
 
-    public TraceabilityAuditResource(TraceabilityAuditService traceabilityAuditService, RecommendationService recommendationService, UserService userService, AuditorRepository auditorRepository) {
+    public TraceabilityAuditResource(TraceabilityAuditService traceabilityAuditService, RecommendationService recommendationService,
+                                     UserService userService, AuditorRepository auditorRepository,
+                                     RecommendationAttributeRecommendationService recommendationAttributeRecommendationService) {
         this.traceabilityAuditService = traceabilityAuditService;
         this.recommendationService = recommendationService;
         this.userService = userService;
         this.auditorRepository = auditorRepository;
+        this.recommendationAttributeRecommendationService = recommendationAttributeRecommendationService;
     }
 
     /**
@@ -198,9 +206,13 @@ public class TraceabilityAuditResource {
         log.debug("REST request to get TraceabilityAudit : {}", id);
         TraceabilityAuditDTO traceabilityAuditDTO = traceabilityAuditService.findOne(id);
 
-        traceabilityAuditDTO.setRecommendationDTOSet(
-            recommendationService.findAllByTraceabilityAudit_Id(traceabilityAuditDTO.getId())
-        );
+        Set<RecommendationDTO> recommendationsList = recommendationService.findAllByTraceabilityAudit_Id(traceabilityAuditDTO.getId());
+
+        for (RecommendationDTO r : recommendationsList) {
+            r.setRecommendationAttributeRecommendationSet(recommendationAttributeRecommendationService.findAll(r.getId()));
+        }
+
+        traceabilityAuditDTO.setRecommendationDTOSet(recommendationsList);
 
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(traceabilityAuditDTO));
     }

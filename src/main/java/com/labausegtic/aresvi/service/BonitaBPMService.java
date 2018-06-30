@@ -80,7 +80,9 @@ public class BonitaBPMService {
             this.loginAPI = TenantAPIAccessor.getLoginAPI();
             // log in to the tenant to create a session
             this.apiSession = loginAPI.login(username, password);
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+            ignore.printStackTrace();
+        }
     }
 
     private void logoutBonita(){

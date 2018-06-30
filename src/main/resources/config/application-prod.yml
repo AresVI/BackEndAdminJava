@@ -127,7 +127,7 @@ jhipster:
 
 application:
     bonita:
-        host: 188.166.27.98
+        host: localhost
         port: 35407
         username: auditor1
         password: auditor1

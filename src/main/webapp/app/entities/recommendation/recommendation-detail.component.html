@@ -40,7 +40,7 @@
 
                 <h4>Procesos: </h4>
 
-                <div class="list-group">
+                <div class="list-group list-group-separated">
                     <div *ngFor="let auditProcessRecom of recommendation.auditProcessRecommendationSet">
                         <a [routerLink]="['/audit-process-recommendation', auditProcessRecom.id ]"
                            *ngIf="auditProcessRecom.bonitaBpmCaseId < 1"
@@ -48,8 +48,7 @@
                             <i class="fa fa-check-square-o" aria-hidden="true" [hidden]="!auditProcessRecom.reviewed"></i>
                             {{auditProcessRecom.auditProcess.name}}
                         </a>
-                        <a href="http://{{hostname}}:35407/bonita/portal/homepage" target="_blank"
-                           *ngIf="auditProcessRecom.bonitaBpmCaseId > 0"
+                        <a *ngIf="auditProcessRecom.bonitaBpmCaseId > 0" (click)="showModal( auditProcessRecom )"
                            class="list-group-item list-group-item-action {{auditProcessRecom.reviewed ? 'list-group-item-success' : 'list-group-item-info'}}">
                             <i class="fa fa-check-square-o" aria-hidden="true" [hidden]="!auditProcessRecom.reviewed"></i>
                             {{auditProcessRecom.auditProcess.name}}
@@ -65,7 +64,7 @@
 
                 <h4>Características: </h4>
 
-                <ul class="list-group">
+                <ul class="list-group" *ngIf="recommendation.recommendationAttributeRecommendationSet.length > 0">
                     <li class="list-group-item" *ngFor="let rar of recommendation.recommendationAttributeRecommendationSet">
                         <div class="row">
                             <div class="col">
@@ -83,6 +82,15 @@
                     </li>
                 </ul>
 
+                <div class="card border-secondary mb-2">
+                    <div class="card-body">
+
+                        <h4 class="card-title text-secondary text-center m-0" *ngIf="recommendation.recommendationAttributeRecommendationSet.length < 1">
+                            No se encontraron características seleccionadas.
+                        </h4>
+
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -91,9 +99,11 @@
             <button type="submit" [disabled]="auditForm.form.invalid || isSaving || !recommendation.levelComputerization || !allProcessReviewed" class="btn btn-primary">
                 <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
             </button>
+            <!--
             <button type="button" (click)="load(recommendation.id)" class="btn btn-primary">
                 <span class="fa fa-refresh"></span>&nbsp; Refrescar
             </button>
+            -->
             <button type="button"
                     [routerLink]="['/traceability-audit', recommendation.traceabilityAuditId ]"
                     class="btn btn-secondary">
@@ -103,20 +113,14 @@
 
     </form>
 
-    <div class="modal" tabindex="-1" role="dialog" [hidden]="false">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal" tabindex="-1" role="dialog" [hidden]="!isShowedModal">
+        <div class="modal-dialog modal-max" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
                 <div class="modal-body">
-                    <iframe src="http://0.0.0.0:35407/bonita/portal/homepage" height="100%" width="100%"></iframe>
+                    <iframe id="iframe_bonita" [src]="iframeUrl" (load)="load(recommendation.id)" height="100%" width="100%" frameborder="0" scrolling="no"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal" (click)="hideModal()">Close</button>
                 </div>
             </div>
         </div>

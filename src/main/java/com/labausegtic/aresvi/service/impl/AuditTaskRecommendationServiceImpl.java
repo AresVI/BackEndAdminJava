@@ -169,20 +169,26 @@ public class AuditTaskRecommendationServiceImpl implements AuditTaskRecommendati
     @Override
     public AuditTaskRecommendationDTO findOneByBonitaBpmCaseIdAndAuditTaskId(Long bonitaBpmCaseId, Long audit_task_id) {
 
-        AuditProcessRecommendation auditProcessRecommendation = auditProcessRecommendationRepository.findByBonitaBpmCaseId(bonitaBpmCaseId);
+        if (audit_task_id > 0) {
 
-        AuditTaskRecommendation auditTaskRecommendation;
+            AuditProcessRecommendation auditProcessRecommendation = auditProcessRecommendationRepository.findByBonitaBpmCaseId(bonitaBpmCaseId);
 
-        auditTaskRecommendation = auditTaskRecommendationRepository.findByAuditProcessRecomIdAndAuditTaskId(
-            auditProcessRecommendation.getId(), audit_task_id
-        );
+            AuditTaskRecommendation auditTaskRecommendation;
 
-        AuditTaskRecommendationDTO auditTaskRecommendationDTO = auditTaskRecommendationMapper.toDto(auditTaskRecommendation);
+            auditTaskRecommendation = auditTaskRecommendationRepository.findByAuditProcessRecomIdAndAuditTaskId(
+                auditProcessRecommendation.getId(), audit_task_id
+            );
 
-        auditTaskRecommendationDTO.setCategoryAttrRecommendationSet(
-            categoryAttrRecommendationService.findAllByAuditTaskRecom_Id(auditTaskRecommendationDTO.getId())
-        );
+            AuditTaskRecommendationDTO auditTaskRecommendationDTO = auditTaskRecommendationMapper.toDto(auditTaskRecommendation);
 
-        return auditTaskRecommendationDTO;
+            auditTaskRecommendationDTO.setCategoryAttrRecommendationSet(
+                categoryAttrRecommendationService.findAllByAuditTaskRecom_Id(auditTaskRecommendationDTO.getId())
+            );
+
+            return auditTaskRecommendationDTO;
+
+        }else{
+            return null;
+        }
     }
 }

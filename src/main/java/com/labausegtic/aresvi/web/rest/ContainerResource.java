@@ -5,6 +5,7 @@ import com.labausegtic.aresvi.service.ContainerService;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.ContainerDTO;
+import com.labausegtic.aresvi.service.dto.ContainerCompleteDTO;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing Container.
@@ -109,6 +111,20 @@ public class ContainerResource {
         log.debug("REST request to get Container : {}", id);
         ContainerDTO containerDTO = containerService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(containerDTO));
+    }
+
+    /**
+     * GET  /containers/auditProcess=:id : get the "id" container.
+     *
+     * @param idAuditProcess the id of the containerDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the containerDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/containers/auditProcess={id}")
+    @Timed
+    public Set<ContainerCompleteDTO> getContainerByAuditProcess(@PathVariable Long id) {
+        log.debug("REST request to get Container : {}", id);
+        Set<ContainerCompleteDTO> containerCompleteDTO = containerService.findAllByAuditProcess_Id(id);
+        return containerCompleteDTO;
     }
 
     /**

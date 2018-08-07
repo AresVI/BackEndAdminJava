@@ -1,21 +1,39 @@
-
-<div *ngIf="auditProcess">
-    <h2><span jhiTranslate="aresViApp.auditProcess.detail.title">Audit Process</span> - {{auditProcess.name}}</h2>
+<div *ngIf="auditProcess && containers">
+    <!-- pantalla con detalle del proceso de auditoria -->
+    <h2>
+        <span jhiTranslate="aresViApp.auditProcess.detail.title">Audit Process</span> - {{auditProcess.name}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
     </dl>
-
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+       <div *ngFor="let container of containers">
+        <h3>Contenedor: {{container.name}}</h3>
+        <div *ngIf="container.auditTaskSet">
+            <div *ngFor="let task of container.auditTaskSet">
+                <h4>Tarea: {{task.name}}</h4>
+                <div *ngIf="task.categoryAttributeSet">
+                    <div *ngFor="let category of task.categoryAttributeSet">
+                        <h5>Categoria: {{category.name}}</h5>
+                        <div *ngIf="category.attributeSet">
+                            <ul>
+                                <li*ngFor="let attribute of category.attributeSet">
+                                    <label>{{attribute.name}}</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" (click)="previousState()" class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;
+        <span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'audit-process/'+ auditProcess.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    <button type="button" [routerLink]="['/', { outlets: { popup: 'audit-process/'+ auditProcess.id + '/edit'} }]" replaceUrl="true"
+        class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;
+        <span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

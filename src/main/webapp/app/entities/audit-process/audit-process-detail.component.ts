@@ -5,6 +5,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { AuditProcess } from './audit-process.model';
 import { AuditProcessService } from './audit-process.service';
+import { Container } from '../container';
 
 @Component({
     selector: 'jhi-audit-process-detail',
@@ -15,6 +16,7 @@ export class AuditProcessDetailComponent implements OnInit, OnDestroy {
     auditProcess: AuditProcess;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
+    containers: any;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -33,7 +35,13 @@ export class AuditProcessDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.auditProcessService.find(id).subscribe((auditProcess) => {
             this.auditProcess = auditProcess;
+            this.auditProcessService.findContainers(id).subscribe((containers) => {
+                console.log(containers)
+                this.containers= containers
+                console.log(this.containers[0].auditTaskSet)
+            })
         });
+        
     }
     previousState() {
         window.history.back();

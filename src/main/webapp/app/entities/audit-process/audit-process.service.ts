@@ -6,11 +6,13 @@ import { SERVER_API_URL } from '../../app.constants';
 import { AuditProcess } from './audit-process.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 import {createRequestOptionAllElements} from '../../shared/model/request-util';
+import { Container } from '../../../../../../node_modules/@angular/compiler/src/i18n/i18n_ast';
 
 @Injectable()
 export class AuditProcessService {
 
     private resourceUrl = SERVER_API_URL + 'api/audit-processes';
+    private containerUrl = SERVER_API_URL + 'api/containers/auditProcess=';
 
     constructor(private http: Http) { }
 
@@ -33,6 +35,13 @@ export class AuditProcessService {
             return res.json();
         });
     }
+
+    findContainers(id: number): Observable<Container>{
+        return this.http.get(`${this.containerUrl}${id}`).map((res: Response) => {
+            return res.json();
+        })    
+    }
+
 
     findComplete(id: number): Observable<AuditProcess> {
         return this.http.get(`${this.resourceUrl}/${id}/complete`).map((res: Response) => {

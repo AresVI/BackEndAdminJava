@@ -209,97 +209,101 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
 
-        Recommendation recommendation = new Recommendation();
+        if (traceabilityAudit.getStatus() == StatusTraceabilityAudit.NOT_STARTED) {
 
-        recommendation.setTraceabilityAudit(traceabilityAudit);
+            Recommendation recommendation = new Recommendation();
 
-        recommendation.setCreationDate(Instant.now());
+            recommendation.setTraceabilityAudit(traceabilityAudit);
 
-        recommendation.setName("Recomendación para la " + traceabilityAudit.getName());
+            recommendation.setCreationDate(Instant.now());
 
-        Optional<User> user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin());
+            recommendation.setName("Recomendación para la " + traceabilityAudit.getName());
 
-        recommendation.setAuditor(auditorRepository.findAuditorByUser_Id(user.get().getId()));
+            Optional<User> user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin());
 
-        recommendation.setReviewed(false);
+            recommendation.setAuditor(auditorRepository.findAuditorByUser_Id(user.get().getId()));
 
-        recommendation = recommendationRepository.save(recommendation);
+            recommendation.setReviewed(false);
 
-        createAllRecommendationAttributeRecommendation(recommendation.getId());
+            recommendation = recommendationRepository.save(recommendation);
 
-        Set<AuditProcess> auditProcessSet = traceabilityAudit.getAuditProcesses();
+            createAllRecommendationAttributeRecommendation(recommendation.getId());
 
-        for (AuditProcess ap : auditProcessSet) {
+            Set<AuditProcess> auditProcessSet = traceabilityAudit.getAuditProcesses();
 
-            AuditProcessRecommendation auditProcessRecommendation = new AuditProcessRecommendation();
+            for (AuditProcess ap : auditProcessSet) {
 
-            auditProcessRecommendation.setAuditProcess(ap);
+                AuditProcessRecommendation auditProcessRecommendation = new AuditProcessRecommendation();
 
-            auditProcessRecommendation.setDescription("");
+                auditProcessRecommendation.setAuditProcess(ap);
 
-            auditProcessRecommendation.setStandardObservation("");
+                auditProcessRecommendation.setDescription("");
 
-            auditProcessRecommendation.setReviewed(false);
+                auditProcessRecommendation.setStandardObservation("");
 
-            auditProcessRecommendation.setTaken(false);
+                auditProcessRecommendation.setReviewed(false);
 
-            auditProcessRecommendation.setRecommendation(recommendation);
+                auditProcessRecommendation.setTaken(false);
 
-            BonitaBPMService bonitaBPMService = new BonitaBPMService(applicationProperties);
+                auditProcessRecommendation.setRecommendation(recommendation);
 
-            bonitaBPMService.startBPMProcess(auditProcessRecommendation);
+                BonitaBPMService bonitaBPMService = new BonitaBPMService(applicationProperties);
 
-            auditProcessRecommendationRepository.save(auditProcessRecommendation);
+                bonitaBPMService.startBPMProcess(auditProcessRecommendation);
 
-            Set<Container> containers = containerRepository.findAllByAuditProcess_Id(ap.getId());
+                auditProcessRecommendationRepository.save(auditProcessRecommendation);
 
-            for (Container c : containers){
+                Set<Container> containers = containerRepository.findAllByAuditProcess_Id(ap.getId());
 
-                Set<AuditTask> auditTasks = auditTaskRepository.findAllByContainer_Id(c.getId());
+                for (Container c : containers) {
 
-                for (AuditTask at : auditTasks) {
+                    Set<AuditTask> auditTasks = auditTaskRepository.findAllByContainer_Id(c.getId());
 
-                    AuditTaskRecommendation auditTaskRecommendation = new AuditTaskRecommendation();
+                    for (AuditTask at : auditTasks) {
 
-                    auditTaskRecommendation.setAuditProcessRecom(auditProcessRecommendation);
+                        AuditTaskRecommendation auditTaskRecommendation = new AuditTaskRecommendation();
 
-                    auditTaskRecommendation.setAuditTask(at);
+                        auditTaskRecommendation.setAuditProcessRecom(auditProcessRecommendation);
 
-                    auditTaskRecommendation.setDescription("");
+                        auditTaskRecommendation.setAuditTask(at);
 
-                    auditTaskRecommendation.setStandardObservation("");
+                        auditTaskRecommendation.setDescription("");
 
-                    auditTaskRecommendation.setReviewed(false);
+                        auditTaskRecommendation.setStandardObservation("");
 
-                    auditTaskRecommendationRepository.save(auditTaskRecommendation);
+                        auditTaskRecommendation.setReviewed(false);
 
-                    Set<CategoryAttribute> categoryAttributes = categoryAttributeRepository.findAllByAuditTask_Id(at.getId());
+                        auditTaskRecommendationRepository.save(auditTaskRecommendation);
 
-                    for ( CategoryAttribute ca : categoryAttributes ) {
+                        Set<CategoryAttribute> categoryAttributes = categoryAttributeRepository.findAllByAuditTask_Id(at.getId());
 
-                        CategoryAttrRecommendation categoryAttrRecommendation = new CategoryAttrRecommendation();
+                        for (CategoryAttribute ca : categoryAttributes) {
 
-                        categoryAttrRecommendation.setAuditTaskRecom(auditTaskRecommendation);
+                            CategoryAttrRecommendation categoryAttrRecommendation = new CategoryAttrRecommendation();
 
-                        categoryAttrRecommendation.setCategoryAttribute(ca);
+                            categoryAttrRecommendation.setAuditTaskRecom(auditTaskRecommendation);
 
-                        categoryAttrRecommendation.setDescription("");
+                            categoryAttrRecommendation.setCategoryAttribute(ca);
 
-                        categoryAttrRecommendationRepository.save(categoryAttrRecommendation);
+                            categoryAttrRecommendation.setDescription("");
 
-                        Set<Attribute> attributes = attributeRepository.findAllByCategoryAttribute_Id(ca.getId());
+                            categoryAttrRecommendationRepository.save(categoryAttrRecommendation);
 
-                        for (Attribute a : attributes) {
+                            Set<Attribute> attributes = attributeRepository.findAllByCategoryAttribute_Id(ca.getId());
 
-                            AttributeRecommendation attributeRecommendation = new AttributeRecommendation();
+                            for (Attribute a : attributes) {
 
-                            attributeRecommendation.setCategoryAttRecom(categoryAttrRecommendation);
+                                AttributeRecommendation attributeRecommendation = new AttributeRecommendation();
 
-                            attributeRecommendation.setAttribute(a);
+                                attributeRecommendation.setCategoryAttRecom(categoryAttrRecommendation);
 
-                            attributeRecommendation.setDescription("");
+                                attributeRecommendation.setAttribute(a);
 
-                            attributeRecommendationRepository.save(attributeRecommendation);
+                                attributeRecommendation.setDescription("");
+
+                                attributeRecommendationRepository.save(attributeRecommendation);
+
+                            }
 
                         }
 
@@ -309,13 +313,15 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
             }
 
+            traceabilityAudit.setStatus(StatusTraceabilityAudit.IN_PROGRESS);
+
+            traceabilityAuditRepository.save(traceabilityAudit);
+
+            return traceabilityAuditMapper.toDto(traceabilityAudit);
+
+        } else {
+            return null;
         }
-
-        traceabilityAudit.setStatus(StatusTraceabilityAudit.IN_PROGRESS);
-
-        traceabilityAuditRepository.save(traceabilityAudit);
-
-        return traceabilityAuditMapper.toDto(traceabilityAudit);
 
     }
 

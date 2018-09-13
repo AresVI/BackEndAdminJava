@@ -13,13 +13,9 @@
                 -- Sin Participante --
             </div>
         </dd>
-        <dt><span jhiTranslate="aresViApp.container.auditProcess">Audit Process</span></dt>
-        <dd>
-            <div *ngIf="container.auditProcessId">
-                <a [routerLink]="['/audit-process', container.auditProcessId]">{{container.auditProcess.name}}</a>
-            </div>
-        </dd>
     </dl>
+
+    <jhi-audit-tasks [container_id]="container.id" *ngIf="container.id"></jhi-audit-tasks>
 
     <button type="button"
             (click)="previousState()"

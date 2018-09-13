@@ -2,6 +2,7 @@ package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.labausegtic.aresvi.service.CategoryAttributeService;
+import com.labausegtic.aresvi.service.dto.CategoryAttributeCompleteDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.CategoryAttributeDTO;
@@ -22,6 +23,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing CategoryAttribute.
@@ -109,6 +111,13 @@ public class CategoryAttributeResource {
         log.debug("REST request to get CategoryAttribute : {}", id);
         CategoryAttributeDTO categoryAttributeDTO = categoryAttributeService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(categoryAttributeDTO));
+    }
+
+    @GetMapping("/category-attributes/auditTask={id}")
+    @Timed
+    public Set<CategoryAttributeCompleteDTO> getContainerByAuditProcess(@PathVariable Long id) {
+        log.debug("REST request to get Container : {}", id);
+        return categoryAttributeService.findAllByAuditTaskId(id);
     }
 
     /**

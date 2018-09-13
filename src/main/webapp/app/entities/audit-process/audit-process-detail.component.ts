@@ -16,7 +16,7 @@ export class AuditProcessDetailComponent implements OnInit, OnDestroy {
     auditProcess: AuditProcess;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
-    containers: any;
+    public containers: any;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -35,14 +35,12 @@ export class AuditProcessDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.auditProcessService.find(id).subscribe((auditProcess) => {
             this.auditProcess = auditProcess;
-            this.auditProcessService.findContainers(id).subscribe((containers) => {
-                console.log(containers)
-                this.containers= containers
-                console.log(this.containers[0].auditTaskSet)
-            })
+            this.auditProcessService.findContainers(id).subscribe((res) => {
+                this.containers = res;
+            });
         });
-        
     }
+
     previousState() {
         window.history.back();
     }

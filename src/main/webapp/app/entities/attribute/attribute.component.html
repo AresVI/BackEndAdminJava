@@ -1,5 +1,5 @@
 <div>
-    <h2>
+    <h3>
         <span jhiTranslate="aresViApp.attribute.home.title">Attributes</span>
         <button class="btn btn-primary float-right jh-create-entity create-attribute" [routerLink]="['/', { outlets: { popup: ['attribute-new'] } }]">
             <span class="fa fa-plus"></span>
@@ -7,7 +7,7 @@
             Create new Attribute
             </span>
         </button>
-    </h2>
+    </h3>
     <jhi-alert></jhi-alert>
     <div class="row">
     </div>
@@ -15,34 +15,28 @@
     <div class="table-responsive" *ngIf="attributes">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="aresViApp.attribute.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="required"><span jhiTranslate="aresViApp.attribute.required">Required</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="weightingId"><span jhiTranslate="aresViApp.attribute.weighting">Weighting</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="categoryAttributeId"><span jhiTranslate="aresViApp.attribute.categoryAttribute">Category Attribute</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
-            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tbody>
             <tr *ngFor="let attribute of attributes ;trackBy: trackId">
-                <td><a [routerLink]="['../attribute', attribute.id ]">{{attribute.id}}</a></td>
+                <td><a [routerLink]="['/attribute', attribute.id ]">{{attribute.id}}</a></td>
                 <td>{{attribute.name}}</td>
                 <td><span jhiTranslate="global.value.boolean.{{attribute.required}}">{{attribute.required}}</span></td>
                 <td>
                     <div *ngIf="attribute.weightingId">
-                        <a [routerLink]="['../weighting', attribute.weightingId  ]" >Nivel {{attribute.weighting.value}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="attribute.categoryAttributeId">
-                        <a [routerLink]="['../category-attribute', attribute.categoryAttributeId  ]" >{{attribute.categoryAttributeId ? attribute.categoryAttribute.name : "--"}}</a>
+                        <a [routerLink]="['/weighting', attribute.weightingId  ]" >Nivel {{attribute.weighting.value}}</a>
                     </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../attribute', attribute.id ]"
+                                [routerLink]="['/attribute', attribute.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>

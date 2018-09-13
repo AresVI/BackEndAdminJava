@@ -39,6 +39,11 @@ export class CategoryAttributeService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    findCategoryAttributesByAuditTaskId(audit_task_id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/auditTask=${audit_task_id}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

@@ -3,14 +3,8 @@
     <h2><span jhiTranslate="aresViApp.auditTask.detail.title">Audit Task</span> - {{auditTask.name}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="aresViApp.auditTask.container">Container</span></dt>
-        <dd>
-            <div *ngIf="auditTask.containerId">
-                <a [routerLink]="['/container', auditTask.containerId]">{{auditTask.container.name}}</a>
-            </div>
-        </dd>
-    </dl>
+
+    <jhi-category-attributes [audit_task_id]="auditTask.id" *ngIf="auditTask.id"></jhi-category-attributes>
 
     <button type="submit"
             (click)="previousState()"

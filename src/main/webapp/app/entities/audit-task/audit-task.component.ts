@@ -1,20 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
 
 import { AuditTask } from './audit-task.model';
 import { AuditTaskService } from './audit-task.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import { Principal, ResponseWrapper } from '../../shared';
 
 @Component({
-    selector: 'jhi-audit-task',
+    selector: 'jhi-audit-tasks',
     templateUrl: './audit-task.component.html'
 })
 export class AuditTaskComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    @Input() container_id: number;
+
+    currentAccount: any;
     auditTasks: AuditTask[];
     error: any;
     success: any;
@@ -36,58 +37,24 @@ currentAccount: any;
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager,
-        private paginationUtil: JhiPaginationUtil,
-        private paginationConfig: PaginationConfig
+        private eventManager: JhiEventManager
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe((data) => {
-            this.page = data['pagingParams'].page;
-            this.previousPage = data['pagingParams'].page;
-            this.reverse = data['pagingParams'].ascending;
-            this.predicate = data['pagingParams'].predicate;
-        });
+        this.auditTasks = [];
     }
 
     loadAll() {
-        this.auditTaskService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+        this.auditTaskService.findAuditTasksByContainerId(this.container_id).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-    transition() {
-        this.router.navigate(['/audit-task'], {queryParams:
-            {
-                page: this.page,
-                size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
+
+    clear() {
         this.loadAll();
     }
 
-    clear() {
-        this.page = 0;
-        this.router.navigate(['/audit-task', {
-            page: this.page,
-            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-        }]);
-        this.loadAll();
-    }
     ngOnInit() {
         this.loadAll();
-        this.principal.identity().then((account) => {
-            this.currentAccount = account;
-        });
         this.registerChangeInAuditTasks();
     }
 
@@ -111,10 +78,6 @@ currentAccount: any;
     }
 
     private onSuccess(data, headers) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = headers.get('X-Total-Count');
-        this.queryCount = this.totalItems;
-        // this.page = pagingParams.page;
         this.auditTasks = data;
     }
     private onError(error) {

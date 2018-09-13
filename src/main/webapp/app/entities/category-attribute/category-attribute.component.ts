@@ -1,20 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
 
 import { CategoryAttribute } from './category-attribute.model';
 import { CategoryAttributeService } from './category-attribute.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import { Principal, ResponseWrapper } from '../../shared';
 
 @Component({
-    selector: 'jhi-category-attribute',
+    selector: 'jhi-category-attributes',
     templateUrl: './category-attribute.component.html'
 })
+
 export class CategoryAttributeComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    @Input() audit_task_id: number;
+
+    currentAccount: any;
     categoryAttributes: CategoryAttribute[];
     error: any;
     success: any;
@@ -36,43 +38,16 @@ currentAccount: any;
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager,
-        private paginationUtil: JhiPaginationUtil,
-        private paginationConfig: PaginationConfig
+        private eventManager: JhiEventManager
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe((data) => {
-            this.page = data['pagingParams'].page;
-            this.previousPage = data['pagingParams'].page;
-            this.reverse = data['pagingParams'].ascending;
-            this.predicate = data['pagingParams'].predicate;
-        });
+        this.categoryAttributes = [];
     }
 
     loadAll() {
-        this.categoryAttributeService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+        this.categoryAttributeService.findCategoryAttributesByAuditTaskId(this.audit_task_id).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
-    }
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-    transition() {
-        this.router.navigate(['/category-attribute'], {queryParams:
-            {
-                page: this.page,
-                size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
-        this.loadAll();
     }
 
     clear() {
@@ -111,10 +86,6 @@ currentAccount: any;
     }
 
     private onSuccess(data, headers) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = headers.get('X-Total-Count');
-        this.queryCount = this.totalItems;
-        // this.page = pagingParams.page;
         this.categoryAttributes = data;
     }
     private onError(error) {

@@ -36,12 +36,11 @@ export class AuditProcessService {
         });
     }
 
-    findContainers(id: number): Observable<Container>{
+    findContainers(id: number): Observable<ResponseWrapper> {
         return this.http.get(`${this.containerUrl}${id}`).map((res: Response) => {
             return res.json();
-        })    
+        });
     }
-
 
     findComplete(id: number): Observable<AuditProcess> {
         return this.http.get(`${this.resourceUrl}/${id}/complete`).map((res: Response) => {

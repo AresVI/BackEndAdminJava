@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
@@ -9,12 +9,14 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
-    selector: 'jhi-container',
+    selector: 'jhi-containers',
     templateUrl: './container.component.html'
 })
 export class ContainerComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    @Input() audit_process_id: number;
+
+    currentAccount: any;
     containers: Container[];
     error: any;
     success: any;
@@ -36,58 +38,20 @@ currentAccount: any;
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager,
-        private paginationUtil: JhiPaginationUtil,
-        private paginationConfig: PaginationConfig
+        private eventManager: JhiEventManager
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe((data) => {
-            this.page = data['pagingParams'].page;
-            this.previousPage = data['pagingParams'].page;
-            this.reverse = data['pagingParams'].ascending;
-            this.predicate = data['pagingParams'].predicate;
-        });
+        this.containers = [];
     }
 
     loadAll() {
-        this.containerService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+        this.containerService.findContainersByAuditProcessId(this.audit_process_id).subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json),
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-    transition() {
-        this.router.navigate(['/container'], {queryParams:
-            {
-                page: this.page,
-                size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
-        this.loadAll();
-    }
 
-    clear() {
-        this.page = 0;
-        this.router.navigate(['/container', {
-            page: this.page,
-            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-        }]);
-        this.loadAll();
-    }
     ngOnInit() {
         this.loadAll();
-        this.principal.identity().then((account) => {
-            this.currentAccount = account;
-        });
         this.registerChangeInContainers();
     }
 
@@ -110,11 +74,7 @@ currentAccount: any;
         return result;
     }
 
-    private onSuccess(data, headers) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = headers.get('X-Total-Count');
-        this.queryCount = this.totalItems;
-        // this.page = pagingParams.page;
+    private onSuccess(data) {
         this.containers = data;
     }
     private onError(error) {

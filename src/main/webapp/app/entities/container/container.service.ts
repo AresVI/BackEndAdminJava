@@ -33,6 +33,11 @@ export class ContainerService {
         });
     }
 
+    findContainersByAuditProcessId(audit_process_id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/auditProcess=${audit_process_id}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)

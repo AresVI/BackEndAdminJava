@@ -39,6 +39,11 @@ export class AuditTaskService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    findAuditTasksByContainerId(container_id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/container=${container_id}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

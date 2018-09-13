@@ -2,6 +2,7 @@ package com.labausegtic.aresvi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.labausegtic.aresvi.service.AuditTaskService;
+import com.labausegtic.aresvi.service.dto.AuditTaskCompleteDTO;
 import com.labausegtic.aresvi.web.rest.util.HeaderUtil;
 import com.labausegtic.aresvi.web.rest.util.PaginationUtil;
 import com.labausegtic.aresvi.service.dto.AuditTaskDTO;
@@ -22,6 +23,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing AuditTask.
@@ -109,6 +111,14 @@ public class AuditTaskResource {
         log.debug("REST request to get AuditTask : {}", id);
         AuditTaskDTO auditTaskDTO = auditTaskService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(auditTaskDTO));
+    }
+
+    @GetMapping("/audit-tasks/container={id}")
+    @Timed
+    public Set<AuditTaskCompleteDTO> getContainerByAuditProcess(@PathVariable Long id) {
+        log.debug("REST request to get by container : {}", id);
+        Set<AuditTaskCompleteDTO> auditTaskDTOSet = auditTaskService.findAllByContainer_Id(id);
+        return auditTaskDTOSet;
     }
 
     /**

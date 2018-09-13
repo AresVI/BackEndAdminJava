@@ -15,26 +15,20 @@
     <div class="table-responsive" *ngIf="auditTasks">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="aresViApp.auditTask.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="containerId"><span jhiTranslate="aresViApp.auditTask.container">Container</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let auditTask of auditTasks ;trackBy: trackId">
-                <td><a [routerLink]="['../audit-task', auditTask.id ]">{{auditTask.id}}</a></td>
+                <td><a [routerLink]="['/audit-task', auditTask.id ]">{{auditTask.id}}</a></td>
                 <td>{{auditTask.name}}</td>
-                <td>
-                    <div *ngIf="auditTask.containerId">
-                        <a [routerLink]="['../container', auditTask.containerId  ]" >{{auditTask.container.name}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../audit-task', auditTask.id ]"
+                                [routerLink]="['/audit-task', auditTask.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
@@ -59,12 +53,4 @@
             </tbody>
         </table>
     </div>
-        <div *ngIf="auditTasks && auditTasks.length">
-            <div class="row justify-content-center">
-                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-            </div>
-            <div class="row justify-content-center">
-                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
-            </div>
-        </div>
 </div>

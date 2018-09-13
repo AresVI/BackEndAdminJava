@@ -1,6 +1,5 @@
 <div>
     <h2>
-        <!-- esto es la lista de contanedores -->
         <span jhiTranslate="aresViApp.container.home.title">Containers</span>
         <button class="btn btn-primary float-right jh-create-entity create-container" [routerLink]="['/', { outlets: { popup: ['container-new'] } }]">
             <span class="fa fa-plus"></span>
@@ -13,14 +12,13 @@
     <div class="row">
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="containers">
+    <div class="table-responsive" *ngIf="containers.length > 0">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="aresViApp.container.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="participantId"><span jhiTranslate="aresViApp.container.participant">Participant</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="auditProcessId"><span jhiTranslate="aresViApp.container.auditProcess">Audit Process</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -33,15 +31,10 @@
                         <a [routerLink]="['../participant', container.participantId  ]" >{{container.participantId}}</a>
                     </div>
                 </td>
-                <td>
-                    <div *ngIf="container.auditProcessId">
-                        <a [routerLink]="['../audit-process', container.auditProcessId  ]" >{{container.auditProcess.name}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
+                <td class="text-right" *ngIf="container">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../container', container.id ]"
+                                [routerLink]="['/container', container.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
@@ -66,12 +59,4 @@
             </tbody>
         </table>
     </div>
-        <div *ngIf="containers && containers.length">
-            <div class="row justify-content-center">
-                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-            </div>
-            <div class="row justify-content-center">
-                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
-            </div>
-        </div>
 </div>

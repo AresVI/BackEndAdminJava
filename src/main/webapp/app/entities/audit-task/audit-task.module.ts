@@ -15,6 +15,7 @@ import {
     auditTaskPopupRoute,
     AuditTaskResolvePagingParams,
 } from './';
+import {AresViCategoryAttributeModule} from '../category-attribute/category-attribute.module';
 
 const ENTITY_STATES = [
     ...auditTaskRoute,
@@ -24,6 +25,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         AresViSharedModule,
+        AresViCategoryAttributeModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [
@@ -45,6 +47,13 @@ const ENTITY_STATES = [
         AuditTaskService,
         AuditTaskPopupService,
         AuditTaskResolvePagingParams,
+    ],
+    exports: [
+        AuditTaskComponent,
+        AuditTaskDetailComponent,
+        AuditTaskDialogComponent,
+        AuditTaskDeleteDialogComponent,
+        AuditTaskPopupComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

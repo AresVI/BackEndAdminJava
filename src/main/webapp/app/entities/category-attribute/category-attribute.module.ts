@@ -15,6 +15,7 @@ import {
     categoryAttributePopupRoute,
     CategoryAttributeResolvePagingParams,
 } from './';
+import {AresViAttributeModule} from '../attribute/attribute.module';
 
 const ENTITY_STATES = [
     ...categoryAttributeRoute,
@@ -24,6 +25,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         AresViSharedModule,
+        AresViAttributeModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [
@@ -45,6 +47,13 @@ const ENTITY_STATES = [
         CategoryAttributeService,
         CategoryAttributePopupService,
         CategoryAttributeResolvePagingParams,
+    ],
+    exports: [
+        CategoryAttributeComponent,
+        CategoryAttributeDetailComponent,
+        CategoryAttributeDialogComponent,
+        CategoryAttributeDeleteDialogComponent,
+        CategoryAttributePopupComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

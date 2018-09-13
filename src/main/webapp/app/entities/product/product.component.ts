@@ -66,7 +66,6 @@ currentAccount: any;
 
     private onSuccess(data) {
         this.company_product = data;
-        console.log(this.company_product)
     }
     private onError(error) {
         this.alertService.error(error.message, null, null);

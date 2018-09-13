@@ -1,18 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { Attribute } from './attribute.model';
 import { AttributeService } from './attribute.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import { Principal, ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-attribute',
     templateUrl: './attribute.component.html'
 })
 export class AttributeComponent implements OnInit, OnDestroy {
+
+    @Input() category_attribute_id: number;
 
     attributes: Attribute[];
     currentAccount: any;
@@ -33,21 +33,10 @@ export class AttributeComponent implements OnInit, OnDestroy {
         private principal: Principal
     ) {
         this.attributes = [];
-        this.itemsPerPage = ITEMS_PER_PAGE;
-        this.page = 0;
-        this.links = {
-            last: 0
-        };
-        this.predicate = 'id';
-        this.reverse = true;
     }
 
     loadAll() {
-        this.attributeService.query({
-            page: this.page,
-            size: this.itemsPerPage,
-            sort: this.sort()
-        }).subscribe(
+        this.attributeService.findAttributeByCategoryAttributeId(this.category_attribute_id).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -60,14 +49,11 @@ export class AttributeComponent implements OnInit, OnDestroy {
     }
 
     loadPage(page) {
-        this.page = page;
         this.loadAll();
     }
+
     ngOnInit() {
         this.loadAll();
-        this.principal.identity().then((account) => {
-            this.currentAccount = account;
-        });
         this.registerChangeInAttributes();
     }
 
@@ -78,6 +64,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
     trackId(index: number, item: Attribute) {
         return item.id;
     }
+
     registerChangeInAttributes() {
         this.eventSubscriber = this.eventManager.subscribe('attributeListModification', (response) => this.reset());
     }
@@ -91,11 +78,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
     }
 
     private onSuccess(data, headers) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = headers.get('X-Total-Count');
-        for (let i = 0; i < data.length; i++) {
-            this.attributes.push(data[i]);
-        }
+        this.attributes = data;
     }
 
     private onError(error) {

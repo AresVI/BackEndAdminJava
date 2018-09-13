@@ -113,12 +113,6 @@ public class ContainerResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(containerDTO));
     }
 
-    /**
-     * GET  /containers/auditProcess=:id : get the "id" container.
-     *
-     * @param idAuditProcess the id of the containerDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the containerDTO, or with status 404 (Not Found)
-     */
     @GetMapping("/containers/auditProcess={id}")
     @Timed
     public Set<ContainerCompleteDTO> getContainerByAuditProcess(@PathVariable Long id) {

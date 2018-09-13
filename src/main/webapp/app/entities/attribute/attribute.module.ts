@@ -44,6 +44,13 @@ const ENTITY_STATES = [
         AttributeService,
         AttributePopupService,
     ],
+    exports: [
+        AttributeComponent,
+        AttributeDetailComponent,
+        AttributeDialogComponent,
+        AttributeDeleteDialogComponent,
+        AttributePopupComponent,
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AresViAttributeModule {}

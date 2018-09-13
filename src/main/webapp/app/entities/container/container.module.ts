@@ -15,6 +15,7 @@ import {
     containerPopupRoute,
     ContainerResolvePagingParams,
 } from './';
+import {AresViAuditTaskModule} from '../audit-task/audit-task.module';
 
 const ENTITY_STATES = [
     ...containerRoute,
@@ -24,6 +25,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         AresViSharedModule,
+        AresViAuditTaskModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [
@@ -45,6 +47,13 @@ const ENTITY_STATES = [
         ContainerService,
         ContainerPopupService,
         ContainerResolvePagingParams,
+    ],
+    exports: [
+        ContainerComponent,
+        ContainerDialogComponent,
+        ContainerPopupComponent,
+        ContainerDeleteDialogComponent,
+        ContainerDeletePopupComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

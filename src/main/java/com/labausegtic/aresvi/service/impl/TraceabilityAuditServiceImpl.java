@@ -209,7 +209,7 @@ public class TraceabilityAuditServiceImpl implements TraceabilityAuditService{
 
         TraceabilityAudit traceabilityAudit = traceabilityAuditRepository.findOne(id);
 
-        if (traceabilityAudit.getStatus() == StatusTraceabilityAudit.NOT_STARTED) {
+        if (traceabilityAudit.getStatus().equalsIgnoreCase(StatusTraceabilityAudit.NOT_STARTED)){
 
             Recommendation recommendation = new Recommendation();
 

@@ -36,7 +36,7 @@ public class BRMSServiceImpl implements BRMSService {
     public ResultInferenceDTO getCategory(InferenceParameterDTO inferenceParameterDTO) {
 
         ResultInferenceDTO resultInferenceDTO = new ResultInferenceDTO();
-
+        
         try {
             HttpResponse<JsonNode> response = Unirest.post("http://" + BRMS_Host + ":" + BRMS_Port + "/api/inference")
                 .header("content-type", "application/json")

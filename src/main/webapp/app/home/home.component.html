@@ -2,7 +2,10 @@
     <div class="col-md-12">
         <div class="jumbotron" [ngSwitch]="isAuthenticated()">
             <span class="hipster img-fluid rounded"></span>
-            <p class="lead text-center"></p>
+            <h1 class="lead text-center">
+                Auditoría Automatizada de Sistemas de Trazabilidad
+            </h1>
+
             <div class="row justify-content-center" *ngSwitchCase="true">
                 <div class="col-12 col-sm-6 col-md-4 text-center p-1">
                     <a class="btn btn-lg btn-success btn-block" routerLink="process/audit/dashboard">

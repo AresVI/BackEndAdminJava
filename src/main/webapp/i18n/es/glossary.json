@@ -3,14 +3,14 @@
         "glossary" : {
             "home": {
                 "title": "Glosario",
-                "createLabel": "Crear nuevo glosarion",
-                "createOrEditLabel": "Crear o editar glosarion"
+                "createLabel": "Crear nuevo glosario",
+                "createOrEditLabel": "Crear o editar glosario"
             },
-            "created": "Un nuevo glosarion ha sido creado con el identificador {{ param }}",
-            "updated": "Un glosarion ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un glosarion ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo glosario ha sido creado con el identificador {{ param }}",
+            "updated": "Un glosario ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un glosario ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar el glosarion {{ id }}?"
+                "question": "¿Seguro que quiere eliminar el glosario {{ id }}?"
             },
             "detail": {
                 "title": "Glosario"
